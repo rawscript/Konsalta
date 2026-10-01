@@ -1,5 +1,5 @@
 import React from "react";
-import Image from "next/image";
+
 interface LogoProps {
   variant?: "light" | "dark";
   className?: string;
@@ -12,17 +12,15 @@ export default function Logo({
   iconSize = 30,
 }: LogoProps) {
   const isLight = variant === "light";
-  const rightChevronColor = isLight ? "#ffffff" : "#0b2d53";
   const textColor = isLight ? "text-white" : "text-[#0b2d53]";
 
   return (
-    <div className={`flex items-center gap-2.5 select-none ${className}`}>
-      <Image
-        src="/logo.ico"
+    <div className={`flex items-center gap-0.5 select-none ${className}`}>
+      <img
+        src="/logo.png"
         alt="Konsalta Logo"
-        width={iconSize}
-        height={iconSize}
-        className="w-auto h-auto"
+        style={{ height: iconSize, width: "auto" }}
+        className="shrink-0 object-contain"
       />
       <span
         className={`text-2xl font-bold tracking-tight ${textColor}`}

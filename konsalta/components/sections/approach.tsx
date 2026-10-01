@@ -5,10 +5,14 @@ import MountainPlaceholder from "@/components/ui/mountain-placeholder";
 
 export default function Approach() {
   return (
-    <section id="our-approach" className="w-full bg-[#f4f7fa] py-20 lg:py-24 relative overflow-hidden border-t border-slate-100">
+    <section id="our-approach" className="relative w-full bg-[#f4f7fa] py-20 lg:py-28 overflow-hidden border-t border-slate-100">
+      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[320px] xl:w-[400px] 2xl:w-[460px] pointer-events-none z-0">
+        <MountainPlaceholder />
+      </div>
+
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-6 items-center">
-          <div className="lg:col-span-4 max-w-lg">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          <div className="lg:col-span-5 max-w-xl">
             <span className="text-xs sm:text-sm font-bold tracking-[0.16em] text-[#1e56a0] uppercase block mb-3">
               LOREM IPSUM
             </span>
@@ -21,18 +25,14 @@ export default function Approach() {
             </p>
           </div>
 
-          <div className="lg:col-span-5 flex items-center justify-center">
+          <div className="lg:col-span-7 xl:col-span-6 flex items-center justify-center lg:justify-start lg:pl-4 xl:pl-8">
             <ApproachDiagram />
           </div>
-
-          <div className="lg:col-span-3 h-full hidden lg:block -mr-6 lg:-mr-12">
-            <MountainPlaceholder />
-          </div>
         </div>
-      </div>
 
-      <div className="lg:hidden w-full h-48 mt-8">
-        <MountainPlaceholder />
+        <div className="lg:hidden w-full h-64 mt-12 relative overflow-hidden rounded-2xl">
+          <MountainPlaceholder />
+        </div>
       </div>
     </section>
   );

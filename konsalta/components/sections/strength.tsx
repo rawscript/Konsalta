@@ -1,6 +1,5 @@
 "use client";
 
-import LeavesPlaceholder from "@/components/ui/leaves-placeholder";
 import { Lightning, ShareNetwork, Target, UsersFour } from "@phosphor-icons/react";
 
 export default function Strength() {
@@ -25,11 +24,22 @@ export default function Strength() {
 
   return (
     <section className="w-full bg-[#072448] py-16 lg:py-20 relative overflow-hidden">
-      <div className="absolute top-0 bottom-0 left-0 w-36 sm:w-56 lg:w-72 pointer-events-none">
-        <LeavesPlaceholder />
+      <div
+        className="absolute top-0 bottom-0 left-0 w-48 sm:w-64 lg:w-80 xl:w-96 overflow-hidden pointer-events-none z-0"
+        style={{
+          clipPath: "polygon(0 0, 100% 0, 68% 100%, 0 100%)",
+        }}
+      >
+        <img
+          src="/macro.jpg"
+          alt="Macro leaves detail"
+          className="w-full h-full object-cover scale-150 origin-center"
+        />
+        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[#072448] to-transparent pointer-events-none" />
+        <div className="absolute inset-0 bg-[#072448]/25 pointer-events-none" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 pl-28 sm:pl-48 lg:pl-56">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10 pl-32 sm:pl-52 lg:pl-64">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-6">
             <span className="text-xs sm:text-sm font-bold tracking-[0.16em] text-sky-300 uppercase block mb-2">

@@ -6,10 +6,14 @@ import { ArrowRight } from "@phosphor-icons/react";
 
 export default function Hero() {
   return (
-    <section id="about" className="relative w-full bg-gradient-to-b from-[#f8fafc] via-[#f1f6fd]/60 to-white overflow-hidden pt-8 lg:pt-14 pb-0">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-end">
-          <div className="lg:col-span-5 xl:col-span-5 z-20 pb-12 lg:pb-20">
+    <section id="about" className="relative w-full bg-[#f8fafc] overflow-hidden">
+      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[55%] xl:w-[58%] h-full z-0 pointer-events-none">
+        <HeroVisual />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[580px] lg:min-h-[660px] py-14 lg:py-24">
+          <div className="lg:col-span-6 xl:col-span-5 max-w-xl">
             <span className="text-xs sm:text-sm font-bold tracking-[0.18em] text-[#1e56a0] uppercase block mb-4">
               LOREM / IPSUM / DOLOR
             </span>
@@ -19,7 +23,7 @@ export default function Hero() {
               <span className="text-[#f26522] block">Consectetur Adipiscing.</span>
             </h1>
 
-            <p className="text-slate-600 text-base sm:text-[17px] leading-relaxed max-w-xl mb-8">
+            <p className="text-slate-600 text-base sm:text-[17px] leading-relaxed mb-8">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
             </p>
 
@@ -32,7 +36,7 @@ export default function Hero() {
             </Link>
           </div>
 
-          <div className="lg:col-span-7 xl:col-span-7 relative flex items-end justify-center lg:justify-end -mr-6 lg:-mr-12">
+          <div className="lg:hidden w-full h-[360px] sm:h-[460px] rounded-2xl overflow-hidden mt-4 shadow-sm">
             <HeroVisual />
           </div>
         </div>
