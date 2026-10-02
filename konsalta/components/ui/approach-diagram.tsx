@@ -10,6 +10,8 @@ export default function ApproachDiagram() {
         className="w-full h-full"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="Konsalta five-step collaborative approach cycle"
       >
         <circle
           cx="280"

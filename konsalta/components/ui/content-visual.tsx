@@ -9,6 +9,8 @@ export default function ContentVisual() {
         className="w-full h-full object-cover"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="Konsalta insights visual representation"
       >
         <defs>
           <linearGradient id="bgCanvas" x1="0" y1="0" x2="1000" y2="440" gradientUnits="userSpaceOnUse">

@@ -161,37 +161,37 @@ export default function Footer() {
 
         <div className="pt-8 border-t border-slate-800/80 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-            <a
-              href="#privacy"
+            <Link
+              href="/privacy"
               className="inline-flex items-center gap-1.5 hover:text-slate-200 transition-colors"
             >
               <Lock size={13} weight="bold" />
               <span>Privacy Policy</span>
-            </a>
+            </Link>
             <span className="text-slate-600 hidden sm:inline">|</span>
-            <a
-              href="#cookies"
+            <Link
+              href="/cookies"
               className="inline-flex items-center gap-1.5 hover:text-slate-200 transition-colors"
             >
               <Cookie size={13} weight="bold" />
               <span>Cookies Preferences</span>
-            </a>
+            </Link>
             <span className="text-slate-600 hidden sm:inline">|</span>
-            <a
-              href="#terms"
+            <Link
+              href="/terms"
               className="inline-flex items-center gap-1.5 hover:text-slate-200 transition-colors"
             >
               <FileText size={13} weight="bold" />
               <span>Terms of Use</span>
-            </a>
+            </Link>
             <span className="text-slate-600 hidden sm:inline">|</span>
-            <a
-              href="#accessibility"
+            <Link
+              href="/accessibility"
               className="inline-flex items-center gap-1.5 hover:text-slate-200 transition-colors"
             >
               <PersonSimple size={14} weight="bold" />
               <span>Accessibility Statement</span>
-            </a>
+            </Link>
           </div>
 
           <div className="text-slate-400 text-center md:text-right">

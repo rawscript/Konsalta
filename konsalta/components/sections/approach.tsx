@@ -6,7 +6,7 @@ import MountainPlaceholder from "@/components/ui/mountain-placeholder";
 export default function Approach() {
   return (
     <section id="our-approach" className="relative w-full bg-[#f4f7fa] py-20 lg:py-28 overflow-hidden border-t border-slate-100">
-      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[320px] xl:w-[400px] 2xl:w-[460px] pointer-events-none z-0">
+      <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-[320px] xl:w-[400px] 2xl:w-[460px] pointer-events-none z-0" aria-hidden="true">
         <MountainPlaceholder />
       </div>
 
@@ -30,7 +30,7 @@ export default function Approach() {
           </div>
         </div>
 
-        <div className="lg:hidden w-full h-64 mt-12 relative overflow-hidden rounded-2xl">
+        <div className="lg:hidden w-full h-72 sm:h-80 md:h-96 mt-12 relative overflow-hidden rounded-2xl shadow-sm border border-slate-200/60 bg-white/40" aria-hidden="true">
           <MountainPlaceholder />
         </div>
       </div>
