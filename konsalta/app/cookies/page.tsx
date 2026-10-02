@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Cookie,
@@ -12,17 +12,46 @@ import {
   Check,
   Info,
   Lock,
+  ArrowCounterClockwise,
 } from "@phosphor-icons/react";
+import {
+  CookiePreferences,
+  DEFAULT_PREFERENCES,
+  getStoredPreferences,
+  savePreferences,
+} from "@/lib/cookies";
 
 export default function CookiesPage() {
-  const [preferences, setPreferences] = useState({
-    essential: true,
-    analytics: true,
-    functional: false,
-    marketing: false,
-  });
+  const [preferences, setPreferences] = useState<CookiePreferences>(DEFAULT_PREFERENCES);
+  const [lastSaved, setLastSaved] = useState<string | null>(null);
+  const [savedNotification, setSavedNotification] = useState<string | null>(null);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  const [savedNotification, setSavedNotification] = useState(false);
+  useEffect(() => {
+    const stored = getStoredPreferences();
+    if (stored) {
+      setPreferences(stored);
+      if (stored.timestamp) {
+        setLastSaved(new Date(stored.timestamp).toLocaleString());
+      }
+    }
+    setIsLoaded(true);
+
+    const handleConsentChange = (e: Event) => {
+      const customEvent = e as CustomEvent<CookiePreferences>;
+      if (customEvent.detail) {
+        setPreferences(customEvent.detail);
+        if (customEvent.detail.timestamp) {
+          setLastSaved(new Date(customEvent.detail.timestamp).toLocaleString());
+        }
+      }
+    };
+
+    window.addEventListener("konsalta_cookie_consent_updated", handleConsentChange);
+    return () => {
+      window.removeEventListener("konsalta_cookie_consent_updated", handleConsentChange);
+    };
+  }, []);
 
   const handleToggle = (key: "analytics" | "functional" | "marketing") => {
     setPreferences((prev) => ({
@@ -32,30 +61,50 @@ export default function CookiesPage() {
   };
 
   const handleSave = () => {
-    setSavedNotification(true);
-    setTimeout(() => setSavedNotification(false), 3000);
+    savePreferences(preferences);
+    const now = new Date().toLocaleString();
+    setLastSaved(now);
+    setSavedNotification("Lorem ipsum preferences saved to your browser.");
+    setTimeout(() => setSavedNotification(null), 4000);
   };
 
   const handleAcceptAll = () => {
-    setPreferences({
+    const allEnabled: CookiePreferences = {
       essential: true,
       analytics: true,
       functional: true,
       marketing: true,
-    });
-    setSavedNotification(true);
-    setTimeout(() => setSavedNotification(false), 3000);
+    };
+    setPreferences(allEnabled);
+    savePreferences(allEnabled);
+    const now = new Date().toLocaleString();
+    setLastSaved(now);
+    setSavedNotification("Lorem ipsum all cookies accepted.");
+    setTimeout(() => setSavedNotification(null), 4000);
   };
 
   const handleRejectAll = () => {
-    setPreferences({
+    const onlyEssential: CookiePreferences = {
       essential: true,
       analytics: false,
       functional: false,
       marketing: false,
-    });
-    setSavedNotification(true);
-    setTimeout(() => setSavedNotification(false), 3000);
+    };
+    setPreferences(onlyEssential);
+    savePreferences(onlyEssential);
+    const now = new Date().toLocaleString();
+    setLastSaved(now);
+    setSavedNotification("Lorem ipsum non-essential cookies rejected.");
+    setTimeout(() => setSavedNotification(null), 4000);
+  };
+
+  const handleReset = () => {
+    setPreferences(DEFAULT_PREFERENCES);
+    savePreferences(DEFAULT_PREFERENCES);
+    const now = new Date().toLocaleString();
+    setLastSaved(now);
+    setSavedNotification("Lorem ipsum preferences reset to defaults.");
+    setTimeout(() => setSavedNotification(null), 4000);
   };
 
   const cookieCategories = [
@@ -135,12 +184,14 @@ export default function CookiesPage() {
           <div className="flex flex-wrap items-center gap-4 text-xs text-sky-200/70 pt-2 border-t border-white/10">
             <span className="inline-flex items-center gap-1.5">
               <Clock size={14} weight="bold" />
-              <span>Lorem Ipsum: Oct 2026</span>
+              <span>
+                {lastSaved ? `Saved: ${lastSaved}` : "Lorem Ipsum: Oct 2026"}
+              </span>
             </span>
             <span>•</span>
             <span className="inline-flex items-center gap-1.5">
               <ShieldCheck size={14} weight="bold" />
-              <span>Consectetur Adipiscing</span>
+              <span>Active Cookie Storage</span>
             </span>
           </div>
         </div>
@@ -156,6 +207,11 @@ export default function CookiesPage() {
               <h2 className="text-xl sm:text-2xl font-bold text-[#0b2d53]">
                 Lorem Cookies Management
               </h2>
+              {lastSaved && (
+                <span className="text-xs text-slate-500 mt-1 block">
+                  Last updated: {lastSaved}
+                </span>
+              )}
             </div>
 
             <div className="flex flex-wrap items-center gap-2.5">
@@ -173,6 +229,14 @@ export default function CookiesPage() {
               >
                 Reject Non-Essential
               </button>
+              <button
+                type="button"
+                onClick={handleReset}
+                title="Reset to default"
+                className="p-2 text-slate-500 hover:text-[#0b2d53] hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
+              >
+                <ArrowCounterClockwise size={16} weight="bold" />
+              </button>
             </div>
           </div>
 
@@ -181,7 +245,9 @@ export default function CookiesPage() {
               const isChecked =
                 cat.key === "essential"
                   ? true
-                  : preferences[cat.key as "analytics" | "functional" | "marketing"];
+                  : isLoaded
+                  ? preferences[cat.key as "analytics" | "functional" | "marketing"]
+                  : false;
 
               return (
                 <div
@@ -249,7 +315,7 @@ export default function CookiesPage() {
           <div className="mt-8 pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-xs text-slate-500">
               <Info size={16} weight="bold" className="text-[#0b2d53] shrink-0" />
-              <span>Lorem ipsum dolor sit amet preferences stored locally.</span>
+              <span>Preferences are stored in your browser storage and cookies.</span>
             </div>
 
             <div className="flex items-center gap-3 w-full sm:w-auto">
@@ -267,7 +333,7 @@ export default function CookiesPage() {
           {savedNotification && (
             <div className="mt-4 p-3 rounded-lg bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center gap-2">
               <CheckCircle size={16} weight="fill" className="text-emerald-600" />
-              <span>Lorem ipsum dolor sit amet preferences saved successfully.</span>
+              <span>{savedNotification}</span>
             </div>
           )}
         </div>
