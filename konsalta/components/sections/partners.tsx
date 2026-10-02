@@ -12,33 +12,33 @@ export default function Partners() {
   const partners = [
     {
       icon: Bank,
-      title: "Lorem ipsum dolor",
+      title: "Governments & Public Institutions",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor.",
+        "Evidence Informed Policy-Making and Effective Public Service Delivery.",
     },
     {
       icon: Handshake,
-      title: "Consectetur adipiscing",
+      title: "Development Partners",
       description:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+        "Generating Evidence and Strengthening Learning to inform Programmes.",
     },
     {
       icon: TrendUp,
-      title: "Tempor incididunt",
+      title: "Private Sector",
       description:
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia.",
+        "Data-Driven Insights, Strategic Advisory, Market-Entry and ESG support",
     },
     {
       icon: UsersThree,
-      title: "Labore et dolore",
+      title: "Civil Society",
       description:
-        "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi.",
+        "Demonstrating Impact and Mobilising Resources for Change",
     },
     {
       icon: GraduationCap,
-      title: "Magna aliqua enim",
+      title: "Academic & Research Institution",
       description:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium.",
+        "Research Evaluation, Data Analysis and Capacity Development.",
     },
   ];
 
@@ -48,17 +48,18 @@ export default function Partners() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-16">
           <div className="max-w-2xl">
             <span className="text-xs sm:text-sm font-bold tracking-[0.16em] text-[#1e56a0] uppercase block mb-3">
-              LOREM IPSUM
+              WHO WE SERVE
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-[#0b2d53] leading-tight">
-              Lorem ipsum dolor sit amet{" "}
-              <span className="text-[#f26522] block sm:inline">consectetur adipiscing elit.</span>
+              Partners Across The{" "}
+              <span className="text-[#f26522] block sm:inline">EVIDENCE to IMPACT </span>
+              <span>Cycle</span>
             </h2>
           </div>
 
           <div className="max-w-md lg:pb-1">
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              We work with a diverse range of partners, each playing a vital role in building more resilient, inclusive and prosperous societies.
             </p>
           </div>
         </div>

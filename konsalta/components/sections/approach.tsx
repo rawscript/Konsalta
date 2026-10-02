@@ -14,14 +14,14 @@ export default function Approach() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
           <div className="lg:col-span-5 max-w-xl">
             <span className="text-xs sm:text-sm font-bold tracking-[0.16em] text-[#1e56a0] uppercase block mb-3">
-              LOREM IPSUM
+              OUR APPROACH
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-[#0b2d53] leading-tight mb-6">
-              Lorem ipsum dolor,{" "}
-              <span className="text-[#f26522] block sm:inline">sit amet consectetur.</span>
+              Seven Principles,{" "}
+              <span className="text-[#f26522] block sm:inline">one assignment at a time.</span>
             </h2>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum.
+              No two assignments at the same time: Each client faces a unique combinations of challenges, Stakeholders, context and objectives. This is why we combine strong core team with a wider multidisciplinary network, allowing us to assemble the right expertise required for each assignment.
             </p>
           </div>
 

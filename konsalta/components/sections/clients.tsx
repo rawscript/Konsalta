@@ -12,23 +12,23 @@ export default function Clients() {
   const clientTypes = [
     {
       icon: Bank,
-      title: "Lorem Ipsum",
+      title: "Governments",
     },
     {
       icon: Handshake,
-      title: "Consectetur",
+      title: "Development Partners",
     },
     {
       icon: ChartLineUp,
-      title: "Adipiscing",
+      title: "Private Sector",
     },
     {
       icon: UsersThree,
-      title: "Tempor Incididunt",
+      title: "Civil Society",
     },
     {
       icon: GraduationCap,
-      title: "Magna Aliqua",
+      title: "Academics & Research",
     },
   ];
 
@@ -38,10 +38,10 @@ export default function Clients() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-4">
             <span className="text-xs sm:text-sm font-bold tracking-[0.16em] text-[#1e56a0] uppercase block mb-2">
-              LOREM IPSUM
+              Our Clients
             </span>
             <h2 className="text-2xl sm:text-3xl font-bold text-[#0b2d53] leading-snug">
-              Lorem ipsum dolor sit amet consectetur adipiscing elit sed.
+              We Work with a range of organisations across sectors.
             </h2>
           </div>
 

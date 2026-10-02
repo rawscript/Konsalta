@@ -7,19 +7,19 @@ export default function Strength() {
   const strengths = [
     {
       icon: Lightning,
-      label: "Lorem\nipsum",
+      label: "Flexible\nand responsive",
     },
     {
       icon: ShareNetwork,
-      label: "Dolor sit\namet",
+      label: "Network-driven\ncollective",
     },
     {
       icon: Target,
-      label: "Consectetur\nadipiscing",
+      label: "Bespoke\nSolutions",
     },
     {
       icon: UsersFour,
-      label: "Tempor\nincididunt",
+      label: "Lasting\nImpact",
     },
   ];
 
@@ -47,13 +47,13 @@ export default function Strength() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           <div className="lg:col-span-6">
             <span className="text-xs sm:text-sm font-bold tracking-[0.16em] text-sky-300 uppercase block mb-2">
-              LOREM IPSUM
+              OUR STRENGTH
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-              Lorem Ipsum
+              Agility
             </h2>
             <p className="text-blue-100/90 text-sm sm:text-base leading-relaxed max-w-md">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua quis nostrud exercitation.
+              We move fast, think deeply and build the right challenges -- because impact doesnt have to take years.
             </p>
           </div>
 

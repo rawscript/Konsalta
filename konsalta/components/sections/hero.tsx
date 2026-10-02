@@ -15,17 +15,16 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center min-h-[580px] lg:min-h-[660px] py-14 lg:py-24">
           <div className="lg:col-span-6 xl:col-span-5 max-w-xl">
             <span className="text-xs sm:text-sm font-bold tracking-[0.18em] text-[#1e56a0] uppercase block mb-4">
-              LOREM / IPSUM / DOLOR
+              RESEARCH / CONSULTING / ADVISORY
             </span>
 
             <h1 className="text-4xl sm:text-5xl lg:text-[3.85rem] font-extrabold tracking-tight leading-[1.1] mb-6">
-              <span className="text-[#0b2d53] block">Lorem Ipsum Dolor.</span>
-              <span className="text-[#f26522] block">Consectetur Adipiscing.</span>
+              <span className="text-[#0b2d53] block">Better Decisions.</span>
+              <span className="text-[#f26522] block">Greater Impact.</span>
             </h1>
 
             <p className="text-slate-600 text-base sm:text-[17px] leading-relaxed mb-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
+Konsalta is a women-led, Africa-focused research, consulting and advisory firm. We are built to move past the slow overhead-heavy structures of traditional consulting - Operating instead as an agile, network driven collective, shaped around each client's needs to deliver sustained value </p>
 
             <Link
               href="/contact"
