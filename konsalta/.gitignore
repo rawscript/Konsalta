@@ -1,11 +1,18 @@
-# Nestjs specific
-/dist
-/node_modules
-/build
-/tmp
+# Next.js
+.next/
+out/
+build/
+dist/
 
-# Logs
-logs
+# Dependencies
+node_modules/
+
+# Lock files — keep only one (pnpm is the chosen package manager)
+package-lock.json
+yarn.lock
+
+# Debug logs
+logs/
 *.log
 npm-debug.log*
 pnpm-debug.log*
@@ -13,12 +20,26 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# dotenv environment variable files
+# Environment variables
 .env
-.env.development
-.env.test
-.env.production
+.env.*
+!.env.example
 
-# temp directory
-.temp
-.tmp
+# Temp
+.temp/
+.tmp/
+tmp/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Vercel
+.vercel
+
+# Turbopack
+.turbo

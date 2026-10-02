@@ -1,0 +1,61 @@
+.visual {
+  background-image: radial-gradient(circle, rgb(11 45 83 / 17%) 0.9px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.brief {
+  transform-origin: 297px 350px;
+  animation: evidence-brief 8s ease-in-out infinite;
+}
+
+.signal {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: evidence-signal 4.8s ease-in-out infinite;
+}
+
+.inputPath, .outcomePath {
+  opacity: 0;
+  animation: evidence-path 5.2s ease-in-out infinite;
+}
+
+.outcome {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: evidence-outcome 5.2s ease-in-out infinite;
+}
+
+.accents { animation: evidence-accents 7s ease-in-out infinite; }
+
+@keyframes evidence-brief {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes evidence-signal {
+  0%, 100% { opacity: 0.45; transform: scale(0.95); }
+  35%, 65% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes evidence-path {
+  0% { opacity: 0; }
+  12%, 68% { opacity: 0.7; stroke-dashoffset: 0; }
+  86%, 100% { opacity: 0; stroke-dashoffset: 0; }
+}
+
+@keyframes evidence-outcome {
+  0%, 14% { opacity: 0.35; transform: scale(0.88); }
+  30%, 70% { opacity: 1; transform: scale(1); }
+  88%, 100% { opacity: 0.5; transform: scale(0.93); }
+}
+
+@keyframes evidence-accents {
+  0%, 100% { opacity: 0.45; transform: translateY(0); }
+  50% { opacity: 0.9; transform: translateY(-7px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brief, .signal, .inputPath, .outcomePath, .outcome, .accents { animation: none; }
+  .inputPath, .outcomePath { opacity: 0.54; stroke-dashoffset: 0; }
+  .signal, .outcome { opacity: 1; }
+}
