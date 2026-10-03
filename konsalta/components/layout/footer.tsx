@@ -9,7 +9,6 @@ import {
   LinkedinLogo,
   InstagramLogo,
   Globe,
-  Question,
   Lock,
   Cookie,
   FileText,
@@ -85,14 +84,14 @@ export default function Footer() {
 
           <div className="lg:col-span-3">
             <span className="text-[14px] font-medium text-slate-200 block mb-3">
-              Lorem ipsum dolor sit amet
+              Subscribe to out Newsletter
             </span>
             <form onSubmit={handleSubmit} className="flex items-center max-w-sm">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Lorem ipsum dolor..."
+                placeholder="Coming Soon..."
                 required
                 className="bg-[#092242] border border-slate-700/80 rounded-l-md px-3.5 py-2.5 text-xs text-white placeholder-slate-400 focus:outline-none focus:border-[#f26522] flex-1"
               />
@@ -106,7 +105,7 @@ export default function Footer() {
             </form>
             {subscribed && (
               <span className="text-xs text-emerald-400 mt-2 block">
-                Lorem ipsum dolor sit amet!
+                You&apos;re subscribed. We&apos;ll be in touch soon.
               </span>
             )}
           </div>
@@ -144,15 +143,6 @@ export default function Footer() {
                 >
                   <Globe size={18} weight="regular" />
                   <span>www.konsaltahub.org</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#faqs"
-                  className="inline-flex items-center gap-2.5 hover:text-white transition-colors"
-                >
-                  <Question size={18} weight="bold" />
-                  <span>FAQs</span>
                 </a>
               </li>
             </ul>

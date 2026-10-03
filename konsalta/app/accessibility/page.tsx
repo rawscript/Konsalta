@@ -16,47 +16,47 @@ import {
 export default function AccessibilityPage() {
   const standards = [
     {
-      title: "Lorem Visual Contrast & Typography",
+      title: "Visual Contrast & Typography",
       icon: Eye,
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+        "We maintain sufficient colour contrast across all text and interactive elements, and use scalable type definitions so content remains readable at any zoom level. Decorative elements are marked appropriately so they do not distract assistive technology users.",
       features: [
-        "Lorem ipsum dolor sit amet contrast ratio compliance.",
-        "Sed do eiusmod tempor scalable font definitions.",
-        "Ut enim ad minim distinguishable visual elements.",
+        "Minimum 4.5:1 contrast ratio for body text, 3:1 for large text.",
+        "All font sizes defined in relative units to support browser zoom.",
+        "Decorative images use empty alt attributes; informative images have descriptive alt text.",
       ],
     },
     {
-      title: "Dolor Keyboard Navigation & Focus",
+      title: "Keyboard Navigation & Focus",
       icon: CheckCircle,
       description:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.",
+        "All interactive elements on the Konsalta site are reachable and operable via keyboard alone. Focus states are clearly visible, tab order follows a logical reading sequence, and skip links allow keyboard users to bypass repeated navigation.",
       features: [
-        "Excepteur sint occaecat logical tab ordering.",
-        "Duis aute irure visible focus state indicators.",
-        "Sunt in culpa skip links for primary landmark regions.",
+        "All links, buttons, and form fields are keyboard accessible.",
+        "Visible, high-contrast focus indicators on all interactive elements.",
+        "Skip-to-main-content link available at the top of every page.",
       ],
     },
     {
-      title: "Consectetur Assistive Compatibility",
+      title: "Assistive Technology Compatibility",
       icon: SlidersHorizontal,
       description:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae.",
+        "Pages are structured using semantic HTML landmarks so screen readers can navigate efficiently. ARIA labels and roles are applied where native semantics are insufficient, and all dynamic content changes are communicated to assistive technologies.",
       features: [
-        "Nemo enim ipsam semantic landmark structuring.",
-        "Neque porro quisquam aria-label descriptions.",
-        "Quis nostrum alternative descriptions for visuals.",
+        "Semantic landmark regions (header, main, nav, footer) on every page.",
+        "ARIA labels applied to icon-only buttons and interactive controls.",
+        "Dynamic UI updates announced via ARIA live regions where relevant.",
       ],
     },
     {
-      title: "Adipiscing Responsive Zoom & Scaling",
+      title: "Responsive Zoom & Scaling",
       icon: ShieldCheck,
       description:
-        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate.",
+        "The site is fully responsive and designed to reflow at up to 400% zoom without loss of content or functionality. Touch targets meet minimum size requirements, and no content is lost or obscured when text spacing is adjusted.",
       features: [
-        "Temporibus autem responsive scaling up to 200%.",
-        "Itaque earum dynamic fluid layout structures.",
-        "Nam libero mobile touch targets exceeding 44px.",
+        "Content reflows correctly at 400% zoom without horizontal scrolling.",
+        "All touch targets meet a minimum size of 44×44px.",
+        "No loss of content when text spacing is overridden by the user.",
       ],
     },
   ];
@@ -73,7 +73,7 @@ export default function AccessibilityPage() {
             className="inline-flex items-center gap-2 text-xs font-semibold text-sky-200 hover:text-white transition-colors mb-6"
           >
             <ArrowLeft size={14} weight="bold" />
-            <span>Lorem Ipsum / Home</span>
+            <span>Konsalta / Home</span>
           </Link>
 
           <div className="flex items-center gap-2.5 mb-3">
@@ -81,25 +81,25 @@ export default function AccessibilityPage() {
               <PersonSimple size={18} weight="bold" />
             </span>
             <span className="text-xs sm:text-sm font-bold tracking-[0.18em] text-sky-300 uppercase">
-              LOREM / ACCESSIBILITY STATEMENT
+              KONSALTA / ACCESSIBILITY STATEMENT
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-[3rem] font-extrabold text-white leading-tight tracking-tight mb-4 max-w-3xl">
-            Lorem Ipsum Dolor.{" "}
+            Built for Everyone.{" "}
             <span className="text-[#f26522]">Accessibility Statement.</span>
           </h1>
 
           <p className="text-blue-100/80 text-sm sm:text-base leading-relaxed max-w-2xl mb-6">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris.
+            Konsalta is committed to making this website accessible to all users,
+            regardless of ability or technology. We aim to conform to WCAG 2.1
+            Level AA and continue to improve the accessibility of our site.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 text-xs text-sky-200/70 pt-2 border-t border-white/10">
             <span className="inline-flex items-center gap-1.5">
               <Clock size={14} weight="bold" />
-              <span>Lorem Ipsum: Oct 2026</span>
+              <span>Last reviewed: October 2026</span>
             </span>
             <span>•</span>
             <span className="inline-flex items-center gap-1.5">
@@ -113,23 +113,23 @@ export default function AccessibilityPage() {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16">
         <div className="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8 mb-10 shadow-xs">
           <span className="text-xs font-semibold text-[#f26522] uppercase tracking-wider block mb-2">
-            LOREM COMMITMENT
+            OUR COMMITMENT
           </span>
           <h2 className="text-xl sm:text-2xl font-bold text-[#0b2d53] mb-4">
             Digital Inclusion & Universal Access
           </h2>
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-4">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore.
+            Konsalta believes that access to information should not be limited by
+            disability or the technology a person uses. We are committed to ensuring
+            our website is perceivable, operable, understandable, and robust for all
+            users — the four principles that underpin the Web Content Accessibility
+            Guidelines (WCAG) 2.1 at Level AA.
           </p>
           <p className="text-sm text-slate-600 leading-relaxed">
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde
-            omnis iste natus error sit voluptatem accusantium doloremque
-            laudantium, totam rem aperiam eaque ipsa quae.
+            Accessibility is an ongoing commitment, not a one-time checklist. We
+            regularly review our site against WCAG criteria and act on any issues
+            identified. We welcome feedback from users who encounter barriers on
+            this site.
           </p>
         </div>
 
@@ -178,15 +178,15 @@ export default function AccessibilityPage() {
 
           <div className="relative z-10 max-w-2xl">
             <span className="text-xs font-bold tracking-widest text-[#f26522] uppercase block mb-2">
-              LOREM ASSISTANCE
+              ACCESSIBILITY FEEDBACK
             </span>
             <h3 className="text-xl sm:text-2xl font-bold mb-3">
-              Lorem Feedback & Accessibility Inquiries
+              Encountered a Barrier? Let Us Know.
             </h3>
             <p className="text-sm text-blue-100/80 leading-relaxed mb-6">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco.
+              If you experience any difficulty accessing content on this site, we
+              want to hear from you. Contact our team and we will work to resolve
+              the issue or provide content in an alternative format.
             </p>
             <a
               href="mailto:accessibility@konsalta.com"

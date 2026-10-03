@@ -1,229 +1,113 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  CalendarBlank,
-  Clock,
-  ArrowRight,
-  MagnifyingGlass,
-  Funnel,
-} from "@phosphor-icons/react";
+import { ArrowRight } from "@phosphor-icons/react/dist/ssr";
 
-const articles = [
-  {
-    tag: "LOREM",
-    date: "Oct 2026",
-    readTime: "6 min read",
-    title: "Lorem ipsum dolor sit amet consectetur adipiscing elit",
-    excerpt:
-      "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.",
-    featured: true,
-  },
-  {
-    tag: "IPSUM",
-    date: "Sep 2026",
-    readTime: "4 min read",
-    title: "Consectetur adipiscing elit sed do eiusmod tempor",
-    excerpt:
-      "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure.",
-    featured: false,
-  },
-  {
-    tag: "DOLOR",
-    date: "Sep 2026",
-    readTime: "7 min read",
-    title: "Tempor incididunt ut labore et dolore magna aliqua",
-    excerpt:
-      "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat.",
-    featured: false,
-  },
-  {
-    tag: "LOREM",
-    date: "Aug 2026",
-    readTime: "5 min read",
-    title: "Labore et dolore magna aliqua ut enim ad minim",
-    excerpt:
-      "Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit.",
-    featured: false,
-  },
-  {
-    tag: "ADIPISCING",
-    date: "Aug 2026",
-    readTime: "8 min read",
-    title: "Minim veniam quis nostrud exercitation ullamco laboris",
-    excerpt:
-      "Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum sed perspiciatis.",
-    featured: false,
-  },
-  {
-    tag: "IPSUM",
-    date: "Jul 2026",
-    readTime: "3 min read",
-    title: "Nostrud exercitation ullamco laboris nisi ut aliquip",
-    excerpt:
-      "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit sed quia consequuntur magni dolores eos qui.",
-    featured: false,
-  },
-];
+export const metadata: Metadata = {
+  title: "Insights",
+  description:
+    "Konsalta Insights will share research, practical learning and strategic thinking that turns evidence into impact.",
+};
 
-const categories = [
-  "All Insights",
-  "Lorem Ipsum",
-  "Dolor Sit",
-  "Consectetur",
-  "Adipiscing",
+const upcomingThemes = [
+  {
+    number: "01",
+    title: "Evidence-informed public services",
+    accent: "bg-[#1e56a0]",
+  },
+  {
+    number: "02",
+    title: "Learning that strengthens programmes",
+    accent: "bg-[#f26522]",
+  },
+  {
+    number: "03",
+    title: "Strategy, markets and ESG",
+    accent: "bg-[#0b2d53]",
+  },
 ];
 
 export default function ContentPage() {
   return (
     <div className="w-full bg-white">
-      <div className="bg-gradient-to-br from-[#0b2d53] via-[#123b6b] to-[#061d38] py-20 lg:py-28 relative overflow-hidden">
-        <div
-          className="absolute top-0 right-0 w-64 h-64 bg-[#f26522] opacity-15 rounded-full blur-3xl pointer-events-none"
-        />
-        <div
-          className="absolute bottom-0 left-0 w-96 h-40 bg-[#1e56a0] opacity-25 rounded-full blur-3xl pointer-events-none"
-        />
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#0b2d53] via-[#123b6b] to-[#061d38] py-20 lg:py-28">
+        <div className="absolute -right-16 -top-20 h-72 w-72 rounded-full bg-[#f26522] opacity-15 blur-3xl" />
+        <div className="absolute -bottom-16 left-1/4 h-40 w-96 rounded-full bg-[#1e56a0] opacity-30 blur-3xl" />
 
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-          <span className="text-xs sm:text-sm font-bold tracking-[0.18em] text-sky-300 uppercase block mb-3">
-            LOREM / IPSUM / INSIGHTS
+        <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-12">
+          <span className="mb-3 block text-xs font-bold uppercase tracking-[0.18em] text-sky-300 sm:text-sm">
+            Konsalta Insights
           </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-[3.25rem] font-extrabold text-white leading-tight tracking-tight mb-5 max-w-3xl">
-            Lorem Ipsum Dolor Sit Amet.{" "}
-            <span className="text-[#f26522]">Consectetur Adipiscing.</span>
+          <h1 className="mb-5 max-w-3xl text-4xl font-extrabold leading-tight tracking-tight text-white sm:text-5xl lg:text-[3.6rem]">
+            Ideas for better <span className="text-[#f26522]">decisions.</span>
           </h1>
-          <p className="text-blue-100/80 text-base sm:text-lg leading-relaxed max-w-2xl mb-10">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.
+          <p className="max-w-2xl text-base leading-relaxed text-blue-100/85 sm:text-lg">
+            Our first perspectives are in development. Here, we will share research,
+            practical learning and strategic thinking that helps turn evidence into impact.
           </p>
+        </div>
+      </section>
 
-          <div className="flex items-center gap-3 max-w-lg">
-            <div className="flex-1 flex items-center gap-3 bg-white/10 border border-white/20 rounded-full px-5 py-3">
-              <MagnifyingGlass size={17} className="text-blue-200 shrink-0" />
-              <input
-                type="text"
-                placeholder="Search lorem ipsum..."
-                className="bg-transparent text-sm text-white placeholder-blue-300 focus:outline-none flex-1"
-              />
-            </div>
-            <button
-              aria-label="Filter insights"
-              className="w-12 h-12 rounded-full bg-[#f26522] hover:bg-[#d95316] flex items-center justify-center text-white transition-colors shrink-0 cursor-pointer shadow-md"
-            >
-              <Funnel size={18} weight="bold" />
-            </button>
+      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-24">
+        <div className="mb-10 flex flex-col justify-between gap-5 sm:flex-row sm:items-end lg:mb-14">
+          <div>
+            <span className="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-[#1e56a0] sm:text-sm">
+              On the editorial desk
+            </span>
+            <h2 className="max-w-xl text-3xl font-bold leading-tight text-[#0b2d53] sm:text-4xl">
+              Perspectives taking shape.
+            </h2>
           </div>
+          <span className="inline-flex w-fit rounded-full border border-[#f26522]/35 bg-[#fff8f4] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#d95316]">
+            Publishing soon
+          </span>
         </div>
-      </div>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
-        <div className="flex items-center gap-2 overflow-x-auto pb-2">
-          {categories.map((cat, i) => (
-            <button
-              key={cat}
-              className={`shrink-0 text-xs sm:text-sm font-semibold px-4 py-2 rounded-full transition-colors cursor-pointer ${
-                i === 0
-                  ? "bg-[#f26522] text-white"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-              }`}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
+          {upcomingThemes.map((theme) => (
+            <article
+              key={theme.number}
+              className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-md"
             >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <section className="max-w-7xl mx-auto px-6 lg:px-12 pb-24 space-y-12">
-        {articles[0] && (
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-2xl overflow-hidden border border-slate-200/80 shadow-sm group hover:shadow-lg transition-all">
-            <div className="lg:col-span-5 bg-gradient-to-br from-[#0b2d53] to-[#1e56a0] min-h-[260px] lg:min-h-[340px] p-8 flex flex-col justify-between relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-40 h-40 bg-[#f26522] rotate-45 transform translate-x-20 -translate-y-20 opacity-80" />
-              <span className="inline-block bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md self-start">
-                {articles[0].tag}
-              </span>
-              <div className="z-10">
-                <span className="text-xs text-sky-200 font-medium block mb-1">Featured</span>
-                <h2 className="text-xl sm:text-2xl font-bold text-white leading-snug">
-                  {articles[0].title}
-                </h2>
-              </div>
-            </div>
-            <div className="lg:col-span-7 bg-white p-8 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center gap-4 text-xs text-slate-400 mb-4">
-                  <span className="flex items-center gap-1.5">
-                    <CalendarBlank size={13} className="text-[#1e56a0]" />
-                    {articles[0].date}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Clock size={13} className="text-[#f26522]" />
-                    {articles[0].readTime}
+              <div className="relative h-44 overflow-hidden bg-[#f7f9fc] p-6">
+                <div className={`absolute left-0 top-0 h-1 w-full ${theme.accent}`} />
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold tracking-[0.18em] text-slate-400">{theme.number}</span>
+                  <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                    Coming soon
                   </span>
                 </div>
-                <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-                  {articles[0].excerpt}
+                <div className="absolute bottom-7 left-6 right-6 space-y-3" aria-hidden="true">
+                  <div className="h-2 w-11/12 rounded-full bg-slate-200/80" />
+                  <div className="h-2 w-8/12 rounded-full bg-slate-200/55" />
+                  <div className="mt-5 h-1.5 w-5/12 rounded-full bg-[#f26522]/40" />
+                </div>
+              </div>
+              <div className="min-h-36 p-6">
+                <h3 className="text-lg font-bold leading-snug text-[#0b2d53]">{theme.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-slate-500">
+                  A forthcoming Konsalta perspective.
                 </p>
               </div>
-              <Link
-                href="/insights"
-                className="inline-flex items-center gap-2 text-sm font-bold text-[#f26522] hover:text-[#d95316] transition-colors mt-6"
-              >
-                <span>Read Full Article</span>
-                <ArrowRight size={15} weight="bold" />
-              </Link>
-            </div>
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {articles.slice(1).map((article) => (
-            <div
-              key={article.title}
-              className="group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-xs hover:shadow-md hover:border-[#f26522]/40 transition-all flex flex-col"
-            >
-              <div className="h-44 bg-gradient-to-br from-[#0b2d53] to-[#1e56a0] p-6 flex flex-col justify-between relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-[#f26522] rotate-45 transform translate-x-16 -translate-y-16 opacity-80" />
-                <span className="inline-block bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md self-start">
-                  {article.tag}
-                </span>
-                <div className="flex items-center justify-between text-xs text-blue-100 z-10">
-                  <span className="flex items-center gap-1.5">
-                    <CalendarBlank size={12} />
-                    {article.date}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Clock size={12} />
-                    {article.readTime}
-                  </span>
-                </div>
-              </div>
-
-              <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                <div>
-                  <h3 className="text-base font-bold text-[#0b2d53] group-hover:text-[#f26522] transition-colors leading-snug mb-2">
-                    {article.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {article.excerpt}
-                  </p>
-                </div>
-                <Link
-                  href="/insights"
-                  className="inline-flex items-center gap-1.5 text-xs font-bold text-[#f26522] hover:text-[#d95316] transition-colors"
-                >
-                  <span>Read Article</span>
-                  <ArrowRight size={13} weight="bold" />
-                </Link>
-              </div>
-            </div>
+            </article>
           ))}
         </div>
+      </section>
 
-        <div className="flex justify-center pt-4">
-          <button className="inline-flex items-center gap-2 border border-slate-300 hover:border-[#f26522] hover:text-[#f26522] text-sm font-semibold text-slate-600 px-8 py-3 rounded-full transition-all cursor-pointer">
-            <span>Load More Articles</span>
-            <ArrowRight size={15} weight="bold" />
-          </button>
+      <section className="border-t border-slate-100 bg-[#f8fafc]">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-7 px-6 py-14 sm:flex-row sm:items-center lg:px-12 lg:py-16">
+          <div className="max-w-xl">
+            <span className="mb-2 block text-xs font-bold uppercase tracking-[0.16em] text-[#1e56a0]">
+              Work with us
+            </span>
+            <h2 className="text-2xl font-bold text-[#0b2d53] sm:text-3xl">Have a question worth exploring?</h2>
+          </div>
+          <Link
+            href="/contact"
+            className="inline-flex shrink-0 items-center gap-2 rounded-full bg-[#f26522] px-7 py-3.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-[#d95316] hover:shadow-md active:scale-95"
+          >
+            Start a conversation
+            <ArrowRight size={16} weight="bold" />
+          </Link>
         </div>
       </section>
     </div>

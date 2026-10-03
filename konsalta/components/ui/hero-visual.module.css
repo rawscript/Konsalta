@@ -1,61 +1,62 @@
+/* ── Hero Visual Animations ── */
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dashDraw {
+  from { stroke-dashoffset: var(--dash-length, 300); }
+  to   { stroke-dashoffset: 0; }
+}
+
+@keyframes pulseBrief {
+  0%, 100% { filter: drop-shadow(0 4px 18px rgba(11, 45, 83, 0.10)); }
+  50%       { filter: drop-shadow(0 8px 28px rgba(11, 45, 83, 0.18)); }
+}
+
+@keyframes floatAccent {
+  0%, 100% { transform: translateY(0px);   opacity: 0.7; }
+  50%       { transform: translateY(-8px);  opacity: 1;   }
+}
+
+/* Wrapper — subtle fade-in on mount */
 .visual {
-  background-image: radial-gradient(circle, rgb(11 45 83 / 17%) 0.9px, transparent 1px);
-  background-size: 28px 28px;
+  animation: fadeInUp 0.8s ease-out both;
 }
 
-.brief {
-  transform-origin: 297px 350px;
-  animation: evidence-brief 8s ease-in-out infinite;
-}
-
+/* Signal cards on the left — staggered fade up */
 .signal {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: evidence-signal 4.8s ease-in-out infinite;
-}
-
-.inputPath, .outcomePath {
+  animation: fadeInUp 0.6s ease-out both;
   opacity: 0;
-  animation: evidence-path 5.2s ease-in-out infinite;
 }
 
+/* Animated path lines from signals into the brief */
+.inputPath {
+  animation: dashDraw 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0.65;
+}
+
+/* Central brief card — gentle pulse */
+.brief {
+  animation:
+    fadeInUp  0.7s ease-out 0.3s both,
+    pulseBrief 4s ease-in-out 1s infinite;
+}
+
+/* Animated path lines from brief out to outcomes */
+.outcomePath {
+  animation: dashDraw 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0.7;
+}
+
+/* Outcome nodes on the right — staggered fade up */
 .outcome {
-  transform-box: fill-box;
-  transform-origin: center;
-  animation: evidence-outcome 5.2s ease-in-out infinite;
+  animation: fadeInUp 0.6s ease-out both;
+  opacity: 0;
 }
 
-.accents { animation: evidence-accents 7s ease-in-out infinite; }
-
-@keyframes evidence-brief {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-@keyframes evidence-signal {
-  0%, 100% { opacity: 0.45; transform: scale(0.95); }
-  35%, 65% { opacity: 1; transform: scale(1); }
-}
-
-@keyframes evidence-path {
-  0% { opacity: 0; }
-  12%, 68% { opacity: 0.7; stroke-dashoffset: 0; }
-  86%, 100% { opacity: 0; stroke-dashoffset: 0; }
-}
-
-@keyframes evidence-outcome {
-  0%, 14% { opacity: 0.35; transform: scale(0.88); }
-  30%, 70% { opacity: 1; transform: scale(1); }
-  88%, 100% { opacity: 0.5; transform: scale(0.93); }
-}
-
-@keyframes evidence-accents {
-  0%, 100% { opacity: 0.45; transform: translateY(0); }
-  50% { opacity: 0.9; transform: translateY(-7px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .brief, .signal, .inputPath, .outcomePath, .outcome, .accents { animation: none; }
-  .inputPath, .outcomePath { opacity: 0.54; stroke-dashoffset: 0; }
-  .signal, .outcome { opacity: 1; }
+/* Small accent shapes — float gently */
+.accents {
+  animation: floatAccent 5s ease-in-out infinite;
 }

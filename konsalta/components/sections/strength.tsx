@@ -53,7 +53,7 @@ export default function Strength() {
               Agility
             </h2>
             <p className="text-blue-100/90 text-sm sm:text-base leading-relaxed max-w-md">
-              We move fast, think deeply and build the right challenges -- because impact doesnt have to take years.
+              We move quickly, think deeply and build the right solutions—because impact shouldn&apos;t take years.
             </p>
           </div>
 

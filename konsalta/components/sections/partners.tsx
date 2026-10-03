@@ -36,7 +36,7 @@ export default function Partners() {
     },
     {
       icon: GraduationCap,
-      title: "Academic & Research Institution",
+      title: "Academic & Research Institutions",
       description:
         "Research Evaluation, Data Analysis and Capacity Development.",
     },

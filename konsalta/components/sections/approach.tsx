@@ -17,11 +17,11 @@ export default function Approach() {
               OUR APPROACH
             </span>
             <h2 className="text-3xl sm:text-4xl lg:text-[2.65rem] font-bold text-[#0b2d53] leading-tight mb-6">
-              Seven Principles,{" "}
-              <span className="text-[#f26522] block sm:inline">one assignment at a time.</span>
+              Seven principles,{" "}
+              <span className="text-[#f26522] block sm:inline">tailored to every assignment.</span>
             </h2>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              No two assignments at the same time: Each client faces a unique combinations of challenges, Stakeholders, context and objectives. This is why we combine strong core team with a wider multidisciplinary network, allowing us to assemble the right expertise required for each assignment.
+              No two assignments are alike. Each client faces a unique combination of challenges, stakeholders, context and objectives. Our core team draws on a wider multidisciplinary network to assemble the right expertise for every assignment.
             </p>
           </div>
 

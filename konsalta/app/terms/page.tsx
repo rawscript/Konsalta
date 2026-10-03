@@ -17,67 +17,67 @@ export default function TermsPage() {
   const sections = [
     {
       id: "acceptance",
-      title: "Lorem Terms Acceptance",
+      title: "Acceptance of Terms",
       icon: CheckCircle,
       content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+        "By accessing or using the Konsalta website, you agree to be bound by these Terms of Use and all applicable laws and regulations. If you do not agree with any part of these terms, you may not use this site. These terms apply to all visitors, users, and anyone who accesses the site.",
       points: [
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit.",
-        "Sed do eiusmod tempor incididunt ut labore et dolore.",
-        "Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.",
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse.",
+        "Access to this site constitutes acceptance of these terms in full.",
+        "Konsalta reserves the right to update these terms at any time without prior notice.",
+        "Continued use of the site following any changes constitutes acceptance of the revised terms.",
+        "These terms apply to all content, services, and materials available on this site.",
       ],
     },
     {
       id: "property",
-      title: "Dolor Intellectual Property",
+      title: "Intellectual Property",
       icon: Scales,
       content:
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
+        "All content on this website — including but not limited to text, graphics, logos, reports, methodologies, and data — is the property of Konsalta or its content partners and is protected by applicable intellectual property laws. Unauthorised use, reproduction, or distribution is strictly prohibited.",
       points: [
-        "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit.",
-        "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet.",
-        "Ut enim ad minima veniam quis nostrum exercitationem ullam corporis.",
-        "Quis autem vel eum iure reprehenderit qui in ea voluptate velit.",
+        "All original content is owned by Konsalta and protected under copyright law.",
+        "Trademarks, logos, and service marks displayed on this site belong to Konsalta.",
+        "You may not reproduce, distribute, or create derivative works without written permission.",
+        "Limited quotation with proper attribution is permitted for non-commercial purposes.",
       ],
     },
     {
       id: "conduct",
-      title: "Consectetur User Conduct",
+      title: "User Conduct",
       icon: ShieldCheck,
       content:
-        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.",
+        "Users of this site agree to engage in a manner that is lawful, respectful, and consistent with Konsalta's values. Any conduct that is harmful, deceptive, or disruptive to the site or its users is strictly prohibited. Konsalta reserves the right to restrict access for violations of these standards.",
       points: [
-        "Et harum quidem rerum facilis est et expedita distinctio.",
-        "Nam libero tempore cum soluta nobis est eligendi optio cumque.",
-        "Temporibus autem quibusdam et aut officiis debitis aut rerum.",
-        "Itaque earum rerum hic tenetur a sapiente delectus ut aut.",
+        "You may not use this site for any unlawful or unauthorised purpose.",
+        "You may not attempt to gain unauthorised access to any part of the site or its systems.",
+        "You may not transmit any content that is harmful, offensive, or in breach of any law.",
+        "Scraping, data mining, or automated access without written consent is not permitted.",
       ],
     },
     {
       id: "liability",
-      title: "Adipiscing Liability Limitation",
+      title: "Limitation of Liability",
       icon: WarningCircle,
       content:
-        "Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.",
+        "Konsalta provides this website on an 'as is' basis and makes no representations or warranties of any kind regarding its accuracy, completeness, or fitness for a particular purpose. To the fullest extent permitted by law, Konsalta excludes all liability for any direct or indirect loss arising from use of this site.",
       points: [
-        "Itaque earum rerum hic tenetur a sapiente delectus aut reiciendis.",
-        "Voluptatibus maiores alias consequatur aut perferendis doloribus.",
-        "Maiores alias consequatur aut perferendis doloribus asperiores repellat.",
-        "Eligendi optio cumque nihil impedit quo minus id quod maxime.",
+        "Konsalta does not warrant that the site will be error-free or uninterrupted.",
+        "We are not liable for any loss or damage arising from reliance on site content.",
+        "Third-party links are provided for convenience only — we do not endorse their content.",
+        "Nothing in these terms limits liability for fraud or death caused by negligence.",
       ],
     },
     {
       id: "governance",
-      title: "Tempor Governing Law",
+      title: "Governing Law",
       icon: Lock,
       content:
-        "Omnis dolor repellendus temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.",
+        "These Terms of Use are governed by and construed in accordance with the laws of Kenya. Any disputes arising from or related to your use of this site shall be subject to the exclusive jurisdiction of the courts of Nairobi, Kenya, unless otherwise required by applicable law in your jurisdiction.",
       points: [
-        "Placeat facere possimus omnis voluptas assumenda est omnis dolor.",
-        "Repellendus temporibus autem quibusdam et aut officiis debitis.",
-        "Aut rerum necessitatibus saepe eveniet ut et voluptates.",
-        "Repudiandae sint et molestiae non recusandae itaque earum.",
+        "These terms are governed by the laws of Kenya.",
+        "Disputes will be resolved in the courts of Nairobi, Kenya.",
+        "If any provision of these terms is found unlawful, the remaining terms remain in effect.",
+        "Failure to enforce any provision does not constitute a waiver of that right.",
       ],
     },
   ];
@@ -94,7 +94,7 @@ export default function TermsPage() {
             className="inline-flex items-center gap-2 text-xs font-semibold text-sky-200 hover:text-white transition-colors mb-6"
           >
             <ArrowLeft size={14} weight="bold" />
-            <span>Lorem Ipsum / Home</span>
+            <span>Konsalta / Home</span>
           </Link>
 
           <div className="flex items-center gap-2.5 mb-3">
@@ -102,25 +102,24 @@ export default function TermsPage() {
               <FileText size={18} weight="bold" />
             </span>
             <span className="text-xs sm:text-sm font-bold tracking-[0.18em] text-sky-300 uppercase">
-              LOREM / TERMS OF USE
+              KONSALTA / TERMS OF USE
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-[3rem] font-extrabold text-white leading-tight tracking-tight mb-4 max-w-3xl">
-            Lorem Ipsum Dolor.{" "}
-            <span className="text-[#f26522]">Terms of Use.</span>
+            Our Terms,{" "}
+            <span className="text-[#f26522]">Clearly Stated.</span>
           </h1>
 
           <p className="text-blue-100/80 text-sm sm:text-base leading-relaxed max-w-2xl mb-6">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris.
+            These terms govern your use of the Konsalta website. Please read them
+            carefully. By using this site, you agree to be bound by these terms.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 text-xs text-sky-200/70 pt-2 border-t border-white/10">
             <span className="inline-flex items-center gap-1.5">
               <Clock size={14} weight="bold" />
-              <span>Lorem Ipsum: Oct 2026</span>
+              <span>Last updated: October 2026</span>
             </span>
             <span>•</span>
             <span className="inline-flex items-center gap-1.5">
@@ -136,7 +135,7 @@ export default function TermsPage() {
           <div className="lg:col-span-4">
             <div className="sticky top-28 bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs">
               <h3 className="text-sm font-bold text-[#0b2d53] uppercase tracking-wider mb-4 pb-3 border-b border-slate-100">
-                Lorem Terms Index
+                Contents
               </h3>
               <ul className="space-y-2">
                 {sections.map((section) => (
@@ -154,10 +153,10 @@ export default function TermsPage() {
 
               <div className="mt-8 pt-6 border-t border-slate-100">
                 <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">
-                  Lorem Legal Team
+                  Legal Queries
                 </span>
                 <p className="text-xs text-slate-600 mb-4 leading-relaxed">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.
+                  Questions about these terms? Contact our team directly.
                 </p>
                 <a
                   href="mailto:legal@konsalta.com"
@@ -173,22 +172,22 @@ export default function TermsPage() {
           <div className="lg:col-span-8 space-y-8">
             <div className="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8">
               <span className="text-xs font-semibold text-[#f26522] uppercase tracking-wider block mb-2">
-                LOREM INTRODUCTION
+                INTRODUCTION
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-[#0b2d53] mb-4">
-                Lorem Agreement & Terms
+                Agreement to These Terms
               </h2>
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                These Terms of Use govern your access to and use of the Konsalta
+                website at www.konsaltahub.org. Konsalta is a women-led,
+                Africa-focused research, consulting and advisory firm registered
+                in Kenya and Nigeria.
               </p>
               <p className="text-sm text-slate-600 leading-relaxed">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt
-                mollit anim id est laborum.
+                By using this site you confirm that you have read, understood, and
+                agree to be bound by these terms and our Privacy Policy. If you
+                are using this site on behalf of an organisation, you represent
+                that you have authority to bind that organisation to these terms.
               </p>
             </div>
 
@@ -204,7 +203,7 @@ export default function TermsPage() {
                   </div>
                   <div>
                     <span className="text-xs font-semibold text-[#f26522] uppercase tracking-wider block">
-                      LOREM SECTION
+                      TERMS
                     </span>
                     <h3 className="text-lg sm:text-xl font-bold text-[#0b2d53]">
                       {section.title}
