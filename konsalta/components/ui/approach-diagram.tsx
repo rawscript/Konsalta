@@ -33,7 +33,7 @@ export default function ApproachDiagram() {
             fontWeight="700"
             fontFamily="inherit"
           >
-            Lorem
+            Our
           </text>
           <text
             x="280"
@@ -44,7 +44,7 @@ export default function ApproachDiagram() {
             fontWeight="700"
             fontFamily="inherit"
           >
-            Ipsum
+            Approach
           </text>
         </g>
 
@@ -55,10 +55,10 @@ export default function ApproachDiagram() {
             <line x1="13.5" y1="13.5" x2="19" y2="19" />
           </g>
           <text x="280" y="80" textAnchor="middle" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            1. Lorem ipsum
+            1. Start with
           </text>
           <text x="280" y="94" textAnchor="middle" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            dolor
+            the Problem
           </text>
         </g>
 
@@ -71,10 +71,10 @@ export default function ApproachDiagram() {
             <path d="M15 4a3 3 0 0 1 0 5" />
           </g>
           <text x="430" y="182" textAnchor="start" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            2. Consectetur
+            2. Build the
           </text>
           <text x="430" y="196" textAnchor="start" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            adipiscing
+            right Team
           </text>
         </g>
 
@@ -87,10 +87,10 @@ export default function ApproachDiagram() {
             <line x1="7" y1="16" x2="13" y2="16" />
           </g>
           <text x="458" y="311" textAnchor="start" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            3. Tempor
+            3. Generate Credible 
           </text>
           <text x="458" y="325" textAnchor="start" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            incididunt
+            Evidence
           </text>
         </g>
 
@@ -101,10 +101,10 @@ export default function ApproachDiagram() {
             <circle cx="12" cy="9" r="2.5" />
           </g>
           <text x="375" y="420" textAnchor="start" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            4. Labore et
+            4. Bring context
           </text>
           <text x="375" y="434" textAnchor="start" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            dolore
+            to the Evidence
           </text>
         </g>
 
@@ -115,7 +115,7 @@ export default function ApproachDiagram() {
             <path d="M11 2v2m0 14v2m-9-9h2m14 0h2m-2.8-6.2l-1.4 1.4m-9.6 9.6l-1.4 1.4m0-12.4l1.4 1.4m9.6 9.6l1.4 1.4" />
           </g>
           <text x="215" y="458" textAnchor="middle" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            5. Magna aliqua
+            5. Translate Evidence into Action
           </text>
           <text x="215" y="472" textAnchor="middle" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
             enim
@@ -132,10 +132,10 @@ export default function ApproachDiagram() {
             <polyline points="14 4 18 4 18 8" />
           </g>
           <text x="104" y="311" textAnchor="end" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            6. Minim veniam
+            6. Strengthen 
           </text>
           <text x="104" y="325" textAnchor="end" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            quis
+            Delivered Capacity
           </text>
         </g>
 
@@ -147,10 +147,10 @@ export default function ApproachDiagram() {
             <line x1="9" y1="12" x2="12" y2="12" />
           </g>
           <text x="133" y="182" textAnchor="end" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            7. Nostrud
+            7. Engage throughout
           </text>
           <text x="133" y="196" textAnchor="end" fill="#0b2d53" fontSize="11" fontWeight="700" fontFamily="inherit">
-            ullamco
+            the process
           </text>
         </g>
       </svg>

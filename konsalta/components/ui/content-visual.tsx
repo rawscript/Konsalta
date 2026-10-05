@@ -77,7 +77,7 @@ export default function ContentVisual() {
       </svg>
 
       <div className="absolute bottom-4 left-6 sm:bottom-6 sm:left-8 bg-black/40 backdrop-blur-md px-4 py-2 rounded-lg border border-white/20 text-white text-xs sm:text-sm font-medium">
-        Lorem ipsum dolor sit amet • Consectetur adipiscing
+        Evidence to Impact • Konsalta Insights
       </div>
     </div>
   );

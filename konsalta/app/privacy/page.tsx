@@ -16,54 +16,54 @@ export default function PrivacyPolicyPage() {
   const sections = [
     {
       id: "collection",
-      title: "Lorem Ipsum Collection",
+      title: "Information We Collect",
       icon: Eye,
       content:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.",
+        "Konsalta collects only the information necessary to provide our services and improve your experience on this site. This includes information you provide directly — such as through our contact form or newsletter — and limited technical data collected automatically when you visit.",
       points: [
-        "Lorem ipsum dolor sit amet consectetur adipiscing elit.",
-        "Sed do eiusmod tempor incididunt ut labore et dolore.",
-        "Ut enim ad minim veniam quis nostrud exercitation ullamco.",
-        "Duis aute irure dolor in reprehenderit in voluptate velit.",
+        "Contact details you submit via forms (name, email, subject, message).",
+        "Newsletter subscription email addresses.",
+        "Technical data including browser type, device, and anonymised IP address.",
+        "Usage data such as pages visited and time spent on site (via analytics cookies, if consented).",
       ],
     },
     {
       id: "usage",
-      title: "Dolor Sit Amet Usage",
+      title: "How We Use Your Information",
       icon: FileText,
       content:
-        "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.",
+        "We use the information we collect solely for the purposes for which it was provided, or for closely related purposes you would reasonably expect. We do not sell, rent, or trade personal data to any third party. Your data is used to respond to your enquiries, send communications you have opted into, and improve our website.",
       points: [
-        "Nemo enim ipsam voluptatem quia voluptas sit aspernatur.",
-        "Neque porro quisquam est qui dolorem ipsum quia dolor.",
-        "Ut enim ad minima veniam quis nostrum exercitationem ullam.",
-        "Quis autem vel eum iure reprehenderit qui in ea voluptate.",
+        "To respond to enquiries and service requests submitted via our contact form.",
+        "To send newsletters and updates to subscribers who have opted in.",
+        "To understand how our site is used and identify areas for improvement.",
+        "To comply with legal and regulatory obligations where applicable.",
       ],
     },
     {
       id: "security",
-      title: "Adipiscing Elit Security",
+      title: "Data Security",
       icon: ShieldCheck,
       content:
-        "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.",
+        "Konsalta takes the security of your personal data seriously. We implement appropriate technical and organisational measures to protect your information against unauthorised access, loss, or disclosure. No method of transmission over the internet is completely secure, but we maintain industry-standard protections.",
       points: [
-        "Temporibus autem quibusdam et aut officiis debitis aut.",
-        "Itaque earum rerum hic tenetur a sapiente delectus.",
-        "Nam libero tempore cum soluta nobis est eligendi optio.",
-        "Omnis dolor repellendus temporibus autem quibusdam et.",
+        "All data transmissions are encrypted using HTTPS/TLS protocols.",
+        "Access to personal data is restricted to authorised personnel only.",
+        "We conduct periodic reviews of our data handling and security practices.",
+        "In the event of a data breach, we will notify affected individuals as required by law.",
       ],
     },
     {
       id: "rights",
-      title: "Tempor Incididunt Rights",
+      title: "Your Rights",
       icon: Lock,
       content:
-        "Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.",
+        "You have rights over your personal data. Depending on your location, these may include the right to access, correct, delete, or restrict processing of your data. You may also have the right to data portability and to withdraw consent at any time. To exercise any of these rights, contact us at privacy@konsalta.org.",
       points: [
-        "Voluptatibus maiores alias consequatur aut perferendis doloribus.",
-        "Maiores alias consequatur aut perferendis doloribus asperiores.",
-        "Eligendi optio cumque nihil impedit quo minus id quod.",
-        "Placeat facere possimus omnis voluptas assumenda est omnis.",
+        "Right to access the personal data we hold about you.",
+        "Right to correct any inaccurate or incomplete data.",
+        "Right to request deletion of your data where no legal basis exists for retention.",
+        "Right to withdraw consent for marketing or optional data processing at any time.",
       ],
     },
   ];
@@ -80,7 +80,7 @@ export default function PrivacyPolicyPage() {
             className="inline-flex items-center gap-2 text-xs font-semibold text-sky-200 hover:text-white transition-colors mb-6"
           >
             <ArrowLeft size={14} weight="bold" />
-            <span>Lorem Ipsum / Home</span>
+            <span>Konsalta / Home</span>
           </Link>
 
           <div className="flex items-center gap-2.5 mb-3">
@@ -88,30 +88,30 @@ export default function PrivacyPolicyPage() {
               <Lock size={18} weight="bold" />
             </span>
             <span className="text-xs sm:text-sm font-bold tracking-[0.18em] text-sky-300 uppercase">
-              LOREM / PRIVACY POLICY
+              KONSALTA / PRIVACY POLICY
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-[3rem] font-extrabold text-white leading-tight tracking-tight mb-4 max-w-3xl">
-            Lorem Ipsum Dolor.{" "}
-            <span className="text-[#f26522]">Privacy Policy.</span>
+            Your Data,{" "}
+            <span className="text-[#f26522]">Handled with Care.</span>
           </h1>
 
           <p className="text-blue-100/80 text-sm sm:text-base leading-relaxed max-w-2xl mb-6">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris.
+            Konsalta is committed to protecting your privacy. This policy explains
+            what personal information we collect, how we use it, and your rights
+            regarding your data.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 text-xs text-sky-200/70 pt-2 border-t border-white/10">
             <span className="inline-flex items-center gap-1.5">
               <Clock size={14} weight="bold" />
-              <span>Lorem Ipsum: Oct 2026</span>
+              <span>Last updated: October 2026</span>
             </span>
             <span>•</span>
             <span className="inline-flex items-center gap-1.5">
               <ShieldCheck size={14} weight="bold" />
-              <span>Dolor Sit Consectetur</span>
+              <span>GDPR & Kenya DPA Aligned</span>
             </span>
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function PrivacyPolicyPage() {
           <div className="lg:col-span-4">
             <div className="sticky top-28 bg-white rounded-2xl border border-slate-200/80 p-6 shadow-xs">
               <h3 className="text-sm font-bold text-[#0b2d53] uppercase tracking-wider mb-4 pb-3 border-b border-slate-100">
-                Lorem Sections
+                Contents
               </h3>
               <ul className="space-y-2">
                 {sections.map((section) => (
@@ -140,10 +140,10 @@ export default function PrivacyPolicyPage() {
 
               <div className="mt-8 pt-6 border-t border-slate-100">
                 <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block mb-2">
-                  Lorem Inquiries
+                  Privacy Enquiries
                 </span>
                 <p className="text-xs text-slate-600 mb-4 leading-relaxed">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod.
+                  Questions about your data or this policy? Reach out directly.
                 </p>
                 <a
                   href="mailto:privacy@konsalta.com"
@@ -159,22 +159,21 @@ export default function PrivacyPolicyPage() {
           <div className="lg:col-span-8 space-y-8">
             <div className="bg-white rounded-2xl border border-slate-200/80 p-6 sm:p-8">
               <span className="text-xs font-semibold text-[#f26522] uppercase tracking-wider block mb-2">
-                LOREM OVERVIEW
+                OVERVIEW
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-[#0b2d53] mb-4">
-                Lorem Ipsum Dolor Sit Amet
+                Our Commitment to Your Privacy
               </h2>
               <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-4">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat.
+                Konsalta respects your privacy and is committed to protecting your
+                personal data. This policy applies to information collected through
+                our website and any direct communications with our team.
               </p>
               <p className="text-sm text-slate-600 leading-relaxed">
-                Duis aute irure dolor in reprehenderit in voluptate velit esse
-                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                cupidatat non proident, sunt in culpa qui officia deserunt
-                mollit anim id est laborum.
+                We process personal data in accordance with applicable data
+                protection laws, including Kenya&apos;s Data Protection Act (2019)
+                and, where applicable, the EU General Data Protection Regulation
+                (GDPR). If you have questions, contact us at privacy@konsalta.org.
               </p>
             </div>
 
@@ -190,7 +189,7 @@ export default function PrivacyPolicyPage() {
                   </div>
                   <div>
                     <span className="text-xs font-semibold text-[#f26522] uppercase tracking-wider block">
-                      LOREM SECTION
+                      PRIVACY
                     </span>
                     <h3 className="text-lg sm:text-xl font-bold text-[#0b2d53]">
                       {section.title}

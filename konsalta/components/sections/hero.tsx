@@ -24,7 +24,8 @@ export default function Hero() {
             </h1>
 
             <p className="text-slate-600 text-base sm:text-[17px] leading-relaxed mb-8">
-Konsalta is a women-led, Africa-focused research, consulting and advisory firm. We are built to move past the slow overhead-heavy structures of traditional consulting - Operating instead as an agile, network driven collective, shaped around each client's needs to deliver sustained value </p>
+              Konsalta is a women-led, Africa-focused research, consulting and advisory firm. We move beyond the slow, overhead-heavy structures of traditional consulting, operating as an agile, network-driven collective shaped around each client&apos;s needs to deliver lasting value.
+            </p>
 
             <Link
               href="/contact"

@@ -63,11 +63,11 @@ export default function CookieBanner() {
         </div>
         <div className="flex-1">
           <h3 className="text-sm font-bold text-white mb-1">
-            Lorem Cookie Notice
+            We use cookies
           </h3>
           <p className="text-xs text-slate-300 leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua.
+            We use cookies to improve your experience and understand how our site
+            is used. You can manage your preferences at any time.
           </p>
         </div>
         <button

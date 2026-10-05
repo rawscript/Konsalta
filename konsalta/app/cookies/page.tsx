@@ -64,7 +64,7 @@ export default function CookiesPage() {
     savePreferences(preferences);
     const now = new Date().toLocaleString();
     setLastSaved(now);
-    setSavedNotification("Lorem ipsum preferences saved to your browser.");
+    setSavedNotification("Your cookie preferences have been saved.");
     setTimeout(() => setSavedNotification(null), 4000);
   };
 
@@ -79,7 +79,7 @@ export default function CookiesPage() {
     savePreferences(allEnabled);
     const now = new Date().toLocaleString();
     setLastSaved(now);
-    setSavedNotification("Lorem ipsum all cookies accepted.");
+    setSavedNotification("All cookies accepted.");
     setTimeout(() => setSavedNotification(null), 4000);
   };
 
@@ -94,7 +94,7 @@ export default function CookiesPage() {
     savePreferences(onlyEssential);
     const now = new Date().toLocaleString();
     setLastSaved(now);
-    setSavedNotification("Lorem ipsum non-essential cookies rejected.");
+    setSavedNotification("Non-essential cookies disabled.");
     setTimeout(() => setSavedNotification(null), 4000);
   };
 
@@ -103,46 +103,46 @@ export default function CookiesPage() {
     savePreferences(DEFAULT_PREFERENCES);
     const now = new Date().toLocaleString();
     setLastSaved(now);
-    setSavedNotification("Lorem ipsum preferences reset to defaults.");
+    setSavedNotification("Preferences reset to defaults.");
     setTimeout(() => setSavedNotification(null), 4000);
   };
 
   const cookieCategories = [
     {
       key: "essential",
-      title: "Lorem Essential Cookies",
+      title: "Essential Cookies",
       badge: "Always Active",
       icon: Lock,
       required: true,
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.",
+        "These cookies are necessary for the website to function and cannot be disabled. They are usually set in response to actions you take, such as setting your privacy preferences, logging in, or filling in forms. You can set your browser to block these cookies, but parts of the site will not work.",
     },
     {
       key: "analytics",
-      title: "Dolor Analytics & Performance",
+      title: "Analytics & Performance",
       badge: "Optional",
       icon: SlidersHorizontal,
       required: false,
       description:
-        "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.",
+        "These cookies help us understand how visitors interact with our website by collecting and reporting information anonymously. They allow us to measure and improve the performance of our site — for example, understanding which pages are most visited and how people navigate between them.",
     },
     {
       key: "functional",
-      title: "Adipiscing Functional Cookies",
+      title: "Functional Cookies",
       badge: "Optional",
       icon: CheckCircle,
       required: false,
       description:
-        "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto.",
+        "Functional cookies enable enhanced features and personalisation, such as remembering your language preference or region. They may be set by us or by third-party providers whose services we use on our pages. Disabling these may affect the quality of the experience.",
     },
     {
       key: "marketing",
-      title: "Tempor Marketing & Targeting",
+      title: "Marketing & Targeting",
       badge: "Optional",
       icon: Cookie,
       required: false,
       description:
-        "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt neque porro quisquam est.",
+        "These cookies may be set through our site by our advertising and content partners. They may be used to build a profile of your interests and show you relevant content on other sites. They do not store personal information directly but uniquely identify your browser and device.",
     },
   ];
 
@@ -158,7 +158,7 @@ export default function CookiesPage() {
             className="inline-flex items-center gap-2 text-xs font-semibold text-sky-200 hover:text-white transition-colors mb-6"
           >
             <ArrowLeft size={14} weight="bold" />
-            <span>Lorem Ipsum / Home</span>
+            <span>Konsalta / Home</span>
           </Link>
 
           <div className="flex items-center gap-2.5 mb-3">
@@ -166,26 +166,25 @@ export default function CookiesPage() {
               <Cookie size={18} weight="bold" />
             </span>
             <span className="text-xs sm:text-sm font-bold tracking-[0.18em] text-sky-300 uppercase">
-              LOREM / COOKIES PREFERENCES
+              KONSALTA / COOKIE PREFERENCES
             </span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl lg:text-[3rem] font-extrabold text-white leading-tight tracking-tight mb-4 max-w-3xl">
-            Lorem Ipsum Dolor.{" "}
-            <span className="text-[#f26522]">Cookies Preferences.</span>
+            Your Privacy,{" "}
+            <span className="text-[#f26522]">Your Choice.</span>
           </h1>
 
           <p className="text-blue-100/80 text-sm sm:text-base leading-relaxed max-w-2xl mb-6">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-            veniam, quis nostrud exercitation ullamco laboris.
+            We believe in transparency. This page lets you control exactly which
+            cookies Konsalta uses on your device — and change your mind at any time.
           </p>
 
           <div className="flex flex-wrap items-center gap-4 text-xs text-sky-200/70 pt-2 border-t border-white/10">
             <span className="inline-flex items-center gap-1.5">
               <Clock size={14} weight="bold" />
               <span>
-                {lastSaved ? `Saved: ${lastSaved}` : "Lorem Ipsum: Oct 2026"}
+                {lastSaved ? `Saved: ${lastSaved}` : "Not yet saved"}
               </span>
             </span>
             <span>•</span>
@@ -202,10 +201,10 @@ export default function CookiesPage() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100 mb-6">
             <div>
               <span className="text-xs font-semibold text-[#f26522] uppercase tracking-wider block mb-1">
-                LOREM PREFERENCE DASHBOARD
+                PREFERENCE DASHBOARD
               </span>
               <h2 className="text-xl sm:text-2xl font-bold text-[#0b2d53]">
-                Lorem Cookies Management
+                Manage Cookie Settings
               </h2>
               {lastSaved && (
                 <span className="text-xs text-slate-500 mt-1 block">
@@ -344,16 +343,17 @@ export default function CookiesPage() {
               <Cookie size={22} weight="bold" />
             </div>
             <h3 className="text-lg font-bold text-[#0b2d53] mb-2">
-              Lorem Ipsum What Are Cookies
+              What Are Cookies?
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-              veniam, quis nostrud exercitation ullamco laboris.
+              Cookies are small text files placed on your device when you visit a
+              website. They are widely used to make sites work efficiently, remember
+              your preferences, and provide information to the site owners.
             </p>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
-              dolore eu fugiat nulla pariatur excepteur sint occaecat.
+              Konsalta only uses cookies that are necessary for the site to function
+              or that you have explicitly consented to. We never sell data derived
+              from your browsing to third parties.
             </p>
           </div>
 
@@ -362,16 +362,17 @@ export default function CookiesPage() {
               <SlidersHorizontal size={22} weight="bold" />
             </div>
             <h3 className="text-lg font-bold text-[#0b2d53] mb-2">
-              Dolor Sit Browser Controls
+              Managing Cookies in Your Browser
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed mb-4">
-              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-              accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae
-              ab illo inventore veritatis.
+              Most browsers allow you to control cookies through their settings. You
+              can block all cookies, delete existing cookies, or set preferences for
+              specific sites — independently of the controls on this page.
             </p>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
-              fugit sed quia consequuntur magni dolores eos qui ratione.
+              Note that blocking all cookies may affect the functionality of some
+              parts of this site. Your browser settings will override the preferences
+              you save here for cookies already stored on your device.
             </p>
           </div>
         </div>

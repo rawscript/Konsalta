@@ -1,320 +1,124 @@
-"use client";
-
-import { useState, FormEvent } from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  EnvelopeSimple,
-  Phone,
-  MapPin,
-  Clock,
-  LinkedinLogo,
-  InstagramLogo,
-  Globe,
-  ArrowRight,
-  ArrowLeft,
-  CheckCircle,
-} from "@phosphor-icons/react";
+import { ArrowLeft, ArrowRight, EnvelopeSimple } from "@phosphor-icons/react/dist/ssr";
+
+export const metadata: Metadata = {
+  title: "Contact",
+  description:
+    "Contact Konsalta about research, consulting and advisory enquiries across Africa.",
+  openGraph: {
+    title: "Contact Konsalta",
+    description:
+      "Start a conversation with Konsalta about research, consulting and advisory enquiries.",
+  },
+};
+
+const engagementAreas = [
+  "Research and evaluation",
+  "Strategic advisory",
+  "Learning and capacity development",
+];
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (formData.email && formData.message) {
-      setIsSubmitted(true);
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
-    }
-  };
-
-  const contactCards = [
-    {
-      title: "General Inquiries",
-      detail: "hello@konsalta.org",
-      description: "Lorem ipsum dolor sit amet consectetur adipiscing elit.",
-    },
-    {
-      title: "Advisory Services",
-      detail: "advisory@konsalta.org",
-      description: "Sed do eiusmod tempor incididunt ut labore et dolore.",
-    },
-    {
-      title: "Partnerships",
-      detail: "partners@konsalta.org",
-      description: "Ut enim ad minim veniam quis nostrud exercitation.",
-    },
-  ];
-
   return (
     <div className="w-full bg-white">
       <div className="border-b border-slate-100 bg-[#f8fafc]/60 py-4">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center gap-2 text-xs sm:text-sm text-slate-500">
-          <Link href="/" className="hover:text-[#f26522] transition-colors flex items-center gap-1.5">
+        <div className="mx-auto flex max-w-7xl items-center gap-2 px-6 text-xs text-slate-500 sm:text-sm lg:px-12">
+          <Link href="/" className="flex items-center gap-1.5 transition-colors hover:text-[#f26522]">
             <ArrowLeft size={14} weight="bold" />
             <span>Home</span>
           </Link>
           <span>/</span>
-          <span className="text-[#0b2d53] font-medium">Contact Us</span>
+          <span className="font-medium text-[#0b2d53]">Contact</span>
         </div>
       </div>
 
-      <section className="max-w-7xl mx-auto px-6 lg:px-12 pt-12 pb-24">
-        <header className="max-w-3xl mb-14">
-          <span className="text-xs sm:text-sm font-bold tracking-[0.18em] text-[#1e56a0] uppercase block mb-3">
-            LOREM / IPSUM / CONTACT
-          </span>
-          <h1 className="text-3xl sm:text-4xl lg:text-[3.25rem] font-extrabold text-[#0b2d53] leading-tight tracking-tight mb-5">
-            Lorem Ipsum Dolor Sit Amet.{" "}
-            <span className="text-[#f26522] block sm:inline">
-              Consectetur Adipiscing.
+      <section className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-24">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12 lg:gap-16">
+          <header className="lg:col-span-6">
+            <span className="mb-3 block text-xs font-bold uppercase tracking-[0.18em] text-[#1e56a0] sm:text-sm">
+              Contact Konsalta
             </span>
-          </h1>
-          <p className="text-slate-600 text-base sm:text-lg leading-relaxed">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.
-          </p>
-        </header>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
-          <div className="lg:col-span-5 bg-[#072448] text-white p-8 sm:p-10 rounded-3xl shadow-lg relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-48 h-48 bg-[#f26522] rounded-full blur-3xl opacity-20 pointer-events-none" />
-            <div
-              className="absolute bottom-0 right-0 w-24 h-24 bg-[#f26522] pointer-events-none opacity-80"
-              style={{ clipPath: "polygon(100% 0, 0 100%, 100% 100%)" }}
-            />
-
-            <span className="text-xs font-bold tracking-widest text-sky-300 uppercase block mb-3">
-              GET IN TOUCH
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-              Lorem Ipsum Dolor
-            </h2>
-            <p className="text-blue-100/80 text-sm leading-relaxed mb-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            <h1 className="mb-6 text-4xl font-extrabold leading-tight tracking-tight text-[#0b2d53] sm:text-5xl lg:text-[3.6rem]">
+              Let&apos;s work towards <span className="text-[#f26522]">better decisions.</span>
+            </h1>
+            <p className="max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
+              For research, consulting and advisory enquiries, get in touch with our
+              team directly. A dedicated enquiry form will be available here soon.
             </p>
 
-            <div className="space-y-6 pb-8 border-b border-white/10">
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-full bg-[#f26522] flex items-center justify-center text-white shrink-0 shadow-sm">
-                  <EnvelopeSimple size={20} weight="bold" />
-                </div>
-                <div>
-                  <span className="text-xs text-blue-200 block">Email us</span>
-                  <a
-                    href="mailto:hello@konsalta.org"
-                    className="text-sm sm:text-base font-semibold text-white hover:text-[#f26522] transition-colors"
-                  >
-                    hello@konsalta.org
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-full bg-[#f26522] flex items-center justify-center text-white shrink-0 shadow-sm">
-                  <Phone size={20} weight="bold" />
-                </div>
-                <div>
-                  <span className="text-xs text-blue-200 block">Call us</span>
-                  <a
-                    href="tel:+254700000000"
-                    className="text-sm sm:text-base font-semibold text-white hover:text-[#f26522] transition-colors"
-                  >
-                    +254 700 000 000
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-full bg-[#f26522] flex items-center justify-center text-white shrink-0 shadow-sm">
-                  <MapPin size={20} weight="bold" />
-                </div>
-                <div>
-                  <span className="text-xs text-blue-200 block">Location</span>
-                  <span className="text-sm sm:text-base font-semibold text-white block">
-                    Nairobi, Kenya • Lagos, Nigeria
-                  </span>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-11 h-11 rounded-full bg-[#f26522] flex items-center justify-center text-white shrink-0 shadow-sm">
-                  <Clock size={20} weight="bold" />
-                </div>
-                <div>
-                  <span className="text-xs text-blue-200 block">Working Hours</span>
-                  <span className="text-sm sm:text-base font-semibold text-white block">
-                    Monday - Friday: 8:00 AM - 5:00 PM
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <div className="pt-8">
-              <span className="text-xs font-semibold text-blue-200 uppercase tracking-wider block mb-4">
-                Connect with our network
+            <div className="mt-10 border-t border-slate-200 pt-8">
+              <span className="mb-4 block text-xs font-bold uppercase tracking-[0.16em] text-[#1e56a0]">
+                Areas we support
               </span>
-              <div className="flex items-center gap-3">
-                <a
-                  href="https://linkedin.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#f26522] text-white flex items-center justify-center transition-all"
-                  aria-label="LinkedIn"
-                >
-                  <LinkedinLogo size={18} weight="fill" />
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#f26522] text-white flex items-center justify-center transition-all"
-                  aria-label="Instagram"
-                >
-                  <InstagramLogo size={18} weight="fill" />
-                </a>
-                <a
-                  href="https://www.konsaltahub.org"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-10 h-10 rounded-full bg-white/10 hover:bg-[#f26522] text-white flex items-center justify-center transition-all"
-                  aria-label="Website"
-                >
-                  <Globe size={18} weight="regular" />
-                </a>
-              </div>
+              <ul className="space-y-3">
+                {engagementAreas.map((area) => (
+                  <li key={area} className="flex items-center gap-3 text-sm font-semibold text-[#0b2d53]">
+                    <span className="h-2 w-2 rounded-full bg-[#f26522]" />
+                    {area}
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          </header>
 
-          <div className="lg:col-span-7 bg-white p-8 sm:p-10 rounded-3xl border border-slate-200/90 shadow-sm">
-            <span className="text-xs sm:text-sm font-bold tracking-[0.16em] text-[#1e56a0] uppercase block mb-2">
-              SEND A MESSAGE
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-[#0b2d53] mb-3">
-              Lorem ipsum dolor sit amet
-            </h2>
-            <p className="text-slate-600 text-sm leading-relaxed mb-8">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.
-            </p>
+          <aside className="relative overflow-hidden rounded-3xl bg-[#072448] p-8 text-white shadow-lg sm:p-10 lg:col-span-6">
+            <div className="pointer-events-none absolute -right-16 -top-16 h-56 w-56 rounded-full bg-[#f26522] opacity-20 blur-3xl" />
+            <div className="pointer-events-none absolute bottom-0 right-0 h-28 w-28 bg-[#f26522] opacity-80" style={{ clipPath: "polygon(100% 0, 0 100%, 100% 100%)" }} />
 
-            {isSubmitted && (
-              <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center gap-3 text-emerald-800 text-sm">
-                <CheckCircle size={22} weight="fill" className="text-emerald-600 shrink-0" />
-                <span>Lorem ipsum dolor sit amet! Your message has been sent successfully.</span>
-              </div>
-            )}
+            <div className="relative z-10">
+              <span className="mb-3 inline-flex rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-sky-200">
+                Get in touch
+              </span>
+              <h2 className="max-w-sm text-2xl font-bold leading-tight sm:text-3xl">Start a conversation.</h2>
+              <p className="mt-4 max-w-md text-sm leading-relaxed text-blue-100/80">
+                Reach our team directly for research, consulting and advisory enquiries.
+              </p>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.firstName}
-                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                    placeholder="Lorem"
-                    className="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-[#f26522] focus:bg-white transition-all"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    value={formData.lastName}
-                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                    placeholder="Ipsum"
-                    className="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-[#f26522] focus:bg-white transition-all"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="lorem@example.com"
-                  className="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-[#f26522] focus:bg-white transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-                  Subject / Area of Interest
-                </label>
-                <input
-                  type="text"
-                  value={formData.subject}
-                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                  placeholder="Lorem ipsum advisory"
-                  className="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-[#f26522] focus:bg-white transition-all"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-2">
-                  Your Message
-                </label>
-                <textarea
-                  rows={5}
-                  required
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit..."
-                  className="w-full bg-[#f8fafc] border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 focus:outline-none focus:border-[#f26522] focus:bg-white transition-all resize-none"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center gap-2 bg-[#f26522] hover:bg-[#d95316] text-white text-sm font-semibold px-8 py-3.5 rounded-full transition-all shadow-md hover:shadow-lg active:scale-95 cursor-pointer"
+              <a
+                href="mailto:engage@konsaltahub.org"
+                className="mt-7 inline-flex items-center gap-3 rounded-xl border border-white/15 bg-white/10 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#f26522]"
               >
-                <span>Send Message</span>
-                <ArrowRight size={16} weight="bold" />
-              </button>
-            </form>
-          </div>
+                <EnvelopeSimple size={19} weight="bold" />
+                engage@konsaltahub.org
+              </a>
+
+              <div className="mt-9 rounded-2xl border border-white/10 bg-white/[0.06] p-5 sm:p-6" aria-label="Contact form preview">
+                <div className="mb-6 flex items-center justify-between">
+                  <span className="text-xs font-bold uppercase tracking-[0.15em] text-white/70">Enquiry form coming soon</span>
+                  <span className="h-2 w-2 rounded-full bg-[#f26522]" />
+                </div>
+                <div className="space-y-5" aria-hidden="true">
+                  <div className="space-y-2">
+                    <div className="h-2 w-20 rounded-full bg-white/25" />
+                    <div className="h-11 rounded-xl border border-white/10 bg-white/[0.07]" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-2 w-28 rounded-full bg-white/25" />
+                    <div className="h-11 rounded-xl border border-white/10 bg-white/[0.07]" />
+                  </div>
+                  <div className="space-y-2">
+                    <div className="h-2 w-24 rounded-full bg-white/25" />
+                    <div className="h-20 rounded-xl border border-white/10 bg-white/[0.07]" />
+                  </div>
+                </div>
+              </div>
+
+              <p className="mt-6 text-xs leading-relaxed text-blue-100/65">
+                Prefer email? We will be glad to hear from you at the address above.
+              </p>
+            </div>
+          </aside>
         </div>
 
-        <div className="mt-20 pt-14 border-t border-slate-200">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {contactCards.map((card) => (
-              <div
-                key={card.title}
-                className="bg-[#f8fafc] p-6 rounded-2xl border border-slate-200/80"
-              >
-                <h3 className="text-base font-bold text-[#0b2d53] mb-1">
-                  {card.title}
-                </h3>
-                <span className="text-sm font-semibold text-[#f26522] block mb-2">
-                  {card.detail}
-                </span>
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  {card.description}
-                </p>
-              </div>
-            ))}
-          </div>
+        <div className="mt-16 border-t border-slate-200 pt-10 lg:mt-20">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-sm font-bold text-[#f26522] transition-colors hover:text-[#d95316]"
+          >
+            Explore Konsalta
+            <ArrowRight size={16} weight="bold" />
+          </Link>
         </div>
       </section>
     </div>

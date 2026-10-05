@@ -23,8 +23,40 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Konsalta | Better Decisions. Greater Impact.",
-  description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  applicationName: "Konsalta",
+  title: {
+    default: "Konsalta | Better Decisions. Greater Impact.",
+    template: "%s | Konsalta",
+  },
+  description:
+    "Konsalta is a women-led, Africa-focused research, consulting and advisory firm delivering evidence-informed decisions and lasting impact.",
+  keywords: [
+    "research",
+    "consulting",
+    "advisory",
+    "Africa",
+    "evidence-informed policy",
+    "monitoring and evaluation",
+    "strategy",
+  ],
+  openGraph: {
+    type: "website",
+    locale: "en_KE",
+    siteName: "Konsalta",
+    title: "Konsalta | Better Decisions. Greater Impact.",
+    description:
+      "A women-led, Africa-focused research, consulting and advisory firm.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Konsalta | Better Decisions. Greater Impact.",
+    description:
+      "A women-led, Africa-focused research, consulting and advisory firm.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
@@ -35,14 +67,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-<<<<<<< HEAD
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
-||||||| parent of f156a56 (Break Time/ Still WIP)
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
-=======
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased scroll-smooth`}
->>>>>>> f156a56 (Break Time/ Still WIP)
     >
       <body
         suppressHydrationWarning
