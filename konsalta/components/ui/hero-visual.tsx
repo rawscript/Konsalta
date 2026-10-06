@@ -41,6 +41,8 @@ export default function HeroVisual() {
           );
         })}
 
+
+
         <g className={styles.brief}>
           <rect x="188" y="213" width="218" height="274" rx="22" fill="#0b2d53" opacity="0.1" transform="translate(7 10)" />
           <rect x="188" y="213" width="218" height="274" rx="22" fill="#ffffff" stroke="#dce5ee" />
