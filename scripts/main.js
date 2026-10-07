@@ -1,301 +1,305 @@
 gsap.registerPlugin(ScrollTrigger);
 
-// ============================================================
-// INITIAL STATES + APPLY DATA-ROT
-// ============================================================
-gsap.set("#nav", { opacity: 0, y: -20 });
-gsap.set(".small-team .word > span", { y: "105%" });
-gsap.set(".big-results .letter", { y: 80, opacity: 0 });
-gsap.set("#subline", { opacity: 0, y: 20 });
-gsap.set(".t-card", { opacity: 0 });
-gsap.set(".stats-inner", { opacity: 0 });
+// ============ CURSOR ============
+const cursor = document.querySelector(".cursor");
+let mx = 0,
+  my = 0,
+  cx = 0,
+  cy = 0;
+document.addEventListener("mousemove", (e) => {
+  mx = e.clientX;
+  my = e.clientY;
+});
+(function animateCursor() {
+  cx += (mx - cx) * 0.2;
+  cy += (my - cy) * 0.2;
+  cursor.style.left = cx + "px";
+  cursor.style.top = cy + "px";
+  requestAnimationFrame(animateCursor);
+})();
+document
+  .querySelectorAll("a, button, .tile, .fpill, .feature-card")
+  .forEach((el) => {
+    el.addEventListener("mouseenter", () =>
+      gsap.to(cursor, { width: 36, height: 36, duration: 0.3 }),
+    );
+    el.addEventListener("mouseleave", () =>
+      gsap.to(cursor, { width: 12, height: 12, duration: 0.3 }),
+    );
+  });
 
-// Apply each card's natural rotation as the rest-state, but start them off-screen above + rotated
-document.querySelectorAll(".card").forEach((card) => {
-  const rot = parseFloat(card.dataset.rot) || 0;
-  card.dataset.restRot = rot;
-  gsap.set(card, { y: -800, rotation: rot + 25, opacity: 0, scale: 0.7 });
+// ============ SVG LINE LENGTHS ============
+document.querySelectorAll(".constellation-lines path").forEach((path) => {
+  const length = path.getTotalLength();
+  path.style.strokeDasharray = length;
+  path.style.strokeDashoffset = length;
 });
 
-// ============================================================
-// INTRO TIMELINE
-// ============================================================
-const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
-intro
-  .to("#nav", { opacity: 1, y: 0, duration: 0.8 }, 0.1)
+// ============ PAGE LOAD ============
+const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+tl.to(".site-header", { opacity: 1, duration: 0.8 }, 0)
   .to(
-    ".small-team .word > span",
-    {
-      y: "0%",
-      duration: 0.9,
-      stagger: 0.08,
-      ease: "power3.out",
-    },
-    0.3,
+    ".title-inner",
+    { y: 0, duration: 1.1, stagger: 0.08, ease: "power4.out" },
+    0.2,
   )
+  .to(".hero-desc", { opacity: 1, duration: 0.8 }, 0.9)
+  .from(".hero-desc", { y: 20, duration: 0.8 }, 0.9)
+  .to(".cta-btn", { opacity: 1, duration: 0.7 }, 1.0)
+  .from(".cta-btn", { y: 20, duration: 0.7 }, 1.0)
   .to(
-    ".big-results .letter",
+    ".tile",
     {
-      y: 0,
-      opacity: 1,
-      duration: 0.9,
-      stagger: 0.05,
-      ease: "back.out(1.6)",
-    },
-    0.55,
-  )
-  .to(
-    ".card",
-    {
-      y: 0,
       opacity: 1,
       scale: 1,
-      rotation: (i, el) => parseFloat(el.dataset.restRot) || 0,
-      duration: 1.1,
-      stagger: { each: 0.08, from: "center" },
-      ease: "back.out(1.4)",
+      duration: 1.2,
+      stagger: { each: 0.07, from: "center" },
+      ease: "elastic.out(1, 0.6)",
+    },
+    0.5,
+  )
+  .from(
+    ".tile",
+    {
+      scale: 0,
+      duration: 1.2,
+      stagger: { each: 0.07, from: "center" },
+      ease: "elastic.out(1, 0.6)",
+    },
+    0.5,
+  )
+  .to(
+    ".constellation-lines path",
+    {
+      strokeDashoffset: 0,
+      duration: 1.4,
+      stagger: 0.06,
+      ease: "power2.inOut",
     },
     0.8,
   )
-  .to("#subline", { opacity: 1, y: 0, duration: 0.8 }, 1.6);
+  .to(".workspace", { opacity: 1, duration: 0.8 }, 1.6)
+  .from(
+    ".fpill",
+    {
+      y: 30,
+      scale: 0.5,
+      opacity: 0,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "back.out(1.6)",
+    },
+    1.6,
+  )
+  .from(
+    ".workspace-label, .learn-more",
+    { y: 20, opacity: 0, duration: 0.6, stagger: 0.1 },
+    1.6,
+  );
 
-// ============================================================
-// CONTINUOUS FLOAT ON CARDS
-// ============================================================
-document.querySelectorAll(".card").forEach((card, i) => {
-  const rot = parseFloat(card.dataset.restRot) || 0;
-  gsap.to(card, {
-    y: `+=${8 + (i % 3) * 5}`,
-    rotation: rot + (i % 2 === 0 ? 1.5 : -1.5),
-    duration: 3 + (i % 4) * 0.5,
-    delay: 1.8 + i * 0.1,
-    ease: "sine.inOut",
-    yoyo: true,
-    repeat: -1,
+// ============ CONSTELLATION 3D TILT ============
+const constellation = document.getElementById("constellation");
+const constellationInner = document.getElementById("constellationInner");
+constellation.addEventListener("mousemove", (e) => {
+  const rect = constellation.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width - 0.5;
+  const y = (e.clientY - rect.top) / rect.height - 0.5;
+  gsap.to(constellationInner, {
+    rotationY: x * 12,
+    rotationX: -y * 8,
+    duration: 0.8,
+    transformPerspective: 1500,
+    ease: "power2.out",
+  });
+});
+constellation.addEventListener("mouseleave", () => {
+  gsap.to(constellationInner, {
+    rotationY: 0,
+    rotationX: 0,
+    duration: 1,
+    ease: "elastic.out(1, 0.5)",
   });
 });
 
-// ============================================================
-// MOUSE PARALLAX ON CARDS
-// ============================================================
-const hero = document.querySelector(".hero");
-let mx = 0,
-  my = 0,
-  tx = 0,
-  ty = 0;
-hero.addEventListener("mousemove", (e) => {
-  const r = hero.getBoundingClientRect();
-  mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-  my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+// ============ SCROLL: CONSTELLATION PARALLAX ============
+gsap.to(".constellation", {
+  y: 100,
+  scale: 0.92,
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "bottom top",
+    scrub: 1,
+  },
 });
-hero.addEventListener("mouseleave", () => {
-  mx = 0;
-  my = 0;
+gsap.to(".hero-left", {
+  y: 60,
+  opacity: 0.4,
+  scrollTrigger: {
+    trigger: ".hero",
+    start: "top top",
+    end: "bottom top",
+    scrub: 1,
+  },
 });
 
-function parallax() {
-  tx += (mx - tx) * 0.05;
-  ty += (my - ty) * 0.05;
-  document.querySelectorAll(".card").forEach((card) => {
-    const d = parseFloat(card.dataset.depth) || 8;
-    card.style.translate = `${tx * d}px ${ty * d * 0.5}px`;
+// ============ STAT NUMBER COUNTER ============
+document.querySelectorAll(".stat-num").forEach((el) => {
+  const target = parseInt(el.dataset.num);
+  const suffix = el.querySelector(".accent");
+  const suffixText = suffix ? suffix.outerHTML : "";
+  ScrollTrigger.create({
+    trigger: el,
+    start: "top 85%",
+    once: true,
+    onEnter: () => {
+      let obj = { val: 0 };
+      gsap.to(obj, {
+        val: target,
+        duration: 2,
+        ease: "power2.out",
+        onUpdate: () => {
+          let display = Math.floor(obj.val);
+          if (target >= 1000)
+            display = "+" + (display / 1000).toFixed(1).replace(".0", "") + "k";
+          else if (
+            target >= 100 &&
+            target <= 999 &&
+            suffix &&
+            suffix.textContent === "k"
+          )
+            display = "+" + display;
+          el.innerHTML = display + suffixText;
+        },
+      });
+    },
   });
-  requestAnimationFrame(parallax);
+});
+
+// ============ SECTION TITLE REVEALS ============
+function splitWords(selector) {
+  document.querySelectorAll(selector).forEach((el) => {
+    const words = el.innerText.split(" ");
+    el.innerHTML = words
+      .map(
+        (w) =>
+          `<span class="sword" style="display:inline-block;overflow:hidden;padding-bottom:0.12em;vertical-align:top;"><span class="sword-inner" style="display:inline-block;transform:translateY(110%);will-change:transform;">${w}</span></span>`,
+      )
+      .join(" ");
+  });
 }
-parallax();
+splitWords(".features-title");
+splitWords(".quote-text");
+splitWords(".final-cta-h2");
 
-// ============================================================
-// CARD HOVER 3D LIFT
-// ============================================================
-document.querySelectorAll(".card").forEach((card) => {
-  const restRot = parseFloat(card.dataset.restRot) || 0;
+// Note: splitWords destroys spans like .accent. Re-color accent words for final-cta.
+document.querySelectorAll(".final-cta-h2 .sword-inner").forEach((el) => {
+  if (el.textContent.includes("good") || el.textContent.includes("ones")) {
+    el.style.color = "var(--yellow)";
+  }
+});
+
+gsap.to(".features-title .sword-inner", {
+  y: 0,
+  duration: 1,
+  stagger: 0.04,
+  ease: "power4.out",
+  scrollTrigger: {
+    trigger: ".features-title",
+    start: "top 80%",
+    toggleActions: "play none none reverse",
+  },
+});
+
+gsap.to(".quote-text .sword-inner", {
+  y: 0,
+  duration: 0.9,
+  stagger: 0.03,
+  ease: "power4.out",
+  scrollTrigger: {
+    trigger: ".quote-text",
+    start: "top 75%",
+    toggleActions: "play none none reverse",
+  },
+});
+
+gsap.to(".final-cta-h2 .sword-inner", {
+  y: 0,
+  duration: 1,
+  stagger: 0.05,
+  ease: "power4.out",
+  scrollTrigger: {
+    trigger: ".final-cta-h2",
+    start: "top 80%",
+    toggleActions: "play none none reverse",
+  },
+});
+
+// ============ FEATURE CARDS REVEAL ============
+gsap.from(".feature-card", {
+  y: 80,
+  opacity: 0,
+  duration: 1,
+  stagger: 0.15,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: ".feature-cards",
+    start: "top 75%",
+    toggleActions: "play none none reverse",
+  },
+});
+
+// ============ QUOTE MARK ============
+gsap.from(".quote-mark", {
+  scale: 0,
+  rotation: -45,
+  duration: 1.2,
+  ease: "elastic.out(1, 0.6)",
+  scrollTrigger: {
+    trigger: ".quote-mark",
+    start: "top 80%",
+    toggleActions: "play none none reverse",
+  },
+});
+
+// ============ FEATURE CARD 3D HOVER ============
+document.querySelectorAll(".feature-card").forEach((card) => {
   card.addEventListener("mousemove", (e) => {
-    const r = card.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width - 0.5;
-    const py = (e.clientY - r.top) / r.height - 0.5;
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
     gsap.to(card, {
-      rotateX: -py * 16,
-      rotateY: px * 16,
-      scale: 1.12,
-      zIndex: 20,
-      duration: 0.4,
+      rotationY: x * 8,
+      rotationX: -y * 8,
+      y: -12,
+      duration: 0.5,
+      transformPerspective: 1200,
       ease: "power2.out",
-      transformPerspective: 700,
-      overwrite: "auto",
     });
   });
   card.addEventListener("mouseleave", () => {
     gsap.to(card, {
-      rotateX: 0,
-      rotateY: 0,
-      scale: 1,
-      zIndex: card.style.zIndex || "",
-      duration: 0.8,
-      ease: "elastic.out(1, 0.6)",
-      overwrite: "auto",
-    });
-  });
-  card.addEventListener("click", () => {
-    gsap.fromTo(
-      card,
-      { scale: 1.15 },
-      {
-        scale: 1.05,
-        duration: 0.15,
-        yoyo: true,
-        repeat: 1,
-        ease: "power2.inOut",
-      },
-    );
-  });
-});
-
-// ============================================================
-// SCROLL: CARDS FAN OUT, "big results" SCALES UP
-// ============================================================
-ScrollTrigger.create({
-  trigger: ".hero",
-  start: "top top",
-  end: "bottom top",
-  scrub: 0.8,
-  onUpdate: (self) => {
-    const p = self.progress;
-    // Big results scales up and stays gray
-    gsap.set(".big-results", { scale: 1 + 0.15 * p, opacity: 1 - 0.4 * p });
-    // Small team rises out
-    gsap.set(".small-team", { y: -60 * p, opacity: 1 - p * 1.5 });
-    // Cards: outer cards fly further out, center cards drift up more
-    const moves = [
-      { x: -260, y: -40, rot: -25 }, // 1
-      { x: -200, y: 20, rot: -18 }, // 2
-      { x: -120, y: 80, rot: -10 }, // 3
-      { x: -40, y: 120, rot: -4 }, // 4
-      { x: 40, y: 120, rot: 4 }, // 5
-      { x: 120, y: 80, rot: 12 }, // 6
-      { x: 200, y: 20, rot: 22 }, // 7
-      { x: 260, y: -40, rot: 28 }, // 8
-    ];
-    document.querySelectorAll(".card").forEach((card, i) => {
-      const m = moves[i];
-      const rest = parseFloat(card.dataset.restRot) || 0;
-      gsap.set(card, {
-        x: m.x * p,
-        y: m.y * p,
-        rotation: rest + m.rot * p,
-      });
-    });
-    gsap.set("#subline", { opacity: 1 - p * 2 });
-  },
-});
-
-// ============================================================
-// TEAM GRID REVEAL ON SCROLL
-// ============================================================
-gsap.from(".eyebrow, .team-head h2, .team-head p", {
-  opacity: 0,
-  y: 30,
-  duration: 0.9,
-  stagger: 0.1,
-  ease: "power3.out",
-  scrollTrigger: { trigger: ".team-head", start: "top 80%" },
-});
-
-gsap.to(".t-card", {
-  opacity: 1,
-  y: 0,
-  duration: 1,
-  stagger: 0.08,
-  ease: "power3.out",
-  scrollTrigger: { trigger: ".team-grid", start: "top 80%" },
-});
-gsap.from(".t-card", {
-  y: 80,
-  scale: 0.9,
-  rotation: (i) => (i % 2 === 0 ? -3 : 3),
-  duration: 1,
-  stagger: 0.08,
-  ease: "back.out(1.3)",
-  scrollTrigger: { trigger: ".team-grid", start: "top 80%" },
-});
-
-// ============================================================
-// STATS REVEAL + COUNTERS
-// ============================================================
-gsap.to(".stats-inner", {
-  opacity: 1,
-  y: 0,
-  duration: 1.2,
-  ease: "power3.out",
-  scrollTrigger: { trigger: ".stats", start: "top 80%" },
-});
-gsap.from(".stats-inner", {
-  y: 60,
-  scale: 0.97,
-  duration: 1.2,
-  ease: "power3.out",
-  scrollTrigger: { trigger: ".stats", start: "top 80%" },
-});
-
-ScrollTrigger.create({
-  trigger: ".stats",
-  start: "top 75%",
-  onEnter: () => {
-    document.querySelectorAll(".stat-block .num").forEach((el) => {
-      const target = parseFloat(el.dataset.count);
-      const span = el.querySelector("span");
-      gsap.to(
-        { v: 0 },
-        {
-          v: target,
-          duration: 2,
-          ease: "power2.out",
-          onUpdate: function () {
-            span.textContent = Math.floor(this.targets()[0].v).toLocaleString();
-          },
-        },
-      );
-    });
-  },
-  once: true,
-});
-
-// ============================================================
-// CTA / BUTTON CLICKS
-// ============================================================
-document.querySelectorAll(".nav-cta, .arrow-pill").forEach((btn) => {
-  btn.addEventListener("click", () => {
-    gsap.fromTo(
-      btn,
-      { scale: 1 },
-      {
-        scale: 0.93,
-        duration: 0.12,
-        yoyo: true,
-        repeat: 1,
-        ease: "power2.inOut",
-      },
-    );
-  });
-});
-
-// Big results: subtle letter rise on hover of the wrap
-document
-  .querySelector(".big-results-wrap")
-  .addEventListener("mouseenter", () => {
-    gsap.to(".big-results .letter", {
-      y: -8,
-      duration: 0.5,
-      stagger: 0.03,
-      ease: "back.out(1.6)",
-    });
-  });
-document
-  .querySelector(".big-results-wrap")
-  .addEventListener("mouseleave", () => {
-    gsap.to(".big-results .letter", {
+      rotationY: 0,
+      rotationX: 0,
       y: 0,
-      duration: 0.6,
-      stagger: 0.03,
-      ease: "elastic.out(1, 0.6)",
+      duration: 0.8,
+      ease: "elastic.out(1, 0.5)",
     });
   });
+});
+
+// ============ FINAL CTA PULSE ON ENTRY ============
+gsap.from(".final-cta-card", {
+  scale: 0.92,
+  opacity: 0,
+  duration: 1.2,
+  ease: "power3.out",
+  scrollTrigger: {
+    trigger: ".final-cta-card",
+    start: "top 80%",
+    toggleActions: "play none none reverse",
+  },
+});
+
+// Refresh
+window.addEventListener("load", () => ScrollTrigger.refresh());
