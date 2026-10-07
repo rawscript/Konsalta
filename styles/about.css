@@ -3,6 +3,7 @@
   --bg-2: #ede6d6;
   --ink: #141416;
   --nav-ink:var(--orange-1);
+  --ink-blue: #080747; /* #080747 */
   --ink-soft: #2b2b30;
   --mute: #8b847a;
   --line: #dad2bf;
@@ -69,13 +70,13 @@ body {
   font-size: 16px;
 }
 .logo-dot {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, var(--orange-1), var(--orange-4));
-  box-shadow: 0 4px 8px -2px rgba(220, 60, 30, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    inset 0 -2px 3px rgba(120, 20, 0, 0.3);
+  max-width: 90px;
+  height: 42px;
+}
+.logo-dot img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .nav-links {
   list-style: none;
@@ -133,14 +134,16 @@ body {
 .hero {
   position: relative;
   min-height: 100vh;
-  padding: 130px 32px 60px;
+  padding: 130px 32px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 5;
 }
-
+.hero-text  {
+  color: var(--ink-blue);
+}
 .small-team {
   font-family: "DM Sans", sans-serif;
   font-weight: 700;
@@ -149,6 +152,7 @@ body {
   line-height: 1;
   color: var(--ink);
   text-align: center;
+  margin-top: -530px; /*magic number formerly 30px*/
   margin-bottom: 0;
   z-index: 4;
   position: relative;
@@ -162,21 +166,23 @@ body {
   display: inline-block;
   transform: translateY(105%);
 }
+/* Big results */
 
-/* Big results faded back text */
 .big-results-wrap {
   position: relative;
   width: 100%;
-  margin-top: -20px;
+  margin-top: 25px; /* magic number depending on about us text*/
   display: flex;
   justify-content: center;
   z-index: 1;
+  overflow: hidden; 
 }
+
 .big-results {
   font-family: "DM Sans", sans-serif;
   font-style: italic;
   font-weight: 800;
-  font-size: clamp(110px, 21vw, 300px);
+  font-size: clamp(32px, 5.2vw, 85px);
   letter-spacing: -0.045em;
   line-height: 0.85;
   color: var(--ghost);
@@ -185,12 +191,14 @@ body {
   user-select: none;
   z-index: 1;
   text-shadow: 0 4px 12px rgba(120, 100, 50, 0.04);
+  max-width: 100%;
 }
+
 .big-results .letter {
   display: inline-block;
   transform-origin: bottom;
+  font-size: inherit;
 }
-
 /* Cards row */
 .cards-row {
   position: absolute;
@@ -363,6 +371,21 @@ body {
 }
 
 /* ============ SECTION 2: TEAM GRID ============ */
+.emphasis {
+  font-style: italic;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--orange-1), var(--orange-3));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.summary {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 600px;
+  margin-top: 20px;
+}
 .team-section {
   padding: 140px 40px 80px;
   position: relative;
