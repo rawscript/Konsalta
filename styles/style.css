@@ -5,7 +5,7 @@
   --navy-light: #16487e;
   --navy-soft: #edf4fc;
   --navy-tint: #d4e4f7;
-  
+
   --orange: #F26522;
   --orange-deep: #d34e0d;
   --orange-light: #ff7e42;
@@ -128,25 +128,23 @@ body.has-custom-cursor .cursor {
 }
 
 .logo {
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: 800;
-  font-size: 22px;
-  letter-spacing: -0.02em;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   text-decoration: none;
-  color: var(--navy);
 }
 
 .logo-dot {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%);
-  box-shadow: 0 3px 8px rgba(242, 101, 34, 0.4),
-    inset 0 1px 1px rgba(255, 255, 255, 0.6);
-  display: inline-block;
+  max-width: 140px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.logo-dot img {
+  max-height: 42px;
+  width: auto;
+  object-fit: contain;
 }
 
 .header-nav {
@@ -637,6 +635,7 @@ body.has-custom-cursor .cursor {
 }
 
 @keyframes tile-float {
+
   0%,
   100% {
     transform: translateY(0);
@@ -671,6 +670,7 @@ body.has-custom-cursor .cursor {
 }
 
 @keyframes sparkleFloat {
+
   0%,
   100% {
     transform: translateY(0);
@@ -977,11 +977,6 @@ body.has-custom-cursor .cursor {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-weight: 800;
-  font-size: 26px;
-  letter-spacing: -0.02em;
-  color: var(--navy);
   margin-bottom: 14px;
 }
 
@@ -1107,6 +1102,7 @@ body.has-custom-cursor .cursor {
 
 /* Accessibility: Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   ::before,
   ::after {
