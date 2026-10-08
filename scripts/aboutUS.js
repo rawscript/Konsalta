@@ -191,6 +191,33 @@ ScrollTrigger.create({
 // ============================================================
 // TEAM GRID REVEAL ON SCROLL
 // ============================================================
+const whoWeServeReveal = gsap.timeline({
+  scrollTrigger: {
+    trigger: ".who-we-serve",
+    start: "top 80%",
+    once: true,
+  },
+});
+
+whoWeServeReveal
+  .from("#who-we-serve-heading", {
+    opacity: 0,
+    y: 28,
+    duration: 0.8,
+    ease: "power3.out",
+  })
+  .from(
+    ".who-we-serve-grid h3, .who-we-serve-grid p",
+    {
+      opacity: 0,
+      y: 18,
+      duration: 0.65,
+      stagger: 0.08,
+      ease: "power3.out",
+    },
+    "-=0.35",
+  );
+
 gsap.from(".eyebrow, .team-head h2, .team-head p", {
   opacity: 0,
   y: 30,
