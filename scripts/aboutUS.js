@@ -191,22 +191,18 @@ ScrollTrigger.create({
 // ============================================================
 // PINNED APPROACH CAROUSEL
 // ============================================================
-const approachCarousel = document.querySelector(".approach-carousel");
-const approachSlides = gsap.utils.toArray(".approach-slide");
-const approachDots = gsap.utils.toArray(".approach-pagination button");
+document.querySelectorAll(".approach-carousel").forEach((carousel) => {
+  const slides = Array.from(carousel.querySelectorAll(".approach-slide"));
+  const dots = Array.from(carousel.querySelectorAll(".approach-pagination button"));
 
-if (
-  approachCarousel &&
-  approachSlides.length > 1 &&
-  !window.matchMedia("(prefers-reduced-motion: reduce)").matches
-) {
-  const syncApproachDots = (progress) => {
-    const activeIndex = Math.min(
-      approachSlides.length - 1,
-      Math.floor(progress * approachSlides.length),
-    );
+  if (slides.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
 
-    approachDots.forEach((dot, index) => {
+  const syncDots = (progress) => {
+    const activeIndex = Math.min(slides.length - 1, Math.floor(progress * slides.length));
+
+    dots.forEach((dot, index) => {
       if (index === activeIndex) {
         dot.setAttribute("aria-current", "true");
       } else {
@@ -215,27 +211,27 @@ if (
     });
   };
 
-  approachCarousel.classList.add("is-enhanced");
-  gsap.set(approachSlides, { autoAlpha: 0, xPercent: 100 });
-  gsap.set(approachSlides[0], { autoAlpha: 1, xPercent: 0 });
+  carousel.classList.add("is-enhanced");
+  gsap.set(slides, { autoAlpha: 0, xPercent: 100 });
+  gsap.set(slides[0], { autoAlpha: 1, xPercent: 0 });
 
-  const approachTimeline = gsap.timeline({
+  const timeline = gsap.timeline({
     scrollTrigger: {
-      trigger: approachCarousel,
+      trigger: carousel,
       start: "top top",
-      end: () => `+=${window.innerHeight * approachSlides.length}`,
+      end: () => `+=${window.innerHeight * slides.length}`,
       pin: true,
       scrub: 0.25,
       anticipatePin: 1,
       invalidateOnRefresh: true,
-      onUpdate: (self) => syncApproachDots(self.progress),
+      onUpdate: (self) => syncDots(self.progress),
     },
   });
 
-  approachSlides.slice(1).forEach((slide, index) => {
+  slides.slice(1).forEach((slide, index) => {
     const position = index + 1;
-    approachTimeline
-      .to(approachSlides[index], { autoAlpha: 0, xPercent: -8, duration: 0.65, ease: "none" }, position)
+    timeline
+      .to(slides[index], { autoAlpha: 0, xPercent: -8, duration: 0.65, ease: "none" }, position)
       .fromTo(
         slide,
         { autoAlpha: 0, xPercent: 100 },
@@ -244,19 +240,19 @@ if (
       );
   });
 
-  approachTimeline.to({}, { duration: 0.35 }, approachSlides.length - 0.35);
-  syncApproachDots(approachTimeline.scrollTrigger.progress);
+  timeline.to({}, { duration: 0.35 }, slides.length - 0.35);
+  syncDots(timeline.scrollTrigger.progress);
 
-  approachDots.forEach((dot, index) => {
+  dots.forEach((dot, index) => {
     dot.addEventListener("click", () => {
-      const trigger = approachTimeline.scrollTrigger;
+      const trigger = timeline.scrollTrigger;
       const targetScroll =
         trigger.start +
-        (trigger.end - trigger.start) * ((index + 0.5) / approachSlides.length);
+        (trigger.end - trigger.start) * ((index + 0.5) / slides.length);
       window.scrollTo({ top: targetScroll, behavior: "smooth" });
     });
   });
-}
+});
 
 // ============================================================
 // TEAM GRID REVEAL ON SCROLL
@@ -269,24 +265,12 @@ const whoWeServeReveal = gsap.timeline({
   },
 });
 
-whoWeServeReveal
-  .from("#who-we-serve-heading", {
-    opacity: 0,
-    y: 28,
-    duration: 0.8,
-    ease: "power3.out",
-  })
-  .from(
-    ".who-we-serve-grid h3, .who-we-serve-grid p",
-    {
-      opacity: 0,
-      y: 18,
-      duration: 0.65,
-      stagger: 0.08,
-      ease: "power3.out",
-    },
-    "-=0.35",
-  );
+whoWeServeReveal.from("#who-we-serve-heading", {
+  opacity: 0,
+  y: 28,
+  duration: 0.8,
+  ease: "power3.out",
+});
 
 gsap.from(".eyebrow, .team-head h2, .team-head p", {
   opacity: 0,
