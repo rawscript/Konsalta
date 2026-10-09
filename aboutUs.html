@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Konsalta</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js" as="script">
     <link rel="icon" href="./public/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="./public/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./public/favicon-16x16.png">
@@ -49,14 +50,16 @@
   </h1>
   <div class="big-results-wrap">
     <div class="big-results" id="bigResults">
-      <!-- Turning -->
-      <span class="letter">T</span><span class="letter">u</span><span class="letter">r</span><span class="letter">n</span><span class="letter">i</span><span class="letter">n</span><span class="letter">g</span><span class="letter">&nbsp;</span>
+      <!-- We -->
+      <span class="letter">W</span><span class="letter">e</span><span class="letter">&nbsp;</span>
+      <!-- Turn -->
+      <span class="letter">T</span><span class="letter">u</span><span class="letter">r</span><span class="letter">n</span><span class="letter">&nbsp;</span>
       <!-- knowledge -->
       <span class="letter">k</span><span class="letter">n</span><span class="letter">o</span><span class="letter">w</span><span class="letter">l</span><span class="letter">e</span><span class="letter">d</span><span class="letter">g</span><span class="letter">e</span><span class="letter">&nbsp;</span>
       <!-- into -->
-      <span class="letter">i</span><span class="letter">n</span><span class="letter">t</span><span class="letter">o</span><span class="letter">&nbsp;</span>
+      <span class="letter">i</span><span class="letter">n</span><spa class="letter">t</span><span class="letter">o</span ><span class="letter">&nbsp;</span >
       <!-- impact -->
-      <span class="letter">i</span><span class="letter">m</span><span class="letter">p</span><span class="letter">a</span><span class="letter">c</span><span class="letter">t</span>
+      <span class="letter">i</span ><span class="letter">m</span ><span class="letter">p</span ><span class="letter">a</span ><span class="letter">c</span ><span class="letter">t</span >
     </div>
   </div>
   
@@ -142,9 +145,81 @@
       </article>
     </div>
   </section>
-  <h2 class="our-approach-heading">Our Approach</h2>
+  <section class="approach" aria-labelledby="approach-heading">
+    <h2 class="our-approach-heading" id="approach-heading">Our Approach</h2>
+    <div class="approach-intro">
+      <h3>Seven principles, one assignment at a time</h3>
+      <p>No two assignments are the same. Each client faces a unique combination of challenges, stakeholders, contexts and objectives. We bring together a strong core team and a wider multidisciplinary network to assemble the expertise each assignment needs.</p>
+    </div>
+    <div class="approach-carousel" aria-label="Seven principles guiding every assignment">
+      <article class="approach-slide">
+        <img class="approach-image" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
+        <div class="approach-copy">
+          <span class="approach-number">01 / 07</span>
+          <h3>Start with the problem.</h3>
+          <p>We begin by understanding the client's core challenge and operating environment, identifying key stakeholders, critical constraints and desired outcomes.</p>
+        </div>
+      </article>
+      <article class="approach-slide">
+        <img class="approach-image" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
+        <div class="approach-copy">
+          <span class="approach-number">02 / 07</span>
+          <h3>Build the right team.</h3>
+          <p>We assemble a multidisciplinary team for each assignment, bringing together the expertise needed to deliver results, with clear leadership and accountability.</p>
+        </div>
+      </article>
+      <article class="approach-slide">
+        <img class="approach-image" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
+        <div class="approach-copy">
+          <span class="approach-number">03 / 07</span>
+          <h3>Generate credible evidence.</h3>
+          <p>We use rigorous, fit-for-purpose methods grounded in professional standards and tailored to each client's objectives and context.</p>
+        </div>
+      </article>
+      <article class="approach-slide">
+        <img class="approach-image" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
+        <div class="approach-copy">
+          <span class="approach-number">04 / 07</span>
+          <h3>Bring context to the evidence.</h3>
+          <p>We combine analytical rigor with knowledge of African policy, institutional, market, social and cultural contexts to interpret findings and assess how they can be applied in practice.</p>
+        </div>
+      </article>
+      <article class="approach-slide">
+        <img class="approach-image" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
+        <div class="approach-copy">
+          <span class="approach-number">05 / 07</span>
+          <h3>Translate evidence into action.</h3>
+          <p>We turn knowledge into practical recommendations, policies, strategies, implementation plans and communication approaches.</p>
+        </div>
+      </article>
+      <article class="approach-slide">
+        <img class="approach-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
+        <div class="approach-copy">
+          <span class="approach-number">06 / 07</span>
+          <h3>Strengthen capacity as we deliver.</h3>
+          <p>Where appropriate, we work alongside client teams and emerging professionals, sharing knowledge and strengthening skills throughout the assignment. This helps the value of our work extend beyond the final deliverable.</p>
+        </div>
+      </article>
+      <article class="approach-slide">
+        <img class="approach-image" src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
+        <div class="approach-copy">
+          <span class="approach-number">07 / 07</span>
+          <h3>Engage throughout the process.</h3>
+          <p>We stay closely engaged with clients, creating opportunities to test assumptions, review emerging findings and adapt as circumstances change.</p>
+        </div>
+      </article>
+      <nav class="approach-pagination" aria-label="Choose an approach principle">
+        <button type="button" aria-label="Show principle 1" aria-current="true"></button>
+        <button type="button" aria-label="Show principle 2"></button>
+        <button type="button" aria-label="Show principle 3"></button>
+        <button type="button" aria-label="Show principle 4"></button>
+        <button type="button" aria-label="Show principle 5"></button>
+        <button type="button" aria-label="Show principle 6"></button>
+        <button type="button" aria-label="Show principle 7"></button>
+      </nav>
+    </div>
+  </section>
   <div class="team-grid" id="teamGrid">
-    
     <div class="t-card">
       <img src="https://cdn.shopify.com/s/files/1/0185/5999/1872/files/enr-1x1-01.jpg?v=1782002435?w=400&h=540&fit=crop&crop=faces&q=80" alt="" />
       <div class="t-meta">

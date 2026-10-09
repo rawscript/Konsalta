@@ -189,6 +189,76 @@ ScrollTrigger.create({
 });
 
 // ============================================================
+// PINNED APPROACH CAROUSEL
+// ============================================================
+const approachCarousel = document.querySelector(".approach-carousel");
+const approachSlides = gsap.utils.toArray(".approach-slide");
+const approachDots = gsap.utils.toArray(".approach-pagination button");
+
+if (
+  approachCarousel &&
+  approachSlides.length > 1 &&
+  !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+) {
+  const syncApproachDots = (progress) => {
+    const activeIndex = Math.min(
+      approachSlides.length - 1,
+      Math.floor(progress * approachSlides.length),
+    );
+
+    approachDots.forEach((dot, index) => {
+      if (index === activeIndex) {
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  approachCarousel.classList.add("is-enhanced");
+  gsap.set(approachSlides, { autoAlpha: 0, xPercent: 100 });
+  gsap.set(approachSlides[0], { autoAlpha: 1, xPercent: 0 });
+
+  const approachTimeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: approachCarousel,
+      start: "top top",
+      end: () => `+=${window.innerHeight * approachSlides.length}`,
+      pin: true,
+      scrub: 0.25,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onUpdate: (self) => syncApproachDots(self.progress),
+    },
+  });
+
+  approachSlides.slice(1).forEach((slide, index) => {
+    const position = index + 1;
+    approachTimeline
+      .to(approachSlides[index], { autoAlpha: 0, xPercent: -8, duration: 0.65, ease: "none" }, position)
+      .fromTo(
+        slide,
+        { autoAlpha: 0, xPercent: 100 },
+        { autoAlpha: 1, xPercent: 0, duration: 0.65, ease: "none" },
+        position,
+      );
+  });
+
+  approachTimeline.to({}, { duration: 0.35 }, approachSlides.length - 0.35);
+  syncApproachDots(approachTimeline.scrollTrigger.progress);
+
+  approachDots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      const trigger = approachTimeline.scrollTrigger;
+      const targetScroll =
+        trigger.start +
+        (trigger.end - trigger.start) * ((index + 0.5) / approachSlides.length);
+      window.scrollTo({ top: targetScroll, behavior: "smooth" });
+    });
+  });
+}
+
+// ============================================================
 // TEAM GRID REVEAL ON SCROLL
 // ============================================================
 const whoWeServeReveal = gsap.timeline({
