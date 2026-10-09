@@ -83,15 +83,17 @@ let mx = 0,
   my = 0,
   tx = 0,
   ty = 0;
-hero.addEventListener("mousemove", (e) => {
-  const r = hero.getBoundingClientRect();
-  mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
-  my = ((e.clientY - r.top) / r.height - 0.5) * 2;
-});
-hero.addEventListener("mouseleave", () => {
-  mx = 0;
-  my = 0;
-});
+if (hero) {
+  hero.addEventListener("mousemove", (e) => {
+    const r = hero.getBoundingClientRect();
+    mx = ((e.clientX - r.left) / r.width - 0.5) * 2;
+    my = ((e.clientY - r.top) / r.height - 0.5) * 2;
+  });
+  hero.addEventListener("mouseleave", () => {
+    mx = 0;
+    my = 0;
+  });
+}
 
 function parallax() {
   tx += (mx - tx) * 0.05;
@@ -102,7 +104,7 @@ function parallax() {
   });
   requestAnimationFrame(parallax);
 }
-parallax();
+if (hero) parallax();
 
 // ============================================================
 // CARD HOVER 3D LIFT
@@ -153,40 +155,39 @@ document.querySelectorAll(".card").forEach((card) => {
 // ============================================================
 // SCROLL: CARDS FAN OUT, "big results" SCALES UP
 // ============================================================
-ScrollTrigger.create({
-  trigger: ".hero",
-  start: "top top",
-  end: "bottom top",
-  scrub: 0.8,
-  onUpdate: (self) => {
-    const p = self.progress;
-    // Big results scales up and stays gray
-    gsap.set(".big-results", { scale: 1 + 0.15 * p, opacity: 1 - 0.4 * p });
-    // Small team rises out
-    gsap.set(".small-team", { y: -60 * p, opacity: 1 - p * 1.5 });
-    // Cards: outer cards fly further out, center cards drift up more
-    const moves = [
-      { x: -260, y: -40, rot: -25 }, // 1
-      { x: -200, y: 20, rot: -18 }, // 2
-      { x: -120, y: 80, rot: -10 }, // 3
-      { x: -40, y: 120, rot: -4 }, // 4
-      { x: 40, y: 120, rot: 4 }, // 5
-      { x: 120, y: 80, rot: 12 }, // 6
-      { x: 200, y: 20, rot: 22 }, // 7
-      { x: 260, y: -40, rot: 28 }, // 8
-    ];
-    document.querySelectorAll(".card").forEach((card, i) => {
-      const m = moves[i];
-      const rest = parseFloat(card.dataset.restRot) || 0;
-      gsap.set(card, {
-        x: m.x * p,
-        y: m.y * p,
-        rotation: rest + m.rot * p,
+if (hero) {
+  ScrollTrigger.create({
+    trigger: hero,
+    start: "top top",
+    end: "bottom top",
+    scrub: 0.8,
+    onUpdate: (self) => {
+      const p = self.progress;
+      gsap.set(".big-results", { scale: 1 + 0.15 * p, opacity: 1 - 0.4 * p });
+      gsap.set(".small-team", { y: -60 * p, opacity: 1 - p * 1.5 });
+      const moves = [
+        { x: -260, y: -40, rot: -25 },
+        { x: -200, y: 20, rot: -18 },
+        { x: -120, y: 80, rot: -10 },
+        { x: -40, y: 120, rot: -4 },
+        { x: 40, y: 120, rot: 4 },
+        { x: 120, y: 80, rot: 12 },
+        { x: 200, y: 20, rot: 22 },
+        { x: 260, y: -40, rot: 28 },
+      ];
+      document.querySelectorAll(".card").forEach((card, i) => {
+        const m = moves[i];
+        const rest = parseFloat(card.dataset.restRot) || 0;
+        gsap.set(card, {
+          x: m.x * p,
+          y: m.y * p,
+          rotation: rest + m.rot * p,
+        });
       });
-    });
-    gsap.set("#subline", { opacity: 1 - p * 2 });
-  },
-});
+      gsap.set("#subline", { opacity: 1 - p * 2 });
+    },
+  });
+}
 
 // ============================================================
 // PINNED APPROACH CAROUSEL
@@ -221,7 +222,7 @@ document.querySelectorAll(".approach-carousel").forEach((carousel) => {
       start: "top top",
       end: () => `+=${window.innerHeight * slides.length}`,
       pin: true,
-      scrub: 0.25,
+      scrub: true,
       anticipatePin: 1,
       invalidateOnRefresh: true,
       onUpdate: (self) => syncDots(self.progress),
@@ -331,7 +332,7 @@ ScrollTrigger.create({
           duration: 2,
           ease: "power2.out",
           onUpdate: function () {
-            span.textContent = Math.floor(this.targets()[0].v).toLocaleString();
+            span.textContent = Math.floor(this.targets()[0].v).toString();
           },
         },
       );
@@ -360,9 +361,9 @@ document.querySelectorAll(".nav-cta, .arrow-pill").forEach((btn) => {
 });
 
 // Big results: subtle letter rise on hover of the wrap
-document
-  .querySelector(".big-results-wrap")
-  .addEventListener("mouseenter", () => {
+const bigResultsWrap = document.querySelector(".big-results-wrap");
+if (bigResultsWrap) {
+  bigResultsWrap.addEventListener("mouseenter", () => {
     gsap.to(".big-results .letter", {
       y: -8,
       duration: 0.5,
@@ -370,9 +371,7 @@ document
       ease: "back.out(1.6)",
     });
   });
-document
-  .querySelector(".big-results-wrap")
-  .addEventListener("mouseleave", () => {
+  bigResultsWrap.addEventListener("mouseleave", () => {
     gsap.to(".big-results .letter", {
       y: 0,
       duration: 0.6,
@@ -380,3 +379,4 @@ document
       ease: "elastic.out(1, 0.6)",
     });
   });
+}
