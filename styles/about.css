@@ -1007,6 +1007,205 @@ body {
   letter-spacing: 0.03em;
 }
 
+/* ============ IMPACT GALLERY ============ */
+.impact-gallery {
+  width: 100vw;
+  height: 100vh;
+  height: 100svh;
+  min-height: 660px;
+  margin-left: calc(50% - 50vw);
+  padding: 56px 0 34px;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  align-items: center;
+  overflow: hidden;
+}
+
+.impact-gallery-heading {
+  position: relative;
+  z-index: 1;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.impact-gallery-kicker {
+  margin-bottom: 10px;
+  color: var(--orange-1);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.impact-gallery-heading h2 {
+  color: var(--navy);
+  font-family: "DM Sans", sans-serif;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.15;
+}
+
+.impact-gallery-viewport {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  perspective: 1400px;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+.impact-gallery-track {
+  display: flex;
+  align-items: center;
+  gap: 44px;
+  padding: 0 calc(50vw - 170px);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.impact-gallery-card {
+  position: relative;
+  flex: 0 0 340px;
+  height: min(54vh, 420px);
+  min-height: 320px;
+  overflow: hidden;
+  border-radius: 8px;
+  isolation: isolate;
+  color: #fff;
+  background: var(--navy);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.impact-gallery-card::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  content: "";
+  background: linear-gradient(180deg, transparent 38%, rgba(6, 26, 50, 0.82) 100%);
+  pointer-events: none;
+}
+
+.impact-gallery-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.impact-gallery-card-copy {
+  position: absolute;
+  z-index: 2;
+  right: 24px;
+  bottom: 24px;
+  left: 24px;
+}
+
+.impact-gallery-card-copy span {
+  color: #ffd29c;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.impact-gallery-card-copy h3 {
+  margin-top: 8px;
+  color: #fff;
+  font-size: 24px;
+  line-height: 1.2;
+}
+
+.impact-gallery-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
+}
+
+.impact-gallery-pagination button {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  place-items: center;
+  background: transparent;
+  cursor: pointer;
+}
+
+.impact-gallery-pagination button::before {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mute);
+  content: "";
+  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+}
+
+.impact-gallery-pagination button[aria-current="true"]::before {
+  width: 14px;
+  height: 14px;
+  background: var(--orange);
+}
+
+.impact-gallery-pagination button:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
+@media (max-width: 750px) {
+  .impact-gallery {
+    min-height: 600px;
+    padding: 48px 0 28px;
+  }
+
+  .impact-gallery-track {
+    gap: 24px;
+    padding: 0 calc(50vw - 135px);
+  }
+
+  .impact-gallery-card {
+    flex-basis: 270px;
+    height: min(48vh, 360px);
+    min-height: 300px;
+  }
+
+  .impact-gallery-card-copy h3 {
+    font-size: 21px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .impact-gallery {
+    height: auto;
+    min-height: 0;
+    padding: 56px 0 32px;
+  }
+
+  .impact-gallery-viewport {
+    height: auto;
+    overflow-x: auto;
+    perspective: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .impact-gallery-track {
+    padding: 24px max(24px, calc((100vw - 340px) / 2));
+    transform: none !important;
+  }
+
+  .impact-gallery-card {
+    transform: none !important;
+  }
+
+  .impact-gallery-pagination {
+    display: none;
+  }
+}
+
 /* ============ SECTION 3: STATS / CTA ============ */
 .stats {
   padding: 80px 40px 140px;

@@ -17,6 +17,7 @@ document.querySelectorAll(".card").forEach((card) => {
   gsap.set(card, { y: -800, rotation: rot + 25, opacity: 0, scale: 0.7 });
 });
 
+
 // ============================================================
 // INTRO TIMELINE
 // ============================================================
@@ -254,6 +255,79 @@ document.querySelectorAll(".approach-carousel").forEach((carousel) => {
     });
   });
 });
+
+// ============================================================
+// PINNED 3D IMPACT GALLERY
+// ============================================================
+const impactGallery = document.querySelector(".impact-gallery");
+const impactTrack = impactGallery?.querySelector(".impact-gallery-track");
+const impactCards = Array.from(impactGallery?.querySelectorAll(".impact-gallery-card") || []);
+const impactDots = Array.from(impactGallery?.querySelectorAll(".impact-gallery-pagination button") || []);
+
+if (impactGallery && impactTrack && impactCards.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  const getImpactScrollAmount = () => -(impactTrack.scrollWidth - window.innerWidth);
+
+  const updateImpactCards = () => {
+    const viewportCenter = window.innerWidth / 2;
+    let closestIndex = 0;
+    let closestDistance = Infinity;
+
+    impactCards.forEach((card, index) => {
+      const rect = card.getBoundingClientRect();
+      const distance = rect.left + rect.width / 2 - viewportCenter;
+      const normalizedDistance = gsap.utils.clamp(-1, 1, distance / (window.innerWidth * 0.5));
+      const absoluteDistance = Math.abs(distance);
+
+      if (absoluteDistance < closestDistance) {
+        closestDistance = absoluteDistance;
+        closestIndex = index;
+      }
+
+      gsap.set(card, {
+        rotationY: normalizedDistance * 38,
+        scale: gsap.utils.clamp(0.76, 1, 1 - absoluteDistance / (window.innerWidth * 1.8)),
+        z: -absoluteDistance * 0.16,
+      });
+    });
+
+    impactDots.forEach((dot, index) => {
+      if (index === closestIndex) {
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.removeAttribute("aria-current");
+      }
+    });
+  };
+
+  const impactTween = gsap.to(impactTrack, {
+    x: getImpactScrollAmount,
+    ease: "none",
+    scrollTrigger: {
+      trigger: impactGallery,
+      start: "top top",
+      end: () => `+=${Math.max(1, Math.abs(getImpactScrollAmount()))}`,
+      pin: true,
+      scrub: true,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onUpdate: updateImpactCards,
+      onRefresh: updateImpactCards,
+    },
+  });
+
+  updateImpactCards();
+
+  impactDots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      const trigger = impactTween.scrollTrigger;
+      const progress = index / (impactCards.length - 1);
+      window.scrollTo({
+        top: trigger.start + (trigger.end - trigger.start) * progress,
+        behavior: "smooth",
+      });
+    });
+  });
+}
 
 // ============================================================
 // TEAM GRID REVEAL ON SCROLL
