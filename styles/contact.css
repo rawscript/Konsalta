@@ -52,9 +52,52 @@ img {
 }
 
 .intro {
-  padding: 90px 24px 32px;
+  position: relative;
+  overflow: hidden;
+  padding: 104px 24px 38px;
   text-align: center;
-  background: radial-gradient(circle at top, rgba(242, 101, 34, 0.12), transparent 32%), #f7f4ef;
+  background:
+    radial-gradient(ellipse at 50% -20%, rgba(242, 101, 34, 0.17), transparent 54%),
+    linear-gradient(180deg, #f7f4ef 0%, rgba(255, 255, 255, 0.5) 100%);
+}
+
+.back-link {
+  position: absolute;
+  top: 30px;
+  left: clamp(24px, 5vw, 64px);
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--navy);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.back-link svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--orange-deep);
+}
+
+.back-link:hover svg {
+  transform: translateX(-3px);
+}
+
+.back-link:focus-visible {
+  outline: 3px solid rgba(242, 101, 34, 0.35);
+  outline-offset: 5px;
+  border-radius: 2px;
 }
 
 .eyebrow {
@@ -68,6 +111,10 @@ img {
 
 .eyebrow.accent {
   color: var(--navy-light);
+}
+
+.contact-copy .eyebrow.accent {
+  color: var(--orange-light);
 }
 
 .intro h1 {
@@ -94,7 +141,7 @@ img {
   background: rgba(255, 255, 255, 0.72);
   border: 1px solid rgba(11, 45, 83, 0.08);
   box-shadow: 0 28px 80px rgba(14, 34, 58, 0.08);
-  border-radius: 28px;
+  border-radius: 20px;
   backdrop-filter: blur(8px);
   display: grid;
   grid-template-columns: 0.95fr 1.4fr;
@@ -102,9 +149,25 @@ img {
 }
 
 .contact-copy {
+  position: relative;
+  isolation: isolate;
   background: linear-gradient(180deg, var(--navy) 0%, #123b69 100%);
   color: var(--white);
   padding: 46px 38px;
+}
+
+.contact-copy::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  right: -88px;
+  bottom: -110px;
+  width: 250px;
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 50%;
+  box-shadow: 0 0 0 24px rgba(255, 255, 255, 0.025), 0 0 0 48px rgba(255, 255, 255, 0.02);
+  pointer-events: none;
 }
 
 .contact-copy h2 {
@@ -147,7 +210,7 @@ img {
 
 .contact-form {
   padding: 46px 38px;
-  background: var(--bg-card);
+  background: linear-gradient(145deg, #ffffff 0%, #fcfbf8 100%);
   display: grid;
   gap: 22px;
 }
@@ -172,7 +235,7 @@ img {
   width: 100%;
   padding: 14px 16px;
   border: 1px solid rgba(11, 45, 83, 0.14);
-  border-radius: 12px;
+  border-radius: 9px;
   background: #f9fbfd;
   color: var(--ink-dark);
   font: inherit;
@@ -231,7 +294,7 @@ img {
 }
 
 .form-status.success {
-  color: #0e7d4f;
+  color: var(--orange-deep);
 }
 
 .form-status.error {
@@ -329,7 +392,8 @@ img {
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  background: rgba(18, 152, 97, 0.1);
+  background: var(--orange-soft);
+  box-shadow: 0 0 0 12px rgba(242, 101, 34, 0.08);
   display: grid;
   place-items: center;
   opacity: 0;
@@ -339,7 +403,7 @@ img {
 .checkmark-group svg {
   width: 62px;
   height: 62px;
-  stroke: #1c8d5d;
+  stroke: var(--orange);
   stroke-width: 8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -438,7 +502,12 @@ img {
 
 @media (max-width: 560px) {
   .intro {
-    padding-top: 72px;
+    padding: 94px 20px 30px;
+  }
+
+  .back-link {
+    top: 24px;
+    left: 20px;
   }
 
   .contact-copy,
@@ -449,5 +518,14 @@ img {
   .form-footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
   }
 }

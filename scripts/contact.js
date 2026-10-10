@@ -8,8 +8,36 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  if (
+    window.gsap &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
+    window.gsap
+      .timeline({ defaults: { ease: "power3.out" } })
+      .from(".back-link", { opacity: 0, x: -12, duration: 0.45 })
+      .from(
+        ".intro .eyebrow, .intro h1, .intro > p:last-child",
+        { opacity: 0, y: 18, duration: 0.6, stagger: 0.1 },
+        "-=0.25",
+      )
+      .fromTo(
+        ".contact-card",
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.75, clearProps: "opacity,transform" },
+        "-=0.2",
+      )
+      .from(
+        ".contact-copy > *, .contact-form > *",
+        { opacity: 0, y: 12, duration: 0.45, stagger: 0.06 },
+        "-=0.35",
+      );
+  }
+
   const playSendAnimation = () => {
-    if (!window.gsap) {
+    if (
+      !window.gsap ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       return;
     }
 
