@@ -542,11 +542,10 @@ body {
 .approach-copy {
   position: absolute;
   z-index: 2;
-  right: 9%;
-  bottom: 9%;
-  left: 9%;
-  margin: 5px;
-  max-width: 860px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 24px;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.24);
 }
 
@@ -560,14 +559,12 @@ body {
 }
 
 .approach-copy h3 {
-  max-width: 760px;
   font-size: 46px;
   line-height: 1.08;
   color: #fff;
 }
 
 .approach-copy p {
-  max-width: 720px;
   margin-top: 14px;
   color: rgba(255, 255, 255, 0.94);
   font-size: 18px;
@@ -653,9 +650,10 @@ body {
   }
 
   .approach-copy {
-    right: 56px;
-    bottom: 36px;
-    left: 24px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: 24px;
   }
 
   .approach-copy h3 {
@@ -1126,10 +1124,10 @@ body {
 .impact-gallery-card-copy {
   position: absolute;
   z-index: 2;
-  right: 24px;
-  bottom: 24px;
-  left: 24px;
-  margin: 5px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 24px;
 }
 
 .impact-gallery-card-copy span {
