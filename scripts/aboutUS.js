@@ -60,6 +60,40 @@ intro
   )
   .to("#subline", { opacity: 1, y: 0, duration: 0.8 }, 1.6);
 
+const mobileMenuToggle = document.querySelector(".nav-menu-toggle");
+const primaryNavigation = document.querySelector("#primary-navigation");
+
+if (mobileMenuToggle && primaryNavigation) {
+  const closeMobileMenu = () => {
+    primaryNavigation.classList.remove("is-open");
+    mobileMenuToggle.setAttribute("aria-expanded", "false");
+    mobileMenuToggle.setAttribute("aria-label", "Open navigation menu");
+  };
+
+  mobileMenuToggle.addEventListener("click", () => {
+    const isOpen = primaryNavigation.classList.toggle("is-open");
+    mobileMenuToggle.setAttribute("aria-expanded", String(isOpen));
+    mobileMenuToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation menu" : "Open navigation menu",
+    );
+  });
+
+  primaryNavigation.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMobileMenu);
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMobileMenu();
+    }
+  });
+
+  window
+    .matchMedia("(min-width: 751px)")
+    .addEventListener("change", closeMobileMenu);
+}
+
 // ============================================================
 // CONTINUOUS FLOAT ON CARDS
 // ============================================================
@@ -227,7 +261,7 @@ document.querySelectorAll(".approach-carousel").forEach((carousel) => {
   carousel.classList.add("is-enhanced");
   gsap.set(slides, { autoAlpha: 0, xPercent: 100 });
   gsap.set(slides[0], { autoAlpha: 1, xPercent: 0 });
-  gsap.set(slideCopy.flat(), { autoAlpha: 0, y: 20 });
+  gsap.set(slideCopy.flat(), { autoAlpha: 0 });
 
   const timeline = gsap.timeline({
     scrollTrigger: {
@@ -244,8 +278,8 @@ document.querySelectorAll(".approach-carousel").forEach((carousel) => {
 
   timeline.fromTo(
     slideCopy[0],
-    { autoAlpha: 0, y: 20 },
-    { autoAlpha: 1, y: 0, duration: 0.55, stagger: 0.08, ease: "none" },
+    { autoAlpha: 0 },
+    { autoAlpha: 1, duration: 0.55, stagger: 0.08, ease: "none" },
     0,
   );
 
@@ -259,7 +293,7 @@ document.querySelectorAll(".approach-carousel").forEach((carousel) => {
       )
       .to(
         slideCopy[index],
-        { autoAlpha: 0, y: -12, duration: 0.4, stagger: 0.04, ease: "none" },
+        { autoAlpha: 0, duration: 0.4, stagger: 0.04, ease: "none" },
         position,
       )
       .fromTo(
@@ -270,8 +304,8 @@ document.querySelectorAll(".approach-carousel").forEach((carousel) => {
       )
       .fromTo(
         slideCopy[index + 1],
-        { autoAlpha: 0, y: 20 },
-        { autoAlpha: 1, y: 0, duration: 0.55, stagger: 0.08, ease: "none" },
+        { autoAlpha: 0 },
+        { autoAlpha: 1, duration: 0.55, stagger: 0.08, ease: "none" },
         position + 0.08,
       );
   });
@@ -360,10 +394,9 @@ if (
 
       gsap.fromTo(
         copyContent,
-        { autoAlpha: 0, y: 18 },
+        { autoAlpha: 0 },
         {
           autoAlpha: 1,
-          y: 0,
           duration: 0.5,
           stagger: 0.08,
           ease: "power3.out",
@@ -406,6 +439,28 @@ if (
 // ============================================================
 // TEAM GRID REVEAL ON SCROLL
 // ============================================================
+if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  gsap.utils
+    .toArray(".who-we-are .quote-text, .approach-intro .quote-text")
+    .forEach((quote) => {
+      gsap.fromTo(
+        quote,
+        { autoAlpha: 0, y: 30 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.95,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: quote,
+            start: "top 82%",
+            once: true,
+          },
+        },
+      );
+    });
+}
+
 const whoWeServeReveal = gsap.timeline({
   scrollTrigger: {
     trigger: ".who-we-serve",
