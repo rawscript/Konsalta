@@ -16,16 +16,96 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap" rel="stylesheet" />
+   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
    <link rel="stylesheet" href="./styles/contact.css">
 </head>
 <body>
     <section class="intro">
+        <p class="eyebrow">Start a conversation</p>
         <h1>Contact Us</h1>
-        <p>Get in touch with our team.</p>
+        <p>Tell us about your needs and we’ll help you move from insight to action.</p>
     </section>
-    <section class="form">
 
+    <section class="contact-wrap" aria-label="Contact form section">
+        <div class="contact-card">
+            <div class="contact-copy">
+                <p class="eyebrow accent">Let’s talk</p>
+                <h2>Need sharper insight for your next decision?</h2>
+                <p>
+                    Whether you are planning a new market move, evaluating impact, or seeking strategic guidance,
+                    our team can help you design a fit-for-purpose approach.
+                </p>
+                <ul class="contact-points">
+                    <li>Research &amp; evaluation</li>
+                    <li>Strategy &amp; advisory</li>
+                    <li>Market intelligence</li>
+                </ul>
+            </div>
+
+            <form id="contactForm" class="contact-form" novalidate>
+                <div class="field-row">
+                    <label>
+                        Full name
+                        <input type="text" name="name" id="name" placeholder="Your name" required>
+                    </label>
+                    <label>
+                        Email address
+                        <input type="email" name="email" id="email" placeholder="you@example.com" required>
+                    </label>
+                </div>
+
+                <div class="field-row">
+                    <label>
+                        Organisation
+                        <input type="text" name="company" id="company" placeholder="Organisation name">
+                    </label>
+                    <label>
+                        Project type
+                        <select name="projectType" id="projectType" required>
+                            <option value="" selected disabled>Select an option</option>
+                            <option value="research">Research &amp; evaluation</option>
+                            <option value="strategy">Strategy &amp; advisory</option>
+                            <option value="market-intelligence">Market intelligence</option>
+                            <option value="policy">Policy &amp; systems</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </label>
+                </div>
+
+                <label>
+                    Your message
+                    <textarea name="message" id="message" rows="6" placeholder="Tell us a little about your goals, timelines, and the challenge you're trying to solve." required></textarea>
+                </label>
+
+                <div class="form-footer">
+                    <button type="submit">Send enquiry</button>
+                    <span class="helper-text">We typically respond within 2 business days.</span>
+                </div>
+
+                <p class="form-status" role="status" aria-live="polite"></p>
+            </form>
+        </div>
     </section>
+
+    <div class="send-overlay" aria-hidden="true">
+        <div class="send-scene">
+            <svg class="flight-path" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path class="flight-trail" d="M110 370 C 205 335, 250 270, 320 215 C 390 165, 470 100, 590 90 C 680 82, 770 105, 820 155" />
+            </svg>
+
+            <div class="plane-group">
+                <div class="plane-shadow"></div>
+                <img class="paper-plane" src="./public/plane/paper-plane.svg" alt="Paper plane">
+            </div>
+
+            <div class="checkmark-group" aria-hidden="true">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15 49L39 73L85 27" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
     <section class="footer-banner">
         <div class="banner">
         <span></span>
