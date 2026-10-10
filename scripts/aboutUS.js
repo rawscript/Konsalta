@@ -195,14 +195,25 @@ if (hero) {
 // ============================================================
 document.querySelectorAll(".approach-carousel").forEach((carousel) => {
   const slides = Array.from(carousel.querySelectorAll(".approach-slide"));
-  const dots = Array.from(carousel.querySelectorAll(".approach-pagination button"));
+  const dots = Array.from(
+    carousel.querySelectorAll(".approach-pagination button"),
+  );
+  const slideCopy = slides.map((slide) =>
+    Array.from(slide.querySelector(".approach-copy").children),
+  );
 
-  if (slides.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  if (
+    slides.length < 2 ||
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  ) {
     return;
   }
 
   const syncDots = (progress) => {
-    const activeIndex = Math.min(slides.length - 1, Math.floor(progress * slides.length));
+    const activeIndex = Math.min(
+      slides.length - 1,
+      Math.floor(progress * slides.length),
+    );
 
     dots.forEach((dot, index) => {
       if (index === activeIndex) {
@@ -216,6 +227,7 @@ document.querySelectorAll(".approach-carousel").forEach((carousel) => {
   carousel.classList.add("is-enhanced");
   gsap.set(slides, { autoAlpha: 0, xPercent: 100 });
   gsap.set(slides[0], { autoAlpha: 1, xPercent: 0 });
+  gsap.set(slideCopy.flat(), { autoAlpha: 0, y: 20 });
 
   const timeline = gsap.timeline({
     scrollTrigger: {
@@ -230,15 +242,37 @@ document.querySelectorAll(".approach-carousel").forEach((carousel) => {
     },
   });
 
+  timeline.fromTo(
+    slideCopy[0],
+    { autoAlpha: 0, y: 20 },
+    { autoAlpha: 1, y: 0, duration: 0.55, stagger: 0.08, ease: "none" },
+    0,
+  );
+
   slides.slice(1).forEach((slide, index) => {
     const position = index + 1;
     timeline
-      .to(slides[index], { autoAlpha: 0, xPercent: -8, duration: 0.65, ease: "none" }, position)
+      .to(
+        slides[index],
+        { autoAlpha: 0, xPercent: -8, duration: 0.65, ease: "none" },
+        position,
+      )
+      .to(
+        slideCopy[index],
+        { autoAlpha: 0, y: -12, duration: 0.4, stagger: 0.04, ease: "none" },
+        position,
+      )
       .fromTo(
         slide,
         { autoAlpha: 0, xPercent: 100 },
         { autoAlpha: 1, xPercent: 0, duration: 0.65, ease: "none" },
         position,
+      )
+      .fromTo(
+        slideCopy[index + 1],
+        { autoAlpha: 0, y: 20 },
+        { autoAlpha: 1, y: 0, duration: 0.55, stagger: 0.08, ease: "none" },
+        position + 0.08,
       );
   });
 
@@ -261,11 +295,22 @@ document.querySelectorAll(".approach-carousel").forEach((carousel) => {
 // ============================================================
 const impactGallery = document.querySelector(".impact-gallery");
 const impactTrack = impactGallery?.querySelector(".impact-gallery-track");
-const impactCards = Array.from(impactGallery?.querySelectorAll(".impact-gallery-card") || []);
-const impactDots = Array.from(impactGallery?.querySelectorAll(".impact-gallery-pagination button") || []);
+const impactCards = Array.from(
+  impactGallery?.querySelectorAll(".impact-gallery-card") || [],
+);
+const impactDots = Array.from(
+  impactGallery?.querySelectorAll(".impact-gallery-pagination button") || [],
+);
 
-if (impactGallery && impactTrack && impactCards.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const getImpactScrollAmount = () => -(impactTrack.scrollWidth - window.innerWidth);
+if (
+  impactGallery &&
+  impactTrack &&
+  impactCards.length > 1 &&
+  !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+) {
+  const getImpactScrollAmount = () =>
+    -(impactTrack.scrollWidth - window.innerWidth);
+  let activeImpactIndex = -1;
 
   const updateImpactCards = () => {
     const viewportCenter = window.innerWidth / 2;
@@ -275,7 +320,11 @@ if (impactGallery && impactTrack && impactCards.length > 1 && !window.matchMedia
     impactCards.forEach((card, index) => {
       const rect = card.getBoundingClientRect();
       const distance = rect.left + rect.width / 2 - viewportCenter;
-      const normalizedDistance = gsap.utils.clamp(-1, 1, distance / (window.innerWidth * 0.5));
+      const normalizedDistance = gsap.utils.clamp(
+        -1,
+        1,
+        distance / (window.innerWidth * 0.5),
+      );
       const absoluteDistance = Math.abs(distance);
 
       if (absoluteDistance < closestDistance) {
@@ -285,7 +334,11 @@ if (impactGallery && impactTrack && impactCards.length > 1 && !window.matchMedia
 
       gsap.set(card, {
         rotationY: normalizedDistance * 38,
-        scale: gsap.utils.clamp(0.76, 1, 1 - absoluteDistance / (window.innerWidth * 1.8)),
+        scale: gsap.utils.clamp(
+          0.76,
+          1,
+          1 - absoluteDistance / (window.innerWidth * 1.8),
+        ),
         z: -absoluteDistance * 0.16,
       });
     });
@@ -297,6 +350,27 @@ if (impactGallery && impactTrack && impactCards.length > 1 && !window.matchMedia
         dot.removeAttribute("aria-current");
       }
     });
+
+    if (closestIndex !== activeImpactIndex) {
+      activeImpactIndex = closestIndex;
+      const copy = impactCards[closestIndex].querySelector(
+        ".impact-gallery-card-copy",
+      );
+      const copyContent = Array.from(copy.children);
+
+      gsap.fromTo(
+        copyContent,
+        { autoAlpha: 0, y: 18 },
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.08,
+          ease: "power3.out",
+          overwrite: true,
+        },
+      );
+    }
   };
 
   const impactTween = gsap.to(impactTrack, {
