@@ -4,40 +4,40 @@ const heroData = {
   why: {
     words: ["We", "drive", "growth", "to", "your", "business"],
     subtitle:
-      "Unlock your brand's potential with our proven marketing expertise. From strategy to execution, we drive growth."
+      "Unlock your brand's potential with our proven marketing expertise. From strategy to execution, we drive growth.",
   },
   about: {
     words: ["Built", "by", "operators", "who", "shipped", "real", "brands"],
     subtitle:
-      "Six years in-house at growth-stage startups taught us what actually moves a number. Now we run that playbook for you."
+      "Six years in-house at growth-stage startups taught us what actually moves a number. Now we run that playbook for you.",
   },
   portfolio: {
     words: ["Forty", "launches.", "Eleven", "rebrands.", "Three", "IPOs."],
     subtitle:
-      "Selected work across SaaS, consumer, and fintech. Every project earned a number we can show you on a call."
-  }
+      "Selected work across SaaS, consumer, and fintech. Every project earned a number we can show you on a call.",
+  },
 };
 
 // Testimonials carousel
 const testimonials = [
   {
-    p1: "The final product exceeded my expectations.",
+    p1: "Core Methodology Principle.",
     p2: "Impressed with the results!",
-    initials: "AS.",
-    avatars: [12, 47]
+    initials: "K.",
+    avatars: [12, 47],
   },
   {
-    p1: "Best agency we've ever worked with.",
-    p2: "ROI through the roof in six weeks.",
-    initials: "MK.",
-    avatars: [32, 68]
+    p1: "Connecting deep domain research with high-level advisory to shape actionable institutional growth.",
+    p2: "Senior Advisory.",
+    initials: "K.",
+    avatars: [32, 68],
   },
   {
-    p1: "They understood our vision and shipped it fast.",
-    p2: "Felt like an extension of our team.",
-    initials: "JR.",
-    avatars: [52, 60]
-  }
+    p1: "Impact Comes from Actionable Insights.",
+    p2: "Konsalta Initiative.",
+    initials: "K.",
+    avatars: [52, 60],
+  },
 ];
 let testimonialIndex = 0;
 
@@ -58,20 +58,20 @@ document.addEventListener("DOMContentLoaded", () => {
           scaleX: 0,
           transformOrigin: "left center",
           duration: 0.8,
-          ease: "power2.inOut"
+          ease: "power2.inOut",
         },
-        "<"
+        "<",
       )
       .to("nav", { opacity: 1, duration: 0.4 }, "-=0.3")
       .from(
         "nav",
         { y: -20, scale: 0.95, duration: 0.7, ease: "back.out(1.5)" },
-        "<"
+        "<",
       )
       .to(
         ".headline .word, .headline .arrow",
         { opacity: 1, duration: 0.4, stagger: 0.06 },
-        "-=0.3"
+        "-=0.3",
       )
       .from(
         ".headline .word",
@@ -80,9 +80,9 @@ document.addEventListener("DOMContentLoaded", () => {
           rotateX: -50,
           duration: 0.8,
           stagger: 0.06,
-          ease: "back.out(1.4)"
+          ease: "back.out(1.4)",
         },
-        "<"
+        "<",
       )
       .from(
         ".headline .arrow",
@@ -90,9 +90,9 @@ document.addEventListener("DOMContentLoaded", () => {
           scale: 0,
           rotation: -90,
           duration: 0.7,
-          ease: "back.out(2)"
+          ease: "back.out(2)",
         },
-        "-=0.4"
+        "-=0.4",
       )
       .to(".subtitle", { opacity: 1, duration: 0.5 }, "-=0.3")
       .from(".subtitle", { y: 14, duration: 0.55 }, "<")
@@ -103,14 +103,14 @@ document.addEventListener("DOMContentLoaded", () => {
           y: 24,
           scale: 0.85,
           duration: 0.7,
-          ease: "back.out(1.7)"
+          ease: "back.out(1.7)",
         },
-        "<"
+        "<",
       )
       .to(
         ".card-base, .stat-half",
         { opacity: 1, duration: 0.4, stagger: 0.1 },
-        "-=0.2"
+        "-=0.2",
       )
       .from(
         ".card-base, .stat-half",
@@ -119,9 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
           scale: 0.96,
           duration: 0.7,
           stagger: 0.1,
-          ease: "back.out(1.4)"
+          ease: "back.out(1.4)",
         },
-        "<"
+        "<",
       )
       .to(".tag", { opacity: 1, duration: 0.3, stagger: 0.06 }, "-=0.5")
       .from(
@@ -130,9 +130,9 @@ document.addEventListener("DOMContentLoaded", () => {
           scale: 0.3,
           duration: 0.7,
           stagger: 0.06,
-          ease: "back.out(2)"
+          ease: "back.out(2)",
         },
-        "<"
+        "<",
       );
 
     // Continuous loops
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
-      delay: 2.5
+      delay: 2.5,
     });
 
     gsap.to(".cta-yellow", {
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       repeat: -1,
       yoyo: true,
       ease: "sine.inOut",
-      delay: 3
+      delay: 3,
     });
 
     // ===== ANIMATED COUNTERS =====
@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
           displayVal = obj.val.toFixed(1);
         }
         el.textContent = prefix + displayVal + suffix;
-      }
+      },
     });
   }
 
@@ -222,9 +222,9 @@ document.addEventListener("DOMContentLoaded", () => {
             y: 0,
             duration: 0.55,
             stagger: 0.04,
-            ease: "back.out(1.4)"
+            ease: "back.out(1.4)",
           });
-        }
+        },
       });
 
       gsap.to(subtitleEl, {
@@ -239,9 +239,9 @@ document.addEventListener("DOMContentLoaded", () => {
             opacity: 1,
             y: 0,
             duration: 0.55,
-            ease: "power3.out"
+            ease: "power3.out",
           });
-        }
+        },
       });
     });
   });
@@ -271,7 +271,7 @@ document.addEventListener("DOMContentLoaded", () => {
       { top: 42, left: 58 },
       { top: 70, left: 4 },
       { top: 70, left: 50 },
-      { top: 88, left: 25 }
+      { top: 88, left: 25 },
     ];
     const shuffled = [...slots].sort(() => Math.random() - 0.5);
 
@@ -284,7 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
         rotation: rotation,
         duration: 0.7,
         ease: "back.out(1.4)",
-        delay: i * 0.03
+        delay: i * 0.03,
       });
     });
   }
@@ -303,8 +303,8 @@ document.addEventListener("DOMContentLoaded", () => {
             duration: 0.18,
             yoyo: true,
             repeat: 1,
-            ease: "power2.inOut"
-          }
+            ease: "power2.inOut",
+          },
         );
       }
     });
@@ -316,7 +316,7 @@ document.addEventListener("DOMContentLoaded", () => {
           scale: 1.05,
           duration: 0.25,
           ease: "back.out(2)",
-          overwrite: "auto"
+          overwrite: "auto",
         });
       }
     });
@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", () => {
           scale: 1,
           duration: 0.35,
           ease: "power2.out",
-          overwrite: "auto"
+          overwrite: "auto",
         });
       }
     });
@@ -364,8 +364,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update avatar imgs
         const avatarEls = avatarsContainer.querySelectorAll(".avatar-mini img");
         t.avatars.forEach((idx, i) => {
-          if (avatarEls[i])
-            avatarEls[i].src = `https://i.pravatar.cc/80?img=${idx}`;
+          if (avatarEls[i]) {
+            // Blank neutral gray avatar SVG placeholder
+            avatarEls[i].src =
+              `data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'><rect width='100%' height='100%' fill='%23e2e8f0'/><circle cx='40' cy='32' r='16' fill='%23cbd5e1'/><path d='M12 72 C 12 52, 28 44, 40 44 C 52 44, 68 52, 68 72 Z' fill='%23cbd5e1'/></svg>`;
+          }
         });
 
         gsap.set([p1, p2, initials], { opacity: 0, y: 8 });
@@ -374,16 +377,16 @@ document.addEventListener("DOMContentLoaded", () => {
           y: 0,
           duration: 0.45,
           stagger: 0.05,
-          ease: "power3.out"
+          ease: "power3.out",
         });
 
         // Initials badge pop
         gsap.fromTo(
           initials,
           { scale: 0.7 },
-          { scale: 1, duration: 0.5, ease: "back.out(2)" }
+          { scale: 1, duration: 0.5, ease: "back.out(2)" },
         );
-      }
+      },
     });
   }
 
@@ -403,7 +406,7 @@ document.addEventListener("DOMContentLoaded", () => {
     gsap.fromTo(
       this,
       { scale: 0.94 },
-      { scale: 1, duration: 0.6, ease: "elastic.out(1.2, 0.4)" }
+      { scale: 1, duration: 0.6, ease: "elastic.out(1.2, 0.4)" },
     );
     // Pulse the headline arrow
     gsap.fromTo(
@@ -415,8 +418,8 @@ document.addEventListener("DOMContentLoaded", () => {
         duration: 0.4,
         yoyo: true,
         repeat: 1,
-        ease: "power2.inOut"
-      }
+        ease: "power2.inOut",
+      },
     );
   });
 
@@ -434,8 +437,8 @@ document.addEventListener("DOMContentLoaded", () => {
             duration: 0.4,
             yoyo: true,
             repeat: 2,
-            ease: "power2.inOut"
-          }
+            ease: "power2.inOut",
+          },
         );
       }, 400);
     }
@@ -452,7 +455,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: "power2.out",
       onUpdate: () => {
         el.textContent = obj.val.toFixed(1) + "M+";
-      }
+      },
     });
   });
 
@@ -466,7 +469,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: "power2.out",
       onUpdate: () => {
         el.textContent = "$" + obj.val.toFixed(0) + "M";
-      }
+      },
     });
   });
 }); // DOMContentLoaded
