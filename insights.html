@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Insights — Konsalta | Research, Advisory & Strategy</title>
+    <meta
+      name="description"
+      content="Perspective is on the Way. Konsalta's senior experts are assembling African policy analyses, market intelligence, and executive thought pieces."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/insights.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      defer
+    ></script>
+    <script src="scripts/insights.js" defer></script>
+  </head>
+  <body>
+    <!-- Ambient Background Glows -->
+    <div class="ambient-1" aria-hidden="true"></div>
+    <div class="ambient-2" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
+
+    <!-- ============ ANIMATED THEME BACKGROUND SHAPES ============ -->
+    <div class="insights-bg-shapes" aria-hidden="true">
+      <div class="bg-shape shape-concentric" data-speed="0.22">
+        <svg viewBox="0 0 100 100" width="110" height="110">
+          <circle
+            cx="50"
+            cy="50"
+            r="44"
+            stroke="#0B2D53"
+            stroke-width="1.8"
+            stroke-dasharray="5 4"
+            fill="none"
+            opacity="0.32"
+          />
+          <circle
+            cx="50"
+            cy="50"
+            r="28"
+            stroke="#0B2D53"
+            stroke-width="1.2"
+            fill="none"
+            opacity="0.2"
+          />
+          <circle cx="50" cy="50" r="6" fill="#F26522" opacity="0.65" />
+          <line
+            x1="10"
+            y1="50"
+            x2="90"
+            y2="50"
+            stroke="#0B2D53"
+            stroke-width="1"
+            opacity="0.15"
+          />
+          <line
+            x1="50"
+            y1="10"
+            x2="50"
+            y2="90"
+            stroke="#0B2D53"
+            stroke-width="1"
+            opacity="0.15"
+          />
+        </svg>
+      </div>
+
+      <div class="bg-shape shape-pill" data-speed="-0.28">
+        <div class="pill-inner">
+          <span class="pill-dot"></span>
+          <span class="pill-line"></span>
+        </div>
+      </div>
+
+      <div class="bg-shape shape-hex" data-speed="0.32">
+        <svg viewBox="0 0 100 100" width="105" height="105">
+          <polygon
+            points="50,8 88,28 88,72 50,92 12,72 12,28"
+            stroke="#0B2D53"
+            stroke-width="2"
+            fill="none"
+            opacity="0.28"
+          />
+          <circle cx="50" cy="8" r="3" fill="#0B2D53" opacity="0.4" />
+          <circle cx="88" cy="28" r="3.5" fill="#F26522" opacity="0.6" />
+          <circle cx="88" cy="72" r="3" fill="#0B2D53" opacity="0.4" />
+          <circle cx="50" cy="92" r="3.5" fill="#F26522" opacity="0.6" />
+          <circle cx="12" cy="72" r="3" fill="#0B2D53" opacity="0.4" />
+          <circle cx="12" cy="28" r="3" fill="#0B2D53" opacity="0.4" />
+          <circle cx="50" cy="50" r="4" fill="#0B2D53" opacity="0.5" />
+        </svg>
+      </div>
+
+      <div class="bg-shape shape-flow-arc" data-speed="-0.18">
+        <svg viewBox="0 0 160 80" width="160" height="80">
+          <path
+            d="M5,40 Q42,5 80,40 T155,40"
+            stroke="#F26522"
+            stroke-width="2"
+            fill="none"
+            stroke-linecap="round"
+            opacity="0.38"
+          />
+          <circle cx="80" cy="40" r="4" fill="#F26522" opacity="0.7" />
+          <circle cx="155" cy="40" r="3" fill="#0B2D53" opacity="0.5" />
+        </svg>
+      </div>
+
+      <div class="bg-shape shape-matrix" data-speed="0.14">
+        <svg viewBox="0 0 70 70" width="70" height="70">
+          <circle cx="10" cy="10" r="2.5" fill="#0B2D53" opacity="0.25" />
+          <circle cx="35" cy="10" r="2.5" fill="#0B2D53" opacity="0.25" />
+          <circle cx="60" cy="10" r="2.5" fill="#F26522" opacity="0.5" />
+          <circle cx="10" cy="35" r="2.5" fill="#0B2D53" opacity="0.25" />
+          <circle cx="35" cy="35" r="2.5" fill="#0B2D53" opacity="0.35" />
+          <circle cx="60" cy="35" r="2.5" fill="#0B2D53" opacity="0.25" />
+          <circle cx="10" cy="60" r="2.5" fill="#F26522" opacity="0.5" />
+          <circle cx="35" cy="60" r="2.5" fill="#0B2D53" opacity="0.25" />
+          <circle cx="60" cy="60" r="2.5" fill="#0B2D53" opacity="0.25" />
+        </svg>
+      </div>
+
+      <div class="bg-shape shape-ellipses" data-speed="0.3">
+        <svg viewBox="0 0 120 120" width="120" height="120">
+          <ellipse
+            cx="60"
+            cy="60"
+            rx="48"
+            ry="48"
+            stroke="#0B2D53"
+            stroke-width="1.8"
+            fill="none"
+            opacity="0.25"
+          />
+          <ellipse
+            cx="60"
+            cy="60"
+            rx="48"
+            ry="18"
+            stroke="#0B2D53"
+            stroke-width="1.5"
+            fill="none"
+            opacity="0.25"
+          />
+          <ellipse
+            cx="60"
+            cy="60"
+            rx="18"
+            ry="48"
+            stroke="#F26522"
+            stroke-width="1.5"
+            fill="none"
+            opacity="0.35"
+          />
+        </svg>
+      </div>
+
+      <div class="bg-shape shape-diamond" data-speed="-0.22">
+        <svg viewBox="0 0 80 80" width="80" height="80">
+          <rect
+            x="15"
+            y="15"
+            width="50"
+            height="50"
+            rx="4"
+            transform="rotate(45 40 40)"
+            stroke="#F26522"
+            stroke-width="2"
+            fill="none"
+            stroke-dasharray="6 4"
+            opacity="0.38"
+          />
+          <circle cx="40" cy="40" r="5" fill="#F26522" opacity="0.75" />
+        </svg>
+      </div>
+
+      <div class="bg-shape shape-sparkle-1" data-speed="-0.15">
+        <svg viewBox="0 0 40 40" width="36" height="36">
+          <path
+            d="M20,2 L23,15 L36,20 L23,25 L20,38 L17,25 L4,20 L17,15 Z"
+            fill="#F26522"
+            opacity="0.48"
+          />
+        </svg>
+      </div>
+    </div>
+
+    <!-- ============ SITE HEADER ============ -->
+    <header class="site-header">
+      <a href="index.html" class="logo" aria-label="Konsalta Home">
+        <span class="logo-dot">
+          <img src="https://i.ibb.co/mFD5XKvd/logo.png" alt="Konsalta Logo" />
+        </span>
+      </a>
+      <nav class="header-nav">
+        <a href="aboutUs.html">About Konsalta</a>
+        <a href="services.html">Our Services</a>
+        <a href="whyUs.html">Why Choose Us</a>
+        <a href="insights.html" class="active">Our Insights</a>
+      </nav>
+      <a href="contactUs.html" class="header-btn">
+        Contact Us
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </a>
+    </header>
+
+    <!-- ============ SUBPAGE ============ -->
+    <div
+      class="subpage-dock"
+      role="navigation"
+      aria-label="Insights Subpage Switcher"
+    >
+      <div class="subpage-dock-inner">
+        <button class="subpage-tab active" data-target="#subpage-1">
+          <span class="subpage-badge">--</span>
+          <span class="subpage-label">Perspective is on the Way</span>
+        </button>
+        <span class="dock-divider"></span>
+        <button class="subpage-tab" data-target="#subpage-2">
+          <span class="subpage-badge">>></span>
+          <span class="subpage-label">Notify Ne</span>
+        </button>
+      </div>
+    </div>
+
+    <main class="insights-main">
+      <!-- =================================================================
+           SUBPAGE 1: Perspective is on the Way
+           ================================================================= -->
+      <section class="insights-subpage subpage-1 active" id="subpage-1">
+        <div class="subpage-container">
+          <div class="subpage-header">
+            <h1 class="insights-hero-title">
+              <span class="title-line title-navy">Perspective is</span>
+              <span class="title-line title-orange">on the Way.</span>
+            </h1>
+            <p class="insights-hero-desc">
+              We are synthesizing empirical evidence, African policy realities,
+              and strategic foresight to provide executive leaders and
+              development institutions with clarity that cuts through the noise.
+            </p>
+          </div>
+
+          <!-- Editorial Hero Glass Showcase -->
+          <div class="editorial-showcase">
+            <div class="editorial-card">
+              <div class="editorial-media-wrap">
+                <img
+                  src="public/konsalta.png"
+                  alt="Konsalta Africa Economic Policy Institute & Research Lab"
+                  class="editorial-img"
+                  loading="eager"
+                />
+                <div class="editorial-glass-overlay">
+                  <div class="overlay-telemetry">
+                    <div class="telemetry-pill"></div>
+                  </div>
+                  <div class="overlay-quote">
+                    <p>
+                      “Good decisions require grounded evidence. Real impact
+                      comes from translating that insight into action.”
+                    </p>
+                    <span class="quote-author"
+                      >— Konsalta Advisory Collective</span
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <!-- Floating Glass Signal Widgets -->
+              <div class="floating-signal signal-1">
+                <div class="signal-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                  </svg>
+                </div>
+                <div class="signal-content">
+                  <span class="signal-title">Macro Diagnostics</span>
+                  <span class="signal-sub">Under Peer Review</span>
+                </div>
+              </div>
+
+              <div class="floating-signal signal-2">
+                <div class="signal-icon icon-orange">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="8" x2="12" y2="12" />
+                    <line x1="12" y1="16" x2="12.01" y2="16" />
+                  </svg>
+                </div>
+                <div class="signal-content">
+                  <span class="signal-title">Early Access</span>
+                  <span class="signal-sub">Now Open</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Subpage 1 Teaser Pillars -->
+          <div class="forthcoming-streams">
+            <div class="stream-card">
+              <div class="stream-num">01</div>
+              <h3>Empirical Field Surveys</h3>
+              <p>
+                Capturing deep quantitative & qualitative ground truths across
+                diverse African communities and urban centers.
+              </p>
+              <div class="stream-tag">Grassroots Signals</div>
+            </div>
+
+            <div class="stream-card">
+              <div class="stream-num">02</div>
+              <h3>Policy & Regulatory Blueprints</h3>
+              <p>
+                Translating institutional complexity into clear executive
+                roadmaps and public-private collaboration frameworks.
+              </p>
+              <div class="stream-tag">Actionable Policy</div>
+            </div>
+
+            <div class="stream-card">
+              <div class="stream-num">03</div>
+              <h3>Foresight & Economic Strategy</h3>
+              <p>
+                Synthesizing regional trade dynamics, digital transformation,
+                and systemic value chain opportunities.
+              </p>
+              <div class="stream-tag">Strategic Direction</div>
+            </div>
+          </div>
+
+          <!-- Step Down Banner to Subpage 2 -->
+          <div class="subpage-step-banner">
+            <button class="step-link-btn" data-target="#subpage-2">
+              <span>Advance to Early Access: </span>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M12 5v14M19 12l-7 7-7-7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- =================================================================
+           SUBPAGE 2: Early Intelligence Access & Interactive Dispatch Streams
+           ================================================================= -->
+      <section class="insights-subpage subpage-2" id="subpage-2">
+        <div class="subpage-container">
+          <div class="subpage-header">
+            <h2 class="subpage-title">
+              <span class="title-line title-navy">Be the First to Access</span>
+              <span class="title-line title-orange"
+                >Our Actionable Insights</span
+              >
+            </h2>
+            <p class="subpage-lead-text">
+              Our team of senior experts is currently assembling insights,
+              policy analyses, and executive thought pieces. Sign up below to be
+              the first to receive these actionable insights directly in your
+              inbox.
+            </p>
+          </div>
+
+          <!-- Interactive Subscription Hub (Glass Surfaced Card) -->
+          <div class="signup-glass-hub" id="subscribeHub">
+            <div class="hub-header">
+              <div class="hub-icon-wrap">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                  />
+                  <polyline points="22,6 12,13 2,6" />
+                </svg>
+              </div>
+              <div class="hub-meta">
+                <h3>Priority Dispatches Delivery</h3>
+                <p>
+                  Select your areas of interest and enter your email for direct
+                  access upon release.
+                </p>
+              </div>
+            </div>
+
+            <!-- Content Stream Buttons (Publications, Briefs, News/Blogs, Thought Leadership) -->
+            <div class="stream-selector-section">
+              <div class="selector-label">
+                <span>Select Desired Intelligence Streams:</span>
+                <span class="selector-hint">(Click to toggle preference)</span>
+              </div>
+              <div class="stream-buttons-grid">
+                <button
+                  type="button"
+                  class="stream-btn active"
+                  data-stream="publications"
+                  aria-pressed="true"
+                >
+                  <span class="btn-check">✓</span>
+                  <span class="btn-icon">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                      <path
+                        d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"
+                      />
+                    </svg>
+                  </span>
+                  <span class="btn-text">Publications</span>
+                </button>
+
+                <button
+                  type="button"
+                  class="stream-btn active"
+                  data-stream="briefs"
+                  aria-pressed="true"
+                >
+                  <span class="btn-check">✓</span>
+                  <span class="btn-icon">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polygon
+                        points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"
+                      />
+                    </svg>
+                  </span>
+                  <span class="btn-text">Briefs</span>
+                </button>
+
+                <button
+                  type="button"
+                  class="stream-btn active"
+                  data-stream="news"
+                  aria-pressed="true"
+                >
+                  <span class="btn-check">✓</span>
+                  <span class="btn-icon">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1m2 13a2 2 0 0 1-2-2V7m2 13a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"
+                      />
+                    </svg>
+                  </span>
+                  <span class="btn-text">News/Blogs</span>
+                </button>
+
+                <button
+                  type="button"
+                  class="stream-btn active"
+                  data-stream="thought-leadership"
+                  aria-pressed="true"
+                >
+                  <span class="btn-check">✓</span>
+                  <span class="btn-icon">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <polygon
+                        points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                      />
+                    </svg>
+                  </span>
+                  <span class="btn-text">Thought Leadership</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Email Address Field & Notify Me Button -->
+            <form
+              class="subscription-form"
+              id="insightSubscriptionForm"
+              novalidate
+            >
+              <div class="form-input-group">
+                <div class="input-wrapper">
+                  <svg
+                    class="input-icon"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                    />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>
+                  <input
+                    type="email"
+                    id="subscriberEmail"
+                    class="email-input"
+                    placeholder="Enter your email address..."
+                    required
+                    aria-label="Email Address Field"
+                  />
+                </div>
+                <button type="submit" class="notify-btn" id="notifyBtn">
+                  <span>Notify Me</span>
+                  <svg
+                    width="15"
+                    height="15"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <path d="M5 12h14M13 6l6 6-6 6" />
+                  </svg>
+                </button>
+              </div>
+              <div
+                class="form-feedback"
+                id="formFeedback"
+                role="alert"
+                aria-live="polite"
+              ></div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="site-footer" id="contact">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <span class="logo-dot">
+              <img
+                src="https://i.ibb.co/mFD5XKvd/logo.png"
+                alt="Konsalta Logo"
+              />
+            </span>
+          </div>
+          <p>
+            A women-led, Africa-focused research, consulting and advisory firm
+            delivering actionable insights and systemic impact.
+          </p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h4>Services</h4>
+            <a href="services.html#services-grid">Research & Evaluation</a>
+            <a href="services.html#services-grid">Strategy & Advisory</a>
+            <a href="services.html#services-grid">Market Intelligence</a>
+            <a href="services.html#services-grid">Policy & Systems</a>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <a href="aboutUs.html">About Konsalta</a>
+            <a href="services.html">Our Services</a>
+            <a href="whyUs.html">Why Choose Us</a>
+            <a href="insights.html">Our Insights</a>
+            <a href="contactUs.html">Contact Us</a>
+          </div>
+          <div class="footer-col">
+            <h4>Governance</h4>
+            <a href="#ethics">Ethics & Integrity</a>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Engagement</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Konsalta. All rights reserved.</span>
+        <span>Better Decisions. Greater Impact.</span>
+      </div>
+    </footer>
+  </body>
+</html>
