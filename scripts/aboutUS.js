@@ -3,7 +3,7 @@ gsap.registerPlugin(ScrollTrigger);
 // ============================================================
 // INITIAL STATES + APPLY DATA-ROT
 // ============================================================
-gsap.set("#nav", { opacity: 0, y: -20 });
+gsap.set(".site-header", { opacity: 0, y: -20 });
 gsap.set(".small-team .word > span", { y: "105%" });
 gsap.set(".big-results .letter", { y: 80, opacity: 0 });
 gsap.set("#subline", { opacity: 0, y: 20 });
@@ -23,7 +23,7 @@ document.querySelectorAll(".card").forEach((card) => {
 // ============================================================
 const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
 intro
-  .to("#nav", { opacity: 1, y: 0, duration: 0.8 }, 0.1)
+  .to(".site-header", { opacity: 1, y: 0, duration: 0.8 }, 0.1)
   .to(
     ".small-team .word > span",
     {

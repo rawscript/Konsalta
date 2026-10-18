@@ -1467,12 +1467,6 @@ body.has-custom-cursor .cursor {
 }
 
 @media (max-width: 768px) {
-  .site-header {
-    padding: 16px 20px;
-  }
-  .header-nav {
-    display: none;
-  }
   .subpage-dock {
     top: 75px;
   }

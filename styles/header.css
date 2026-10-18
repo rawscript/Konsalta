@@ -1,0 +1,202 @@
+/* ============ KONSALTA GLOBAL SITE HEADER ============ */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 56px;
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.site-header .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  position: static !important;
+  transform: none !important;
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+.site-header .logo-dot {
+  max-width: 140px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.site-header .logo-dot img {
+  max-height: 42px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.site-header .header-nav {
+  display: flex;
+  gap: 32px;
+  align-items: center;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.site-header .header-menu-toggle,
+.site-header .mobile-nav-contact {
+  display: none;
+}
+
+.site-header .header-nav a {
+  color: var(--ink-soft, #4e5e73);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.25s ease, transform 0.2s ease;
+  position: relative;
+  font-family: "Manrope", sans-serif;
+}
+
+.site-header .header-nav a:hover,
+.site-header .header-nav a.active {
+  color: var(--navy, #0B2D53);
+}
+
+.site-header .header-nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: var(--orange, #F26522);
+  border-radius: 2px;
+}
+
+.site-header .header-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--navy, #0B2D53);
+  background: var(--white, #ffffff);
+  border: 1.5px solid var(--navy, #0B2D53);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 0 var(--navy, #0B2D53);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.site-header .header-btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--navy, #0B2D53);
+  color: var(--orange, #F26522);
+  border-color: var(--orange, #F26522);
+}
+
+.site-header .header-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--navy, #0B2D53);
+}
+
+/* ============ RESPONSIVE BREAKPOINTS ============ */
+@media (max-width: 1100px) {
+  .site-header {
+    padding: 20px 32px;
+  }
+}
+
+@media (max-width: 850px) {
+  .site-header {
+    padding: 16px 20px;
+    position: relative;
+  }
+
+  .site-header .header-nav {
+    display: none;
+    position: absolute;
+    top: calc(100% - 4px);
+    left: 20px;
+    right: 20px;
+    padding: 8px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border: 1px solid rgba(11, 45, 83, 0.12);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 16px 36px rgba(11, 45, 83, 0.16);
+    z-index: 1000;
+  }
+
+  .site-header .header-nav.is-open {
+    display: flex !important;
+  }
+
+  .site-header .header-nav a {
+    padding: 12px 14px;
+    font-size: 15px;
+  }
+
+  .site-header .header-nav a.active::after {
+    left: 14px;
+    width: 28px;
+    bottom: 6px;
+  }
+
+  .site-header .header-nav .mobile-nav-contact {
+    display: block;
+    border-top: 1px solid var(--line, #e2ddd3);
+    color: var(--orange-deep, #d34e0d);
+    font-weight: 700;
+    margin-top: 4px;
+  }
+
+  .site-header .header-menu-toggle {
+    display: inline-grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    border: 1px solid var(--navy-tint, #d4e4f7);
+    border-radius: 50%;
+    background: var(--white, #ffffff);
+    color: var(--navy, #0B2D53);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .site-header .header-menu-toggle:hover {
+    background: var(--navy-soft, #edf4fc);
+  }
+
+  .site-header .header-menu-toggle svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+  }
+
+  .site-header .header-menu-toggle:focus-visible,
+  .site-header .header-nav a:focus-visible {
+    outline: 3px solid rgba(242, 101, 34, 0.6);
+    outline-offset: 3px;
+  }
+
+  .site-header .header-btn {
+    display: none !important;
+  }
+}

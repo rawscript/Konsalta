@@ -1382,10 +1382,6 @@ body.has-custom-cursor .cursor {
 }
 
 @media (max-width: 720px) {
-  .header-nav {
-    display: none;
-  }
-
   .stage {
     aspect-ratio: auto;
     min-height: 460px;

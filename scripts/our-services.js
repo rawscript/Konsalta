@@ -51,28 +51,11 @@ document.addEventListener("DOMContentLoaded", () => {
   if (typeof gsap !== "undefined") {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
-    tl.to(".top-bar", { opacity: 1, duration: 0.4 })
-      .from(
-        ".top-bar",
-        {
-          scaleX: 0,
-          transformOrigin: "left center",
-          duration: 0.8,
-          ease: "power2.inOut",
-        },
-        "<",
-      )
-      .to("nav", { opacity: 1, duration: 0.4 }, "-=0.3")
-      .from(
-        "nav",
-        { y: -20, scale: 0.95, duration: 0.7, ease: "back.out(1.5)" },
-        "<",
-      )
-      .to(
-        ".headline .word, .headline .arrow",
-        { opacity: 1, duration: 0.4, stagger: 0.06 },
-        "-=0.3",
-      )
+    tl.to(
+      ".headline .word, .headline .arrow",
+      { opacity: 1, duration: 0.4, stagger: 0.06 },
+      0.2
+    )
       .from(
         ".headline .word",
         {

@@ -12,9 +12,11 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="styles/services.css" />
   <link rel="stylesheet" href="styles/our-services.css" />
+  <link rel="stylesheet" href="styles/header.css" />
   <!-- GSAP & ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="scripts/header.js" defer></script>
   <script src="scripts/our-services.js" defer></script>
   <script src="scripts/services.js" defer></script>
 </head>
@@ -26,32 +28,29 @@
     <div class="ambient-2" aria-hidden="true"></div>
     <div class="cursor" aria-hidden="true"></div>
     
-  <div class="top-bar"></div>
+  <header class="site-header">
+    <a href="index.html" class="logo" aria-label="Konsalta Home">
+      <span class="logo-dot"><img src="https://i.ibb.co/mFD5XKvd/logo.png" alt="Konsalta Logo"></span>
+    </a>
+    <button class="header-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+    </button>
+    <nav class="header-nav" id="primary-navigation">
+      <a href="aboutUs.html">About Konsalta</a>
+      <a href="services.html" class="active">Explore Our Services</a>
+     <!-- <a href="whyUs.html">Why Choose Us</a> -->
+      <a href="insights.html">Our Insights</a>
+      <a href="contactUs.html" class="mobile-nav-contact">Contact Us</a>
+    </nav>
+    <a href="contactUs.html" class="header-btn">Contact Us
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6" />
+      </svg>
+    </a>
+  </header>
 
   <div class="page">
-    <!-- ============= NAV ============= -->
-    <nav>
-      <a href="index.html" class="logo" aria-label="Konsalta Home">
-        <span class="logo-dot">
-          <img src="https://i.ibb.co/mFD5XKvd/logo.png" alt="Konsalta Logo" />
-        </span>
-      </a>
-      <div class="nav-pill">
-
-        <a href="aboutUs.html">
-          <button class="nav-link" data-tab="about">About Konsalta</button>
-        </a>
-        <a href="services.html">
-          <button class="nav-link active" data-tab="why">Our Services</button>
-        </a>
-        <a href="insights.html">
-          <button class="nav-link" data-tab="portfolio">Our Insights</button>
-        </a>
-        <a href="contactUs.html">
-          <button class="book-cta" id="bookCtaNav">Contact Us</button>
-        </a>
-      </div>
-    </nav>
 
     <!-- ============= HERO ============= -->
     <main class="hero">
