@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Cursor scaling on interactive elements
     document
-      .querySelectorAll("a, button, .serve-card, .why-card-6, .team-card, .bullet-item-card, .principle-card, .principle-tab")
+      .querySelectorAll("a, button, .serve-card, .why-card-6, .bullet-item-card, .principle-card, .principle-tab, .team-nav-pill, .carousel-nav-btn, .carousel-dot, .dossier-tab, .dossier-social-link, .dossier-action-btn, .carousel-toggle-play")
       .forEach((el) => {
         el.addEventListener("mouseenter", () => {
           gsap.to(cursor, {
@@ -199,25 +199,22 @@ document.addEventListener("DOMContentLoaded", () => {
         once: true,
       });
 
-      // 5. Meet The Team Cards (batched individually as each card is reached)
-      ScrollTrigger.batch(".team-card", {
-        start: "top 88%",
-        onEnter: (batch) => {
-          gsap.fromTo(
-            batch,
-            { opacity: 0, y: 35 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.65,
-              stagger: 0.12,
-              ease: "power2.out",
-              overwrite: "auto",
-            }
-          );
-        },
-        once: true,
-      });
+      // 5. Meet The Team Showcase Carousel Reveal
+      gsap.fromTo(
+        ".team-showcase-carousel",
+        { opacity: 0, y: 35 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: ".team-section",
+            start: "top 82%",
+            once: true,
+          },
+        }
+      );
 
       // 6. Why Konsalta 5 Bullets (batched)
       ScrollTrigger.batch(".bullet-item-card", {
@@ -284,4 +281,318 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+
+  // ============ 5. CREATIVE TEAM SHOWCASE CAROUSEL CONTROLLER ============
+  initTeamCarousel();
 });
+
+function initTeamCarousel() {
+  const carousel = document.getElementById("teamCarousel");
+  if (!carousel) return;
+
+  const viewport = carousel.querySelector(".team-carousel-viewport");
+  const track = carousel.querySelector(".team-carousel-track");
+  const slides = Array.from(carousel.querySelectorAll(".team-carousel-slide"));
+  const pills = Array.from(carousel.querySelectorAll(".team-nav-pill"));
+  const dots = Array.from(carousel.querySelectorAll(".carousel-dot"));
+  const btnPrev = carousel.querySelector(".btn-prev");
+  const btnNext = carousel.querySelector(".btn-next");
+  const numCurrent = document.getElementById("currentSlideNum");
+  const progressBar = document.getElementById("carouselProgressBar");
+  const playToggle = document.getElementById("carouselPlayToggle");
+  const totalSlides = slides.length;
+
+  if (totalSlides === 0) return;
+
+  let currentIndex = 0;
+  let isPlaying = true;
+  let autoplayTimer = null;
+  const AUTOPLAY_INTERVAL = 5500;
+
+  // Calculate slide position to center the active slide in the viewport
+  function updateCarousel(smooth = true) {
+    if (!viewport || !track) return;
+    const activeSlide = slides[currentIndex];
+    if (!activeSlide) return;
+
+    const viewportWidth = viewport.offsetWidth;
+    const slideOffsetLeft = activeSlide.offsetLeft;
+    const slideWidth = activeSlide.offsetWidth;
+
+    // Calculate translation to position activeSlide exactly in the center
+    const targetX = (viewportWidth / 2) - (slideOffsetLeft + slideWidth / 2);
+
+    track.style.transition = smooth
+      ? "transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1)"
+      : "none";
+    track.style.transform = `translateX(${targetX}px)`;
+
+    // Update active slide classes & 3D tilt
+    slides.forEach((slide, idx) => {
+      const isActive = idx === currentIndex;
+      slide.classList.toggle("is-active", isActive);
+
+      // Subtle 3D perspective effect for flanking slides
+      if (isActive) {
+        slide.style.transform = "scale(1) translateZ(0)";
+      } else if (idx < currentIndex) {
+        slide.style.transform = "scale(0.9) translateZ(-40px) rotateY(10deg)";
+      } else {
+        slide.style.transform = "scale(0.9) translateZ(-40px) rotateY(-10deg)";
+      }
+    });
+
+    // Update pill buttons (scoped container scroll, NEVER scroll window)
+    const pillsNav = carousel.querySelector(".team-nav-pills");
+    pills.forEach((pill, idx) => {
+      const isActive = idx === currentIndex;
+      pill.classList.toggle("is-active", isActive);
+      pill.setAttribute("aria-selected", isActive ? "true" : "false");
+      if (isActive && pillsNav && pillsNav.scrollWidth > pillsNav.clientWidth) {
+        const offset = pill.offsetLeft - (pillsNav.clientWidth / 2) + (pill.offsetWidth / 2);
+        pillsNav.scrollTo({ left: offset, behavior: "smooth" });
+      }
+    });
+
+    // Update dots
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle("is-active", idx === currentIndex);
+    });
+
+    // Update counter display
+    if (numCurrent) {
+      numCurrent.textContent = String(currentIndex + 1).padStart(2, "0");
+    }
+
+    // Update progress bar width
+    if (progressBar) {
+      const percent = ((currentIndex + 1) / totalSlides) * 100;
+      progressBar.style.width = `${percent}%`;
+    }
+  }
+
+  function goToSlide(index, smooth = true) {
+    currentIndex = (index + totalSlides) % totalSlides;
+    updateCarousel(smooth);
+  }
+
+  function nextSlide() {
+    goToSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    goToSlide(currentIndex - 1);
+  }
+
+  // --- Autoplay Controls ---
+  function startAutoplay() {
+    stopAutoplay();
+    if (isPlaying) {
+      autoplayTimer = setInterval(() => {
+        // Only advance if carousel is currently visible in viewport to prevent unwanted work
+        const rect = carousel.getBoundingClientRect();
+        const isInViewport = rect.top < window.innerHeight && rect.bottom > 0;
+        if (isInViewport) {
+          nextSlide();
+        }
+      }, AUTOPLAY_INTERVAL);
+    }
+  }
+
+  function stopAutoplay() {
+    if (autoplayTimer) {
+      clearInterval(autoplayTimer);
+      autoplayTimer = null;
+    }
+  }
+
+  function resetAutoplay() {
+    stopAutoplay();
+    startAutoplay();
+  }
+
+  function pauseTemporarily() {
+    stopAutoplay();
+    // Resume after 12 seconds of inactivity
+    setTimeout(() => {
+      if (isPlaying) startAutoplay();
+    }, 12000);
+  }
+
+  // Prev / Next button clicks
+  if (btnPrev) {
+    btnPrev.addEventListener("click", () => {
+      prevSlide();
+      resetAutoplay();
+    });
+  }
+
+  if (btnNext) {
+    btnNext.addEventListener("click", () => {
+      nextSlide();
+      resetAutoplay();
+    });
+  }
+
+  // Top quick-nav pills
+  pills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      const targetIdx = parseInt(pill.getAttribute("data-index"), 10);
+      if (!isNaN(targetIdx)) {
+        goToSlide(targetIdx);
+        resetAutoplay();
+      }
+    });
+  });
+
+  // Dots navigation
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      const targetIdx = parseInt(dot.getAttribute("data-index"), 10);
+      if (!isNaN(targetIdx)) {
+        goToSlide(targetIdx);
+        resetAutoplay();
+      }
+    });
+  });
+
+  // Clicking neighbor slide glides it into focus
+  slides.forEach((slide, idx) => {
+    slide.addEventListener("click", (e) => {
+      if (idx !== currentIndex && !e.target.closest(".dossier-tab, .dossier-social-link, .dossier-action-btn")) {
+        goToSlide(idx);
+        resetAutoplay();
+      }
+    });
+  });
+
+  // Autoplay Play/Pause Toggle button
+  if (playToggle) {
+    playToggle.addEventListener("click", () => {
+      isPlaying = !isPlaying;
+      const pauseIcon = playToggle.querySelector(".state-pause");
+      const playIcon = playToggle.querySelector(".state-play");
+      if (isPlaying) {
+        if (pauseIcon) pauseIcon.style.display = "inline-flex";
+        if (playIcon) playIcon.style.display = "none";
+        startAutoplay();
+      } else {
+        if (pauseIcon) pauseIcon.style.display = "none";
+        if (playIcon) playIcon.style.display = "inline-flex";
+        stopAutoplay();
+      }
+    });
+  }
+
+  // Pause autoplay on mouse enter, resume on mouse leave
+  carousel.addEventListener("mouseenter", stopAutoplay);
+  carousel.addEventListener("mouseleave", () => {
+    if (isPlaying) startAutoplay();
+  });
+
+  // Touch and Drag swipe handling
+  let isPointerDown = false;
+  let startPointerX = 0;
+  let diffX = 0;
+
+  viewport.addEventListener("touchstart", (e) => {
+    isPointerDown = true;
+    startPointerX = e.touches[0].clientX;
+    diffX = 0;
+    stopAutoplay();
+  }, { passive: true });
+
+  viewport.addEventListener("touchmove", (e) => {
+    if (!isPointerDown) return;
+    diffX = e.touches[0].clientX - startPointerX;
+  }, { passive: true });
+
+  viewport.addEventListener("touchend", () => {
+    if (!isPointerDown) return;
+    isPointerDown = false;
+    if (diffX < -45) {
+      nextSlide();
+    } else if (diffX > 45) {
+      prevSlide();
+    }
+    if (isPlaying) startAutoplay();
+  });
+
+  // Mouse drag support
+  viewport.addEventListener("mousedown", (e) => {
+    if (e.target.closest("button, a, input")) return;
+    isPointerDown = true;
+    startPointerX = e.clientX;
+    diffX = 0;
+    stopAutoplay();
+  });
+
+  window.addEventListener("mousemove", (e) => {
+    if (!isPointerDown) return;
+    diffX = e.clientX - startPointerX;
+  });
+
+  window.addEventListener("mouseup", () => {
+    if (!isPointerDown) return;
+    isPointerDown = false;
+    if (diffX < -50) {
+      nextSlide();
+    } else if (diffX > 50) {
+      prevSlide();
+    }
+    if (isPlaying) startAutoplay();
+  });
+
+  // Keyboard accessibility
+  window.addEventListener("keydown", (e) => {
+    if (document.activeElement && document.activeElement.tagName === "INPUT") return;
+    const rect = carousel.getBoundingClientRect();
+    const inView = rect.top < window.innerHeight && rect.bottom > 0;
+    if (!inView) return;
+
+    if (e.key === "ArrowLeft") {
+      prevSlide();
+      resetAutoplay();
+    } else if (e.key === "ArrowRight") {
+      nextSlide();
+      resetAutoplay();
+    }
+  });
+
+  // --- Scoped Dossier Tabs (Pedigree / Mandate / Contact) ---
+  carousel.querySelectorAll(".team-profile-dossier").forEach((dossier) => {
+    const tabs = dossier.querySelectorAll(".dossier-tab");
+    const panels = dossier.querySelectorAll(".dossier-panel");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", (e) => {
+        e.stopPropagation();
+        pauseTemporarily(); // User is reading, give them time!
+        const target = tab.getAttribute("data-tab-target");
+
+        tabs.forEach((t) => t.classList.toggle("is-active", t === tab));
+        panels.forEach((p) => {
+          const isTarget = p.getAttribute("data-panel") === target;
+          p.classList.toggle("is-active", isTarget);
+        });
+      });
+    });
+  });
+
+  // Window resize handler
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      updateCarousel(false);
+    }, 100);
+  });
+
+  // Initial render & autoplay start
+  // Delay slightly to ensure fonts & layout dimensions are ready
+  setTimeout(() => {
+    updateCarousel(false);
+    startAutoplay();
+  }, 150);
+}
+

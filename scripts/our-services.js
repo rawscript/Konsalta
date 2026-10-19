@@ -139,8 +139,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ===== ANIMATED COUNTERS =====
-    animateCounter("#stat1Num", 1.2, "M+", 1.6);
-    animateCounter("#stat2Num", 3, "M", 1.6, "$");
+    animateCounter("#stat1Num", 9, "Services", 1.6);
+    animateCounter("#stat2Num", 100, "%", 1.6, );
   }
 
   function animateCounter(selector, target, suffix, duration, prefix = "") {
