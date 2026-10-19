@@ -1784,4 +1784,5 @@ body.has-custom-cursor .cursor {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
 }
