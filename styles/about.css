@@ -1786,3 +1786,267 @@ body.has-custom-cursor .cursor {
     text-align: center;
   }
 }
+
+/* ========================================================
+   TEAM PROFILE CARDS (Interactive Split-Card Showcase)
+   Brand Palette: Konsalta Navy (#0B2D53) & Orange (#F26522)
+   ======================================================== */
+
+.team-carousel-slide .service-details {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--bg-card, #ffffff);
+  border: 1.5px solid var(--line, #e2ddd3);
+  box-shadow: 0 10px 28px rgba(11, 45, 83, 0.08);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.4s ease;
+  user-select: none;
+}
+
+.team-carousel-slide.is-active .service-details {
+  border-color: rgba(242, 101, 34, 0.45);
+  box-shadow: 0 20px 48px -10px rgba(11, 45, 83, 0.2), 0 0 0 1px rgba(242, 101, 34, 0.25);
+}
+
+.team-carousel-slide .service-details:hover {
+  border-color: var(--orange, #F26522);
+  box-shadow: 0 24px 55px -8px rgba(11, 45, 83, 0.24);
+}
+
+/* Left Half: Profile Photo */
+.service-details img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+  z-index: 1;
+}
+
+.service-details:hover img {
+  transform: scale(1.06);
+}
+
+/* Right Half: Resting Information Panel */
+.service-details .service-text,
+.service-details .service-white.service-text {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(155deg, #ffffff 0%, #f6f8fb 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 20px;
+  box-sizing: border-box;
+  border-left: 1px solid rgba(11, 45, 83, 0.06);
+  z-index: 2;
+  transition: opacity 0.3s ease;
+}
+
+/* Category Badge in resting state */
+.service-text .service-badge {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--orange-deep, #d34e0d);
+  background: var(--orange-soft, #fff2eb);
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(242, 101, 34, 0.2);
+}
+
+/* Person Name */
+.service-details .service-text p,
+.service-white p {
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif !important;
+  font-size: 19px !important;
+  font-weight: 800 !important;
+  color: var(--navy, #0B2D53) !important;
+  line-height: 1.25 !important;
+  margin: 0 0 8px 0 !important;
+  padding: 0 !important;
+  letter-spacing: -0.3px;
+}
+
+/* Handle / Role Link */
+.service-details .service-text a,
+.service-white .service-text a {
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: var(--orange, #F26522) !important;
+  text-decoration: none !important;
+  padding: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.service-details .service-text a:hover {
+  color: var(--orange-deep, #d34e0d) !important;
+  transform: translateX(2px);
+}
+
+/* Hover Reveal Overlay */
+.service-details .service-hover-text {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 22px 20px;
+  background: linear-gradient(145deg, rgba(11, 45, 83, 0.97) 0%, rgba(6, 26, 50, 0.99) 100%);
+  color: #ffffff;
+  border-top: 3.5px solid var(--orange, #F26522);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 10;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(242, 101, 34, 0.5) transparent;
+  transition: left 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+              width 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.32s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.service-hover-text::-webkit-scrollbar {
+  width: 4px;
+}
+.service-hover-text::-webkit-scrollbar-thumb {
+  background: rgba(242, 101, 34, 0.5);
+  border-radius: 4px;
+}
+
+/* On Card Hover: Overlay expands to full width and reveals */
+.service-details:hover .service-hover-text,
+.service-details:focus-within .service-hover-text {
+  left: 0;
+  width: 100%;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Sub-Department / Head */
+.service-details .service-hover-text .service-head {
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--orange-light, #ff7e42);
+  margin: 0 0 5px 0;
+  padding: 0;
+  text-align: left;
+}
+
+/* Main Role Title */
+.service-details .service-hover-text h4:not(.service-head) {
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: 14.5px;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.35;
+  padding: 0 0 8px 0;
+  margin: 0 0 10px 0;
+  border-bottom: 2px solid var(--orange, #F26522);
+  text-align: left;
+  letter-spacing: -0.2px;
+}
+
+/* Mandate Panel & Text */
+.service-hover-text .dossier-panel {
+  display: block;
+  flex: 1 1 auto;
+}
+
+.service-hover-text .dossier-badge-label {
+  display: inline-block;
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 5px;
+}
+
+.service-hover-text .dossier-text {
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  line-height: 1.58;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0 0 12px 0;
+  padding: 0;
+}
+
+/* Footer / Contact Action Link */
+.service-hover-footer {
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.service-contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px;
+  background: var(--orange, #F26522);
+  color: #ffffff !important;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 999px;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(242, 101, 34, 0.35);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-contact-btn svg {
+  width: 13px;
+  height: 13px;
+  stroke: #ffffff;
+  transition: transform 0.25s ease;
+}
+
+.service-contact-btn:hover {
+  background: var(--orange-light, #ff7e42);
+  transform: translateX(3px);
+  box-shadow: 0 6px 18px rgba(242, 101, 34, 0.45);
+}
+
+.service-contact-btn:hover svg {
+  transform: translateX(2px);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .team-carousel-slide .service-details {
+    height: 380px;
+  }
+  .service-details .service-hover-text {
+    padding: 18px 16px;
+  }
+}
