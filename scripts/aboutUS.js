@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Cursor scaling on interactive elements
     document
-      .querySelectorAll("a, button, .serve-card, .why-card-6, .bullet-item-card, .principle-card, .principle-tab, .team-nav-pill, .carousel-nav-btn, .carousel-dot, .dossier-tab, .dossier-social-link, .dossier-action-btn, .carousel-toggle-play")
+      .querySelectorAll("a, button, .serve-card, .serve-star, .why-card-6, .bullet-item-card, .principle-card, .principle-tab, .team-nav-pill, .carousel-nav-btn, .carousel-dot, .dossier-tab, .dossier-social-link, .dossier-action-btn, .carousel-toggle-play")
       .forEach((el) => {
         el.addEventListener("mouseenter", () => {
           gsap.to(cursor, {
@@ -282,7 +282,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ============ 5. CREATIVE TEAM SHOWCASE CAROUSEL CONTROLLER ============
+  // ============ 5. INTERACTIVE WHO-WE-SERVE STARS ============
+  initServeStars();
+
+  // ============ 6. CREATIVE TEAM SHOWCASE CAROUSEL CONTROLLER ============
   initTeamCarousel();
 });
 
@@ -596,3 +599,77 @@ function initTeamCarousel() {
   }, 150);
 }
 
+// ============================================================
+//   SERVE STARS — Euclidean ambient + hover-invert animation
+// ============================================================
+function initServeStars() {
+  const stars = document.querySelectorAll(".serve-star");
+  if (!stars.length || typeof gsap === "undefined") return;
+
+  const COLOR_NAVY   = "#0B2D53";
+  const COLOR_ORANGE = "#F26522";
+
+  stars.forEach((star, index) => {
+    const colorType   = star.dataset.starColor;
+    const baseTilt    = parseFloat(star.dataset.tilt || 0);
+    const baseColor   = colorType === "blue" ? COLOR_NAVY : COLOR_ORANGE;
+    const invertColor = colorType === "blue" ? COLOR_ORANGE : COLOR_NAVY;
+
+    // Snap to the authored tilt before floating kicks in
+    gsap.set(star, { rotation: baseTilt, transformOrigin: "50% 50%" });
+
+    // Coordinated but independent float — each star has its own rhythm
+    const floatY      = index % 2 === 0 ? -10 : 8;
+    const floatRot    = baseTilt + (index % 2 === 0 ? 13 : -11);
+    const floatScale  = 1 + (index % 3 === 0 ? 0.09 : 0.04);
+    const floatDur    = 2.1 + (index % 5) * 0.38;
+    const floatDelay  = (index * 0.19) % 1.6;
+
+    gsap.to(star, {
+      y         : floatY,
+      rotation  : floatRot,
+      scale     : floatScale,
+      duration  : floatDur,
+      repeat    : -1,
+      yoyo      : true,
+      ease      : "sine.inOut",
+      delay     : floatDelay,
+    });
+
+    // Hover → invert color, pop scale, spin +45° from base tilt
+    star.addEventListener("mouseenter", () => {
+      gsap.to(star, {
+        color     : invertColor,
+        scale     : 1.5,
+        rotation  : baseTilt + 45,
+        duration  : 0.28,
+        ease      : "back.out(2.2)",
+        overwrite : "auto",
+      });
+    });
+
+    // Leave → restore original color, scale, and tilt
+    star.addEventListener("mouseleave", () => {
+      gsap.to(star, {
+        color     : baseColor,
+        scale     : 1,
+        rotation  : baseTilt,
+        duration  : 0.42,
+        ease      : "power2.out",
+        overwrite : "auto",
+        onComplete: () => {
+          // Re-attach the float after the leave transition settles
+          gsap.to(star, {
+            y         : floatY,
+            rotation  : floatRot,
+            scale     : floatScale,
+            duration  : floatDur,
+            repeat    : -1,
+            yoyo      : true,
+            ease      : "sine.inOut",
+          });
+        },
+      });
+    });
+  });
+}
