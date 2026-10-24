@@ -3,10 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dynamic Main Preview Image Accordion</title>
+    <meta
+      name="description"
+      content="Konsalta is a women-led, Africa-focused research, consulting and advisory firm bridging local insight with global perspective."
+    />
+    <title>Why Choose Us — Konsalta | Better Decisions. Greater Impact</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&family=Manrope:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles/why-us.css" />
@@ -18,9 +23,14 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
       defer
     ></script>
+    <script src="scripts/header.js" defer></script>
     <script src="scripts/whyUs.js" defer></script>
   </head>
   <body>
+     <!-- Ambient Background Glows -->
+    <div class="ambient-1" aria-hidden="true"></div>
+    <div class="ambient-2" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
 
       <header class="site-header">
         <a href="index.html" class="logo" aria-label="Konsalta Home">
@@ -44,7 +54,7 @@
         <nav class="header-nav" id="primary-navigation">
           <a href="aboutUs.html">About Konsalta</a>
           <a href="services.html">Explore Our Services</a>
-          <a href="whyUs.html">Why Choose Us</a>
+          <a href="whyUs.html" class="active" aria-current="page">Why Choose Us</a>
           <a href="insights.html">Our Insights</a>
         </nav>
         <a href="contactUs.html" class="header-btn"
@@ -69,41 +79,50 @@
     <div class="grain"></div>
 
 
-    <!-- ============ HERO ============ -->
-    <section class="hero">
-      <h1 class="headline" id="headline">
-        <div class="line line-1">
-          <span class="word" style="color: #F26522;"><span>Bespoke</span></span>
-          <span class="word"><span>Teams</span></span>
-        </div>
-        <div class="line line-2">
-          <span class="inline-img" id="inlineImg"></span>
-          <span class="word"><span>Around</span></span>
-          <span class="idea-pill" id="ideaPill">
-            <span class="txt">Behind every<br />great idea</span>
-            <span class="leaf"></span>
+    <!-- ============ HERO + PILLARS PARALLAX STAGE ============ -->
+    <div class="parallax-stage">
+
+      <!-- Shared animated orbs — bleed across hero AND pillars section -->
+      <span class="hero-orb hero-orb-one" aria-hidden="true"></span>
+      <span class="hero-orb hero-orb-two" aria-hidden="true"></span>
+      <span class="hero-orb hero-orb-three" aria-hidden="true"></span>
+
+      <!-- ============ HERO ============ -->
+      <section class="hero">
+        <h1 class="headline" id="headline">
+          <span class="line line-1">
+            <span class="word hero-accent"><span>Bespoke</span></span>
+            <span class="word"><span>Teams</span></span>
           </span>
+          <span class="line line-2">
+            <span class="inline-img" id="inlineImg"></span>
+            <span class="word"><span>Around</span></span>
+            <span class="idea-pill" id="ideaPill">
+              <span class="txt">Behind every<br />great idea</span>
+              <span class="leaf"></span>
+            </span>
+          </span>
+          <span class="line line-3">
+            <span class="word"><span>Analytical</span></span>
+            <span class="word"><span>Work</span></span>
+          </span>
+        </h1>
+      </section>
+
+      <!-- ============ OUR 5 PILLARS ============ -->
+      <section class="section section-1">
+        <div class="pillars-frame">
+          <div class="section-content">
+            <h2 class="section-title">Our 5 Pillars</h2>
+            <p class="section-text">
+              At Konsalta, we partner with diverse institutions operating at the frontlines of African socioeconomic transformation, delivering tailored intelligence, institutional capacity, and actionable strategies. We have five clear reasons why Africa's foremost institutions trust our collective to deliver enduring outcomes.
+            </p>
+          </div>
+          <span class="section-subtitle">They Are:</span>
         </div>
-        <div class="line line-3">
-          <span class="word"><span>Analytical</span></span>
-          <span class="word"><span>Work</span></span>
-        </div>
-      </h1>
-    </section>
+      </section>
 
-   <!-- <hr class="section-divider" /> -->
-
-    <section class="section section-1">
-      <div class="section-content">
-        <h2 class="section-title"> So, Why Choose Konsalta</h2> 
-        <p class="section-text">
-          At Konsalta,partner with diverse institutions operating at the frontlines of African socioeconomic transformation, delivering tailored intelligence, institutional capacity, and actionable strategies.We have five clear reasons why Africa's foremost institutions trust our collective to deliver enduring outcomes.
-        </p>
-      </div>
-
-      <span class="section-subtitle">They Are:</span>
-
-    </section>
+    </div><!-- end .parallax-stage -->
 
     <div class="wrapper">
       <div class="accordion-container">
@@ -131,7 +150,7 @@
           style="
             background-image: url(&quot;https://plus.unsplash.com/premium_photo-1661878265739-da90bc1af051?q=80&w=1572&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D&quot;);
           "
-          data-img=" https://plus.unsplash.com/premium_photo-1661878265739-da90bc1af051?q=80&w=1572&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
+          data-img="https://plus.unsplash.com/premium_photo-1661878265739-da90bc1af051?q=80&w=1572&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
           data-num="02"
           data-category="Specialization"
           data-title="Agile Specialists, Not Retainer-Heavy Generalists"
@@ -145,27 +164,27 @@
           class="cinematic-panel thumb-panel"
           tabindex="0"
           style="
-            background-image: url(public/baobab-unsplash.jpg);
+            background-image: url('./public/baobab-unsplash.jpg');
           "
-          data-img="https://images.unsplash.com/photo-1626695436755-3e288720849c?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
-          data-num="02"
+          data-img="./public/baobab-unsplash.jpg"
+          data-num="03"
           data-category="African Context"
           data-title="Deep African Context Combined With Global Methodological Rigor"
           data-desc="We bridge regional policy nuances, community realities, and institutional ecosystems with international best practices, producing solutions that work seamlessly in practice, not just in theory."
         >
           <span class="panel-number">03</span>
-          <span class="panel-title-collapsed">African Contex</span>
+          <span class="panel-title-collapsed">African Context</span>
         </div>
 
         <div
           class="cinematic-panel thumb-panel"
           tabindex="0"
           style="
-            background-image: url(public/integrity2.jpg);
+            background-image: url('./public/integrity2.jpg');
           "
-          data-img="public/integrity.jpg"
+          data-img="./public/integrity.jpg"
           data-num="04"
-          data-category="Luxury Space"
+          data-category="Integrity"
           data-title="Uncompromising Independence, Integrity and Analysis"
           data-desc="Our advice is strictly objective and free from institutional conflicts of interest. We provide decision-makers with the unvarnished truth and actionable clarity required to govern effectively."
         >
@@ -177,10 +196,10 @@
           class="cinematic-panel thumb-panel"
           tabindex="0"
           style="
-            background-image: url(public/sustainability.jpg);
+            background-image: url('./public/sustainability.jpg');
           "
-          data-img="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1400"
-          data-num="04"
+          data-img="./public/sustainability.jpg"
+          data-num="05"
           data-category="Sustainability"
           data-title="Sustainable Institutional Capability"
           data-desc="We believe consulting value must outlive the engagement. We institutionalize analytics methodologies, transfer analytical tools, and coach internal leaders so your teams thrive autonomously."
@@ -190,7 +209,176 @@
         </div>
       </div>
 
-      <div class="widget">
+
+        <!-- ============================================================
+         4. WHY KONSALTA: 6 VALUE DRIVERS
+         ============================================================ -->
+      <section class="why-konsalta-section" id="why-konsalta-pillars">
+        <div class="section-container-why">
+          <div class="section-head-why">
+            <h2 class="section-title-why">
+              Why <span class="accent">Konsalta</span>
+            </h2>
+            <p class="section-desc-why">
+              Well, we build to move past the slow, Overhead-heavy consulting
+              models of the past. Our model is designed to deliver high-quality,
+              evidence-based solutions faster, and with greater responsiveness
+              than traditional consulting.
+            </p>
+          </div>
+
+          <div class="why-grid-6">
+            <!-- Pillar 1 -->
+            <article class="why-card-6">
+              <div class="why-card-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                  />
+                </svg>
+              </div>
+              <h3 class="why-card-title">African-led, globally informed:</h3>
+              <p class="why-card-desc">
+                We are rooted in Africa, and connected to the world through our
+                global network of experts. We combine local insight with
+                international best practices to deliver solutions that are both
+                contextually relevant and globally informed.
+              </p>
+            </article>
+
+            <!-- Pillar 2 -->
+            <article class="why-card-6">
+              <div class="why-card-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"
+                  />
+                </svg>
+              </div>
+              <h3 class="why-card-title">A multi-hub African network:</h3>
+              <p class="why-card-desc">
+                We have the head office in Zimbabwe, but also bring together
+                local insights, regional expertise, and global best practices
+                through our multi-hub network across Africa. This allows us to
+                deliver solutions that are both contextually relevant and
+                globally informed.
+              </p>
+            </article>
+
+            <!-- Pillar 3 -->
+            <article class="why-card-6">
+              <div class="why-card-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                  <circle cx="12" cy="10" r="3" />
+                </svg>
+              </div>
+              <h3 class="why-card-title">Multidisciplinary Expertise</h3>
+              <p class="why-card-desc">
+                We have hands-on technically experienced leaders from
+                government, development, academia, consulting and the private
+                sector, who bring a wealth of knowledge and practical insights
+                to every engagement.
+              </p>
+            </article>
+
+            <!-- Pillar 4 -->
+            <article class="why-card-6">
+              <div class="why-card-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <h3 class="why-card-title">Bespoke, fit-for-purpose teams:</h3>
+              <p class="why-card-desc">
+                Every single project is unique, and we assemble bespoke teams of
+                experts for each assignment, ensuring the right mix of skills,
+                experience, and perspectives to deliver the best outcomes.
+              </p>
+            </article>
+
+            <!-- Pillar 5 -->
+            <article class="why-card-6">
+              <div class="why-card-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                </svg>
+              </div>
+              <h3 class="why-card-title">Rigour with a practical edge:</h3>
+              <p class="why-card-desc">
+                We bridge the gap between evidence and action — we
+                are credible, actionable, and focused on delivering practical
+                solutions that can be implemented in the real world.
+              </p>
+            </article>
+
+            <!-- Pillar 6 -->
+            <article class="why-card-6">
+              <div class="why-card-icon" aria-hidden="true">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <polyline points="16 11 18 13 22 9" />
+                </svg>
+              </div>
+              <h3 class="why-card-title">From evidence to impact:</h3>
+              <p class="why-card-desc">
+                We help clients transform data, research and insights into
+                actionable strategies, policies, and programs that drive
+                real-world impact and sustainable change.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+
+      <!-- <div class="widget">
         <p class="widget-title">Official Partners & Supporters</p>
         <a href="https://siammakemoney.com/en" target="_blank">
           <img
@@ -213,7 +401,70 @@
             class="sticky-logo"
           />
         </a>
+      </div> -->
+
+      <footer class="site-footer" id="contact">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="footer-logo" href="index.html" aria-label="Konsalta home">
+              <img src="public/Konsalta-white.png" alt="Konsalta" />
+            </a>
+            <p>
+              A women-led, Africa-focused research, consulting, and advisory
+              firm delivering actionable insights and systemic impact.
+            </p>
+          </div>
+          <div class="footer-cols">
+            <div class="footer-col">
+              <h4>Services</h4>
+              <a href="services.html#services-grid"
+                >Research &amp; Evaluation</a
+              >
+              <a href="services.html#services-grid">Strategy &amp; Advisory</a>
+              <a href="services.html#services-grid">Market Intelligence</a>
+              <a href="services.html#services-grid">Policy &amp; Systems</a>
+            </div>
+            <div class="footer-col">
+              <h4>Company</h4>
+              <a href="aboutUs.html">About Konsalta</a>
+              <a href="whyUs.html">Why Choose Us</a>
+              <a href="insights.html">Our Insights</a>
+              <a href="contactUs.html">Contact Us</a>
+            </div>
+            <div class="footer-col footer-contact">
+              <h4>Find Us</h4>
+              <p>
+                <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+                  ></path>
+                  <circle cx="12" cy="10" r="2.5"></circle></svg
+                >Harare, Zimbabwe
+              </p>
+              <a
+                href="https://www.linkedin.com/company/konsalta-hub-africa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><svg
+                  class="footer-icon footer-icon-brand"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 9v10M5 5v.01M10 19v-6a4 4 0 0 1 8 0v6M10 9v10M3 3h18v18H3z"
+                  ></path></svg
+                >LinkedIn</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 Konsalta. All rights reserved.</span>
+          <span>Developed by Momentum Labs</span>
+          <span>Better Decisions. Greater Impact.</span>
+        </div>
       </div>
-    </div>
+    </footer>
   </body>
 </html>

@@ -11,6 +11,10 @@
   --orange-light: #ff7e42;
   --orange-soft: #fff2eb;
   --orange-tint: #fedbc9;
+  --white: #ffffff;
+  --bg-warm: #f0ece1;
+  --shadow-sm: 0 10px 24px rgba(6, 26, 50, 0.08);
+  --shadow-md: 0 18px 36px rgba(6, 26, 50, 0.14);
 
   --bg-color: #f0ece1;
   --card-surface: rgba(255, 255, 255, 0.04);
@@ -23,10 +27,12 @@
   --ink: #0d0d10;
   --ink-soft: #2a2a2d;
   --mute: #8a8780;
-  --line: #dad6c9;
+  /* --line: #dad6c9; */
   --pill: #0d0d10;
   --green: #bfd58f;
   --green-dark: #5c7838;
+  --line: #e2ddd3;
+  --line-light: rgba(226, 221, 211, 0.6);
 }
 
 * {
@@ -39,6 +45,64 @@ body {
   background-color: var(--bg);
   color: var(--ink);
   font-family: "Plus Jakarta Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Custom Cursor */
+.cursor {
+  display: none;
+  position: fixed;
+  width: 12px;
+  height: 12px;
+  background: var(--orange);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  box-shadow: 0 0 12px rgba(242, 101, 34, 0.6);
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, opacity 0.2s;
+}
+
+body.has-custom-cursor {
+  cursor: none;
+}
+
+body.has-custom-cursor a,
+body.has-custom-cursor button,
+body.has-custom-cursor .interactive-card,
+body.has-custom-cursor .tab-btn {
+  cursor: none;
+}
+
+body.has-custom-cursor .cursor {
+  display: block;
+}
+
+/* Ambient Background Glows */
+.ambient-1 {
+  position: fixed;
+  top: 3%;
+  right: -5%;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(242, 101, 34, 0.12) 0%, rgba(242, 101, 34, 0.02) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-2 {
+  position: fixed;
+  bottom: 5%;
+  left: -8%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(11, 45, 83, 0.12) 0%, rgba(11, 45, 83, 0.02) 50%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .site-header {
@@ -81,6 +145,78 @@ body {
 .header-menu-toggle,
 .mobile-nav-contact {
   display: none;
+}
+
+/* ============ MOBILE NAV ============ */
+@media (max-width: 768px) {
+  .header-menu-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    color: var(--ink);
+    padding: 0;
+    z-index: 20;
+  }
+
+  .header-menu-toggle svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+  }
+
+  .header-btn {
+    display: none;
+  }
+
+  .header-nav {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(240, 236, 225, 0.97);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 12px 0;
+    z-index: 15;
+  }
+
+  .header-nav.nav-open {
+    display: flex;
+  }
+
+  .header-nav a {
+    padding: 14px 28px;
+    font-size: 15px;
+    border-bottom: 1px solid var(--line-light);
+  }
+
+  .header-nav a:last-child {
+    border-bottom: none;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    background: rgba(240, 236, 225, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line-light);
+    padding: 16px 24px;
+  }
 }
 
 .header-nav a {
@@ -150,12 +286,61 @@ body {
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.1  0 0 0 0 0.1  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
+/* ============ PARALLAX STAGE (hero + pillars share orbs) ============ */
+.parallax-stage {
+  position: relative;
+  /* no overflow:hidden — lets orbs bleed freely */
+  background:
+    radial-gradient(circle at 15% 20%, rgba(242, 101, 34, 0.10), transparent 30%),
+    radial-gradient(circle at 85% 75%, rgba(22, 72, 126, 0.12), transparent 32%);
+}
+
 /* ============ HERO ============ */
 .hero {
   padding: 40px 40px 40px;
   text-align: center;
   position: relative;
   z-index: 5;
+  /* background removed — stage handles it */
+}
+
+.hero-orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.hero-orb-one {
+  width: clamp(260px, 30vw, 480px);
+  aspect-ratio: 1;
+  top: -6%;
+  left: -8%;
+  filter: blur(60px);
+  background: radial-gradient(circle at 35% 35%, rgba(255, 126, 66, 0.55), rgba(242, 101, 34, 0));
+  z-index: 0;
+}
+
+.hero-orb-two {
+  width: clamp(300px, 36vw, 560px);
+  aspect-ratio: 1;
+  right: -10%;
+  top: 10%;
+  filter: blur(70px);
+  background: radial-gradient(circle, rgba(22, 72, 126, 0.28), rgba(22, 72, 126, 0));
+  z-index: 0;
+}
+
+/* Third orb — sits low, bleeds into the pillars frame */
+.hero-orb-three {
+  width: clamp(220px, 28vw, 420px);
+  aspect-ratio: 1;
+  bottom: -8%;
+  left: 30%;
+  transform: translateX(-50%);
+  filter: blur(80px);
+  background: radial-gradient(circle, rgba(229, 184, 135, 0.22), rgba(229, 184, 135, 0));
+  z-index: 0;
 }
 
 .headline {
@@ -167,6 +352,12 @@ body {
   color: var(--ink);
   max-width: 1300px;
   margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-accent {
+  color: var(--orange);
 }
 @media (max-width: 600px) {
   .headline {
@@ -189,7 +380,6 @@ body {
 }
 .headline .word > span {
   display: inline-block;
-  transform: translateY(105%);
 }
 
 /* Inline image pill (yellow blob) */
@@ -212,7 +402,6 @@ body {
     #e26a4d 70%,
     #4d9cc6 100%
   );
-  transform: scale(0);
   will-change: transform;
 }
 .inline-img::before {
@@ -236,7 +425,6 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  /* coiled tube illusion */
   background:
     repeating-linear-gradient(
       95deg,
@@ -268,7 +456,6 @@ body {
     0 5px 10px -2px rgba(6, 26, 50, 0.25),
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
     inset 0 -2px 4px rgba(6, 26, 50, 0.35);
-  transform: scale(0);
   will-change: transform;
 }
 .idea-pill .txt {
@@ -341,13 +528,73 @@ body {
 
 .section {
   width: 100%;
-  padding: clamp(48px, 8vw, 96px) 20px;
+  padding: clamp(1px, 8vw, 96px) 20px;
+}
+
+.section-1 {
+  position: relative;
+  z-index: 5;
+  /* background removed — orbs from parallax-stage bleed through */
+}
+
+/* ============ PILLARS GLASSMORPHISM FRAME ============ */
+.pillars-frame {
+  position: relative;
+  z-index: 2;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(36px, 5vw, 64px) clamp(28px, 5vw, 64px);
+  border-radius: 28px;
+
+  /* Glass surface */
+  background: rgba(255, 255, 255, 0.48);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+
+  /* Layered border: bright top edge + subtle overall stroke */
+  border: 1px solid rgba(255, 255, 255, 0.62);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,   /* top highlight */
+    0 -1px 0 rgba(0, 0, 0, 0.04) inset,        /* bottom shadow line */
+    0 8px 32px -4px rgba(11, 45, 83, 0.10),
+    0 24px 64px -16px rgba(11, 45, 83, 0.12),
+    0 0 0 1px rgba(226, 221, 211, 0.5);        /* outer frame ring */
+}
+
+/* Soft orange glow on the top-left corner of the frame */
+.pillars-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse at 10% 0%,
+    rgba(242, 101, 34, 0.08) 0%,
+    transparent 55%
+  );
+  pointer-events: none;
+}
+
+/* Subtle navy glow on the bottom-right corner */
+.pillars-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    ellipse at 90% 100%,
+    rgba(11, 45, 83, 0.07) 0%,
+    transparent 55%
+  );
+  pointer-events: none;
 }
 
 .section-content {
   max-width: 760px;
   margin: 0 auto;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* Small orange rule above the title, echoing the divider's accent */
@@ -430,6 +677,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  position: relative;
 }
 
 .accordion-container {
@@ -487,7 +735,7 @@ body {
   left: 24px;
   font-family: "Playfair Display", serif;
   font-size: 18px;
-  color: var(--accent-gold);
+  color: var(--bg);
   z-index: 2;
 }
 
@@ -641,4 +889,234 @@ body {
   .panel-content h2 {
     font-size: 30px;
   }
+}
+
+/* ============================================================
+   4. WHY KONSALTA (6 PILLARS / EXPLANATIONS)
+   ============================================================ */
+.why-konsalta-section {
+  padding: 10px 0;
+  padding-bottom: 80px;
+  /* background:
+    linear-gradient(135deg, rgba(237, 244, 252, 0.95), rgba(255, 242, 235, 0.68)),
+    var(--bg); */
+  border-top: 1px solid var(--line-light);
+  border-bottom: 1px solid var(--line-light);
+}
+
+.why-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.why-card-6 {
+  background: var(--white);
+  border: 1.5px solid var(--line);
+  border-radius: 20px;
+  padding: 36px 30px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.why-card-6:hover {
+  transform: translateY(-6px);
+  border-color: var(--orange);
+  box-shadow: var(--shadow-md);
+}
+
+.why-card-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  background: var(--navy-soft);
+  border: 1px solid var(--navy-tint);
+  display: inline-grid;
+  place-items: center;
+  color: var(--navy);
+  margin-bottom: 22px;
+  transition: all 0.3s;
+}
+
+.why-card-6:hover .why-card-icon {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--white);
+}
+
+.why-card-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.why-card-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 14px;
+}
+
+.why-card-desc {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  flex-grow: 1;
+}
+
+/* Ensure cards are visible before JS/GSAP kicks in */
+.why-card-6,
+.section-head-why {
+  opacity: 1;
+  visibility: visible;
+}
+
+.section-container-why {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.section-head-why {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 60px;
+}
+
+.section-title-why {
+  font-family: "Playfair Display", sans-serif;
+  font-size: clamp(32px, 4.2vw, 48px);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  margin-bottom: 18px;
+}
+
+.section-title-why .accent {
+  color: var(--orange);
+}
+
+.section-desc-why {
+  font-size: 17px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+
+/* ============================================================
+   8. SITE FOOTER
+   ============================================================ */
+.site-footer {
+  background: linear-gradient(135deg, var(--navy-deep), var(--navy));
+  color: var(--white);
+  padding: 70px 0 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 60px;
+  margin-bottom: 50px;
+}
+
+.footer-brand {
+  max-width: 360px;
+}
+
+.footer-logo {
+  margin-bottom: 18px;
+}
+
+.footer-logo img {
+  height: 42px;
+  width: auto;
+}
+
+.footer-brand p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.74);
+  line-height: 1.65;
+}
+
+.footer-cols {
+  display: flex;
+  gap: 50px;
+}
+
+.footer-col h4 {
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--white);
+  margin-bottom: 18px;
+}
+
+.footer-col a {
+  display: block;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.76);
+  text-decoration: none;
+  margin-bottom: 10px;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-col a:hover {
+  color: var(--orange);
+  transform: translateX(3px);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.62);
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ============ FOOTER ICONS ============ */
+.footer-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.footer-icon-brand {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.footer-contact p,
+.footer-contact a {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.footer-col p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.76);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
