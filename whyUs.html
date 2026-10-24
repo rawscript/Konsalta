@@ -1,230 +1,219 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Why Choose Us - Better Decisions. Greater Impact</title>
-  <link rel="icon" href="./public/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="./public/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./public/favicon-16x16.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="./public/apple-touch-icon.png">
-  <link rel="manifest" href="./public/site.webmanifest">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles/about.css">
-  <link rel="stylesheet" href="./styles/why-us.css">
-  <link rel="stylesheet" href="./styles/footer.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic Main Preview Image Accordion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/why-us.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      defer
+    ></script>
+    <script src="scripts/whyUs.js" defer></script>
+  </head>
+  <body>
 
-<div class="grain"></div>
-
-<nav class="nav" id="nav">
-  <div class="logo">
-    <span class="logo-dot"><img src="https://i.ibb.co/zVycVPh8/Logo-3.png" alt="konsalta-logo" /></span>
-  </div>
-  <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
-  </button>
-  <ul class="nav-links liquid-glass" id="primary-navigation">
-    <li><a href="services.html">Our Services</a></li>
-    <li><a href="whyUs.html" class="active">Why Choose Us</a></li>
-    <li><a href="insights.html">Our Insights</a></li>
-  </ul>
-  <button class="nav-cta" onclick="window.location.href='contactUs.html'">
-    Contact Us
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-      <line x1="7" y1="17" x2="17" y2="7" />
-      <polyline points="7 7 17 7 17 17" />
-    </svg>
-  </button>
-</nav>
-
-<!-- HERO -->
-<section class="why-hero" id="why-hero">
-  <div class="why-hero-inner">
-    <div class="why-eyebrow">WHY KONSALTA</div>
-    <h1 class="why-headline">
-      <span class="wh-line">The partner Africa's</span>
-      <span class="wh-line wh-line--accent"><em class="emphasis">most complex</em></span>
-      <span class="wh-line">challenges deserve.</span>
-    </h1>
-    <p class="why-sub">We combine deep local insight, rigorous evidence generation, and a multidisciplinary network to deliver not just reports — but real, lasting outcomes for institutions across Africa.</p>
-    <a href="contactUs.html" class="why-cta">
-      Start a conversation
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-    </a>
-  </div>
-  <div class="why-hero-badge" aria-hidden="true">
-    <div class="badge-ring"></div>
-    <div class="badge-inner">
-      <span class="badge-number">9</span>
-      <span class="badge-label">core<br>services</span>
-    </div>
-  </div>
-</section>
-
-<!-- DIFFERENTIATORS GRID -->
-<section class="diff-section" id="differentiators">
-  <div class="diff-header">
-    <div class="why-eyebrow">WHAT SETS US APART</div>
-    <h2 class="diff-title">Five reasons clients choose<br><em class="emphasis-static">Konsalta</em></h2>
-  </div>
-  <div class="diff-grid">
-    <article class="diff-card diff-card--large" data-index="01">
-      <div class="diff-icon">
-        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2"/><path d="M12 20a8 8 0 0 1 16 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="20" cy="20" r="3" fill="currentColor"/><path d="M20 8v4M20 28v4M8 20h4M28 20h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-      </div>
-      <span class="diff-num">01</span>
-      <h3>Africa-First Expertise</h3>
-      <p>We are built for Africa. Our work is grounded in deep contextual knowledge of the continent's diverse policy environments, institutional landscapes, and market dynamics — not adapted from elsewhere.</p>
-    </article>
-    <article class="diff-card" data-index="02">
-      <div class="diff-icon">
-        <svg viewBox="0 0 40 40" fill="none"><path d="M8 32V16l12-8 12 8v16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="15" y="22" width="10" height="10" rx="1" stroke="currentColor" stroke-width="2"/></svg>
-      </div>
-      <span class="diff-num">02</span>
-      <h3>Women-Led Leadership</h3>
-      <p>Our women-led structure brings a perspectives-first approach to every engagement — fostering inclusive, sustainable solutions that reflect the full complexity of the communities we serve.</p>
-    </article>
-    <article class="diff-card" data-index="03">
-      <div class="diff-icon">
-        <svg viewBox="0 0 40 40" fill="none"><path d="M6 34l10-12 8 6 10-16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="34" cy="12" r="3" stroke="currentColor" stroke-width="2"/></svg>
-      </div>
-      <span class="diff-num">03</span>
-      <h3>Evidence, Not Opinion</h3>
-      <p>Every recommendation we make is grounded in rigorous primary and secondary research. We generate credible evidence using fit-for-purpose methodologies, then translate it into clear action.</p>
-    </article>
-    <article class="diff-card diff-card--accent" data-index="04">
-      <div class="diff-icon">
-        <svg viewBox="0 0 40 40" fill="none"><circle cx="14" cy="14" r="6" stroke="currentColor" stroke-width="2"/><circle cx="28" cy="26" r="6" stroke="currentColor" stroke-width="2"/><path d="M19 16l4 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
-      </div>
-      <span class="diff-num">04</span>
-      <h3>Agile Network Model</h3>
-      <p>We mobilise multidisciplinary teams shaped specifically around your project — drawing from top-tier African and international experts, without the overhead of a large firm.</p>
-    </article>
-    <article class="diff-card" data-index="05">
-      <div class="diff-icon">
-        <svg viewBox="0 0 40 40" fill="none"><path d="M20 6l3 9h9l-7 5 3 9-8-6-8 6 3-9-7-5h9z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-      </div>
-      <span class="diff-num">05</span>
-      <h3>Impact Over Shelfware</h3>
-      <p>We don't deliver reports that gather dust. Every deliverable — from data pipelines to policy briefs — is designed to enable immediate, confident decision-making and measurable change.</p>
-    </article>
-  </div>
-</section>
-
-<!-- APPROACH CAROUSEL (reuse about.css carousel pattern) -->
-<section class="team-section" style="padding: 40px 40px 80px;">
-  <section class="approach-intro quote-section" aria-labelledby="why-approach-heading" style="padding: 80px 56px;">
-    <h2 id="why-approach-heading"><em class="emphasis">How we work with you</em></h2>
-    <div class="quote-mark" aria-hidden="true">&ldquo;</div>
-    <p class="summary quote-text">We start with your problem, not our pitch. Every engagement is built around a deep understanding of your context, constraints, and the outcomes you need to achieve. Then we bring together the right team, the right methods, and the right evidence.</p>
-  </section>
-</section>
-
-<!-- STATS / PROOF POINTS -->
-<section class="stats">
-  <div class="stats-inner">
-    <h3>Built for Africa.<br><em>Proven in practice.</em></h3>
-    <div class="stat-block">
-      <div class="num" data-count="9"><span>0</span></div>
-      <div class="lbl">Core service offerings across 3 integrated pillars</div>
-    </div>
-    <div class="stat-block">
-      <div class="num" data-count="5"><span>0</span></div>
-      <div class="lbl">Distinct client groups from government to civil society</div>
-    </div>
-    <div class="stat-block">
-      <div class="num" data-count="7"><span>0</span></div>
-      <div class="lbl">Guiding principles shaping every assignment</div>
-    </div>
-  </div>
-</section>
-
-<!-- TESTIMONIAL / TRUST SECTION -->
-<section class="trust-section" id="trust">
-  <div class="trust-inner">
-    <div class="why-eyebrow">CLIENT TRUST</div>
-    <h2 class="trust-title">What our partners say</h2>
-    <div class="trust-grid">
-      <blockquote class="trust-card">
-        <p>&ldquo;Konsalta brought a level of contextual rigour we hadn&rsquo;t seen before. Their team understood not just our data, but our operating environment.&rdquo;</p>
-        <footer><strong>Government Partner</strong><span>East Africa</span></footer>
-      </blockquote>
-      <blockquote class="trust-card trust-card--highlight">
-        <p>&ldquo;The evidence synthesis they delivered was immediately actionable. Within weeks we had a policy brief in front of decision-makers that actually moved things forward.&rdquo;</p>
-        <footer><strong>Development Partner</strong><span>Southern Africa</span></footer>
-      </blockquote>
-      <blockquote class="trust-card">
-        <p>&ldquo;What sets Konsalta apart is their commitment to impact, not just outputs. They stayed engaged long after the report was submitted.&rdquo;</p>
-        <footer><strong>Private Sector Client</strong><span>West Africa</span></footer>
-      </blockquote>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="final-cta-why" id="start">
-  <div class="final-cta-card">
-    <span class="orb orb-1" aria-hidden="true"></span>
-    <span class="orb orb-2" aria-hidden="true"></span>
-    <h2 class="final-cta-h2">
-      Ready to make decisions that<br>
-      <span class="accent">drive lasting impact?</span>
-    </h2>
-    <p>Partner with our Africa-focused research and advisory collective to make confident, future-ready decisions for your institution.</p>
-    <a href="contactUs.html" class="cta-btn">
-      Start a Conversation
-      <span class="cta-arrow" aria-hidden="true">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-      </span>
-    </a>
-  </div>
-</section>
-
-<footer class="site-footer" id="contact">
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a class="footer-logo" href="index.html" aria-label="Konsalta home">
-          <img src="public/Konsalta-white.png" alt="Konsalta" />
+      <header class="site-header">
+        <a href="index.html" class="logo" aria-label="Konsalta Home">
+          <span class="logo-dot"
+            ><img
+              src="https://i.ibb.co/zVycVPh8/Logo-3.png"
+              alt="Konsalta Logo"
+          /></span>
         </a>
-        <p>A women-led, Africa-focused research, consulting, and advisory firm delivering actionable insights and systemic impact.</p>
-      </div>
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h4>Services</h4>
-          <a href="services.html#services-grid">Research &amp; Evaluation</a>
-          <a href="services.html#services-grid">Strategy &amp; Advisory</a>
-          <a href="services.html#services-grid">Market Intelligence</a>
-          <a href="services.html#services-grid">Policy &amp; Systems</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
+        <button
+          class="header-menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          aria-label="Open navigation menu"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </button>
+        <nav class="header-nav" id="primary-navigation">
           <a href="aboutUs.html">About Konsalta</a>
+          <a href="services.html">Explore Our Services</a>
           <a href="whyUs.html">Why Choose Us</a>
           <a href="insights.html">Our Insights</a>
-          <a href="contactUs.html">Contact Us</a>
+        </nav>
+        <a href="contactUs.html" class="header-btn"
+          >Contact Us
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+      </header>
+
+
+    <div class="grain"></div>
+
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <h1 class="headline" id="headline">
+        <div class="line line-1">
+          <span class="word" style="color: #F26522;"><span>Bespoke</span></span>
+          <span class="word"><span>Teams</span></span>
         </div>
-        <div class="footer-col footer-contact">
-          <h4>Find Us</h4>
-          <p><svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Harare, Zimbabwe</p>
-          <a href="https://www.linkedin.com/company/konsalta-hub-africa/" target="_blank" rel="noopener noreferrer"><svg class="footer-icon footer-icon-brand" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v10M5 5v.01M10 19v-6a4 4 0 0 1 8 0v6M10 9v10M3 3h18v18H3z"></path></svg>LinkedIn</a>
+        <div class="line line-2">
+          <span class="inline-img" id="inlineImg"></span>
+          <span class="word"><span>Around</span></span>
+          <span class="idea-pill" id="ideaPill">
+            <span class="txt">Behind every<br />great idea</span>
+            <span class="leaf"></span>
+          </span>
+        </div>
+        <div class="line line-3">
+          <span class="word"><span>Analytical</span></span>
+          <span class="word"><span>Work</span></span>
+        </div>
+      </h1>
+    </section>
+
+   <!-- <hr class="section-divider" /> -->
+
+    <section class="section section-1">
+      <div class="section-content">
+        <h2 class="section-title"> So, Why Choose Konsalta</h2> 
+        <p class="section-text">
+          At Konsalta,partner with diverse institutions operating at the frontlines of African socioeconomic transformation, delivering tailored intelligence, institutional capacity, and actionable strategies.We have five clear reasons why Africa's foremost institutions trust our collective to deliver enduring outcomes.
+        </p>
+      </div>
+
+      <span class="section-subtitle">They Are:</span>
+
+    </section>
+
+    <div class="wrapper">
+      <div class="accordion-container">
+        <div
+          id="mainDisplay"
+          class="cinematic-panel main-panel"
+          style="background-image: url('https://images.unsplash.com/photo-1577401159468-3bbc7ee440b5?w=1400&q=80&auto=format&fit=crop')"
+        >
+          <span class="panel-number" id="displayNum">01</span>
+          <div class="panel-content" id="displayContent">
+            <span class="panel-category" id="displayCategory"
+              >Evidence</span
+            >
+            <h2 id="displayTitle">Grounded Empirical Evidence Over Unchecked Assumptions</h2>
+            <p id="displayDesc">
+              Every analysis, strategy, and recommendation we generate is rigorously anchored in verified, real-world African field data—protecting our clients from expensive strategic missteps based on superficial assumptions.
+            </p>
+            <a href="contactUs.html" class="action-btn">Explore More</a>
+          </div>
+        </div>
+
+        <div
+          class="cinematic-panel thumb-panel"
+          tabindex="0"
+          style="
+            background-image: url(&quot;https://plus.unsplash.com/premium_photo-1661878265739-da90bc1af051?q=80&w=1572&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D&quot;);
+          "
+          data-img=" https://plus.unsplash.com/premium_photo-1661878265739-da90bc1af051?q=80&w=1572&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
+          data-num="02"
+          data-category="Specialization"
+          data-title="Agile Specialists, Not Retainer-Heavy Generalists"
+          data-desc="We custom-build dedicated project squads containing senior domain masters who possess immediate technical fluency in your specific challenge, ensuring efficiency, speed, and maximum capital return."
+        >
+          <span class="panel-number">02</span>
+          <span class="panel-title-collapsed">Specialization</span>
+        </div>
+
+        <div
+          class="cinematic-panel thumb-panel"
+          tabindex="0"
+          style="
+            background-image: url(public/baobab-unsplash.jpg);
+          "
+          data-img="https://images.unsplash.com/photo-1626695436755-3e288720849c?q=80&w=1742&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
+          data-num="02"
+          data-category="African Context"
+          data-title="Deep African Context Combined With Global Methodological Rigor"
+          data-desc="We bridge regional policy nuances, community realities, and institutional ecosystems with international best practices, producing solutions that work seamlessly in practice, not just in theory."
+        >
+          <span class="panel-number">03</span>
+          <span class="panel-title-collapsed">African Contex</span>
+        </div>
+
+        <div
+          class="cinematic-panel thumb-panel"
+          tabindex="0"
+          style="
+            background-image: url(public/integrity2.jpg);
+          "
+          data-img="public/integrity.jpg"
+          data-num="04"
+          data-category="Luxury Space"
+          data-title="Uncompromising Independence, Integrity and Analysis"
+          data-desc="Our advice is strictly objective and free from institutional conflicts of interest. We provide decision-makers with the unvarnished truth and actionable clarity required to govern effectively."
+        >
+          <span class="panel-number">04</span>
+          <span class="panel-title-collapsed">Integrity</span>
+        </div>
+
+        <div
+          class="cinematic-panel thumb-panel"
+          tabindex="0"
+          style="
+            background-image: url(public/sustainability.jpg);
+          "
+          data-img="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1400"
+          data-num="04"
+          data-category="Sustainability"
+          data-title="Sustainable Institutional Capability"
+          data-desc="We believe consulting value must outlive the engagement. We institutionalize analytics methodologies, transfer analytical tools, and coach internal leaders so your teams thrive autonomously."
+        >
+          <span class="panel-number">05</span>
+          <span class="panel-title-collapsed">Sustainability</span>
         </div>
       </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 Konsalta. All rights reserved.</span>
-      <span>Developed by Momentum Labs</span>
-      <span>Better Decisions. Greater Impact.</span>
-    </div>
-  </div>
-</footer>
 
-<script src="scripts/whyUs.js"></script>
-</body>
+      <div class="widget">
+        <p class="widget-title">Official Partners & Supporters</p>
+        <a href="https://siammakemoney.com/en" target="_blank">
+          <img
+            src="https://siamwebtools.com/toolsbox/images/siammakemoney.webp"
+            alt="Siam Make Money Logo"
+            class="sticky-logo"
+          />
+        </a>
+        <a href="https://directoryplus.org/" target="_blank">
+          <img
+            src="https://directoryplus.org/images/logo.png"
+            alt="Directory Plus Logo"
+            class="sticky-logo"
+          />
+        </a>
+        <a href="https://siamwebtools.com/toolsbox/" target="_blank">
+          <img
+            src="https://siamwebtools.com/toolsbox/images/sm-tools2.png"
+            alt="Siam Web Tools Logo"
+            class="sticky-logo"
+          />
+        </a>
+      </div>
+    </div>
+  </body>
 </html>
