@@ -220,12 +220,16 @@ body.has-custom-cursor .cursor {
 .hero {
   display: grid;
   grid-template-columns: 1fr 1.15fr;
-  gap: 48px;
-  padding: 40px 56px 60px;
+  gap: clamp(40px, 4.5vw, 64px);
+  padding: clamp(50px, 6vh, 88px) clamp(32px, 4.5vw, 64px) clamp(64px, 8vh, 110px);
   align-items: center;
   position: relative;
   z-index: 5;
-  min-height: 720px;
+  min-height: calc(100vh - 90px);
+  background:
+    radial-gradient(circle at 86% 35%, rgba(242, 101, 34, 0.08) 0%, transparent 48%),
+    radial-gradient(circle at 14% 28%, rgba(11, 45, 83, 0.06) 0%, transparent 42%),
+    linear-gradient(180deg, var(--bg) 0%, #f4efe5 100%);
 }
 
 .hero-left {
@@ -286,11 +290,11 @@ body.has-custom-cursor .cursor {
 }
 
 .hero-desc {
-  font-size: 17px;
-  line-height: 1.65;
+  font-size: clamp(16px, 1.2vw, 18px);
+  line-height: 1.7;
   color: var(--ink-soft);
-  max-width: 520px;
-  margin-bottom: 36px;
+  max-width: 550px;
+  margin-bottom: 38px;
 }
 
 .hero-actions {
@@ -688,8 +692,10 @@ body.has-custom-cursor .cursor {
 
 /* ============ FEATURES SECTION ============ */
 .features {
-  padding: 120px 56px;
-  background: var(--bg-warm);
+  padding: clamp(140px, 14vh, 200px) clamp(32px, 5vw, 72px);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(242, 101, 34, 0.04) 0%, transparent 60%),
+    linear-gradient(180deg, #f4efe5 0%, #ede7d8 25%, #e7e0cf 50%, #eee8db 80%, #f6f2ea 100%);
   position: relative;
 }
 
@@ -697,8 +703,8 @@ body.has-custom-cursor .cursor {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 70px;
-  gap: 60px;
+  margin-bottom: clamp(60px, 7vh, 85px);
+  gap: clamp(36px, 4vw, 60px);
 }
 
 .section-eyebrow {
@@ -724,11 +730,11 @@ body.has-custom-cursor .cursor {
 .features h2 {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
-  font-size: clamp(38px, 4.8vw, 68px);
+  font-size: clamp(38px, 4.8vw, 70px);
   line-height: 1.05;
   letter-spacing: -0.035em;
   color: var(--navy);
-  max-width: 720px;
+  max-width: 760px;
 }
 
 .features-meta {
@@ -747,19 +753,19 @@ body.has-custom-cursor .cursor {
 .feature-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
+  gap: clamp(24px, 2.4vw, 36px);
 }
 
 .feature-card {
-  padding: 38px 34px;
-  border-radius: 32px;
-  min-height: 380px;
+  padding: clamp(42px, 3.8vw, 54px) clamp(32px, 2.8vw, 42px);
+  border-radius: 34px;
+  min-height: clamp(420px, 44vh, 480px);
   display: flex;
   flex-direction: column;
   transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.45s;
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .feature-card:hover {
@@ -768,31 +774,31 @@ body.has-custom-cursor .cursor {
 
 /* Card Themes */
 .feature-card.fc-navy {
-  background: linear-gradient(160deg, #123d6d 0%, #0B2D53 100%);
+  background: linear-gradient(155deg, #17457a 0%, #0B2D53 50%, #05182e 100%);
   color: var(--white);
   box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.2),
-    0 18px 36px rgba(11, 45, 83, 0.25),
-    0 36px 72px rgba(11, 45, 83, 0.1);
+    inset 0 2px 0 rgba(255, 255, 255, 0.22),
+    0 20px 40px rgba(11, 45, 83, 0.28),
+    0 40px 80px rgba(11, 45, 83, 0.12);
 }
 
 .feature-card.fc-orange {
-  background: linear-gradient(160deg, #f77a3d 0%, #F26522 100%);
+  background: linear-gradient(155deg, #ff7a38 0%, #F26522 50%, #c44507 100%);
   color: var(--white);
   box-shadow:
     inset 0 2px 0 rgba(255, 255, 255, 0.35),
-    0 18px 36px rgba(242, 101, 34, 0.28),
-    0 36px 72px rgba(242, 101, 34, 0.12);
+    0 20px 40px rgba(242, 101, 34, 0.3),
+    0 40px 80px rgba(242, 101, 34, 0.14);
 }
 
 .feature-card.fc-soft {
-  background: linear-gradient(160deg, #ffffff 0%, var(--navy-soft) 100%);
+  background: linear-gradient(160deg, #ffffff 0%, #f7fafd 50%, #e2eefb 100%);
   color: var(--navy);
   border: 1px solid var(--navy-tint);
   box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.8),
-    0 18px 36px rgba(11, 45, 83, 0.08),
-    0 36px 72px rgba(11, 45, 83, 0.04);
+    inset 0 2px 0 rgba(255, 255, 255, 0.9),
+    0 20px 40px rgba(11, 45, 83, 0.08),
+    0 40px 80px rgba(11, 45, 83, 0.04);
 }
 
 .feature-card .fc-num {
@@ -800,38 +806,38 @@ body.has-custom-cursor .cursor {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
-  margin-bottom: 22px;
+  margin-bottom: 24px;
   opacity: 0.85;
 }
 
 .feature-card h3 {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
-  font-size: 26px;
-  line-height: 1.15;
+  font-size: clamp(24px, 1.9vw, 30px);
+  line-height: 1.2;
   letter-spacing: -0.025em;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .feature-card p {
-  font-size: 15px;
-  line-height: 1.6;
-  opacity: 0.88;
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 0.9;
   flex: 1;
 }
 
 .feature-card .fc-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.16);
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.18);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 24px;
+  margin-top: 28px;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.12);
 }
 
 .feature-card.fc-soft .fc-icon {
@@ -841,73 +847,92 @@ body.has-custom-cursor .cursor {
 
 /* ============ QUOTE ============ */
 .quote-section {
-  padding: 130px 56px;
-  background: var(--bg);
+  padding: clamp(150px, 16vh, 220px) clamp(32px, 5vw, 72px);
+  background:
+    radial-gradient(ellipse 65% 55% at 50% 50%, rgba(242, 101, 34, 0.06) 0%, rgba(11, 45, 83, 0.04) 45%, transparent 75%),
+    linear-gradient(180deg, #f6f2ea 0%, var(--bg) 25%, var(--bg) 75%, #f3ede2 100%);
   text-align: center;
   position: relative;
 }
 
 .quote-mark {
   display: block;
-  font-size: 100px;
+  font-size: clamp(90px, 9vw, 130px);
   line-height: 0.6;
   color: var(--orange);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
+  opacity: 0.9;
 }
 
 .quote-section blockquote {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
-  font-size: clamp(28px, 3.8vw, 52px);
-  line-height: 1.2;
+  font-size: clamp(30px, 3.8vw, 54px);
+  line-height: 1.25;
   letter-spacing: -0.03em;
   color: var(--navy);
-  max-width: 1000px;
-  margin: 0 auto 36px;
+  max-width: 1100px;
+  margin: 0 auto 40px;
 }
 
 .quote-author {
   font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   color: var(--ink-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.quote-author::before,
+.quote-author::after {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1.5px;
+  background: rgba(11, 45, 83, 0.2);
 }
 
 /* ============ FINAL CTA ============ */
 .final-cta {
-  padding: 80px 56px 120px;
+  padding: clamp(90px, 11vh, 150px) clamp(28px, 4vw, 64px) clamp(130px, 15vh, 190px);
   text-align: center;
-  background: var(--bg);
+  background: linear-gradient(180deg, #f3ede2 0%, var(--bg) 35%, #eee8de 100%);
+  position: relative;
 }
 
 .final-cta-card {
-  max-width: 1100px;
+  max-width: min(1360px, 94vw);
   margin: 0 auto;
-  padding: 80px 60px;
-  border-radius: 44px;
-  background: linear-gradient(150deg, #103866 0%, #0B2D53 50%, #061a32 100%);
+  padding: clamp(80px, 9vh, 120px) clamp(36px, 6vw, 96px);
+  border-radius: 48px;
+  background: linear-gradient(145deg, #16487e 0%, #0B2D53 45%, #05162a 100%);
   color: var(--white);
   position: relative;
   overflow: hidden;
   box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.2),
+    inset 0 2px 0 rgba(255, 255, 255, 0.22),
     inset 0 -4px 0 rgba(0, 0, 0, 0.5),
-    0 30px 60px rgba(11, 45, 83, 0.35),
-    0 60px 120px rgba(11, 45, 83, 0.2);
+    0 36px 72px rgba(11, 45, 83, 0.35),
+    0 72px 140px rgba(11, 45, 83, 0.2);
 }
 
 .final-cta h2 {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
-  font-size: clamp(38px, 5vw, 72px);
-  line-height: 1.05;
+  font-size: clamp(40px, 5.2vw, 76px);
+  line-height: 1.08;
   letter-spacing: -0.035em;
   margin-bottom: 28px;
   color: var(--white);
+  max-width: 920px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .final-cta h2 .accent {
@@ -915,11 +940,11 @@ body.has-custom-cursor .cursor {
 }
 
 .final-cta p {
-  font-size: 17px;
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 580px;
-  margin: 0 auto 36px;
+  font-size: clamp(17px, 1.3vw, 20px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 680px;
+  margin: 0 auto 40px;
 }
 
 .final-cta .cta-btn {
@@ -966,9 +991,9 @@ body.has-custom-cursor .cursor {
 
 /* ============ FOOTER ============ */
 .site-footer {
-  background: var(--bg);
-  padding: 60px 56px 40px;
-  border-top: 1px solid var(--line);
+  background: linear-gradient(180deg, #eee8de 0%, #e5dfd2 100%);
+  padding: clamp(70px, 8vh, 96px) clamp(32px, 5vw, 72px) 44px;
+  border-top: 1px solid rgba(11, 45, 83, 0.12);
 }
 
 .footer-top {
@@ -1037,7 +1062,8 @@ body.has-custom-cursor .cursor {
   .hero {
     grid-template-columns: minmax(0, 1fr);
     gap: 40px;
-    padding: 30px 32px 50px;
+    padding: 40px 32px 60px;
+    min-height: auto;
   }
 
   .hero-left,
@@ -1051,16 +1077,16 @@ body.has-custom-cursor .cursor {
 
   .feature-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
+    gap: 24px;
   }
 
   .features {
-    padding: 70px 32px;
+    padding: 96px 32px;
   }
 
   .final-cta,
   .quote-section {
-    padding: 70px 32px;
+    padding: 96px 32px;
   }
 
   .features-head {
