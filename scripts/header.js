@@ -1,63 +1,51 @@
-// Konsalta — Header Navigation & Responsive Menu Controller
+/**
+ * header.js — Mobile navigation toggle
+ * Handles the hamburger menu open/close behaviour across all pages.
+ */
 (function () {
-  function initHeaderNav() {
-    const menuToggle = document.querySelector(".header-menu-toggle");
-    const headerNav = document.querySelector("#primary-navigation");
+  const toggle = document.querySelector(".header-menu-toggle");
+  const nav = document.getElementById("primary-navigation");
 
-    if (!menuToggle || !headerNav) return;
-    if (menuToggle.dataset.navBound === "true") return;
-    menuToggle.dataset.navBound = "true";
+  if (!toggle || !nav) return;
 
-    const closeMenu = () => {
-      headerNav.classList.remove("is-open");
-      menuToggle.setAttribute("aria-expanded", "false");
-      menuToggle.setAttribute("aria-label", "Open navigation menu");
-    };
-
-    menuToggle.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const isOpen = headerNav.classList.toggle("is-open");
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.setAttribute(
-        "aria-label",
-        isOpen ? "Close navigation menu" : "Open navigation menu"
-      );
-    });
-
-    headerNav.querySelectorAll("a").forEach((link) => {
-      link.addEventListener("click", closeMenu);
-    });
-
-    // Close when clicking outside of the header
-    document.addEventListener("click", (e) => {
-      if (!headerNav.contains(e.target) && !menuToggle.contains(e.target)) {
-        closeMenu();
-      }
-    });
-
-    // Close on Escape key
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        closeMenu();
-      }
-    });
-
-    // Close when resizing back to desktop
-    const mql = window.matchMedia("(min-width: 851px)");
-    const handleMqlChange = (e) => {
-      if (e.matches) closeMenu();
-    };
-
-    if (mql.addEventListener) {
-      mql.addEventListener("change", handleMqlChange);
-    } else if (mql.addListener) {
-      mql.addListener(handleMqlChange);
+  // Close nav when clicking outside of it
+  document.addEventListener("click", function (e) {
+    if (
+      nav.classList.contains("nav-open") &&
+      !nav.contains(e.target) &&
+      !toggle.contains(e.target)
+    ) {
+      closeNav();
     }
+  });
+
+  // Close nav on Escape key
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && nav.classList.contains("nav-open")) {
+      closeNav();
+      toggle.focus();
+    }
+  });
+
+  toggle.addEventListener("click", function () {
+    const isOpen = nav.classList.contains("nav-open");
+    isOpen ? closeNav() : openNav();
+  });
+
+  // Close nav when a link inside it is clicked (single-page navigation)
+  nav.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", closeNav);
+  });
+
+  function openNav() {
+    nav.classList.add("nav-open");
+    toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Close navigation menu");
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", initHeaderNav);
-  } else {
-    initHeaderNav();
+  function closeNav() {
+    nav.classList.remove("nav-open");
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open navigation menu");
   }
 })();
