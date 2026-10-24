@@ -47,6 +47,9 @@ if (typeof gsap !== "undefined") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ===== GSAP-POWERED CHECKERED GRID TRACKING EFFECT =====
+  initCheckeredGridTracking();
+
   // ===== INTRO TIMELINE =====
   if (typeof gsap !== "undefined") {
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
@@ -384,75 +387,308 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(cycleTestimonial, 7000);
 
   // ===== BOOK A CALL ATTENTION =====
-  document.getElementById("ctaBig").addEventListener("click", function () {
-    if (typeof gsap === "undefined") return;
-    gsap.fromTo(
-      this,
-      { scale: 0.94 },
-      { scale: 1, duration: 0.6, ease: "elastic.out(1.2, 0.4)" },
-    );
-    // Pulse the headline arrow
-    gsap.fromTo(
-      ".headline .arrow",
-      { scale: 1 },
-      {
-        scale: 1.3,
-        rotation: 15,
-        duration: 0.4,
-        yoyo: true,
-        repeat: 1,
-        ease: "power2.inOut",
-      },
-    );
-  });
+  const ctaBig = document.getElementById("ctaBig");
+  if (ctaBig) {
+    ctaBig.addEventListener("click", function () {
+      if (typeof gsap === "undefined") return;
+      gsap.fromTo(
+        this,
+        { scale: 0.94 },
+        { scale: 1, duration: 0.6, ease: "elastic.out(1.2, 0.4)" },
+      );
+      // Pulse the headline arrow
+      gsap.fromTo(
+        ".headline .arrow",
+        { scale: 1 },
+        {
+          scale: 1.3,
+          rotation: 15,
+          duration: 0.4,
+          yoyo: true,
+          repeat: 1,
+          ease: "power2.inOut",
+        },
+      );
+    });
+  }
 
-  document.getElementById("bookCtaNav").addEventListener("click", function () {
-    // Smooth scroll to the big CTA + pulse it
-    const target = document.getElementById("ctaBig");
-    target.scrollIntoView({ behavior: "smooth", block: "center" });
-    if (typeof gsap !== "undefined") {
-      setTimeout(() => {
-        gsap.fromTo(
-          target,
-          { scale: 1 },
-          {
-            scale: 1.08,
+  const bookCtaNav = document.getElementById("bookCtaNav");
+  if (bookCtaNav) {
+    bookCtaNav.addEventListener("click", function () {
+      const target = document.getElementById("ctaBig");
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        if (typeof gsap !== "undefined") {
+          setTimeout(() => {
+            gsap.fromTo(
+              target,
+              { scale: 1 },
+              {
+                scale: 1.08,
+                duration: 0.4,
+                yoyo: true,
+                repeat: 2,
+                ease: "power2.inOut",
+              },
+            );
+          }, 400);
+        }
+      }
+    });
+  }
+
+  // Stat half hover triggers counter replay
+  const statTop = document.getElementById("statTop");
+  if (statTop) {
+    statTop.addEventListener("click", () => {
+      if (typeof gsap === "undefined") return;
+      const el = document.getElementById("stat1Num");
+      if (!el) return;
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: 1.2,
+        duration: 1.2,
+        ease: "power2.out",
+        onUpdate: () => {
+          el.textContent = obj.val.toFixed(1) + "M+";
+        },
+      });
+    });
+  }
+
+  const statBottom = document.getElementById("statBottom");
+  if (statBottom) {
+    statBottom.addEventListener("click", () => {
+      if (typeof gsap === "undefined") return;
+      const el = document.getElementById("stat2Num");
+      if (!el) return;
+      const obj = { val: 0 };
+      gsap.to(obj, {
+        val: 3,
+        duration: 1.2,
+        ease: "power2.out",
+        onUpdate: () => {
+          el.textContent = "$" + obj.val.toFixed(0) + "M";
+        },
+      });
+    });
+  }
+}); // DOMContentLoaded
+
+function initCheckeredGridTracking() {
+  const page = document.querySelector(".page");
+  if (!page) return;
+
+  let canvas = document.getElementById("pageGridCanvas");
+  if (!canvas) {
+    canvas = document.createElement("canvas");
+    canvas.id = "pageGridCanvas";
+    canvas.className = "page-grid-canvas";
+    canvas.setAttribute("aria-hidden", "true");
+    page.insertBefore(canvas, page.firstChild);
+  }
+
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const CELL_SIZE = 54;
+  // Radius of a few squares (approx 4.2 squares = ~226px)
+  const RADIUS = CELL_SIZE * 4.2;
+
+  let width = 0;
+  let height = 0;
+  let dpr = 1;
+
+  function resizeCanvas() {
+    const rect = page.getBoundingClientRect();
+    width = Math.ceil(rect.width);
+    height = Math.ceil(rect.height);
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
+    canvas.style.width = width + "px";
+    canvas.style.height = height + "px";
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas, { passive: true });
+
+  if (typeof ResizeObserver !== "undefined") {
+    const ro = new ResizeObserver(() => {
+      resizeCanvas();
+    });
+    ro.observe(page);
+  }
+
+  // GSAP animated tracker state
+  const tracker = {
+    x: -999,
+    y: -999,
+    intensity: 0,
+  };
+
+  let needsClear = false;
+  let lastClientX = -999;
+  let lastClientY = -999;
+
+  function handlePointer(clientX, clientY) {
+    lastClientX = clientX;
+    lastClientY = clientY;
+
+    const rect = page.getBoundingClientRect();
+    const mouseX = clientX - rect.left;
+    const mouseY = clientY - rect.top;
+
+    // Check if pointer is in or near .page
+    const isInside =
+      clientX >= rect.left - 50 &&
+      clientX <= rect.right + 50 &&
+      clientY >= rect.top - 50 &&
+      clientY <= rect.bottom + 50;
+
+    if (!isInside) {
+      if (tracker.intensity > 0) {
+        if (typeof gsap !== "undefined") {
+          gsap.to(tracker, {
+            intensity: 0,
             duration: 0.4,
-            yoyo: true,
-            repeat: 2,
-            ease: "power2.inOut",
-          },
-        );
-      }, 400);
+            ease: "power2.out",
+            overwrite: "auto",
+          });
+        } else {
+          tracker.intensity = 0;
+        }
+      }
+      return;
+    }
+
+    // Inside .page: smoothly move x, y and ensure intensity is 1
+    if (typeof gsap !== "undefined") {
+      gsap.to(tracker, {
+        x: mouseX,
+        y: mouseY,
+        intensity: 1,
+        duration: 0.22,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    } else {
+      tracker.x = mouseX;
+      tracker.y = mouseY;
+      tracker.intensity = 1;
+    }
+  }
+
+  window.addEventListener("pointermove", (e) => {
+    handlePointer(e.clientX, e.clientY);
+  }, { passive: true });
+
+  window.addEventListener("scroll", () => {
+    if (lastClientX !== -999) {
+      handlePointer(lastClientX, lastClientY);
+    }
+  }, { passive: true });
+
+  document.addEventListener("mouseleave", () => {
+    if (typeof gsap !== "undefined") {
+      gsap.to(tracker, {
+        intensity: 0,
+        duration: 0.4,
+        ease: "power2.out",
+        overwrite: "auto",
+      });
+    } else {
+      tracker.intensity = 0;
     }
   });
 
-  // Stat half hover triggers counter replay
-  document.getElementById("statTop").addEventListener("click", () => {
-    if (typeof gsap === "undefined") return;
-    const el = document.getElementById("stat1Num");
-    const obj = { val: 0 };
-    gsap.to(obj, {
-      val: 1.2,
-      duration: 1.2,
-      ease: "power2.out",
-      onUpdate: () => {
-        el.textContent = obj.val.toFixed(1) + "M+";
-      },
-    });
-  });
+  function drawCheckeredGrid() {
+    ctx.clearRect(0, 0, width, height);
 
-  document.getElementById("statBottom").addEventListener("click", () => {
-    if (typeof gsap === "undefined") return;
-    const el = document.getElementById("stat2Num");
-    const obj = { val: 0 };
-    gsap.to(obj, {
-      val: 3,
-      duration: 1.2,
-      ease: "power2.out",
-      onUpdate: () => {
-        el.textContent = "$" + obj.val.toFixed(0) + "M";
-      },
+    if (tracker.intensity <= 0.001) return;
+
+    const totalCols = Math.ceil(width / CELL_SIZE);
+    const totalRows = Math.ceil(height / CELL_SIZE);
+
+    const minCol = Math.max(0, Math.floor((tracker.x - RADIUS) / CELL_SIZE));
+    const maxCol = Math.min(totalCols - 1, Math.ceil((tracker.x + RADIUS) / CELL_SIZE));
+    const minRow = Math.max(0, Math.floor((tracker.y - RADIUS) / CELL_SIZE));
+    const maxRow = Math.min(totalRows - 1, Math.ceil((tracker.y + RADIUS) / CELL_SIZE));
+
+    for (let c = minCol; c <= maxCol; c++) {
+      for (let r = minRow; r <= maxRow; r++) {
+        const isCheckered = (c + r) % 2 === 0;
+        const isAlternate = (c + r) % 2 !== 0;
+
+        const cellCenterX = (c + 0.5) * CELL_SIZE;
+        const cellCenterY = (r + 0.5) * CELL_SIZE;
+        const dist = Math.hypot(cellCenterX - tracker.x, cellCenterY - tracker.y);
+
+        if (dist >= RADIUS) continue;
+
+        const norm = 1 - dist / RADIUS;
+        const falloff = Math.pow(norm, 1.25);
+
+        // Grid cell coordinates fitting inside the 54px background grid
+        const cellX = c * CELL_SIZE + 1.5;
+        const cellY = r * CELL_SIZE + 1.5;
+        const cellW = CELL_SIZE - 3;
+        const cellH = CELL_SIZE - 3;
+
+        if (isCheckered) {
+          // Muted warm brand terracotta tone (visible & tasteful)
+          const alpha = falloff * tracker.intensity * 0.35;
+          if (alpha > 0.005) {
+            ctx.fillStyle = `rgba(242, 101, 34, ${alpha.toFixed(3)})`;
+            ctx.beginPath();
+            if (ctx.roundRect) {
+              ctx.roundRect(cellX, cellY, cellW, cellH, 4);
+            } else {
+              ctx.rect(cellX, cellY, cellW, cellH);
+            }
+            ctx.fill();
+          }
+        } else if (isAlternate) {
+          // Subtle complementary muted navy tone for genuine checkerboard contrast
+          const alpha = falloff * tracker.intensity * 0.16;
+          if (alpha > 0.005) {
+            ctx.fillStyle = `rgba(11, 45, 83, ${alpha.toFixed(3)})`;
+            ctx.beginPath();
+            if (ctx.roundRect) {
+              ctx.roundRect(cellX, cellY, cellW, cellH, 4);
+            } else {
+              ctx.rect(cellX, cellY, cellW, cellH);
+            }
+            ctx.fill();
+          }
+        }
+      }
+    }
+  }
+
+  if (typeof gsap !== "undefined") {
+    gsap.ticker.add(() => {
+      if (tracker.intensity <= 0.001) {
+        if (needsClear) {
+          ctx.clearRect(0, 0, width, height);
+          needsClear = false;
+        }
+        return;
+      }
+      needsClear = true;
+      drawCheckeredGrid();
     });
-  });
-}); // DOMContentLoaded
+  } else {
+    function fallbackLoop() {
+      if (tracker.intensity > 0.001) {
+        drawCheckeredGrid();
+      }
+      requestAnimationFrame(fallbackLoop);
+    }
+    requestAnimationFrame(fallbackLoop);
+  }
+}
+

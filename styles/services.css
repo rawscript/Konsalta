@@ -778,46 +778,49 @@ body.has-custom-cursor .cursor {
 
 /* ============ SERVICES SPECTRUM & FILTER TABS ============ */
 .services-spectrum-section {
-  padding: 80px 40px 100px;
+  padding: 48px clamp(16px, 3vw, 40px) 56px;
   position: relative;
   z-index: 10;
+  background: var(--bg-warm);
+  border-top: 1px solid var(--line);
 }
 
 .section-container {
-  max-width: 1280px;
+  max-width: min(1440px, 96vw);
   margin: 0 auto;
+  width: 100%;
 }
 
 .spectrum-header {
   text-align: center;
   max-width: 860px;
-  margin: 0 auto 50px;
+  margin: 0 auto 30px;
 }
 
 .eyebrow-tag {
   font-family: "JetBrains Mono", monospace;
-  font-size: 12px;
+  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  color: var(--orange);
+  color: var(--orange-deep);
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .spectrum-title {
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: clamp(32px, 4vw, 48px);
+  font-size: clamp(28px, 3.5vw, 44px);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--navy);
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .spectrum-subtitle {
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 15.5px;
+  line-height: 1.55;
   color: var(--ink-soft);
-  margin-bottom: 36px;
+  margin-bottom: 24px;
 }
 
 /* Filter Tabs */
@@ -825,27 +828,25 @@ body.has-custom-cursor .cursor {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
   margin: 0 auto;
 }
 
 .filter-tab {
-  background: var(--glass-card);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
+  background: #ffffff;
   color: var(--ink-soft);
-  border: 1.5px solid var(--glass-border);
-  padding: 10px 20px;
+  border: 1.5px solid rgba(11, 45, 83, 0.12);
+  padding: 8px 18px;
   border-radius: 100px;
   font-family: "Manrope", sans-serif;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 700;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 8px;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 12px rgba(11, 45, 83, 0.04), var(--glass-inset);
+  box-shadow: 0 2px 8px rgba(11, 45, 83, 0.04), inset 0 1px 0 #ffffff;
 }
 
 .tab-count {
@@ -861,16 +862,16 @@ body.has-custom-cursor .cursor {
 .filter-tab:hover {
   border-color: var(--navy);
   color: var(--navy);
-  background: var(--glass-card-hover);
+  background: #ffffff;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(11, 45, 83, 0.08), inset 0 1px 1px rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 12px rgba(11, 45, 83, 0.08);
 }
 
 .filter-tab.active {
   background: var(--navy);
   color: var(--white);
   border-color: var(--navy);
-  box-shadow: 0 6px 18px rgba(11, 45, 83, 0.25);
+  box-shadow: 0 4px 14px rgba(11, 45, 83, 0.2);
 }
 
 .filter-tab.active .tab-count {
@@ -882,41 +883,41 @@ body.has-custom-cursor .cursor {
 .services-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-  margin-top: 40px;
+  gap: 18px;
+  margin-top: 24px;
+  width: 100%;
 }
 
 .service-card {
   position: relative;
-  background: var(--glass-card);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  padding: 36px 32px 30px;
+  background: #ffffff;
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  padding: 26px 22px 20px;
   display: flex;
   flex-direction: column;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.35s ease, background 0.35s ease;
+  justify-content: space-between;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
   overflow: hidden;
-  box-shadow: var(--glass-shadow), var(--glass-inset-card);
-  transform-style: preserve-3d;
+  box-shadow: 0 2px 8px rgba(11, 45, 83, 0.04);
+  min-width: 0;
+  word-break: break-word;
 }
 
 .service-card:hover {
-  transform: translateY(-8px);
-  background: var(--glass-card-hover);
-  border-color: rgba(242, 101, 34, 0.45);
-  box-shadow: var(--glass-shadow-hover), inset 0 1px 2px 0 rgba(255, 255, 255, 1);
+  transform: translateY(-4px);
+  border-color: var(--orange);
+  box-shadow: 0 12px 28px rgba(11, 45, 83, 0.08);
 }
 
 .card-glow {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  border-radius: 20px;
+  border-radius: 18px;
   background: radial-gradient(
     320px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(242, 101, 34, 0.13),
+    rgba(242, 101, 34, 0.1),
     transparent 70%
   );
   opacity: 0;
@@ -941,7 +942,7 @@ body.has-custom-cursor .cursor {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
 }
 
 .pillar-badge {
@@ -950,7 +951,7 @@ body.has-custom-cursor .cursor {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-weight: 700;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 6px;
   background: var(--navy-soft);
   color: var(--navy);
@@ -968,7 +969,7 @@ body.has-custom-cursor .cursor {
 
 .service-num {
   font-family: "JetBrains Mono", monospace;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--line);
   transition: color 0.3s ease;
@@ -979,22 +980,22 @@ body.has-custom-cursor .cursor {
 }
 
 .service-icon-box {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   background: linear-gradient(135deg, var(--navy-soft) 0%, #ffffff 100%);
   border: 1px solid var(--navy-tint);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--navy);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   transition: all 0.3s ease;
 }
 
 .service-icon-box svg {
-  width: 26px;
-  height: 26px;
+  width: 22px;
+  height: 22px;
 }
 
 .service-card:hover .service-icon-box {
@@ -1006,33 +1007,33 @@ body.has-custom-cursor .cursor {
 
 .service-title {
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 700;
-  line-height: 1.3;
+  line-height: 1.25;
   color: var(--navy);
-  margin-bottom: 14px;
-  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  letter-spacing: -0.015em;
 }
 
 .service-description {
-  font-size: 14.5px;
-  line-height: 1.65;
+  font-size: 13.5px;
+  line-height: 1.55;
   color: var(--ink-soft);
-  margin-bottom: 24px;
+  margin-bottom: 14px;
   flex: 1;
 }
 
 .capability-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 28px;
+  gap: 6px;
+  margin-bottom: 14px;
 }
 
 .chip {
-  font-size: 11.5px;
+  font-size: 11px;
   font-weight: 600;
-  padding: 4px 10px;
+  padding: 3px 8px;
   border-radius: 100px;
   background: var(--bg-warm);
   color: var(--ink);
@@ -1040,16 +1041,16 @@ body.has-custom-cursor .cursor {
 }
 
 .card-footer {
-  padding-top: 18px;
+  padding-top: 12px;
   border-top: 1px solid var(--line);
 }
 
 .service-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-family: "Manrope", sans-serif;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--navy);
   text-decoration: none;
@@ -1070,25 +1071,38 @@ body.has-custom-cursor .cursor {
 
 /* ============ HOW WE DELIVER VALUE ============ */
 .delivery-model-section {
-  padding: 80px 40px 100px;
-  background: var(--bg-warm);
+  padding: 56px 0 64px;
+  position: relative;
+  z-index: 10;
+  background: var(--bg);
   border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+}
+
+.delivery-model-section .section-container {
+  max-width: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0 16px;
 }
 
 .delivery-head {
   text-align: center;
-  max-width: 760px;
-  margin: 0 auto 50px;
+  max-width: 780px;
+  margin: 0 auto 36px;
+  padding: 0 16px;
+}
+
+.delivery-head .eyebrow-tag {
+  color: var(--orange-deep);
 }
 
 .delivery-title {
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: clamp(30px, 3.5vw, 42px);
+  font-size: clamp(28px, 3.5vw, 44px);
   font-weight: 800;
   letter-spacing: -0.03em;
   color: var(--navy);
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 }
 
 .delivery-desc {
@@ -1100,78 +1114,105 @@ body.has-custom-cursor .cursor {
 .delivery-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  align-items: stretch;
 }
 
 .delivery-card {
-  background: var(--glass-card);
-  backdrop-filter: var(--glass-blur);
-  -webkit-backdrop-filter: var(--glass-blur);
-  border: 1px solid var(--glass-border);
-  border-radius: 18px;
-  padding: 40px 32px;
-  box-shadow: var(--glass-shadow), var(--glass-inset);
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+  border: 1.5px solid var(--line);
+  border-radius: 24px;
+  padding: clamp(36px, 4vw, 52px) clamp(28px, 3vw, 42px);
+  min-height: 360px;
+  box-shadow: 0 4px 18px rgba(11, 45, 83, 0.05);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  position: relative;
+  min-width: 0;
+  word-break: break-word;
 }
 
 .delivery-card:hover {
   transform: translateY(-6px);
-  background: var(--glass-card-hover);
-  border-color: rgba(242, 101, 34, 0.35);
-  box-shadow: 0 16px 36px -10px rgba(11, 45, 83, 0.12), 0 0 0 1px rgba(242, 101, 34, 0.18), inset 0 1px 2px rgba(255, 255, 255, 1);
+  border-color: var(--orange);
+  box-shadow: 0 16px 36px rgba(11, 45, 83, 0.1);
 }
 
 .delivery-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 14px;
+  background: var(--orange-soft);
+  border: 1.5px solid var(--orange-tint);
+  color: var(--orange-deep);
   font-family: "JetBrains Mono", monospace;
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--orange);
-  margin-bottom: 18px;
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 22px;
 }
 
 .delivery-card h3 {
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: clamp(21px, 1.8vw, 25px);
+  font-weight: 800;
   color: var(--navy);
-  margin-bottom: 12px;
+  line-height: 1.25;
+  margin-bottom: 14px;
 }
 
 .delivery-card p {
-  font-size: 14.5px;
+  font-size: clamp(15px, 1.1vw, 16.5px);
   line-height: 1.65;
   color: var(--ink-soft);
+  flex: 1;
+  margin: 0;
 }
 
 /* ============ FINAL CTA SECTION ============ */
 .final-cta {
-  padding: 100px 56px;
+  padding: 36px clamp(16px, 3vw, 40px) 56px;
   display: flex;
   justify-content: center;
+  position: relative;
+  background: var(--bg);
 }
 
 .final-cta-card {
   position: relative;
   width: 100%;
-  max-width: 1100px;
-  background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy) 100%);
+  max-width: min(1440px, 96vw);
+  background: linear-gradient(145deg, #103866 0%, #0B2D53 50%, #061a32 100%);
   border-radius: 28px;
-  padding: 80px 48px;
+  padding: 48px clamp(24px, 4vw, 56px);
   text-align: center;
   overflow: hidden;
   box-shadow:
-    0 24px 60px rgba(6, 26, 50, 0.25),
-    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    0 20px 48px rgba(6, 26, 50, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
 .final-cta-h2 {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
-  font-size: clamp(34px, 4.5vw, 56px);
+  font-size: clamp(28px, 3.5vw, 44px);
   line-height: 1.1;
   letter-spacing: -0.035em;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   color: var(--white);
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .final-cta-h2 .accent {
@@ -1179,11 +1220,11 @@ body.has-custom-cursor .cursor {
 }
 
 .final-cta p {
-  font-size: 17px;
+  font-size: 15.5px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.85);
-  max-width: 580px;
-  margin: 0 auto 36px;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 620px;
+  margin: 0 auto 24px;
 }
 
 .final-cta .cta-btn {
@@ -1363,21 +1404,77 @@ body.has-custom-cursor .cursor {
     height: 110px;
   }
 
+  .services-spectrum-section {
+    padding: 40px 20px 48px;
+  }
+
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .service-card {
+    padding: 22px 20px 18px;
+  }
+
+  .delivery-model-section {
+    padding: 48px 0 56px;
   }
 
   .delivery-cards {
-    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .delivery-card {
+    padding: 32px 28px;
+    min-height: 300px;
   }
 
   .final-cta {
-    padding: 70px 32px;
+    padding: 32px 16px 48px;
+  }
+
+  .final-cta-card {
+    padding: 44px clamp(20px, 3vw, 48px);
+    border-radius: 22px;
   }
 
   .footer-top {
     flex-direction: column;
     gap: 40px;
+  }
+
+  .site-footer {
+    padding: 48px 32px 36px;
+  }
+}
+
+@media (max-width: 900px) {
+  .delivery-cards {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .delivery-card {
+    min-height: auto;
+    padding: 28px 24px;
+  }
+
+  .delivery-num {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .delivery-card h3 {
+    font-size: 20px;
+  }
+
+  .delivery-card p {
+    font-size: 15px;
   }
 }
 
@@ -1418,21 +1515,233 @@ body.has-custom-cursor .cursor {
     height: 100px;
   }
 
-  .services-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+  .services-spectrum-section {
+    padding: 36px 16px 44px;
   }
 
-  .services-spectrum-section {
-    padding: 50px 20px 70px;
+  .spectrum-header {
+    margin-bottom: 20px;
+  }
+
+  .spectrum-title {
+    font-size: 26px;
+  }
+
+  .spectrum-subtitle {
+    font-size: 14px;
+  }
+
+  .filter-tabs {
+    gap: 8px;
+  }
+
+  .filter-tab {
+    font-size: 12.5px;
+    padding: 6px 14px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .service-card {
+    padding: 20px 18px 16px;
+  }
+
+  .service-title {
+    font-size: 17px;
+  }
+
+  .service-description {
+    font-size: 13px;
+  }
+
+  .chip {
+    font-size: 10.5px;
+    padding: 2px 7px;
+  }
+
+  .delivery-model-section {
+    padding: 40px 0 48px;
+  }
+
+  .delivery-head {
+    margin-bottom: 28px;
+  }
+
+  .delivery-title {
+    font-size: 26px;
+  }
+
+  .delivery-desc {
+    font-size: 14.5px;
+  }
+
+  .final-cta {
+    padding: 28px 16px 40px;
   }
 
   .final-cta-card {
-    padding: 50px 24px;
+    padding: 40px 20px;
+    border-radius: 20px;
+  }
+
+  .final-cta-h2 {
+    font-size: 26px;
+  }
+
+  .final-cta p {
+    font-size: 14px;
+  }
+
+  .site-footer {
+    padding: 40px 20px 28px;
   }
 
   .footer-cols {
     flex-wrap: wrap;
-    gap: 36px;
+    gap: 32px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .services-spectrum-section {
+    padding: 28px 12px 36px;
+  }
+
+  .spectrum-title {
+    font-size: 22px;
+  }
+
+  .filter-tab {
+    font-size: 11.5px;
+    padding: 5px 10px;
+  }
+
+  .tab-count {
+    font-size: 10px;
+    padding: 1px 5px;
+  }
+
+  .service-card {
+    padding: 18px 16px 14px;
+  }
+
+  .card-top {
+    margin-bottom: 10px;
+  }
+
+  .pillar-badge {
+    font-size: 9px;
+    padding: 2px 6px;
+  }
+
+  .service-icon-box {
+    width: 38px;
+    height: 38px;
+    margin-bottom: 10px;
+  }
+
+  .service-icon-box svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .service-title {
+    font-size: 16px;
+  }
+
+  .service-description {
+    font-size: 12.5px;
+    margin-bottom: 10px;
+  }
+
+  .capability-chips {
+    gap: 4px;
+    margin-bottom: 10px;
+  }
+
+  .chip {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+
+  .card-footer {
+    padding-top: 10px;
+  }
+
+  .service-link {
+    font-size: 12px;
+  }
+
+  .delivery-model-section {
+    padding: 32px 0 40px;
+  }
+
+  .delivery-model-section .section-container {
+    padding: 0 12px;
+  }
+
+  .delivery-head {
+    margin-bottom: 24px;
+    padding: 0 4px;
+  }
+
+  .delivery-title {
+    font-size: 22px;
+  }
+
+  .delivery-desc {
+    font-size: 14px;
+  }
+
+  .delivery-card {
+    padding: 24px 20px;
+    border-radius: 18px;
+  }
+
+  .delivery-card h3 {
+    font-size: 18px;
+  }
+
+  .delivery-card p {
+    font-size: 14px;
+  }
+
+  .final-cta {
+    padding: 24px 12px 32px;
+  }
+
+  .final-cta-card {
+    padding: 36px 16px;
+    border-radius: 18px;
+  }
+
+  .final-cta-h2 {
+    font-size: 22px;
+  }
+
+  .final-cta p {
+    font-size: 13.5px;
+  }
+
+  .cta-btn {
+    font-size: 14px;
+    padding: 12px 24px;
+  }
+
+  .site-footer {
+    padding: 32px 14px 24px;
+  }
+
+  .footer-cols {
+    gap: 24px;
   }
 }

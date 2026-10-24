@@ -251,18 +251,23 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    gsap.from(".delivery-card", {
-      y: 35,
-      opacity: 0,
-      duration: 0.75,
-      stagger: 0.15,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: ".delivery-cards",
-        start: "top 85%",
-        once: true
+    gsap.fromTo(
+      ".delivery-card",
+      { y: 35, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.65,
+        stagger: 0.08,
+        ease: "power2.out",
+        clearProps: "transform",
+        scrollTrigger: {
+          trigger: ".delivery-cards",
+          start: "top 88%",
+          once: true
+        }
       }
-    });
+    );
 
     // Final CTA Section Entrance & Parallax Orbs
     gsap.from(".final-cta-card", {
