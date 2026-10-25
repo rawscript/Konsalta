@@ -1397,6 +1397,112 @@ body.has-custom-cursor .cursor {
   }
 }
 
+/* ============ FOLDABLE DEVICE SUPPORT ============ */
+
+/* Dynamic viewport units for foldables with browser toolbars */
+.hero {
+  min-height: 100svh;
+}
+
+@supports (height: 100dvh) {
+  .hero {
+    min-height: 100dvh;
+  }
+}
+
+/* Foldable devices in unfolded state (tall aspect ratio) */
+@media (aspect-ratio: 6/5) and (max-width: 767px) {
+  .hero {
+    min-height: 100svh;
+  }
+
+  .hero-title {
+    font-size: clamp(34px, 9vw, 52px);
+  }
+
+  .constellation {
+    transform: scale(0.48);
+    margin-bottom: -310px;
+  }
+}
+
+/* Foldable devices in folded narrow mode (Galaxy Fold, etc.) */
+@media (max-width: 280px) {
+  .hero-title {
+    font-size: 22px;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
+  .hero-desc {
+    font-size: 13px;
+  }
+
+  .hero-badge {
+    font-size: 8px;
+    padding: 4px 8px;
+  }
+
+  .cta-btn,
+  .secondary-btn {
+    padding: 12px 16px;
+    font-size: 12px;
+    min-height: var(--touch-min);
+  }
+
+  .site-header {
+    padding: 12px 12px;
+  }
+
+  .logo-dot {
+    max-width: 100px;
+  }
+
+  .header-menu-toggle {
+    width: 40px;
+    height: 40px;
+  }
+
+  .footer-col a {
+    padding: 10px 0;
+    min-height: var(--touch-min);
+  }
+
+  .feature-card h3 {
+    font-size: 18px;
+  }
+
+  .feature-card p {
+    font-size: 14px;
+  }
+}
+
+/* Landscape orientation on foldables */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero {
+    min-height: auto;
+    padding: 60px 20px 40px;
+  }
+
+  .hero-right {
+    display: none;
+  }
+
+  .hero-title {
+    font-size: clamp(24px, 5vw, 36px);
+  }
+
+  .hero-desc {
+    margin-bottom: 20px;
+  }
+
+  .features,
+  .quote-section,
+  .final-cta {
+    padding: 48px 20px;
+  }
+}
+
 /* Accessibility: Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
 

@@ -1,0 +1,90 @@
+.agents/
+.kiro/
+.claude/
+.cursor/
+.aider*
+.windsurf/
+
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# ============ BUILD OUTPUT ============
+dist/
+build/
+out/
+.cache/
+
+# ============ ENVIRONMENT & SECRETS ============
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# Secret files
+secrets.json
+credentials.json
+*.pem
+*.key
+
+# ============ IDE & EDITORS ============
+# VS Code
+.vscode/
+*.code-workspace
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-workspace
+*.sublime-project
+
+# ============ OPERATING SYSTEM ============
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# ============ LOGS & TEMP FILES ============
+logs/
+*.log
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# ============ BACKUP FILES ============
+*.bak
+*.backup
+*.old
+
+# ============ TESTING & COVERAGE ============
+coverage/
+.nyc_output/
+test-results/
+
+# ============ MISC ============
+# Archive files (usually downloaded dependencies)
+*.zip
+*.tar.gz
+*.rar
+

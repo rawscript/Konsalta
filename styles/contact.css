@@ -557,3 +557,60 @@ img {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ============ FOLDABLE DEVICE SUPPORT ============ */
+
+/* Foldable devices in folded narrow mode (Galaxy Fold, etc.) */
+@media (max-width: 280px) {
+  .intro {
+    padding: 80px 16px 24px;
+  }
+
+  .intro h1 {
+    font-size: 2rem;
+  }
+
+  .intro p:last-child {
+    font-size: 0.95rem;
+  }
+
+  .back-link {
+    font-size: 0.85rem;
+  }
+
+  .contact-copy,
+  .contact-form {
+    padding: 24px 16px;
+  }
+
+  .contact-copy h2 {
+    font-size: 1.5rem;
+  }
+
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  .contact-form button {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Landscape orientation on foldables */
+@media (max-height: 500px) and (orientation: landscape) {
+  .intro {
+    padding: 60px 20px 24px;
+  }
+
+  .intro h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+  }
+
+  .contact-wrap {
+    padding: 16px 20px 40px;
+  }
+}
