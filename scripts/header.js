@@ -37,6 +37,17 @@
     link.addEventListener("click", closeNav);
   });
 
+  // Close mobile menu when viewport expands to desktop size
+  let resizeTimeout;
+  window.addEventListener("resize", function () {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(function () {
+      if (window.innerWidth > 1100 && nav.classList.contains("nav-open")) {
+        closeNav();
+      }
+    }, 100);
+  });
+
   function openNav() {
     nav.classList.add("nav-open");
     toggle.setAttribute("aria-expanded", "true");

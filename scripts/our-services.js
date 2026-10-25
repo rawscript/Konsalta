@@ -47,25 +47,39 @@ if (typeof gsap !== "undefined") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ===== MOBILE PERFORMANCE CONFIG =====
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isMobile = window.innerWidth <= 768;
+  const isSmallMobile = window.innerWidth <= 480;
+
   // ===== GSAP-POWERED CHECKERED GRID TRACKING EFFECT =====
-  initCheckeredGridTracking();
+  // Skip on mobile for performance
+  if (!isMobile && !prefersReducedMotion) {
+    initCheckeredGridTracking();
+  }
 
   // ===== INTRO TIMELINE =====
   if (typeof gsap !== "undefined") {
+    // Animation values based on viewport
+    const wordY = isMobile ? 25 : 40;
+    const cardY = isMobile ? 18 : 30;
+    const duration = isMobile ? 0.5 : 0.8;
+    const stagger = isMobile ? 0.04 : 0.06;
+
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
 
     tl.to(
       ".headline .word, .headline .arrow",
-      { opacity: 1, duration: 0.4, stagger: 0.06 },
+      { opacity: 1, duration: 0.4, stagger: stagger },
       0.2
     )
       .from(
         ".headline .word",
         {
-          y: 40,
-          rotateX: -50,
-          duration: 0.8,
-          stagger: 0.06,
+          y: wordY,
+          rotateX: isMobile || prefersReducedMotion ? 0 : -50,
+          duration: duration,
+          stagger: stagger,
           ease: "back.out(1.4)",
         },
         "<",
@@ -101,45 +115,47 @@ document.addEventListener("DOMContentLoaded", () => {
       .from(
         ".card-base, .stat-half",
         {
-          y: 30,
+          y: cardY,
           scale: 0.96,
-          duration: 0.7,
+          duration: isMobile ? 0.5 : 0.7,
           stagger: 0.1,
           ease: "back.out(1.4)",
         },
         "<",
       )
-      .to(".tag", { opacity: 1, duration: 0.3, stagger: 0.06 }, "-=0.5")
+      .to(".tag", { opacity: 1, duration: 0.3, stagger: stagger }, "-=0.5")
       .from(
         ".tag",
         {
           scale: 0.3,
           duration: 0.7,
-          stagger: 0.06,
+          stagger: stagger,
           ease: "back.out(2)",
         },
         "<",
       );
 
-    // Continuous loops
-    gsap.to(".headline .arrow", {
-      y: -5,
-      rotation: 3,
-      duration: 2.5,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-      delay: 2.5,
-    });
+    // Continuous loops - skip on mobile for performance
+    if (!isMobile && !prefersReducedMotion) {
+      gsap.to(".headline .arrow", {
+        y: -5,
+        rotation: 3,
+        duration: 2.5,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 2.5,
+      });
 
-    gsap.to(".cta-yellow", {
-      scale: 1.02,
-      duration: 1.6,
-      repeat: -1,
-      yoyo: true,
-      ease: "sine.inOut",
-      delay: 3,
-    });
+      gsap.to(".cta-yellow", {
+        scale: 1.02,
+        duration: 1.6,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: 3,
+      });
+    }
 
     // ===== ANIMATED COUNTERS =====
     animateCounter("#stat1Num", 9, "Services", 1.6);

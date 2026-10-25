@@ -1,9 +1,68 @@
 gsap.registerPlugin(ScrollTrigger);
 
+// ============ ANIMATION CONFIG FACTORY ============
+// Returns animation settings based on viewport width and motion preferences
+// - <=480px: Disable heavy animations (constellation, parallax, 3D transforms)
+// - <=768px: Reduce animation intensity (shorter durations, smaller values)
+// - >768px: Full desktop experience
+function getAnimationConfig() {
+  const width = window.innerWidth;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (prefersReducedMotion) {
+    return {
+      disabled: true,
+      constellation3D: false,
+      parallax: false,
+      tileStagger: { duration: 0.3, stagger: 0.02 },
+      featureCard3D: false,
+      lineDuration: 0.3,
+      sectionRevealDuration: 0.4
+    };
+  }
+
+  if (width <= 480) {
+    return {
+      disabled: false,
+      constellation3D: false,
+      parallax: false,
+      tileStagger: { duration: 0.6, stagger: 0.03 },
+      featureCard3D: false,
+      lineDuration: 0.8,
+      sectionRevealDuration: 0.5
+    };
+  }
+
+  if (width <= 768) {
+    return {
+      disabled: false,
+      constellation3D: false,
+      parallax: { y: 40, scale: 0.7 }, // Reduced values
+      tileStagger: { duration: 0.8, stagger: 0.05 },
+      featureCard3D: false,
+      lineDuration: 1.0,
+      sectionRevealDuration: 0.6
+    };
+  }
+
+  // Desktop: full animations
+  return {
+    disabled: false,
+    constellation3D: true,
+    parallax: { y: 90, scale: null }, // null = use responsive calculation
+    tileStagger: { duration: 1.2, stagger: 0.07 },
+    featureCard3D: true,
+    lineDuration: 1.4,
+    sectionRevealDuration: 0.9
+  };
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   // ============ CURSOR ============
   const cursor = document.querySelector(".cursor");
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const animConfig = getAnimationConfig();
 
   if (cursor && isFinePointer) {
     document.body.classList.add("has-custom-cursor");
@@ -82,8 +141,8 @@ document.addEventListener("DOMContentLoaded", () => {
       {
         opacity: 1,
         scale: 1,
-        duration: 1.2,
-        stagger: { each: 0.07, from: "center" },
+        duration: animConfig.tileStagger.duration,
+        stagger: { each: animConfig.tileStagger.stagger, from: "center" },
         ease: "elastic.out(1, 0.6)",
       },
       0.4,
@@ -92,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
       ".constellation-lines path",
       {
         strokeDashoffset: 0,
-        duration: 1.4,
+        duration: animConfig.lineDuration,
         stagger: 0.06,
         ease: "power2.inOut",
       },
@@ -102,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ============ CONSTELLATION 3D TILT ============
   const constellation = document.getElementById("constellation");
   const constellationInner = document.getElementById("constellationInner");
-  if (constellation && constellationInner && isFinePointer) {
+  if (constellation && constellationInner && isFinePointer && animConfig.constellation3D) {
     constellation.addEventListener("mousemove", (e) => {
       const rect = constellation.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
@@ -126,27 +185,33 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============ SCROLL: CONSTELLATION PARALLAX ============
-  gsap.to(".constellation", {
-    y: 90,
-    scale: () =>
-      window.innerWidth <= 380 ? 0.44 : window.innerWidth <= 700 ? 0.55 : 0.94,
-    scrollTrigger: {
-      trigger: ".hero",
-      start: "top top",
-      end: "bottom top",
-      scrub: 1,
-      invalidateOnRefresh: true,
-    },
-  });
-  gsap.to(".hero-left", {
-    y: 50,
-    opacity: 0.45,
-    scrollTrigger: {
-      start: "top top",
-      end: "bottom top",
-      scrub: 1,
-    },
-  });
+  if (animConfig.parallax) {
+    const parallaxConfig = animConfig.parallax;
+    const scaleValue = parallaxConfig.scale !== null 
+      ? parallaxConfig.scale 
+      : () => window.innerWidth <= 380 ? 0.44 : window.innerWidth <= 700 ? 0.55 : 0.94;
+    
+    gsap.to(".constellation", {
+      y: parallaxConfig.y,
+      scale: scaleValue,
+      scrollTrigger: {
+        trigger: ".hero",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+        invalidateOnRefresh: true,
+      },
+    });
+    gsap.to(".hero-left", {
+      y: parallaxConfig.y * 0.55,
+      opacity: 0.45,
+      scrollTrigger: {
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+  }
 
   // ============ SECTION TITLE REVEALS ============
   function splitWords(selector) {
@@ -260,7 +325,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ============ FEATURE CARD 3D HOVER ============
-  if (isFinePointer) {
+  if (isFinePointer && animConfig.featureCard3D) {
     document.querySelectorAll(".feature-card").forEach((card) => {
       card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
@@ -298,6 +363,15 @@ document.addEventListener("DOMContentLoaded", () => {
       start: "top 80%",
       toggleActions: "play none none reverse",
     },
+  });
+
+  // ============ RESIZE HANDLER WITH DEBOUNCE ============
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
   });
 
   // Refresh

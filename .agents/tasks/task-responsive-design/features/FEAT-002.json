@@ -1,0 +1,37 @@
+{
+  "id": "FEAT-002",
+  "type": "perf",
+  "description": "Optimize GSAP animations for mobile performance - reduce/disable heavy 3D transforms and parallax on smaller screens, implement viewport-based animation configuration, and ensure reduced-motion preference is respected.",
+  "status": "completed",
+  "steps": [
+    "1. In scripts/main.js: Add getAnimationConfig() function at the top that returns animation settings based on viewport width (disabled constellation and parallax on <=480px, reduced intensity on <=768px)",
+    "2. In scripts/main.js: Modify constellation 3D tilt initialization to skip on screens <=768px (already checks isFinePointer, add width check)",
+    "3. In scripts/main.js: Modify constellation parallax scroll animation to reduce scale/y values on mobile or disable entirely on screens <=480px",
+    "4. In scripts/main.js: Modify tile stagger animation to use shorter duration and smaller stagger values on mobile screens",
+    "5. In scripts/main.js: Modify feature-card 3D hover effect to skip on screens <=768px (already checks isFinePointer, add width check)",
+    "6. In scripts/main.js: Add resize event listener with debounce that re-evaluates animation config and refreshes ScrollTrigger",
+    "7. In scripts/services.js: Wrap any 3D transforms or heavy animations with viewport width checks - disable or simplify on mobile",
+    "8. In scripts/insights.js: Add viewport checks for any card animations - reduce y distance and stagger values on mobile",
+    "9. In scripts/aboutUS.js: Add viewport checks for statistics counter animations and reveal animations - reduce distances and durations on mobile",
+    "10. In scripts/whyUs.js and scripts/our-services.js: Add viewport checks for card/tile animations - simplify to fade-in on mobile if using 3D effects",
+    "11. In scripts/header.js: Ensure mobile menu works correctly on resize (close menu if viewport expands to desktop)",
+    "12. Verify all JS files respect prefers-reduced-motion: check that main.js already handles this, ensure other files also check window.matchMedia('(prefers-reduced-motion: reduce)') and skip/disable animations"
+  ],
+  "acceptance_criteria": [
+    "Constellation 3D tilt effect disabled on viewports <=768px",
+    "Parallax scrolling effects disabled or significantly reduced on viewports <=768px",
+    "Animation durations reduced by 30-50% on mobile viewports",
+    "All animations respect prefers-reduced-motion media query",
+    "No jank or performance issues when scrolling on mobile devices",
+    "Page still visually appealing with animations disabled/reduced"
+  ],
+  "verification": [
+    "Open index.html in Chrome DevTools at 375px mobile viewport and scroll - verify smooth performance",
+    "Check that constellation tiles animate in but without 3D tilt on mobile",
+    "Test with 'prefers-reduced-motion: reduce' emulation in Chrome DevTools (Rendering tab) - verify all animations are disabled",
+    "Test at 768px tablet width - verify reduced but not disabled animations",
+    "Check that resize from mobile to desktop re-enables animations appropriately"
+  ],
+  "blocked_reason": null,
+  "findings": "Successfully implemented mobile performance optimizations for GSAP animations across all JS files:\n\n**main.js changes:**\n- Added getAnimationConfig() factory function that returns animation settings based on viewport width and prefers-reduced-motion\n- <=480px: Disabled constellation 3D tilt, parallax, feature-card 3D hover; reduced tile stagger duration from 1.2s to 0.6s\n- <=768px: Disabled constellation 3D tilt and feature-card 3D hover; reduced parallax y from 90 to 40; reduced tile stagger duration to 0.8s\n- Added resize event listener with 150ms debounce for ScrollTrigger.refresh()\n\n**services.js changes:**\n- Added isMobile, isSmallMobile, prefersReducedMotion config vars\n- Disabled 3D glass tilt on service cards for <=768px\n- Disabled mouse parallax on background shapes for mobile\n- Reduced float-card hover scale on mobile (1.18 -> 1.08)\n\n**insights.js changes:**\n- Added viewport config vars at DOMContentLoaded start\n- Disabled background shape parallax scroll for mobile\n- Disabled mouse parallax for mobile\n- Reduced card animation y distance (35->20) and duration (0.7->0.5) on mobile\n- Skip sector icon bounce animation on small mobile\n\n**aboutUS.js changes:**\n- Added viewport config vars\n- Reduced all reveal animation y distances by ~30-40% on mobile\n- Reduced stagger delays from 0.1-0.12 to 0.06 on mobile\n- Reduced durations from 0.65-0.8 to 0.45-0.55 on mobile\n\n**whyUs.js changes:**\n- Added viewport config vars at top level\n- Wired prefersReducedMotion into existing reduceMotion check\n\n**our-services.js changes:**\n- Added viewport config vars\n- Disabled checkered grid tracking effect on mobile (canvas-heavy)\n- Reduced headline word y distance (40->25) and rotateX disabled on mobile\n- Reduced card y distance (30->18) on mobile\n- Disabled continuous loop animations (arrow bob, CTA pulse) on mobile\n\n**header.js changes:**\n- Added resize listener with debounce that closes mobile nav when viewport expands to desktop (>1100px)\n\nAll files now properly check prefers-reduced-motion media query and disable/simplify animations accordingly."
+}

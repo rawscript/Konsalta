@@ -8,6 +8,11 @@ if (typeof gsap !== "undefined") {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ============ MOBILE PERFORMANCE CONFIG ============
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isMobile = window.innerWidth <= 768;
+  const isSmallMobile = window.innerWidth <= 480;
+
   // ============ 1. CUSTOM CURSOR ============
   const cursor = document.querySelector(".cursor");
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
@@ -108,31 +113,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ============ 3. SCROLLTRIGGER SECTION REVEALS ============
     if (typeof ScrollTrigger !== "undefined") {
+      // Animation values based on viewport
+      const revealY = isMobile ? 18 : 25;
+      const revealDuration = isMobile ? 0.45 : 0.65;
+      const staggerDelay = isMobile ? 0.06 : 0.1;
+
       // Reveal Section Headers as they enter view
       ScrollTrigger.batch(".section-head", {
         start: "top 88%",
         onEnter: (batch) => {
           gsap.fromTo(
             batch,
-            { opacity: 0, y: 25 },
-            { opacity: 1, y: 0, duration: 0.65, ease: "power2.out", overwrite: "auto" }
+            { opacity: 0, y: revealY },
+            { opacity: 1, y: 0, duration: revealDuration, ease: "power2.out", overwrite: "auto" }
           );
         },
         once: true,
       });
 
       // 1. Who We Serve Cards (batched by row)
+      const serveCardY = isMobile ? 22 : 35;
       ScrollTrigger.batch(".serve-card", {
         start: "top 88%",
         onEnter: (batch) => {
           gsap.fromTo(
             batch,
-            { opacity: 0, y: 35 },
+            { opacity: 0, y: serveCardY },
             {
               opacity: 1,
               y: 0,
-              duration: 0.65,
-              stagger: 0.12,
+              duration: revealDuration,
+              stagger: staggerDelay,
               ease: "power2.out",
               overwrite: "auto",
             }
@@ -142,14 +153,15 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       // 2. Approach Quote Box
+      const quoteY = isMobile ? 20 : 30;
       gsap.fromTo(
         ".approach-quote-box",
-        { opacity: 0, y: 30, scale: 0.97 },
+        { opacity: 0, y: quoteY, scale: 0.97 },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 0.75,
+          duration: revealDuration,
           ease: "power2.out",
           scrollTrigger: {
             trigger: ".approach-quote-box",
@@ -165,12 +177,12 @@ document.addEventListener("DOMContentLoaded", () => {
         onEnter: (batch) => {
           gsap.fromTo(
             batch,
-            { opacity: 0, y: 30 },
+            { opacity: 0, y: revealY },
             {
               opacity: 1,
               y: 0,
-              duration: 0.6,
-              stagger: 0.1,
+              duration: revealDuration,
+              stagger: staggerDelay,
               ease: "power2.out",
               overwrite: "auto",
             }
@@ -185,12 +197,12 @@ document.addEventListener("DOMContentLoaded", () => {
         onEnter: (batch) => {
           gsap.fromTo(
             batch,
-            { opacity: 0, y: 35 },
+            { opacity: 0, y: serveCardY },
             {
               opacity: 1,
               y: 0,
-              duration: 0.65,
-              stagger: 0.1,
+              duration: revealDuration,
+              stagger: staggerDelay,
               ease: "power2.out",
               overwrite: "auto",
             }
@@ -202,11 +214,11 @@ document.addEventListener("DOMContentLoaded", () => {
       // 5. Meet The Team Showcase Carousel Reveal
       gsap.fromTo(
         ".team-showcase-carousel",
-        { opacity: 0, y: 35 },
+        { opacity: 0, y: serveCardY },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: isMobile ? 0.55 : 0.8,
           ease: "power2.out",
           scrollTrigger: {
             trigger: ".team-section",
@@ -222,12 +234,12 @@ document.addEventListener("DOMContentLoaded", () => {
         onEnter: (batch) => {
           gsap.fromTo(
             batch,
-            { opacity: 0, x: -25 },
+            { opacity: 0, x: isMobile ? -15 : -25 },
             {
               opacity: 1,
               x: 0,
-              duration: 0.6,
-              stagger: 0.1,
+              duration: revealDuration,
+              stagger: staggerDelay,
               ease: "power2.out",
               overwrite: "auto",
             }
@@ -239,12 +251,12 @@ document.addEventListener("DOMContentLoaded", () => {
       // 7. CTA Banner
       gsap.fromTo(
         ".about-cta-card",
-        { opacity: 0, y: 30, scale: 0.97 },
+        { opacity: 0, y: quoteY, scale: 0.97 },
         {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 0.75,
+          duration: revealDuration,
           ease: "power2.out",
           scrollTrigger: {
             trigger: ".about-cta-section",

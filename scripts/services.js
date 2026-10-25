@@ -27,6 +27,11 @@ let userIsSearching = false;
 document.addEventListener("DOMContentLoaded", () => {
   if (typeof gsap === "undefined") return;
 
+  // ===== ANIMATION CONFIG FOR MOBILE PERFORMANCE =====
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isMobile = window.innerWidth <= 768;
+  const isSmallMobile = window.innerWidth <= 480;
+
   // ===== CURSOR TRACKING =====
   const cursor = document.querySelector(".cursor");
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
@@ -309,115 +314,124 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===== 3D GLASS TILT & MOUSE SPECULAR GLOW ON SERVICE CARDS =====
-  document.querySelectorAll(".service-card").forEach((card) => {
-    card.addEventListener("mousemove", (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+  // Skip 3D transforms on mobile for performance
+  if (!isMobile && !prefersReducedMotion) {
+    document.querySelectorAll(".service-card").forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
 
-      card.style.setProperty("--mouse-x", `${x}px`);
-      card.style.setProperty("--mouse-y", `${y}px`);
+        card.style.setProperty("--mouse-x", `${x}px`);
+        card.style.setProperty("--mouse-y", `${y}px`);
 
-      const cx = rect.width / 2;
-      const cy = rect.height / 2;
-      const rotX = ((y - cy) / cy) * -5.5;
-      const rotY = ((x - cx) / cx) * 5.5;
+        const cx = rect.width / 2;
+        const cy = rect.height / 2;
+        const rotX = ((y - cy) / cy) * -5.5;
+        const rotY = ((x - cx) / cx) * 5.5;
 
-      gsap.to(card, {
-        rotateX: rotX,
-        rotateY: rotY,
-        transformPerspective: 900,
-        duration: 0.25,
-        ease: "power2.out",
-        overwrite: "auto"
+        gsap.to(card, {
+          rotateX: rotX,
+          rotateY: rotY,
+          transformPerspective: 900,
+          duration: 0.25,
+          ease: "power2.out",
+          overwrite: "auto"
+        });
+      });
+
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, {
+          rotateX: 0,
+          rotateY: 0,
+          duration: 0.5,
+          ease: "power2.out",
+          overwrite: "auto"
+        });
       });
     });
-
-    card.addEventListener("mouseleave", () => {
-      gsap.to(card, {
-        rotateX: 0,
-        rotateY: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        overwrite: "auto"
-      });
-    });
-  });
+  }
 
   // ===== MOUSE PARALLAX ON HERO & BACKGROUND SHAPES =====
-  document.addEventListener("mousemove", (e) => {
-    const cx = window.innerWidth / 2;
-    const cy = window.innerHeight / 2;
-    const dx = (e.clientX - cx) / window.innerWidth;
-    const dy = (e.clientY - cy) / window.innerHeight;
+  // Skip on mobile for performance
+  if (!isMobile && !prefersReducedMotion) {
+    document.addEventListener("mousemove", (e) => {
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      const dx = (e.clientX - cx) / window.innerWidth;
+      const dy = (e.clientY - cy) / window.innerHeight;
 
-    // Background shapes subtle spatial drift
-    document.querySelectorAll(".bg-shape").forEach((shape, i) => {
-      const speed = parseFloat(shape.dataset.speed || 0.2);
-      const strength = (i % 2 === 0 ? -1 : 1) * Math.abs(speed) * 24;
-      gsap.to(shape, {
-        x: dx * strength,
-        y: dy * strength,
-        duration: 1.1,
+      // Background shapes subtle spatial drift
+      document.querySelectorAll(".bg-shape").forEach((shape, i) => {
+        const speed = parseFloat(shape.dataset.speed || 0.2);
+        const strength = (i % 2 === 0 ? -1 : 1) * Math.abs(speed) * 24;
+        gsap.to(shape, {
+          x: dx * strength,
+          y: dy * strength,
+          duration: 1.1,
+          ease: "power2.out",
+          overwrite: "auto"
+        });
+      });
+
+      // Sphere subtle 3D tilt
+      gsap.to(".sphere", {
+        x: dx * -12,
+        y: dy * -12,
+        rotationY: dx * 5,
+        rotationX: -dy * 5,
+        transformPerspective: 1200,
+        duration: 0.7,
         ease: "power2.out",
         overwrite: "auto"
       });
-    });
 
-    // Sphere subtle 3D tilt
-    gsap.to(".sphere", {
-      x: dx * -12,
-      y: dy * -12,
-      rotationY: dx * 5,
-      rotationX: -dy * 5,
-      transformPerspective: 1200,
-      duration: 0.7,
-      ease: "power2.out",
-      overwrite: "auto"
-    });
-
-    // Floating cards drift
-    document.querySelectorAll(".float-card").forEach((card, i) => {
-      const strength = 10 + (i % 4) * 4;
-      gsap.to(card, {
-        x: dx * strength * -1,
-        y: dy * strength * -1,
-        duration: 0.8,
-        ease: "power2.out",
-        overwrite: "auto"
+      // Floating cards drift
+      document.querySelectorAll(".float-card").forEach((card, i) => {
+        const strength = 10 + (i % 4) * 4;
+        gsap.to(card, {
+          x: dx * strength * -1,
+          y: dy * strength * -1,
+          duration: 0.8,
+          ease: "power2.out",
+          overwrite: "auto"
+        });
       });
     });
-  });
+  }
 
   // ===== CARD HOVER INTERACTIONS (HERO) =====
-  document.querySelectorAll(".float-card").forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      gsap.to(card, {
-        scale: 1.18,
-        rotation: 0,
-        duration: 0.4,
-        ease: "back.out(2)",
-        overwrite: "auto",
-        zIndex: 10
+  // Reduce hover animations on mobile
+  if (!prefersReducedMotion) {
+    document.querySelectorAll(".float-card").forEach((card) => {
+      card.addEventListener("mouseenter", () => {
+        gsap.to(card, {
+          scale: isMobile ? 1.08 : 1.18,
+          rotation: 0,
+          duration: 0.4,
+          ease: "back.out(2)",
+          overwrite: "auto",
+          zIndex: 10
+        });
+      });
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, {
+          scale: 1,
+          duration: 0.5,
+          ease: "power2.out",
+          overwrite: "auto",
+          zIndex: 4,
+          clearProps: "rotation"
+        });
+      });
+      card.addEventListener("click", () => {
+        const grid = document.getElementById("services-grid");
+        if (grid) {
+          grid.scrollIntoView({ behavior: "smooth" });
+        }
       });
     });
-    card.addEventListener("mouseleave", () => {
-      gsap.to(card, {
-        scale: 1,
-        duration: 0.5,
-        ease: "power2.out",
-        overwrite: "auto",
-        zIndex: 4,
-        clearProps: "rotation"
-      });
-    });
-    card.addEventListener("click", () => {
-      const grid = document.getElementById("services-grid");
-      if (grid) {
-        grid.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-  });
+  }
 
   // ===== CONTINUOUS SPHERE ROTATION =====
   gsap.to(".sphere-inner", {

@@ -11,6 +11,11 @@ if (typeof gsap !== "undefined") {
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  // ─── MOBILE PERFORMANCE CONFIG ───────────────────────────────────────────
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isMobile = window.innerWidth <= 768;
+  const isSmallMobile = window.innerWidth <= 480;
+
   // ─── 1. CUSTOM CURSOR ────────────────────────────────────────────────────
   const cursor = document.querySelector(".cursor");
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
@@ -46,38 +51,47 @@ document.addEventListener("DOMContentLoaded", () => {
       .fromTo(".editorial-card",        { opacity: 0, scale: 0.94, y: 35 }, { opacity: 1, scale: 1, y: 0, duration: 0.95, ease: "power3.out" }, 0.6)
       .fromTo(".floating-signal",       { opacity: 0, scale: 0.8, y: 20 }, { opacity: 1, scale: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "back.out(1.8)" }, 0.9);
 
-    // Background shape parallax
+    // Background shape parallax - Skip on mobile for performance
     if (typeof ScrollTrigger !== "undefined") {
-      document.querySelectorAll(".bg-shape").forEach((shape) => {
-        const speed = parseFloat(shape.dataset.speed || 0.2);
-        gsap.to(shape, {
-          y: speed * -260, ease: "none",
-          scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 1.2 }
+      if (!isMobile && !prefersReducedMotion) {
+        document.querySelectorAll(".bg-shape").forEach((shape) => {
+          const speed = parseFloat(shape.dataset.speed || 0.2);
+          gsap.to(shape, {
+            y: speed * -260, ease: "none",
+            scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 1.2 }
+          });
         });
-      });
+      }
+
+      // Stream card animations - reduced on mobile
+      const cardY = isMobile ? 20 : 35;
+      const cardDuration = isMobile ? 0.5 : 0.7;
+      const cardStagger = isMobile ? 0.06 : 0.12;
 
       ScrollTrigger.batch(".stream-card", {
         start: "top 85%",
-        onEnter: (batch) => gsap.fromTo(batch, { opacity: 0, y: 35, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.7, stagger: 0.12, ease: "power2.out" }),
+        onEnter: (batch) => gsap.fromTo(batch, { opacity: 0, y: cardY, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: cardDuration, stagger: cardStagger, ease: "power2.out" }),
         once: true
       });
     }
 
-    // Mouse parallax on background shapes
-    document.addEventListener("mousemove", (e) => {
-      const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
-      const dx = (e.clientX - cx) / window.innerWidth;
-      const dy = (e.clientY - cy) / window.innerHeight;
+    // Mouse parallax on background shapes - Skip on mobile for performance
+    if (!isMobile && !prefersReducedMotion) {
+      document.addEventListener("mousemove", (e) => {
+        const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+        const dx = (e.clientX - cx) / window.innerWidth;
+        const dy = (e.clientY - cy) / window.innerHeight;
 
-      document.querySelectorAll(".bg-shape").forEach((shape, i) => {
-        const speed = parseFloat(shape.dataset.speed || 0.2);
-        const dist  = (i % 2 === 0 ? -1 : 1) * Math.abs(speed) * 24;
-        gsap.to(shape, { x: dx * dist, y: dy * dist, duration: 1.2, ease: "power2.out", overwrite: "auto" });
-      });
+        document.querySelectorAll(".bg-shape").forEach((shape, i) => {
+          const speed = parseFloat(shape.dataset.speed || 0.2);
+          const dist  = (i % 2 === 0 ? -1 : 1) * Math.abs(speed) * 24;
+          gsap.to(shape, { x: dx * dist, y: dy * dist, duration: 1.2, ease: "power2.out", overwrite: "auto" });
+        });
 
-      gsap.to(".floating-signal.signal-1", { x: dx * -14, y: dy * -14, duration: 0.8, ease: "power2.out", overwrite: "auto" });
-      gsap.to(".floating-signal.signal-2", { x: dx * 16,  y: dy * 16,  duration: 0.8, ease: "power2.out", overwrite: "auto" });
-    }, { passive: true });
+        gsap.to(".floating-signal.signal-1", { x: dx * -14, y: dy * -14, duration: 0.8, ease: "power2.out", overwrite: "auto" });
+        gsap.to(".floating-signal.signal-2", { x: dx * 16,  y: dy * 16,  duration: 0.8, ease: "power2.out", overwrite: "auto" });
+      }, { passive: true });
+    }
   }
 
   // ─── 3. SUBPAGE DOCK NAVIGATION ──────────────────────────────────────────
@@ -105,24 +119,33 @@ document.addEventListener("DOMContentLoaded", () => {
   // ─── 4. SECTOR SHOWCASE ANIMATIONS ──────────────────────────────────────
   if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
     // Header line draws in
+    const headerY = isMobile ? 18 : 28;
+    const headerDuration = isMobile ? 0.5 : 0.7;
+
     gsap.from(".sector-showcase-header > *", {
-      opacity: 0, y: 28, duration: 0.7, stagger: 0.12, ease: "power3.out",
+      opacity: 0, y: headerY, duration: headerDuration, stagger: 0.12, ease: "power3.out",
       scrollTrigger: { trigger: "#sectorShowcase", start: "top 82%", once: true }
     });
 
-    // Cards stagger up with a slight rotation for personality
+    // Cards stagger up with a slight rotation for personality - skip rotation on mobile
+    const cardY = isMobile ? 28 : 44;
+    const cardDuration = isMobile ? 0.45 : 0.65;
+    const cardRotation = isMobile || prefersReducedMotion ? 0 : 1.5;
+
     gsap.from(".sector-card", {
-      opacity: 0, y: 44, rotation: 1.5, scale: 0.96,
-      duration: 0.65, stagger: 0.1, ease: "power3.out",
+      opacity: 0, y: cardY, rotation: cardRotation, scale: 0.96,
+      duration: cardDuration, stagger: 0.1, ease: "power3.out",
       scrollTrigger: { trigger: ".sector-grid", start: "top 84%", once: true }
     });
 
-    // Icon bounces in after the card
-    gsap.from(".sector-icon", {
-      scale: 0, opacity: 0, duration: 0.5, stagger: 0.1, ease: "back.out(2)",
-      scrollTrigger: { trigger: ".sector-grid", start: "top 80%", once: true },
-      delay: 0.15
-    });
+    // Icon bounces in after the card - skip on mobile for performance
+    if (!isSmallMobile && !prefersReducedMotion) {
+      gsap.from(".sector-icon", {
+        scale: 0, opacity: 0, duration: 0.5, stagger: 0.1, ease: "back.out(2)",
+        scrollTrigger: { trigger: ".sector-grid", start: "top 80%", once: true },
+        delay: 0.15
+      });
+    }
   }
 
   // ─── 5. RSS FEED ─────────────────────────────────────────────────────────

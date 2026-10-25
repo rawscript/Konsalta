@@ -8,6 +8,11 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  // ─── MOBILE PERFORMANCE CONFIG ───────────────────────────────────────────
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isMobile = window.innerWidth <= 768;
+  const isSmallMobile = window.innerWidth <= 480;
+
   // ─── ACCORDION PANEL UPDATE ──────────────────────────────────────────────
   const mainDisplay  = document.getElementById("mainDisplay");
   const displayNum   = document.getElementById("displayNum");
@@ -71,7 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // ─── GSAP + SCROLLTRIGGER ────────────────────────────────────────────────
   if (typeof gsap === "undefined") return;
 
-  const reduceMotion  = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const reduceMotion  = prefersReducedMotion;
   const canHover      = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const hasST         = typeof ScrollTrigger !== "undefined";
 
