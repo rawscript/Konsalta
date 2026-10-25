@@ -59,8 +59,18 @@ body {
   pointer-events: none;
   z-index: 9999;
   box-shadow: 0 0 12px rgba(242, 101, 34, 0.6);
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, opacity 0.2s;
+  /* position is now driven by transform in JS — no top/left needed */
+  top: 0;
+  left: 0;
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  will-change: transform;
+}
+
+/* Expanded state — toggled via JS class instead of GSAP tween */
+.cursor--large {
+  width: 32px;
+  height: 32px;
+  opacity: 0.85;
 }
 
 body.has-custom-cursor {
@@ -358,6 +368,10 @@ body.has-custom-cursor .cursor {
 
 .hero-accent {
   color: var(--orange);
+}
+
+.headline-navy {
+  color: #123c6c;
 }
 @media (max-width: 600px) {
   .headline {
@@ -896,11 +910,7 @@ body.has-custom-cursor .cursor {
    4. WHY KONSALTA (6 PILLARS / EXPLANATIONS)
    ============================================================ */
 .why-konsalta-section {
-  padding: 10px 0;
-  padding-bottom: 80px;
-  /* background:
-    linear-gradient(135deg, rgba(237, 244, 252, 0.95), rgba(255, 242, 235, 0.68)),
-    var(--bg); */
+  padding: 10px 0 80px;
   border-top: 1px solid var(--line-light);
   border-bottom: 1px solid var(--line-light);
 }
@@ -917,7 +927,11 @@ body.has-custom-cursor .cursor {
   border-radius: 20px;
   padding: 36px 30px;
   box-shadow: var(--shadow-sm);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Only transition the properties that actually change on hover */
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
   display: flex;
   flex-direction: column;
   position: relative;

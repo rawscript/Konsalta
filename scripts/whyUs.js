@@ -1,203 +1,158 @@
-const thumbs = document.querySelectorAll(".thumb-panel");
-const mainDisplay = document.getElementById("mainDisplay");
-const displayNum = document.getElementById("displayNum");
-const displayCategory = document.getElementById("displayCategory");
-const displayTitle = document.getElementById("displayTitle");
-const displayDesc = document.getElementById("displayDesc");
-const displayContent = document.getElementById("displayContent");
-let panelUpdateTimer;
-
-function updateMainPanel(panel) {
-  const { img, num, category, title, desc } = panel.dataset;
-
-  window.clearTimeout(panelUpdateTimer);
-  displayContent.classList.add("fade-out");
-
-  panelUpdateTimer = window.setTimeout(() => {
-    mainDisplay.style.backgroundImage = `url("${img}")`;
-    displayNum.textContent = num;
-    displayCategory.textContent = category;
-    displayTitle.textContent = title;
-    displayDesc.textContent = desc;
-    displayContent.classList.remove("fade-out");
-  }, 200);
-}
-
-thumbs.forEach((thumb) => {
-  thumb.addEventListener("mouseenter", () => updateMainPanel(thumb));
-  thumb.addEventListener("focus", () => updateMainPanel(thumb));
-});
+/**
+ * whyUs.js — optimised for performance
+ * - Single DOMContentLoaded entry point
+ * - Cursor uses rAF loop only, no per-element GSAP tweens
+ * - Orb parallax merged into one scrub timeline
+ * - Panel update debounced with a single timer ref
+ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ============ CUSTOM CURSOR ============
-  const cursor = document.querySelector(".cursor");
+  // ─── ACCORDION PANEL UPDATE ──────────────────────────────────────────────
+  const mainDisplay  = document.getElementById("mainDisplay");
+  const displayNum   = document.getElementById("displayNum");
+  const displayCat   = document.getElementById("displayCategory");
+  const displayTitle = document.getElementById("displayTitle");
+  const displayDesc  = document.getElementById("displayDesc");
+  const displayContent = document.getElementById("displayContent");
+  let panelTimer;
+
+  function updateMainPanel(panel) {
+    const { img, num, category, title, desc } = panel.dataset;
+    clearTimeout(panelTimer);
+    displayContent.classList.add("fade-out");
+    panelTimer = setTimeout(() => {
+      mainDisplay.style.backgroundImage = `url("${img}")`;
+      displayNum.textContent   = num;
+      displayCat.textContent   = category;
+      displayTitle.textContent = title;
+      displayDesc.textContent  = desc;
+      displayContent.classList.remove("fade-out");
+    }, 200);
+  }
+
+  document.querySelectorAll(".thumb-panel").forEach((thumb) => {
+    thumb.addEventListener("mouseenter", () => updateMainPanel(thumb));
+    thumb.addEventListener("focus",      () => updateMainPanel(thumb));
+  });
+
+  // ─── CUSTOM CURSOR ───────────────────────────────────────────────────────
+  const cursor       = document.querySelector(".cursor");
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
 
   if (cursor && isFinePointer) {
     document.body.classList.add("has-custom-cursor");
-    let mx = window.innerWidth / 2;
-    let my = window.innerHeight / 2;
-    let cx = mx;
-    let cy = my;
 
+    let mx = window.innerWidth  / 2;
+    let my = window.innerHeight / 2;
+    let cx = mx, cy = my;
+
+    // Single mousemove listener — cheap, no GSAP involved
     document.addEventListener("mousemove", (e) => {
       mx = e.clientX;
       my = e.clientY;
+    }, { passive: true });
+
+    // CSS classes handle the size change — zero JS tween overhead
+    document.querySelectorAll("a, button, .why-card-6, .cinematic-panel").forEach((el) => {
+      el.addEventListener("mouseenter", () => cursor.classList.add("cursor--large"),    { passive: true });
+      el.addEventListener("mouseleave", () => cursor.classList.remove("cursor--large"), { passive: true });
     });
 
-    (function animateCursor() {
-      cx += (mx - cx) * 0.22;
-      cy += (my - cy) * 0.22;
-      cursor.style.left = cx + "px";
-      cursor.style.top = cy + "px";
-      requestAnimationFrame(animateCursor);
+    // Single rAF loop for smooth lag, writing only transform
+    (function tick() {
+      cx += (mx - cx) * 0.18;
+      cy += (my - cy) * 0.18;
+      cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+      requestAnimationFrame(tick);
     })();
-
-    // Cursor scaling on interactive elements — only if GSAP is available
-    if (typeof gsap !== "undefined") {
-      document
-        .querySelectorAll("a, button, .serve-card, .why-card-6, .cinematic-panel")
-        .forEach((el) => {
-          el.addEventListener("mouseenter", () => {
-            gsap.to(cursor, { width: 32, height: 32, opacity: 0.85, duration: 0.25, ease: "power2.out" });
-          });
-          el.addEventListener("mouseleave", () => {
-            gsap.to(cursor, { width: 12, height: 12, opacity: 1, duration: 0.25, ease: "power2.out" });
-          });
-        });
-    }
   }
 
-  // ============ GSAP ANIMATIONS ============
-  if (typeof gsap !== "undefined") {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const hasScrollTrigger = typeof ScrollTrigger !== "undefined";
+  // ─── GSAP + SCROLLTRIGGER ────────────────────────────────────────────────
+  if (typeof gsap === "undefined") return;
 
-    if (hasScrollTrigger) {
-      gsap.registerPlugin(ScrollTrigger);
-    }
+  const reduceMotion  = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const canHover      = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const hasST         = typeof ScrollTrigger !== "undefined";
 
-    if (!reduceMotion) {
-      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+  if (hasST) gsap.registerPlugin(ScrollTrigger);
 
-      // Cards are visible by default via CSS; GSAP animates them in on scroll
-      gsap.set(".section-head-why, .why-card-6", { autoAlpha: 1 });
+  if (reduceMotion) return;
 
-      intro
-        .from(".site-header", { autoAlpha: 0, y: -18, duration: 0.65 })
-        .from(
-          ".headline .word > span",
-          { yPercent: 105, duration: 0.9, stagger: 0.09, ease: "power4.out" },
-          0.16,
-        )
-        .from(
-          "#inlineImg, #ideaPill",
-          { scale: 0, duration: 0.65, stagger: 0.12, ease: "back.out(1.5)" },
-          0.34,
-        )
-        .to(".hero-orb-one", { x: 34, y: 18, duration: 2.2, ease: "sine.inOut" }, 0)
-        .to(".hero-orb-two", { x: -28, y: -12, duration: 2.5, ease: "sine.inOut" }, 0.1)
-        .to(".hero-orb-three", { x: 16, y: 22, duration: 2.8, ease: "sine.inOut" }, 0.2);
+  // ── Intro timeline ──────────────────────────────────────────────────────
+  gsap.timeline({ defaults: { ease: "power3.out" } })
+    .from(".site-header",           { autoAlpha: 0, y: -18, duration: 0.6 })
+    .from(".headline .word > span", { yPercent: 105, duration: 0.85, stagger: 0.08, ease: "power4.out" }, 0.14)
+    .from("#inlineImg, #ideaPill",  { scale: 0, duration: 0.6, stagger: 0.1, ease: "back.out(1.5)" }, 0.3);
 
-      gsap.to("#inlineImg", {
-        y: 6,
-        rotation: 2,
-        duration: 2.8,
-        delay: 1.5,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
-      gsap.to("#ideaPill", {
-        y: 5,
-        rotation: -1.5,
-        duration: 3.2,
-        delay: 1.7,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
+  // ── Ambient orb drift on load (CSS handles these via keyframe would be
+  //    lighter, but GSAP yoyo is already set up — keep it, just don't repeat
+  //    for the third orb which isn't animated individually) ─────────────────
+  gsap.to("#inlineImg", { y: 6,  rotation:  2,   duration: 2.8, delay: 1.4, ease: "sine.inOut", yoyo: true, repeat: -1 });
+  gsap.to("#ideaPill",  { y: 5,  rotation: -1.5, duration: 3.2, delay: 1.6, ease: "sine.inOut", yoyo: true, repeat: -1 });
 
-      if (hasScrollTrigger) {
-        // Orbs parallax through the full parallax-stage (hero + pillars)
-        gsap.to(".hero-orb-one", {
-          y: 180,
-          scrollTrigger: { trigger: ".parallax-stage", start: "top top", end: "bottom top", scrub: 1.4 },
-        });
-        gsap.to(".hero-orb-two", {
-          y: -120,
-          x: 20,
-          scrollTrigger: { trigger: ".parallax-stage", start: "top top", end: "bottom top", scrub: 1.8 },
-        });
-        gsap.to(".hero-orb-three", {
-          y: -90,
-          x: 40,
-          scrollTrigger: { trigger: ".parallax-stage", start: "top top", end: "bottom top", scrub: 1.0 },
-        });
-        // Pillars frame fades in gently as it enters view
-        gsap.from(".pillars-frame", {
-          autoAlpha: 0,
-          y: 28,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ".section-1", start: "top 82%", once: true },
-        });
-        gsap.from(".section-content, .section-subtitle", {
-          autoAlpha: 0,
-          y: 20,
-          duration: 0.7,
-          stagger: 0.14,
-          scrollTrigger: { trigger: ".section-1", start: "top 75%", once: true },
-        });
-        gsap.from(".cinematic-panel", {
-          autoAlpha: 0,
-          y: 48,
-          duration: 0.8,
-          stagger: 0.1,
-          scrollTrigger: { trigger: ".accordion-container", start: "top 78%", once: true },
-        });
-        gsap.from(".section-head-why, .why-card-6", {
-          autoAlpha: 0,
-          y: 42,
-          duration: 0.7,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: ".why-konsalta-section",
-            start: "top 85%",
-            once: true,
-          },
-        });
-      }
+  // ── Parallax: merge all three orbs into ONE ScrollTrigger timeline ───────
+  // One scrub = one scroll listener instead of three separate ones
+  if (hasST) {
+    const orbTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".parallax-stage",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1.2,
+      },
+    });
+    orbTl
+      .to(".hero-orb-one",   { y: 180,        ease: "none" }, 0)
+      .to(".hero-orb-two",   { y: -120, x: 20, ease: "none" }, 0)
+      .to(".hero-orb-three", { y: -90,  x: 40, ease: "none" }, 0);
 
-      if (canHover) {
-        const inlineImg = document.getElementById("inlineImg");
-        const ideaPill = document.getElementById("ideaPill");
+    // ── Scroll-reveal animations ───────────────────────────────────────────
+    // pillars frame
+    gsap.from(".pillars-frame", {
+      autoAlpha: 0, y: 24, duration: 0.8,
+      scrollTrigger: { trigger: ".section-1", start: "top 84%", once: true },
+    });
+    gsap.from(".section-content, .section-subtitle", {
+      autoAlpha: 0, y: 18, duration: 0.65, stagger: 0.12,
+      scrollTrigger: { trigger: ".section-1", start: "top 78%", once: true },
+    });
 
-        inlineImg.addEventListener("mouseenter", () => {
-          gsap.to(inlineImg, { scale: 1.08, rotation: 4, duration: 0.35, ease: "back.out(1.6)" });
-        });
-        inlineImg.addEventListener("mouseleave", () => {
-          gsap.to(inlineImg, { scale: 1, rotation: 0, duration: 0.55, ease: "elastic.out(1, 0.6)" });
-        });
-        ideaPill.addEventListener("mouseenter", () => {
-          gsap.to(ideaPill, { scale: 1.06, rotation: -3, duration: 0.35, ease: "back.out(1.6)" });
-          gsap.to(ideaPill.querySelector(".leaf"), { rotation: "+=360", duration: 0.75, ease: "power2.inOut" });
-        });
-        ideaPill.addEventListener("mouseleave", () => {
-          gsap.to(ideaPill, { scale: 1, rotation: 0, duration: 0.55, ease: "elastic.out(1, 0.6)" });
-        });
-      }
-    }
+    // cinematic panels — batch so stagger is driven by one ST instance
+    gsap.from(".cinematic-panel", {
+      autoAlpha: 0, y: 40, duration: 0.75, stagger: 0.08,
+      scrollTrigger: { trigger: ".accordion-container", start: "top 80%", once: true },
+    });
+
+    // why-cards — use gsap.utils.toArray + batch for clean stagger
+    gsap.from(".section-head-why, .why-card-6", {
+      autoAlpha: 0, y: 36, duration: 0.65, stagger: 0.08,
+      scrollTrigger: { trigger: ".why-konsalta-section", start: "top 86%", once: true },
+    });
+  }
+
+  // ── Hover interactions (desktop only) ────────────────────────────────────
+  if (canHover) {
+    const inlineImg = document.getElementById("inlineImg");
+    const ideaPill  = document.getElementById("ideaPill");
+    const leaf      = ideaPill?.querySelector(".leaf");
+
+    inlineImg?.addEventListener("mouseenter", () =>
+      gsap.to(inlineImg, { scale: 1.08, rotation: 4,   duration: 0.3, ease: "back.out(1.6)" }));
+    inlineImg?.addEventListener("mouseleave", () =>
+      gsap.to(inlineImg, { scale: 1,    rotation: 0,   duration: 0.5, ease: "elastic.out(1, 0.6)" }));
+
+    ideaPill?.addEventListener("mouseenter", () => {
+      gsap.to(ideaPill, { scale: 1.06, rotation: -3, duration: 0.3, ease: "back.out(1.6)" });
+      if (leaf) gsap.to(leaf, { rotation: "+=360", duration: 0.7, ease: "power2.inOut" });
+    });
+    ideaPill?.addEventListener("mouseleave", () =>
+      gsap.to(ideaPill, { scale: 1, rotation: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }));
   }
 
 }); // end DOMContentLoaded
 
-// Refresh ScrollTrigger after fonts/images finish loading so trigger
-// positions are calculated against the final settled layout.
-window.addEventListener("load", function () {
-  if (typeof ScrollTrigger !== "undefined") {
-    ScrollTrigger.refresh();
-  }
-});
+// Recalculate ScrollTrigger positions after all assets are loaded
+window.addEventListener("load", () => {
+  if (typeof ScrollTrigger !== "undefined") ScrollTrigger.refresh();
+}, { once: true });
