@@ -1815,3 +1815,35 @@ body.has-custom-cursor .cursor {
     align-items: center;
   }
 }
+
+/* ============================================================
+   FOLDABLE DEVICE SUPPORT
+   ============================================================ */
+
+/* Galaxy Fold / ultra-narrow foldables (closed-fold state) */
+@media (max-width: 280px) {
+  .services-hero { padding: 24px 0 28px; }
+  .services-grid { grid-template-columns: 1fr; gap: 12px; }
+  .service-card { padding: 16px 14px; }
+  .services-hero .section-title { font-size: 24px; }
+  .services-tabs { flex-direction: column; gap: 6px; }
+  .services-tab-btn { font-size: 12px; padding: 8px 14px; }
+}
+
+/* Landscape foldables (phone-like device rotated) */
+@media (max-height: 500px) and (orientation: landscape) {
+  .services-hero { padding: 16px 0 20px; }
+  .services-grid { gap: 10px; }
+  .service-card { padding: 14px 12px; }
+}
+
+/* Dynamic viewport units for notched/foldable screens */
+@supports (height: 100dvh) {
+  .services-hero { min-height: 60dvh; }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .service-card { transition: none; transform: none !important; }
+  html { scroll-behavior: auto; }
+}

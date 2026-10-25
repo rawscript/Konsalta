@@ -986,3 +986,35 @@ body.has-custom-cursor .cursor {
 /* ============================================================
    8. SITE FOOTER (Standardized via styles/footer.css)
    ============================================================ */
+
+/* ============================================================
+   FOLDABLE DEVICE SUPPORT
+   ============================================================ */
+
+/* Galaxy Fold / ultra-narrow foldables (closed-fold state) */
+@media (max-width: 280px) {
+  .why-us-hero { padding: 24px 0 28px; min-height: unset; }
+  .why-us-hero h1, .why-us-hero .hero-title { font-size: 24px; }
+  .why-us-grid { grid-template-columns: 1fr; gap: 12px; }
+  .why-us-item { padding: 16px 14px; }
+  .stats-row { flex-direction: column; gap: 12px; }
+  .stat-card { min-width: unset; width: 100%; }
+}
+
+/* Landscape foldables (phone-like device rotated) */
+@media (max-height: 500px) and (orientation: landscape) {
+  .why-us-hero { padding: 16px 0 20px; min-height: unset; }
+  .why-us-grid { gap: 10px; }
+  .why-us-item { padding: 14px 12px; }
+}
+
+/* Dynamic viewport units for notched/foldable screens */
+@supports (height: 100dvh) {
+  .why-us-hero { min-height: 100dvh; }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .why-us-item, .stat-card { transition: none; transform: none !important; }
+  html { scroll-behavior: auto; }
+}

@@ -205,3 +205,36 @@
     display: none !important;
   }
 }
+
+/* ============================================================
+   FOLDABLE DEVICE SUPPORT
+   ============================================================ */
+
+/* Galaxy Fold / ultra-narrow foldables (closed-fold state) */
+@media (max-width: 280px) {
+  .site-header { padding: 10px 12px; }
+  .site-header .logo-dot { max-width: 100px; height: 34px; }
+  .site-header .logo-dot img { max-height: 32px; }
+  .site-header .header-menu-toggle { width: 36px; height: 36px; padding: 8px; }
+  .site-header .header-nav { left: 8px; right: 8px; padding: 6px; }
+  .site-header .header-nav a { font-size: 13px; padding: 10px 10px; min-height: 40px; }
+}
+
+/* Landscape foldables (phone-like device rotated) */
+@media (max-height: 500px) and (orientation: landscape) {
+  .site-header { padding: 8px 16px; }
+  .site-header .logo-dot { height: 32px; }
+  .site-header .logo-dot img { max-height: 30px; }
+  .site-header .header-menu-toggle { width: 36px; height: 36px; }
+}
+
+/* Dynamic viewport units for notched/foldable screens */
+@supports (height: 100dvh) {
+  .site-header + * { padding-top: env(safe-area-inset-top, 0px); }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .site-header .header-btn { transition: none; transform: none !important; box-shadow: none !important; }
+  .site-header .header-menu-toggle { transition: none; }
+}

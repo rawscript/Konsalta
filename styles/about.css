@@ -2405,3 +2405,51 @@ body.has-custom-cursor .cursor {
     padding: 18px 16px;
   }
 }
+
+/* ============================================================
+   FOLDABLE DEVICE SUPPORT
+   ============================================================ */
+
+/* Galaxy Fold / ultra-narrow foldables (closed-fold state) */
+@media (max-width: 280px) {
+  .who-we-are-hero { padding: 24px 0 32px; }
+  .hero-main-title { font-size: 26px; }
+  .hero-lead-text { font-size: 14px; }
+  .hero-actions { flex-direction: column; gap: 10px; }
+  .hero-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .hero-stat-card { padding: 16px 12px; }
+  .hero-stat-number { font-size: 28px; }
+  .principles-layout { grid-template-columns: 1fr; }
+  .principles-nav { display: none; }
+  .why-grid-6 { grid-template-columns: 1fr; gap: 12px; }
+  .team-carousel-slide { flex: 0 0 240px; }
+  .section-title { font-size: 24px; }
+  .serve-grid { grid-template-columns: 1fr; }
+  .approach-quote-box { padding: 16px; }
+}
+
+/* Landscape foldables (phone-like device rotated) */
+@media (max-height: 500px) and (orientation: landscape) {
+  .who-we-are-hero { padding: 16px 0 20px; }
+  .hero-stats-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .hero-stat-card { padding: 12px 8px; }
+  .hero-stat-number { font-size: 24px; }
+  .ambient-1, .ambient-2 { display: none; }
+  .who-we-serve-section { padding: 24px 0 16px; }
+  .approach-section { padding: 16px 0; }
+  .why-konsalta-section { padding: 32px 0; }
+  .team-section { padding: 24px 0 32px; }
+}
+
+/* Dynamic viewport units for notched/foldable screens */
+@supports (height: 100dvh) {
+  .who-we-are-hero { min-height: 100dvh; }
+  .about-page { min-height: 100dvh; }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .hero-stat-card, .serve-card, .why-card-6, .principle-card, .team-carousel-slide { transition: none; transform: none !important; }
+  .serve-star { transition: none; animation: none; }
+  html { scroll-behavior: auto; }
+}
