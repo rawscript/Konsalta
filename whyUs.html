@@ -11,10 +11,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&family=Manrope:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&family=Manrope:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles/why-us.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
       defer
@@ -31,6 +32,9 @@
     <div class="ambient-1" aria-hidden="true"></div>
     <div class="ambient-2" aria-hidden="true"></div>
     <div class="cursor" aria-hidden="true"></div>
+
+    <!-- Interactive Multi-Hub Connection Mesh Background -->
+    <canvas id="hubMeshCanvas" class="hub-mesh-canvas" aria-hidden="true"></canvas>
 
       <header class="site-header">
         <a href="index.html" class="logo" aria-label="Konsalta Home">
@@ -403,7 +407,7 @@
         </a>
       </div> -->
 
-      <footer class="site-footer" id="contact">
+    <footer class="site-footer" id="contact">
       <div class="footer-inner">
         <div class="footer-top">
           <div class="footer-brand">
@@ -418,9 +422,7 @@
           <div class="footer-cols">
             <div class="footer-col">
               <h4>Services</h4>
-              <a href="services.html#services-grid"
-                >Research &amp; Evaluation</a
-              >
+              <a href="services.html#services-grid">Research &amp; Evaluation</a>
               <a href="services.html#services-grid">Strategy &amp; Advisory</a>
               <a href="services.html#services-grid">Market Intelligence</a>
               <a href="services.html#services-grid">Policy &amp; Systems</a>
@@ -436,26 +438,21 @@
               <h4>Find Us</h4>
               <p>
                 <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
-                  ></path>
-                  <circle cx="12" cy="10" r="2.5"></circle></svg
-                >Harare, Zimbabwe
+                  <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
+                  <circle cx="12" cy="10" r="2.5"></circle>
+                </svg>Harare, Zimbabwe
               </p>
               <a
                 href="https://www.linkedin.com/company/konsalta-hub-africa/"
                 target="_blank"
                 rel="noopener noreferrer"
-                ><svg
-                  class="footer-icon footer-icon-brand"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path
-                    d="M5 9v10M5 5v.01M10 19v-6a4 4 0 0 1 8 0v6M10 9v10M3 3h18v18H3z"
-                  ></path></svg
-                >LinkedIn</a
+              ><svg
+                class="footer-icon footer-icon-brand"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
               >
+                <path d="M5 9v10M5 5v.01M10 19v-6a4 4 0 0 1 8 0v6M10 9v10M3 3h18v18H3z"></path>
+              </svg>LinkedIn</a>
             </div>
           </div>
         </div>

@@ -558,7 +558,30 @@ body.has-custom-cursor .cursor {
 .approach-section {
   padding: clamp(32px, 3.5vw, 48px) 0;
   position: relative;
+  overflow: hidden;
   background: linear-gradient(180deg, rgba(237, 244, 252, 0.35) 0%, transparent 40%, rgba(242, 101, 34, 0.03) 100%);
+}
+
+/* Ambient Muted Fading Brand Blue Dots Field (Edge-Only Circular Vignette Falloff) */
+.approach-dots-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.38;
+  mask-image: radial-gradient(ellipse 92% 90% at 50% 50%, black 68%, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0.3) 92%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 92% 90% at 50% 50%, black 68%, rgba(0, 0, 0, 0.8) 80%, rgba(0, 0, 0, 0.3) 92%, transparent 100%);
+}
+
+.approach-dots-bg .bgDot {
+  fill: var(--navy, #0B2D53);
+}
+
+.approach-section .section-container {
+  position: relative;
+  z-index: 2;
 }
 
 .approach-quote-box {
