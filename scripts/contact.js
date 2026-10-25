@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
       );
   };
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
     if (!form.checkValidity()) {
@@ -184,10 +184,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const formData = new FormData(form);
     const name = (formData.get("name") || "there").toString().trim();
 
-    status.textContent = `Thanks${name && name !== "there" ? `, ${name}` : ""}. Your enquiry has been received and the Konsalta team will get back to you soon.`;
-    status.classList.remove("error");
-    status.classList.add("success");
-    form.reset();
-    playSendAnimation();
+    // Collect form data
+    const data = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      company: formData.get("company"),
+      projectType: formData.get("projectType"),
+      message: formData.get("message")
+    };
+
+    // Disable submit button while sending
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    try {
+      // Determine API URL based on environment
+      const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:3000/api/contact'
+        : '/api/contact';
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        status.textContent = `Thanks${name && name !== "there" ? `, ${name}` : ""}. Your enquiry has been received and the Konsalta team will get back to you soon.`;
+        status.classList.remove("error");
+        status.classList.add("success");
+        form.reset();
+        playSendAnimation();
+      } else {
+        throw new Error(result.error || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error('Contact form error:', error);
+      status.textContent = error.message || "Sorry, there was a problem sending your enquiry. Please email us directly at engage@konsaltahub.org";
+      status.classList.remove("success");
+      status.classList.add("error");
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
+    }
   });
 });
