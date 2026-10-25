@@ -377,6 +377,7 @@ body.has-custom-cursor .cursor {
   overflow: hidden;
   padding-bottom: 0.1em;
   margin-bottom: -0.1em;
+  
 }
 .headline .word > span {
   display: inline-block;
