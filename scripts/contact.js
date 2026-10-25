@@ -205,6 +205,8 @@ document.addEventListener("DOMContentLoaded", () => {
         ? 'http://localhost:3000/api/contact'
         : '/api/contact';
 
+      console.log('Sending to:', apiUrl);
+
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
@@ -213,7 +215,16 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(data)
       });
 
+      console.log('Response status:', response.status);
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Server error:', errorText);
+        throw new Error(`Server error: ${response.status}`);
+      }
+
       const result = await response.json();
+      console.log('Result:', result);
 
       if (result.success) {
         status.textContent = `Thanks${name && name !== "there" ? `, ${name}` : ""}. Your enquiry has been received and the Konsalta team will get back to you soon.`;

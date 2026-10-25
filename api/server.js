@@ -60,11 +60,11 @@ app.post('/api/contact', async (req, res) => {
       'other': 'Other'
     };
 
-    // Email to Konsalta team
+    // Email to Konsalta team (sends to both engage and no-reply mailboxes)
     const mailOptions = {
       from: `"Konsalta Contact Form" <${process.env.SMTP_USER}>`,
       replyTo: email,
-      to: process.env.REPLY_TO,
+      to: `${process.env.REPLY_TO}, ${process.env.SMTP_USER}`,
       subject: `New Enquiry from ${name} - ${projectTypes[projectType] || projectType}`,
       text: `
 New Contact Form Submission
