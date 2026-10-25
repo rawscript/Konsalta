@@ -586,7 +586,14 @@ body {
   }
   .cta-yellow {
     font-size: 14px;
-    padding: 10px 14px 10px 20px;
+    padding: 12px 16px 12px 22px;
+    min-height: var(--touch-min, 44px);
+    width: 100%;
+    justify-content: center;
+  }
+  .cta-circle {
+    width: 28px;
+    height: 28px;
   }
   .cards-grid {
     gap: 10px;
@@ -604,16 +611,36 @@ body {
   }
   .tag {
     font-size: 12px;
-    padding: 5px 10px 6px;
+    padding: 6px 12px 7px;
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
   }
   .stat-half {
     padding: 20px;
     border-radius: 18px;
+    min-height: 140px;
   }
   .stat-number {
     font-size: 36px;
   }
+  .stat-desc {
+    font-size: 13px;
+  }
   .testimonial-text {
     font-size: 15px;
+  }
+  .quote-mark {
+    font-size: 36px;
+    margin-bottom: 16px;
+  }
+  .testimonial-avatars .avatar-mini {
+    width: 28px;
+    height: 28px;
+  }
+  .testimonial-avatars .author-label {
+    width: 32px;
+    height: 32px;
+    font-size: 10px;
   }
 }

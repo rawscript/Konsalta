@@ -759,6 +759,103 @@ body.has-custom-cursor .cursor {
   }
 }
 
+/* ============ MOBILE PORTRAIT (480px and below) ============ */
+@media (max-width: 480px) {
+  .hero {
+    padding: 24px 16px 32px;
+  }
+
+  .headline {
+    font-size: clamp(32px, 9vw, 48px);
+  }
+
+  .subtitle {
+    font-size: 14px;
+    padding: 0 8px;
+  }
+
+  .section {
+    padding: 48px 12px;
+  }
+
+  .section-title {
+    font-size: clamp(24px, 6vw, 36px);
+  }
+
+  .section-text {
+    font-size: 15px;
+  }
+
+  .pillars-frame {
+    padding: 24px 16px;
+    border-radius: 20px;
+  }
+
+  .accordion-container {
+    gap: 10px;
+  }
+
+  .cinematic-panel.main-panel {
+    height: 300px;
+  }
+
+  .cinematic-panel.thumb-panel {
+    height: 70px;
+  }
+
+  .panel-content {
+    padding: 28px 20px;
+  }
+
+  .panel-content h2 {
+    font-size: 24px;
+  }
+
+  .panel-content p {
+    font-size: 13px;
+  }
+
+  .action-btn {
+    padding: 10px 20px;
+    font-size: 12px;
+    min-height: var(--touch-min, 44px);
+  }
+
+  .why-grid-6 {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .why-card-6 {
+    padding: 24px 18px;
+  }
+
+  .why-card-title {
+    font-size: 18px;
+  }
+
+  .why-card-desc {
+    font-size: 14px;
+  }
+
+  .why-card-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .section-container-why {
+    padding: 0 16px;
+  }
+
+  .section-title-why {
+    font-size: clamp(24px, 6vw, 36px);
+  }
+
+  .section-desc-why {
+    font-size: 15px;
+  }
+}
+
 /* ============================================================
    4. WHY KONSALTA (6 PILLARS / EXPLANATIONS)
    ============================================================ */

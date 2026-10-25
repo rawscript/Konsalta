@@ -508,6 +508,9 @@ img {
   .back-link {
     top: 24px;
     left: 20px;
+    min-height: var(--touch-min, 44px);
+    display: inline-flex;
+    align-items: center;
   }
 
   .contact-copy,
@@ -515,9 +518,34 @@ img {
     padding: 28px 20px;
   }
 
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    min-height: var(--touch-min, 44px);
+    padding: 12px 14px;
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+
+  .contact-form label {
+    gap: 10px;
+  }
+
+  .contact-form button {
+    width: 100%;
+    min-height: var(--touch-min, 44px);
+    padding: 14px 24px;
+    font-size: 15px;
+  }
+
   .form-footer {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .footer-col a {
+    min-height: var(--touch-min, 44px);
+    display: flex;
+    align-items: center;
   }
 }
 

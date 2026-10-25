@@ -1877,7 +1877,16 @@ body.has-custom-cursor .cursor {
   }
 
   .hero-stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .hero-stat-card {
+    padding: 20px 16px;
+  }
+
+  .hero-stat-number {
+    font-size: 32px;
   }
 
   .hero-actions {
@@ -1889,6 +1898,7 @@ body.has-custom-cursor .cursor {
   .hero-actions .btn-secondary {
     width: 100%;
     justify-content: center;
+    min-height: var(--touch-min, 44px);
   }
 
   .serve-grid {
@@ -1902,6 +1912,40 @@ body.has-custom-cursor .cursor {
 
   .why-grid-6 {
     grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .principles-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .principles-nav {
+    position: sticky;
+    top: 72px;
+    z-index: 10;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 8px 4px 12px;
+    gap: 8px;
+    background: rgba(247, 245, 240, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .principles-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .principle-tab {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 13px;
+    min-height: var(--touch-min, 44px);
   }
 
   .principle-card {
@@ -1972,6 +2016,129 @@ body.has-custom-cursor .cursor {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+}
+
+/* ============ MOBILE PORTRAIT (480px and below) ============ */
+@media (max-width: 480px) {
+  .who-we-are-hero {
+    padding: 32px 0 48px;
+  }
+
+  .hero-main-title {
+    font-size: clamp(26px, 7vw, 34px);
+  }
+
+  .hero-lead-text {
+    font-size: 15px;
+  }
+
+  .hero-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .hero-stat-card {
+    padding: 18px 16px;
+  }
+
+  .hero-stat-number {
+    font-size: 28px;
+  }
+
+  .hero-stat-title {
+    font-size: 14px;
+  }
+
+  .hero-stat-desc {
+    font-size: 12px;
+  }
+
+  .hero-actions .btn-primary,
+  .hero-actions .btn-secondary {
+    padding: 12px 20px;
+    font-size: 14px;
+    min-height: var(--touch-min, 44px);
+  }
+
+  .serve-card {
+    padding: 24px 20px;
+  }
+
+  .serve-title {
+    font-size: 18px;
+  }
+
+  .serve-desc {
+    font-size: 13.5px;
+  }
+
+  .why-card-6 {
+    padding: 24px 20px;
+  }
+
+  .why-card-title {
+    font-size: 18px;
+  }
+
+  .why-card-desc {
+    font-size: 14px;
+  }
+
+  .why-card-icon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .principle-tab {
+    padding: 8px 12px;
+    font-size: 12px;
+    min-height: var(--touch-min, 44px);
+  }
+
+  .principle-card {
+    padding: 20px 16px;
+  }
+
+  .principle-title {
+    font-size: 17px;
+  }
+
+  .principle-body {
+    font-size: 14px;
+  }
+
+  .team-nav-pill {
+    min-height: var(--touch-min, 44px);
+  }
+
+  .team-carousel-slide {
+    flex: 0 0 92vw;
+    max-width: 340px;
+  }
+
+  .about-cta-card {
+    padding: 32px 20px;
+  }
+
+  .about-cta-title {
+    font-size: clamp(24px, 6vw, 36px);
+  }
+
+  .about-cta-subtitle {
+    font-size: 15px;
+  }
+
+  .about-cta-card .cta-btn-glow {
+    padding: 14px 28px;
+    font-size: 14px;
+    min-height: var(--touch-min, 44px);
+  }
+
+  .footer-col a {
+    min-height: var(--touch-min, 44px);
+    display: flex;
+    align-items: center;
   }
 }
 

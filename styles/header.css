@@ -149,6 +149,9 @@
   .site-header .header-nav a {
     padding: 12px 14px;
     font-size: 15px;
+    min-height: var(--touch-min, 44px);
+    display: flex;
+    align-items: center;
   }
 
   .site-header .header-nav a.active::after {
