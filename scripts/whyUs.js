@@ -1,195 +1,153 @@
-const thumbs = document.querySelectorAll(".thumb-panel");
-const mainDisplay = document.getElementById("mainDisplay");
-const displayNum = document.getElementById("displayNum");
-const displayCategory = document.getElementById("displayCategory");
-const displayTitle = document.getElementById("displayTitle");
-const displayDesc = document.getElementById("displayDesc");
-const displayContent = document.getElementById("displayContent");
-let panelUpdateTimer;
-
-function updateMainPanel(panel) {
-  const { img, num, category, title, desc } = panel.dataset;
-
-  window.clearTimeout(panelUpdateTimer);
-  displayContent.classList.add("fade-out");
-
-  panelUpdateTimer = window.setTimeout(() => {
-    mainDisplay.style.backgroundImage = `url("${img}")`;
-    displayNum.textContent = num;
-    displayCategory.textContent = category;
-    displayTitle.textContent = title;
-    displayDesc.textContent = desc;
-    displayContent.classList.remove("fade-out");
-  }, 200);
-}
-
-thumbs.forEach((thumb) => {
-  thumb.addEventListener("mouseenter", () => updateMainPanel(thumb));
-  thumb.addEventListener("focus", () => updateMainPanel(thumb));
-});
+/**
+ * whyUs.js — optimised for performance
+ * - Single DOMContentLoaded entry point
+ * - Cursor uses rAF loop only, no per-element GSAP tweens
+ * - Orb parallax merged into one scrub timeline
+ * - Panel update debounced with a single timer ref
+ */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ============ CUSTOM CURSOR ============
-  const cursor = document.querySelector(".cursor");
+  // ─── ACCORDION PANEL UPDATE ──────────────────────────────────────────────
+  const mainDisplay  = document.getElementById("mainDisplay");
+  const displayNum   = document.getElementById("displayNum");
+  const displayCat   = document.getElementById("displayCategory");
+  const displayTitle = document.getElementById("displayTitle");
+  const displayDesc  = document.getElementById("displayDesc");
+  const displayContent = document.getElementById("displayContent");
+  let panelTimer;
+
+  function updateMainPanel(panel) {
+    const { img, num, category, title, desc } = panel.dataset;
+    clearTimeout(panelTimer);
+    displayContent.classList.add("fade-out");
+    panelTimer = setTimeout(() => {
+      mainDisplay.style.backgroundImage = `url("${img}")`;
+      displayNum.textContent   = num;
+      displayCat.textContent   = category;
+      displayTitle.textContent = title;
+      displayDesc.textContent  = desc;
+      displayContent.classList.remove("fade-out");
+    }, 200);
+  }
+
+  document.querySelectorAll(".thumb-panel").forEach((thumb) => {
+    thumb.addEventListener("mouseenter", () => updateMainPanel(thumb));
+    thumb.addEventListener("focus",      () => updateMainPanel(thumb));
+  });
+
+  // ─── CUSTOM CURSOR ───────────────────────────────────────────────────────
+  const cursor       = document.querySelector(".cursor");
   const isFinePointer = window.matchMedia("(pointer: fine)").matches;
 
   if (cursor && isFinePointer) {
     document.body.classList.add("has-custom-cursor");
-    let mx = window.innerWidth / 2;
-    let my = window.innerHeight / 2;
-    let cx = mx;
-    let cy = my;
 
+    let mx = window.innerWidth  / 2;
+    let my = window.innerHeight / 2;
+    let cx = mx, cy = my;
+
+    // Single mousemove listener — cheap, no GSAP involved
     document.addEventListener("mousemove", (e) => {
       mx = e.clientX;
       my = e.clientY;
+    }, { passive: true });
+
+    // CSS classes handle the size change — zero JS tween overhead
+    document.querySelectorAll("a, button, .why-card-6, .cinematic-panel").forEach((el) => {
+      el.addEventListener("mouseenter", () => cursor.classList.add("cursor--large"),    { passive: true });
+      el.addEventListener("mouseleave", () => cursor.classList.remove("cursor--large"), { passive: true });
     });
 
-    (function animateCursor() {
-      cx += (mx - cx) * 0.22;
-      cy += (my - cy) * 0.22;
-      cursor.style.left = cx + "px";
-      cursor.style.top = cy + "px";
-      requestAnimationFrame(animateCursor);
+    // Single rAF loop for smooth lag, writing only transform
+    (function tick() {
+      cx += (mx - cx) * 0.18;
+      cy += (my - cy) * 0.18;
+      cursor.style.transform = `translate(${cx}px, ${cy}px) translate(-50%, -50%)`;
+      requestAnimationFrame(tick);
     })();
-
-    // Cursor scaling on interactive elements — only if GSAP is available
-    if (typeof gsap !== "undefined") {
-      document
-        .querySelectorAll("a, button, .serve-card, .why-card-6, .cinematic-panel")
-        .forEach((el) => {
-          el.addEventListener("mouseenter", () => {
-            gsap.to(cursor, { width: 32, height: 32, opacity: 0.85, duration: 0.25, ease: "power2.out" });
-          });
-          el.addEventListener("mouseleave", () => {
-            gsap.to(cursor, { width: 12, height: 12, opacity: 1, duration: 0.25, ease: "power2.out" });
-          });
-        });
-    }
   }
 
-  // ============ GSAP ANIMATIONS ============
-  if (typeof gsap !== "undefined") {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    const hasScrollTrigger = typeof ScrollTrigger !== "undefined";
+  // ─── GSAP + SCROLLTRIGGER ────────────────────────────────────────────────
+  if (typeof gsap === "undefined") return;
 
-    if (hasScrollTrigger) {
-      gsap.registerPlugin(ScrollTrigger);
-    }
+  const reduceMotion  = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const canHover      = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const hasST         = typeof ScrollTrigger !== "undefined";
 
-    if (!reduceMotion) {
-      const intro = gsap.timeline({ defaults: { ease: "power3.out" } });
+  if (hasST) gsap.registerPlugin(ScrollTrigger);
 
-      // Cards are visible by default via CSS; GSAP animates them in on scroll
-      gsap.set(".section-head-why, .why-card-6", { autoAlpha: 1 });
+  if (reduceMotion) return;
 
-      intro
-        .from(".site-header", { autoAlpha: 0, y: -18, duration: 0.65 })
-        .from(
-          ".headline .word > span",
-          { yPercent: 105, duration: 0.9, stagger: 0.09, ease: "power4.out" },
-          0.16,
-        )
-        .from(
-          "#inlineImg, #ideaPill",
-          { scale: 0, duration: 0.65, stagger: 0.12, ease: "back.out(1.5)" },
-          0.34,
-        )
-        .to(".hero-orb-one", { x: 34, y: 18, duration: 2.2, ease: "sine.inOut" }, 0)
-        .to(".hero-orb-two", { x: -28, y: -12, duration: 2.5, ease: "sine.inOut" }, 0.1)
-        .to(".hero-orb-three", { x: 16, y: 22, duration: 2.8, ease: "sine.inOut" }, 0.2);
+  // ── Intro timeline ──────────────────────────────────────────────────────
+  gsap.timeline({ defaults: { ease: "power3.out" } })
+    .fromTo(".site-header", { autoAlpha: 0, y: -12 }, { autoAlpha: 1, y: 0, duration: 0.6, clearProps: "transform" })
+    .from(".headline .word > span", { yPercent: 105, duration: 0.85, stagger: 0.08, ease: "power4.out" }, 0.14)
+    .from("#inlineImg, #ideaPill",  { scale: 0, duration: 0.6, stagger: 0.1, ease: "back.out(1.5)" }, 0.3);
 
-      gsap.to("#inlineImg", {
-        y: 6,
-        rotation: 2,
-        duration: 2.8,
-        delay: 1.5,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
-      gsap.to("#ideaPill", {
-        y: 5,
-        rotation: -1.5,
-        duration: 3.2,
-        delay: 1.7,
-        ease: "sine.inOut",
-        yoyo: true,
-        repeat: -1,
-      });
+  // ── Ambient orb drift on load (CSS handles these via keyframe would be
+  //    lighter, but GSAP yoyo is already set up — keep it, just don't repeat
+  //    for the third orb which isn't animated individually) ─────────────────
+  gsap.to("#inlineImg", { y: 6,  rotation:  2,   duration: 2.8, delay: 1.4, ease: "sine.inOut", yoyo: true, repeat: -1 });
+  gsap.to("#ideaPill",  { y: 5,  rotation: -1.5, duration: 3.2, delay: 1.6, ease: "sine.inOut", yoyo: true, repeat: -1 });
 
-      if (hasScrollTrigger) {
-        // Orbs parallax through the full parallax-stage (hero + pillars)
-        gsap.to(".hero-orb-one", {
-          y: 180,
-          scrollTrigger: { trigger: ".parallax-stage", start: "top top", end: "bottom top", scrub: 1.4 },
-        });
-        gsap.to(".hero-orb-two", {
-          y: -120,
-          x: 20,
-          scrollTrigger: { trigger: ".parallax-stage", start: "top top", end: "bottom top", scrub: 1.8 },
-        });
-        gsap.to(".hero-orb-three", {
-          y: -90,
-          x: 40,
-          scrollTrigger: { trigger: ".parallax-stage", start: "top top", end: "bottom top", scrub: 1.0 },
-        });
-        // Pillars frame fades in gently as it enters view
-        gsap.from(".pillars-frame", {
-          autoAlpha: 0,
-          y: 28,
-          duration: 0.9,
-          ease: "power3.out",
-          scrollTrigger: { trigger: ".section-1", start: "top 82%", once: true },
-        });
-        gsap.from(".section-content, .section-subtitle", {
-          autoAlpha: 0,
-          y: 20,
-          duration: 0.7,
-          stagger: 0.14,
-          scrollTrigger: { trigger: ".section-1", start: "top 75%", once: true },
-        });
-        gsap.from(".cinematic-panel", {
-          autoAlpha: 0,
-          y: 48,
-          duration: 0.8,
-          stagger: 0.1,
-          scrollTrigger: { trigger: ".accordion-container", start: "top 78%", once: true },
-        });
-        gsap.from(".section-head-why, .why-card-6", {
-          autoAlpha: 0,
-          y: 42,
-          duration: 0.7,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: ".why-konsalta-section",
-            start: "top 85%",
-            once: true,
-          },
-        });
-      }
+  // ── Parallax: merge all three orbs into ONE ScrollTrigger timeline ───────
+  // One scrub = one scroll listener instead of three separate ones
+  if (hasST) {
+    const orbTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".parallax-stage",
+        start: "top top",
+        end: "bottom top",
+        scrub: 1.2,
+      },
+    });
+    orbTl
+      .to(".hero-orb-one",   { y: 180,        ease: "none" }, 0)
+      .to(".hero-orb-two",   { y: -120, x: 20, ease: "none" }, 0)
+      .to(".hero-orb-three", { y: -90,  x: 40, ease: "none" }, 0);
 
-      if (canHover) {
-        const inlineImg = document.getElementById("inlineImg");
-        const ideaPill = document.getElementById("ideaPill");
+    // ── Scroll-reveal animations ───────────────────────────────────────────
+    // pillars frame
+    gsap.from(".pillars-frame", {
+      autoAlpha: 0, y: 24, duration: 0.8,
+      scrollTrigger: { trigger: ".section-1", start: "top 84%", once: true },
+    });
+    gsap.from(".section-content, .section-subtitle", {
+      autoAlpha: 0, y: 18, duration: 0.65, stagger: 0.12,
+      scrollTrigger: { trigger: ".section-1", start: "top 78%", once: true },
+    });
 
-        inlineImg.addEventListener("mouseenter", () => {
-          gsap.to(inlineImg, { scale: 1.08, rotation: 4, duration: 0.35, ease: "back.out(1.6)" });
-        });
-        inlineImg.addEventListener("mouseleave", () => {
-          gsap.to(inlineImg, { scale: 1, rotation: 0, duration: 0.55, ease: "elastic.out(1, 0.6)" });
-        });
-        ideaPill.addEventListener("mouseenter", () => {
-          gsap.to(ideaPill, { scale: 1.06, rotation: -3, duration: 0.35, ease: "back.out(1.6)" });
-          gsap.to(ideaPill.querySelector(".leaf"), { rotation: "+=360", duration: 0.75, ease: "power2.inOut" });
-        });
-        ideaPill.addEventListener("mouseleave", () => {
-          gsap.to(ideaPill, { scale: 1, rotation: 0, duration: 0.55, ease: "elastic.out(1, 0.6)" });
-        });
-      }
-    }
+    // cinematic panels — batch so stagger is driven by one ST instance
+    gsap.from(".cinematic-panel", {
+      autoAlpha: 0, y: 40, duration: 0.75, stagger: 0.08,
+      scrollTrigger: { trigger: ".accordion-container", start: "top 80%", once: true },
+    });
+
+    // why-cards — use gsap.utils.toArray + batch for clean stagger
+    gsap.from(".section-head-why, .why-card-6", {
+      autoAlpha: 0, y: 36, duration: 0.65, stagger: 0.08,
+      scrollTrigger: { trigger: ".why-konsalta-section", start: "top 86%", once: true },
+    });
+  }
+
+  // ── Hover interactions (desktop only) ────────────────────────────────────
+  if (canHover) {
+    const inlineImg = document.getElementById("inlineImg");
+    const ideaPill  = document.getElementById("ideaPill");
+    const leaf      = ideaPill?.querySelector(".leaf");
+
+    inlineImg?.addEventListener("mouseenter", () =>
+      gsap.to(inlineImg, { scale: 1.08, rotation: 4,   duration: 0.3, ease: "back.out(1.6)" }));
+    inlineImg?.addEventListener("mouseleave", () =>
+      gsap.to(inlineImg, { scale: 1,    rotation: 0,   duration: 0.5, ease: "elastic.out(1, 0.6)" }));
+
+    ideaPill?.addEventListener("mouseenter", () => {
+      gsap.to(ideaPill, { scale: 1.06, rotation: -3, duration: 0.3, ease: "back.out(1.6)" });
+      if (leaf) gsap.to(leaf, { rotation: "+=360", duration: 0.7, ease: "power2.inOut" });
+    });
+    ideaPill?.addEventListener("mouseleave", () =>
+      gsap.to(ideaPill, { scale: 1, rotation: 0, duration: 0.5, ease: "elastic.out(1, 0.6)" }));
   }
 
   // ============ MULTI-HUB CONNECTION MESH ============
@@ -197,18 +155,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 }); // end DOMContentLoaded
 
-// Refresh ScrollTrigger after fonts/images finish loading so trigger
-// positions are calculated against the final settled layout.
+// Refresh ScrollTrigger after fonts/images finish loading
 window.addEventListener("load", function () {
   if (typeof ScrollTrigger !== "undefined") {
     ScrollTrigger.refresh();
   }
-});
+}, { once: true });
 
 // ============================================================
 //   MULTI-HUB CONNECTION MESH (Negative Space Network)
-//   Visualizes Konsalta's multi-hub African network
-//   with ambient node floating & interactive cursor proximity
+//   Visualizes Konsalta's multi-hub African research & advisory
+//   network with ambient floating, animated signal pulses,
+//   and high-visibility negative space presence.
 // ============================================================
 function initMultiHubMesh() {
   const canvas = document.getElementById("hubMeshCanvas");
@@ -226,49 +184,77 @@ function initMultiHubMesh() {
   function resizeCanvas() {
     width = window.innerWidth;
     height = window.innerHeight;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
+    canvas.width = Math.round(width * dpr);
+    canvas.height = Math.round(height * dpr);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.scale(dpr, dpr);
   }
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
 
-  // Strategic hub placement in negative space (left & right gutters + transition zones)
+  // Strategic hub placement in negative space (left & right gutters)
   const hubsData = [
-    // Hero & Top Header Flanks
-    { xP: 0.08, yP: 0.06, code: "HRE", city: "Harare", color: COLOR_ORANGE, primary: true, phase: 0 },
-    { xP: 0.15, yP: 0.12, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 1.2 },
-    { xP: 0.05, yP: 0.19, code: "LUN", city: "Lusaka", color: COLOR_NAVY, primary: true, phase: 2.1 },
-    { xP: 0.92, yP: 0.07, code: "NBO", city: "Nairobi", color: COLOR_ORANGE, primary: true, phase: 0.8 },
-    { xP: 0.85, yP: 0.15, code: "KGL", city: "Kigali", color: COLOR_NAVY, primary: true, phase: 2.5 },
-    { xP: 0.94, yP: 0.22, code: "", city: "", color: COLOR_ORANGE, primary: false, phase: 3.1 },
+    // ── Hero & Top Flanks (Visible immediately on load) ──
+    { xP: 0.055, yP: 0.045, code: "HRE", city: "Harare", color: COLOR_ORANGE, primary: true, phase: 0 },
+    { xP: 0.125, yP: 0.085, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 1.2 },
+    { xP: 0.045, yP: 0.135, code: "LUN", city: "Lusaka", color: COLOR_NAVY, primary: true, phase: 2.1 },
+    { xP: 0.115, yP: 0.185, code: "", city: "", color: COLOR_ORANGE, primary: false, phase: 3.0 },
 
-    // Pillars Intro & Frame Flanks
-    { xP: 0.06, yP: 0.28, code: "GBE", city: "Gaborone", color: COLOR_NAVY, primary: true, phase: 1.5 },
-    { xP: 0.13, yP: 0.35, code: "WDH", city: "Windhoek", color: COLOR_ORANGE, primary: true, phase: 2.7 },
-    { xP: 0.04, yP: 0.42, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 3.9 },
-    { xP: 0.93, yP: 0.30, code: "DAR", city: "Dar es Salaam", color: COLOR_NAVY, primary: true, phase: 0.4 },
-    { xP: 0.86, yP: 0.38, code: "EBB", city: "Kampala", color: COLOR_ORANGE, primary: true, phase: 1.8 },
-    { xP: 0.95, yP: 0.44, code: "ADD", city: "Addis Ababa", color: COLOR_NAVY, primary: true, phase: 2.9 },
+    { xP: 0.935, yP: 0.050, code: "NBO", city: "Nairobi", color: COLOR_ORANGE, primary: true, phase: 0.8 },
+    { xP: 0.865, yP: 0.095, code: "KGL", city: "Kigali", color: COLOR_NAVY, primary: true, phase: 2.5 },
+    { xP: 0.945, yP: 0.150, code: "ADD", city: "Addis Ababa", color: COLOR_NAVY, primary: true, phase: 1.7 },
+    { xP: 0.875, yP: 0.200, code: "", city: "", color: COLOR_ORANGE, primary: false, phase: 3.3 },
 
-    // Accordion & Transition Flanks
-    { xP: 0.05, yP: 0.51, code: "MPM", city: "Maputo", color: COLOR_ORANGE, primary: true, phase: 1.1 },
-    { xP: 0.12, yP: 0.58, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 2.3 },
-    { xP: 0.07, yP: 0.65, code: "LLW", city: "Lilongwe", color: COLOR_NAVY, primary: true, phase: 3.4 },
-    { xP: 0.94, yP: 0.52, code: "CAI", city: "Cairo", color: COLOR_NAVY, primary: true, phase: 0.6 },
-    { xP: 0.87, yP: 0.59, code: "", city: "", color: COLOR_ORANGE, primary: false, phase: 1.9 },
-    { xP: 0.93, yP: 0.66, code: "LOS", city: "Lagos", color: COLOR_ORANGE, primary: true, phase: 2.8 },
+    // ── Pillars Section Flanks ──
+    { xP: 0.055, yP: 0.260, code: "GBE", city: "Gaborone", color: COLOR_NAVY, primary: true, phase: 1.5 },
+    { xP: 0.125, yP: 0.325, code: "WDH", city: "Windhoek", color: COLOR_ORANGE, primary: true, phase: 2.7 },
+    { xP: 0.045, yP: 0.390, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 3.9 },
 
-    // 6 Value Drivers Flanks
-    { xP: 0.06, yP: 0.73, code: "ACC", city: "Accra", color: COLOR_NAVY, primary: true, phase: 0.9 },
-    { xP: 0.14, yP: 0.79, code: "ABJ", city: "Abidjan", color: COLOR_ORANGE, primary: true, phase: 2.0 },
-    { xP: 0.05, yP: 0.86, code: "DKR", city: "Dakar", color: COLOR_NAVY, primary: true, phase: 3.2 },
-    { xP: 0.12, yP: 0.92, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 4.1 },
-    { xP: 0.93, yP: 0.74, code: "JNB", city: "Johannesburg", color: COLOR_ORANGE, primary: true, phase: 1.3 },
-    { xP: 0.86, yP: 0.81, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 2.4 },
-    { xP: 0.94, yP: 0.88, code: "CPT", city: "Cape Town", color: COLOR_NAVY, primary: true, phase: 3.5 },
-    { xP: 0.88, yP: 0.94, code: "MRU", city: "Mauritius", color: COLOR_ORANGE, primary: true, phase: 0.5 },
+    { xP: 0.935, yP: 0.275, code: "DAR", city: "Dar es Salaam", color: COLOR_NAVY, primary: true, phase: 0.4 },
+    { xP: 0.865, yP: 0.340, code: "EBB", city: "Kampala", color: COLOR_ORANGE, primary: true, phase: 1.8 },
+    { xP: 0.945, yP: 0.405, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 2.9 },
+
+    // ── Accordion / Mid Section Flanks ──
+    { xP: 0.050, yP: 0.475, code: "MPM", city: "Maputo", color: COLOR_ORANGE, primary: true, phase: 1.1 },
+    { xP: 0.120, yP: 0.540, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 2.3 },
+    { xP: 0.060, yP: 0.605, code: "LLW", city: "Lilongwe", color: COLOR_NAVY, primary: true, phase: 3.4 },
+
+    { xP: 0.940, yP: 0.485, code: "CAI", city: "Cairo", color: COLOR_NAVY, primary: true, phase: 0.6 },
+    { xP: 0.870, yP: 0.550, code: "", city: "", color: COLOR_ORANGE, primary: false, phase: 1.9 },
+    { xP: 0.935, yP: 0.615, code: "LOS", city: "Lagos", color: COLOR_ORANGE, primary: true, phase: 2.8 },
+
+    // ── 6 Strategic Pillars Flanks ──
+    { xP: 0.055, yP: 0.690, code: "ACC", city: "Accra", color: COLOR_NAVY, primary: true, phase: 0.9 },
+    { xP: 0.130, yP: 0.755, code: "ABJ", city: "Abidjan", color: COLOR_ORANGE, primary: true, phase: 2.0 },
+    { xP: 0.048, yP: 0.825, code: "DKR", city: "Dakar", color: COLOR_NAVY, primary: true, phase: 3.2 },
+    { xP: 0.115, yP: 0.890, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 4.1 },
+
+    { xP: 0.930, yP: 0.700, code: "JNB", city: "Johannesburg", color: COLOR_ORANGE, primary: true, phase: 1.3 },
+    { xP: 0.865, yP: 0.765, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 2.4 },
+    { xP: 0.940, yP: 0.835, code: "CPT", city: "Cape Town", color: COLOR_NAVY, primary: true, phase: 3.5 },
+    { xP: 0.875, yP: 0.900, code: "MRU", city: "Mauritius", color: COLOR_ORANGE, primary: true, phase: 0.5 },
+  ];
+
+  // Guaranteed constellation links forming continuous geometric network
+  const constellationLinks = [
+    // Left flank chains
+    [0, 1], [1, 2], [2, 3], [3, 8], [8, 9], [9, 10], [10, 14], [14, 15], [15, 16], [16, 20], [20, 21], [21, 22], [22, 23],
+    [0, 2], [1, 3], [8, 10], [14, 16], [20, 22],
+    // Right flank chains
+    [4, 5], [5, 6], [6, 7], [7, 11], [11, 12], [12, 13], [13, 17], [17, 18], [18, 19], [19, 24], [24, 25], [25, 26], [26, 27],
+    [4, 6], [5, 7], [11, 13], [17, 19], [24, 26], [25, 27],
+    // Subtle cross-arch connectors at transition spaces
+    [3, 7], [10, 13], [21, 25]
+  ];
+
+  // Travelling data pulses along links
+  const pulses = [
+    { linkIdx: 0, progress: 0.2, speed: 0.0035 },
+    { linkIdx: 2, progress: 0.7, speed: 0.0040 },
+    { linkIdx: 7, progress: 0.4, speed: 0.0038 },
+    { linkIdx: 12, progress: 0.1, speed: 0.0042 },
+    { linkIdx: 17, progress: 0.5, speed: 0.0036 },
+    { linkIdx: 22, progress: 0.8, speed: 0.0045 }
   ];
 
   const mouse = {
@@ -316,7 +302,7 @@ function initMultiHubMesh() {
       const pageX = h.xP * width;
       const pageY = h.yP * docHeight;
 
-      // Subtle float motion
+      // Gentle floating oscillation
       const floatX = reduceMotion ? 0 : Math.sin(elapsed * 1.1 + h.phase) * 3.5;
       const floatY = reduceMotion ? 0 : Math.cos(elapsed * 0.9 + h.phase) * 3.5;
 
@@ -329,8 +315,8 @@ function initMultiHubMesh() {
         const dx = mouse.x - vx;
         const dy = mouse.y - vy;
         const dist = Math.hypot(dx, dy);
-        if (dist < 210) {
-          prox = (1 - dist / 210) * mouse.active;
+        if (dist < 240) {
+          prox = (1 - dist / 240) * mouse.active;
         }
       }
 
@@ -339,61 +325,81 @@ function initMultiHubMesh() {
         vx,
         vy,
         prox,
-        visible: vy >= -80 && vy <= height + 80,
+        visible: vy >= -120 && vy <= height + 120,
       });
     }
 
-    // 1. Draw ambient connecting threads between neighbouring visible nodes
-    for (let i = 0; i < screenNodes.length; i++) {
-      const a = screenNodes[i];
-      if (!a.visible) continue;
+    // 1. Draw Guaranteed Constellation Links
+    for (let i = 0; i < constellationLinks.length; i++) {
+      const link = constellationLinks[i];
+      const a = screenNodes[link[0]];
+      const b = screenNodes[link[1]];
+      if (!a || !b) continue;
+      if (!a.visible && !b.visible) continue;
 
-      for (let j = i + 1; j < screenNodes.length; j++) {
-        const b = screenNodes[j];
-        if (!b.visible) continue;
+      const maxProx = Math.max(a.prox, b.prox);
+      const isCrossArch = Math.abs(a.vx - b.vx) > width * 0.4;
+      const baseAlpha = isCrossArch ? 0.10 : 0.28;
+      const activeAlpha = baseAlpha + maxProx * 0.55;
 
-        const dx = b.vx - a.vx;
-        const dy = b.vy - a.vy;
-        const dist = Math.hypot(dx, dy);
+      ctx.save();
+      ctx.beginPath();
+      if (isCrossArch) {
+        ctx.setLineDash([4, 8]);
+      } else {
+        ctx.setLineDash([]);
+      }
+      ctx.moveTo(a.vx, a.vy);
+      ctx.lineTo(b.vx, b.vy);
 
-        // Connect nodes on the same flank within reasonable distance
-        if (dist < 260 && Math.abs(dx) < 180) {
-          const maxProx = Math.max(a.prox, b.prox);
-          const baseAlpha = 0.045;
-          const activeAlpha = baseAlpha + maxProx * 0.32;
+      if (maxProx > 0.05) {
+        const grad = ctx.createLinearGradient(a.vx, a.vy, b.vx, b.vy);
+        grad.addColorStop(0, a.color === COLOR_ORANGE ? `rgba(242, 101, 34, ${activeAlpha})` : `rgba(11, 45, 83, ${activeAlpha})`);
+        grad.addColorStop(1, b.color === COLOR_ORANGE ? `rgba(242, 101, 34, ${activeAlpha})` : `rgba(11, 45, 83, ${activeAlpha})`);
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = 1.4 + maxProx * 1.0;
+      } else {
+        ctx.strokeStyle = `rgba(11, 45, 83, ${baseAlpha})`;
+        ctx.lineWidth = isCrossArch ? 1 : 1.2;
+      }
+      ctx.stroke();
+      ctx.restore();
+    }
 
-          ctx.beginPath();
-          ctx.moveTo(a.vx, a.vy);
-          ctx.lineTo(b.vx, b.vy);
+    // 2. Animate Data Signal Pulses Along Links
+    if (!reduceMotion) {
+      for (let p = 0; p < pulses.length; p++) {
+        const pulse = pulses[p];
+        pulse.progress = (pulse.progress + pulse.speed) % 1;
+        const link = constellationLinks[pulse.linkIdx];
+        if (!link) continue;
+        const a = screenNodes[link[0]];
+        const b = screenNodes[link[1]];
+        if (!a || !b || (!a.visible && !b.visible)) continue;
 
-          if (maxProx > 0.05) {
-            const grad = ctx.createLinearGradient(a.vx, a.vy, b.vx, b.vy);
-            grad.addColorStop(0, a.color === COLOR_ORANGE ? `rgba(242, 101, 34, ${activeAlpha})` : `rgba(11, 45, 83, ${activeAlpha})`);
-            grad.addColorStop(1, b.color === COLOR_ORANGE ? `rgba(242, 101, 34, ${activeAlpha})` : `rgba(11, 45, 83, ${activeAlpha})`);
-            ctx.strokeStyle = grad;
-            ctx.lineWidth = 1 + maxProx * 0.6;
-          } else {
-            ctx.strokeStyle = `rgba(11, 45, 83, ${baseAlpha})`;
-            ctx.lineWidth = 1;
-          }
-          ctx.stroke();
-        }
+        const px = a.vx + (b.vx - a.vx) * pulse.progress;
+        const py = a.vy + (b.vy - a.vy) * pulse.progress;
+
+        ctx.beginPath();
+        ctx.arc(px, py, 2.2, 0, Math.PI * 2);
+        ctx.fillStyle = pulse.linkIdx % 2 === 0 ? "rgba(242, 101, 34, 0.85)" : "rgba(11, 45, 83, 0.75)";
+        ctx.fill();
       }
     }
 
-    // 2. Draw dynamic cursor connector rays to nearby nodes
+    // 3. Draw Dynamic Cursor Connector Rays
     if (mouse.active > 0) {
       for (let i = 0; i < screenNodes.length; i++) {
         const node = screenNodes[i];
-        if (!node.visible || node.prox <= 0.01) continue;
+        if (!node.visible || node.prox <= 0.02) continue;
 
         const grad = ctx.createLinearGradient(mouse.x, mouse.y, node.vx, node.vy);
-        grad.addColorStop(0, `rgba(242, 101, 34, ${0.45 * node.prox})`);
-        grad.addColorStop(0.65, `rgba(11, 45, 83, ${0.22 * node.prox})`);
-        grad.addColorStop(1, `rgba(11, 45, 83, ${0.08 * node.prox})`);
+        grad.addColorStop(0, `rgba(242, 101, 34, ${0.55 * node.prox})`);
+        grad.addColorStop(0.7, `rgba(11, 45, 83, ${0.30 * node.prox})`);
+        grad.addColorStop(1, `rgba(11, 45, 83, ${0.12 * node.prox})`);
 
         ctx.strokeStyle = grad;
-        ctx.lineWidth = 1 + node.prox * 1.0;
+        ctx.lineWidth = 1.2 + node.prox * 1.2;
         ctx.beginPath();
         ctx.moveTo(mouse.x, mouse.y);
         ctx.lineTo(node.vx, node.vy);
@@ -401,78 +407,94 @@ function initMultiHubMesh() {
       }
     }
 
-    // 3. Render Hub Nodes & Labels
+    // 4. Render Hub Nodes & Badges
     for (let i = 0; i < screenNodes.length; i++) {
       const node = screenNodes[i];
       if (!node.visible) continue;
 
       const p = node.prox;
       const isOrange = node.color === COLOR_ORANGE;
-      const baseRadius = node.primary ? 3.0 : 1.8;
+      const baseRadius = node.primary ? 5.0 : 3.2;
       const radius = baseRadius * (1 + p * 0.35);
 
       if (node.primary) {
         // Outer pulsing orbit ring
-        const pulse = Math.sin(elapsed * 2 + node.phase) * 1.5;
-        const ringR = (8.5 + pulse) * (1 + p * 0.3);
+        const pulse = Math.sin(elapsed * 2.2 + node.phase) * 2.2;
+        const ringR = (15 + pulse) * (1 + p * 0.32);
 
         ctx.beginPath();
         ctx.arc(node.vx, node.vy, ringR, 0, Math.PI * 2);
         ctx.strokeStyle = isOrange
-          ? `rgba(242, 101, 34, ${0.2 + p * 0.4})`
-          : `rgba(11, 45, 83, ${0.16 + p * 0.35})`;
+          ? `rgba(242, 101, 34, ${0.40 + p * 0.45})`
+          : `rgba(11, 45, 83, ${0.35 + p * 0.45})`;
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+
+        // Inner orbit ring
+        ctx.beginPath();
+        ctx.arc(node.vx, node.vy, 9 * (1 + p * 0.2), 0, Math.PI * 2);
+        ctx.strokeStyle = isOrange
+          ? `rgba(242, 101, 34, ${0.25 + p * 0.35})`
+          : `rgba(11, 45, 83, ${0.22 + p * 0.35})`;
         ctx.lineWidth = 1;
         ctx.stroke();
 
-        // Inner solid hub core
+        // Solid Hub Core with subtle glow
+        ctx.save();
         ctx.beginPath();
         ctx.arc(node.vx, node.vy, radius, 0, Math.PI * 2);
         ctx.fillStyle = node.color;
+        ctx.shadowColor = node.color;
+        ctx.shadowBlur = 8;
         ctx.fill();
+        ctx.restore();
 
-        // Hub Badge Label (e.g. "HRE", "NBO", "JNB")
+        // Hub Code Badge (e.g. "HRE", "NBO", "JNB")
         if (node.code) {
           const isLeft = node.vx < width / 2;
-          const labelX = isLeft ? node.vx + 14 : node.vx - 14;
-          const labelY = node.vy + 3.5;
+          const labelX = isLeft ? node.vx + 18 : node.vx - 18;
+          const labelY = node.vy + 4;
 
           ctx.save();
-          ctx.font = "600 9px 'JetBrains Mono', monospace";
+          ctx.font = "700 11px 'JetBrains Mono', monospace";
           ctx.textAlign = isLeft ? "left" : "right";
 
-          // Text opacity: 0.35 at rest, up to 0.95 when near cursor
-          const textAlpha = 0.32 + p * 0.63;
+          // Text opacity: clearly visible at rest (0.80), brighter on proximity
+          const textAlpha = 0.80 + p * 0.20;
           ctx.fillStyle = isOrange
             ? `rgba(242, 101, 34, ${textAlpha})`
             : `rgba(11, 45, 83, ${textAlpha})`;
 
           ctx.fillText(node.code, labelX, labelY);
 
-          // Subtitle / City name on hover
-          if (p > 0.35 && node.city) {
-            ctx.font = "500 8px 'Manrope', sans-serif";
-            ctx.fillStyle = `rgba(11, 45, 83, ${(p - 0.35) * 1.4})`;
-            ctx.fillText(node.city, labelX, labelY + 11);
+          // Subtitle / City name
+          if (node.city) {
+            ctx.font = "600 9.5px 'Manrope', sans-serif";
+            const cityAlpha = 0.50 + p * 0.50;
+            ctx.fillStyle = `rgba(11, 45, 83, ${cityAlpha})`;
+            ctx.fillText(node.city, labelX, labelY + 13);
           }
 
           // Small connector tick mark
           ctx.beginPath();
-          ctx.moveTo(node.vx + (isLeft ? 5 : -5), node.vy);
-          ctx.lineTo(node.vx + (isLeft ? 10 : -10), node.vy);
-          ctx.strokeStyle = isOrange ? `rgba(242, 101, 34, ${0.3 + p * 0.5})` : `rgba(11, 45, 83, ${0.25 + p * 0.4})`;
-          ctx.lineWidth = 1;
+          ctx.moveTo(node.vx + (isLeft ? 7 : -7), node.vy);
+          ctx.lineTo(node.vx + (isLeft ? 14 : -14), node.vy);
+          ctx.strokeStyle = isOrange
+            ? `rgba(242, 101, 34, ${0.55 + p * 0.4})`
+            : `rgba(11, 45, 83, ${0.45 + p * 0.4})`;
+          ctx.lineWidth = 1.2;
           ctx.stroke();
 
           ctx.restore();
         }
       } else {
-        // Secondary vertex: delicate geometric diamond
+        // Secondary vertex: geometric diamond waypoint
         ctx.save();
         ctx.translate(node.vx, node.vy);
         ctx.rotate(Math.PI / 4);
         ctx.fillStyle = isOrange
-          ? `rgba(242, 101, 34, ${0.3 + p * 0.5})`
-          : `rgba(11, 45, 83, ${0.25 + p * 0.45})`;
+          ? `rgba(242, 101, 34, ${0.50 + p * 0.45})`
+          : `rgba(11, 45, 83, ${0.45 + p * 0.45})`;
         ctx.fillRect(-radius, -radius, radius * 2, radius * 2);
         ctx.restore();
       }

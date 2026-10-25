@@ -59,8 +59,18 @@ body {
   pointer-events: none;
   z-index: 9999;
   box-shadow: 0 0 12px rgba(242, 101, 34, 0.6);
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, opacity 0.2s;
+  /* position is now driven by transform in JS — no top/left needed */
+  top: 0;
+  left: 0;
+  transition: width 0.2s ease, height 0.2s ease, opacity 0.2s ease;
+  will-change: transform;
+}
+
+/* Expanded state — toggled via JS class instead of GSAP tween */
+.cursor--large {
+  width: 32px;
+  height: 32px;
+  opacity: 0.85;
 }
 
 body.has-custom-cursor {
@@ -119,176 +129,10 @@ body.has-custom-cursor .cursor {
   z-index: 1;
 }
 
-.site-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 28px 56px;
-  position: relative;
-  z-index: 10;
-}
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.logo-dot {
-  max-width: 140px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-}
-
-.logo-dot img {
-  max-height: 42px;
-  width: auto;
-  object-fit: contain;
-}
-
-.header-nav {
-  display: flex;
-  gap: 32px;
-  align-items: center;
-  font-family: "Manrope", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.header-menu-toggle,
-.mobile-nav-contact {
-  display: none;
-}
-
-/* ============ MOBILE NAV ============ */
-@media (max-width: 768px) {
-  .header-menu-toggle {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: 1.5px solid var(--line);
-    border-radius: 8px;
-    width: 40px;
-    height: 40px;
-    cursor: pointer;
-    color: var(--ink);
-    padding: 0;
-    z-index: 20;
-  }
-
-  .header-menu-toggle svg {
-    width: 20px;
-    height: 20px;
-    stroke: currentColor;
-    stroke-width: 2;
-    fill: none;
-    stroke-linecap: round;
-  }
-
-  .header-btn {
-    display: none;
-  }
-
-  .header-nav {
-    display: none;
-    flex-direction: column;
-    gap: 0;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: rgba(240, 236, 225, 0.97);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 12px 0;
-    z-index: 15;
-  }
-
-  .header-nav.nav-open {
-    display: flex;
-  }
-
-  .header-nav a {
-    padding: 14px 28px;
-    font-size: 15px;
-    border-bottom: 1px solid var(--line-light);
-  }
-
-  .header-nav a:last-child {
-    border-bottom: none;
-  }
-
-  .site-header {
-    position: sticky;
-    top: 0;
-    background: rgba(240, 236, 225, 0.95);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--line-light);
-    padding: 16px 24px;
-  }
-}
-
-.header-nav a {
-  color: var(--ink-soft);
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  transition:
-    color 0.25s,
-    transform 0.2s;
-  position: relative;
-}
-
-.header-nav a:hover,
-.header-nav a.active {
-  color: var(--navy);
-}
-
-.header-nav a.active::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -4px;
-  width: 100%;
-  height: 2px;
-  background: var(--orange);
-  border-radius: 2px;
-}
-
-.header-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 22px;
-  font-family: "Manrope", sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--navy);
-  background: var(--white);
-  border: 1.5px solid var(--navy);
-  border-radius: 12px;
-  text-decoration: none;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 0 var(--navy);
-}
-
-.header-btn:hover {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 var(--navy);
-  color: var(--orange);
-  border-color: var(--orange);
-}
-
-.header-btn:active {
-  transform: translateY(4px);
-  box-shadow: 0 0 0 var(--navy);
-}
+/* ============================================================
+   GLOBAL SITE HEADER
+   Centralized in styles/header.css (shared across all pages)
+   ============================================================ */
 
 .grain {
   position: fixed;
@@ -303,6 +147,7 @@ body.has-custom-cursor .cursor {
 /* ============ PARALLAX STAGE (hero + pillars share orbs) ============ */
 .parallax-stage {
   position: relative;
+  z-index: 2;
   /* no overflow:hidden — lets orbs bleed freely */
   background:
     radial-gradient(circle at 15% 20%, rgba(242, 101, 34, 0.10), transparent 30%),
@@ -314,7 +159,7 @@ body.has-custom-cursor .cursor {
   padding: 40px 40px 40px;
   text-align: center;
   position: relative;
-  z-index: 5;
+  z-index: 3;
   /* background removed — stage handles it */
 }
 
@@ -367,11 +212,15 @@ body.has-custom-cursor .cursor {
   max-width: 1300px;
   margin: 0 auto;
   position: relative;
-  z-index: 1;
+  z-index: 5;
 }
 
 .hero-accent {
   color: var(--orange);
+}
+
+.headline-navy {
+  color: #123c6c;
 }
 @media (max-width: 600px) {
   .headline {
@@ -391,6 +240,7 @@ body.has-custom-cursor .cursor {
   overflow: hidden;
   padding-bottom: 0.1em;
   margin-bottom: -0.1em;
+  
 }
 .headline .word > span {
   display: inline-block;
@@ -554,16 +404,16 @@ body.has-custom-cursor .cursor {
 /* ============ PILLARS GLASSMORPHISM FRAME ============ */
 .pillars-frame {
   position: relative;
-  z-index: 2;
+  z-index: 5;
   max-width: 860px;
   margin: 0 auto;
   padding: clamp(36px, 5vw, 64px) clamp(28px, 5vw, 64px);
   border-radius: 28px;
 
-  /* Glass surface */
-  background: rgba(255, 255, 255, 0.48);
-  backdrop-filter: blur(18px) saturate(160%);
-  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  /* Glass surface with refined opacity to sit cleanly in front of mesh lines */
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
 
   /* Layered border: bright top edge + subtle overall stroke */
   border: 1px solid rgba(255, 255, 255, 0.62);
@@ -692,6 +542,7 @@ body.has-custom-cursor .cursor {
   flex-direction: column;
   gap: 30px;
   position: relative;
+  z-index: 2;
 }
 
 .accordion-container {
@@ -699,10 +550,13 @@ body.has-custom-cursor .cursor {
   gap: 16px;
   height: 580px;
   width: 100%;
+  position: relative;
+  z-index: 3;
 }
 
 .cinematic-panel {
   position: relative;
+  z-index: 4;
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
@@ -909,19 +763,24 @@ body.has-custom-cursor .cursor {
    4. WHY KONSALTA (6 PILLARS / EXPLANATIONS)
    ============================================================ */
 .why-konsalta-section {
-  padding: 10px 0;
-  padding-bottom: 80px;
-  /* background:
-    linear-gradient(135deg, rgba(237, 244, 252, 0.95), rgba(255, 242, 235, 0.68)),
-    var(--bg); */
+  padding: 10px 0 80px;
   border-top: 1px solid var(--line-light);
   border-bottom: 1px solid var(--line-light);
+  position: relative;
+  z-index: 3;
+}
+
+.section-head-why {
+  position: relative;
+  z-index: 4;
 }
 
 .why-grid-6 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
+  position: relative;
+  z-index: 4;
 }
 
 .why-card-6 {
@@ -930,10 +789,15 @@ body.has-custom-cursor .cursor {
   border-radius: 20px;
   padding: 36px 30px;
   box-shadow: var(--shadow-sm);
-  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Only transition the properties that actually change on hover */
+  transition:
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
   display: flex;
   flex-direction: column;
   position: relative;
+  z-index: 5;
 }
 
 .why-card-6:hover {

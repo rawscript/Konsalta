@@ -430,11 +430,11 @@ body.has-custom-cursor .cursor {
   z-index: 10;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 20px 32px 100px;
+  padding: 8px 32px 60px;
 }
 
 .insights-subpage {
-  padding: 40px 0 90px;
+  padding: 24px 0 60px;
   transition: opacity 0.4s ease;
 }
 
@@ -447,7 +447,7 @@ body.has-custom-cursor .cursor {
 .subpage-header {
   text-align: center;
   max-width: 820px;
-  margin: 0 auto 50px;
+  margin: 0 auto 32px;
 }
 
 .hero-badge {
@@ -491,7 +491,7 @@ body.has-custom-cursor .cursor {
 .insights-hero-title,
 .subpage-title {
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: clamp(40px, 5.5vw, 68px);
+  font-size: clamp(35px, 5.5vw, 58px);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.035em;
@@ -522,7 +522,7 @@ body.has-custom-cursor .cursor {
    SUBPAGE 1: EDITORIAL SHOWCASE
    ========================================================================== */
 .editorial-showcase {
-  margin: 40px auto 60px;
+  margin: 24px auto 40px;
   max-width: 1080px;
 }
 
@@ -734,8 +734,8 @@ body.has-custom-cursor .cursor {
 .forthcoming-streams {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-  margin: 70px 0 50px;
+  gap: 24px;
+  margin: 40px 0 28px;
 }
 
 .stream-card {
@@ -1512,5 +1512,421 @@ body.has-custom-cursor .cursor {
     flex-direction: column;
     gap: 12px;
     text-align: center;
+  }
+}
+
+/* ============================================================
+   RSS FEED — SUBPAGE 2
+   ============================================================ */
+
+/* Cursor expanded state (class-based, no GSAP tween) */
+.cursor--large {
+  width: 32px !important;
+  height: 32px !important;
+  opacity: 0.85 !important;
+}
+
+.rss-feed-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 36px;
+}
+
+/* ── Card ── */
+.rss-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--glass-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1.5px solid var(--glass-border);
+  border-radius: 20px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--glass-shadow), var(--glass-inset-card);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.rss-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(242, 101, 34, 0.4);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+/* ── Card image ── */
+.rss-card-img-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--navy-soft);
+  flex-shrink: 0;
+}
+
+.rss-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.rss-card:hover .rss-card-img {
+  transform: scale(1.04);
+}
+
+.rss-card-img-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--navy-tint);
+}
+
+.rss-card-img-placeholder svg {
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
+}
+
+/* ── Card body ── */
+.rss-card-body {
+  padding: 20px 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.rss-card-date {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--orange);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.rss-card-excerpt {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  flex: 1;
+  margin: 0;
+}
+
+.rss-card-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--navy);
+  font-family: "Manrope", sans-serif;
+  margin-top: auto;
+  transition: color 0.2s ease;
+}
+
+.rss-card:hover .rss-card-cta {
+  color: var(--orange);
+}
+
+/* ── Skeleton loaders ── */
+.rss-skeleton {
+  pointer-events: none;
+  min-height: 260px;
+  background: linear-gradient(90deg, var(--bg-warm) 25%, rgba(255,255,255,0.6) 50%, var(--bg-warm) 75%);
+  background-size: 400% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* ── Error state ── */
+.rss-error {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 48px 24px;
+  background: var(--glass-card);
+  border: 1.5px solid var(--glass-border);
+  border-radius: 20px;
+  color: var(--ink-soft);
+  font-size: 14px;
+}
+
+.rss-error svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: var(--orange);
+}
+
+.rss-error a {
+  color: var(--orange);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.rss-error a:hover {
+  text-decoration: underline;
+}
+
+/* ── Footer link ── */
+.rss-feed-footer {
+  text-align: center;
+  padding: 4px 0 20px;
+}
+
+.rss-linkedin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 26px;
+  background: var(--glass);
+  backdrop-filter: var(--glass-blur);
+  border: 1.5px solid var(--navy);
+  border-radius: 100px;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+  box-shadow: 0 3px 0 var(--navy);
+  transition: all 0.22s ease;
+}
+
+.rss-linkedin-btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--navy);
+  color: var(--orange);
+  border-color: var(--orange);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .rss-feed-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .rss-feed-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   SECTOR & CLIENT GROUPS SHOWCASE
+   ============================================================ */
+.sector-showcase {
+  margin: 0 0 48px;
+}
+
+.sector-showcase-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.sector-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--orange);
+  background: var(--orange-soft);
+  border: 1px solid var(--orange-tint);
+  padding: 5px 14px;
+  border-radius: 100px;
+  margin-bottom: 14px;
+}
+
+.sector-showcase-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+/* ── Grid ── */
+.sector-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* ── Card ── */
+.sector-card {
+  position: relative;
+  background: var(--glass-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1.5px solid var(--glass-border);
+  border-radius: 22px;
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: var(--glass-shadow), var(--glass-inset-card);
+  transition:
+    transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.28s ease,
+    box-shadow 0.28s ease;
+  overflow: hidden;
+}
+
+/* Subtle tinted corner glow per card — alternates navy / orange */
+.sector-card::before {
+  content: "";
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(11, 45, 83, 0.1), transparent 70%);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.sector-card[data-index="1"]::before,
+.sector-card[data-index="3"]::before {
+  background: radial-gradient(circle, rgba(242, 101, 34, 0.12), transparent 70%);
+}
+
+.sector-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(242, 101, 34, 0.45);
+  box-shadow: var(--glass-shadow-hover);
+}
+
+/* ── Top row: icon + number ── */
+.sector-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.sector-num {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--ink-soft);
+  opacity: 0.5;
+  letter-spacing: 0.06em;
+  padding-top: 2px;
+}
+
+/* ── Icon box ── */
+.sector-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  background: var(--navy-soft);
+  border: 1px solid var(--navy-tint);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.28s ease, border-color 0.28s ease, color 0.28s ease, transform 0.28s ease;
+}
+
+.sector-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.sector-icon--orange {
+  background: var(--orange-soft);
+  border-color: var(--orange-tint);
+  color: var(--orange-deep);
+}
+
+.sector-card:hover .sector-icon {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+  transform: scale(1.1) rotate(-4deg);
+}
+
+.sector-card:hover .sector-icon--orange {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: var(--white);
+}
+
+/* ── Title & desc ── */
+.sector-card-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.sector-card-desc {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0;
+  flex: 1;
+}
+
+/* ── Tag pills ── */
+.sector-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.sector-tags span {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 100px;
+  background: var(--bg);
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.sector-card:hover .sector-tags span {
+  background: var(--navy-soft);
+  color: var(--navy);
+  border-color: var(--navy-tint);
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .sector-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .sector-grid {
+    grid-template-columns: 1fr;
+  }
+  .sector-showcase {
+    margin-bottom: 32px;
   }
 }
