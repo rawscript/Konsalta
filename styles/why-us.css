@@ -737,219 +737,6 @@ body.has-custom-cursor .cursor {
   filter: brightness(0.9);
 }
 
-@media (max-width: 900px) {
-  .accordion-container {
-    flex-direction: column;
-    height: auto;
-  }
-  .cinematic-panel.main-panel {
-    height: 380px;
-    min-width: 100%;
-  }
-  .cinematic-panel.thumb-panel {
-    height: 90px;
-    min-width: 100%;
-  }
-  .panel-title-collapsed {
-    writing-mode: horizontal-tb;
-    transform: none;
-    bottom: 24px;
-    left: 60px;
-  }
-  .panel-content h2 {
-    font-size: 30px;
-  }
-}
-
-/* ============ TABLET (768px) ============ */
-@media (max-width: 768px) {
-  /* Grid: 2 columns for tablets */
-  .why-grid-6 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-  }
-
-  /* Accordion panels - better sizing */
-  .accordion-container {
-    gap: 12px;
-  }
-
-  .cinematic-panel.main-panel {
-    height: 320px;
-  }
-
-  .cinematic-panel.thumb-panel {
-    height: 100px;
-  }
-
-  /* Card adjustments */
-  .why-card-6 {
-    padding: 28px 22px;
-  }
-
-  .why-card-title {
-    font-size: 19px;
-  }
-
-  .why-card-desc {
-    font-size: 14px;
-  }
-
-  /* Section container */
-  .section-container-why {
-    padding: 0 20px;
-  }
-}
-
-/* ============ MOBILE PORTRAIT (480px and below) ============ */
-@media (max-width: 480px) {
-  .hero {
-    padding: 24px 16px 32px;
-  }
-
-  .headline {
-    font-size: clamp(32px, 9vw, 48px);
-  }
-
-  .subtitle {
-    font-size: 14px;
-    padding: 0 8px;
-  }
-
-  .section {
-    padding: 48px 12px;
-  }
-
-  .section-title {
-    font-size: clamp(24px, 6vw, 36px);
-  }
-
-  .section-text {
-    font-size: 15px;
-  }
-
-  .pillars-frame {
-    padding: 24px 16px;
-    border-radius: 20px;
-  }
-
-  /* Accordion - proper mobile sizing (not strips) */
-  .accordion-container {
-    gap: 12px;
-  }
-
-  .cinematic-panel.main-panel {
-    height: 260px;
-  }
-
-  .cinematic-panel.thumb-panel {
-    height: 120px;
-  }
-
-  .panel-content {
-    padding: 24px 18px;
-  }
-
-  .panel-content h2 {
-    font-size: 22px;
-  }
-
-  .panel-content p {
-    font-size: 13px;
-    line-height: 1.5;
-  }
-
-  .action-btn {
-    padding: 12px 22px;
-    font-size: 13px;
-    min-height: var(--touch-min, 44px);
-  }
-
-  /* Grid: single column on mobile */
-  .why-grid-6 {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .why-card-6 {
-    padding: 24px 18px;
-  }
-
-  .why-card-title {
-    font-size: 18px;
-  }
-
-  .why-card-desc {
-    font-size: 14px;
-  }
-
-  .why-card-icon {
-    width: 44px;
-    height: 44px;
-  }
-
-  .section-container-why {
-    padding: 0 16px;
-  }
-
-  .section-title-why {
-    font-size: clamp(24px, 6vw, 36px);
-  }
-
-  .section-desc-why {
-    font-size: 15px;
-  }
-}
-
-/* ============ SMALL MOBILE (320px and below) ============ */
-@media (max-width: 320px) {
-  .hero {
-    padding: 20px 12px 28px;
-  }
-
-  .headline {
-    font-size: clamp(28px, 8vw, 36px);
-  }
-
-  /* Accordion - ensure panels don't become strips */
-  .accordion-container {
-    gap: 10px;
-  }
-
-  .cinematic-panel.main-panel {
-    height: 220px;
-  }
-
-  .cinematic-panel.thumb-panel {
-    height: 110px;
-  }
-
-  .panel-content {
-    padding: 20px 16px;
-  }
-
-  .panel-content h2 {
-    font-size: 20px;
-  }
-
-  /* Cards */
-  .why-card-6 {
-    padding: 20px 16px;
-  }
-
-  .why-card-title {
-    font-size: 17px;
-  }
-
-  .why-card-desc {
-    font-size: 13px;
-  }
-
-  .section-container-why {
-    padding: 0 14px;
-  }
-}
-
 /* ============================================================
    4. WHY KONSALTA (6 PILLARS / EXPLANATIONS)
    ============================================================ */
@@ -980,7 +767,6 @@ body.has-custom-cursor .cursor {
   border-radius: 20px;
   padding: 36px 30px;
   box-shadow: var(--shadow-sm);
-  /* Only transition the properties that actually change on hover */
   transition:
     transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.35s ease,
@@ -1037,7 +823,6 @@ body.has-custom-cursor .cursor {
   flex-grow: 1;
 }
 
-/* Ensure cards are visible before JS/GSAP kicks in */
 .why-card-6,
 .section-head-why {
   opacity: 1;
@@ -1078,54 +863,320 @@ body.has-custom-cursor .cursor {
 
 
 /* ============================================================
-   8. SITE FOOTER (Standardized via styles/footer.css)
+   RESPONSIVE BREAKPOINTS (MUST come after base styles)
    ============================================================ */
 
-/* ============================================================
-   FOLDABLE DEVICE SUPPORT
-   ============================================================ */
-
-/* Galaxy Fold / ultra-narrow foldables (closed-fold state) */
-@media (max-width: 280px) {
-  .hero { padding: 20px 10px 24px; }
-  .headline { font-size: 24px; }
-  
-  /* Accordion panels */
-  .accordion-container { gap: 8px; }
-  .cinematic-panel.main-panel { height: 200px; }
-  .cinematic-panel.thumb-panel { height: 100px; }
-  
-  /* Cards */
-  .why-grid-6 { grid-template-columns: 1fr; gap: 12px; }
-  .why-card-6 { padding: 18px 14px; }
-  .why-card-title { font-size: 16px; }
-  .why-card-desc { font-size: 13px; }
-  
-  /* Section container */
-  .section-container-why { padding: 0 12px; }
+@media (max-width: 900px) {
+  .accordion-container {
+    flex-direction: column;
+    height: auto;
+  }
+  .cinematic-panel.main-panel {
+    flex: none;
+    height: 320px;
+    width: 100%;
+    min-width: 100%;
+  }
+  .cinematic-panel.thumb-panel {
+    flex: none;
+    height: 80px;
+    width: 100%;
+    min-width: 100%;
+  }
+  .panel-title-collapsed {
+    writing-mode: horizontal-tb;
+    transform: none;
+    bottom: 24px;
+    left: 60px;
+  }
+  .panel-content h2 {
+    font-size: 28px;
+  }
+  /* Grid: 2 columns */
+  .why-grid-6 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
-/* Landscape foldables (phone-like device rotated) */
-@media (max-height: 500px) and (orientation: landscape) {
-  .hero { padding: 16px 16px 20px; }
+/* ============ TABLET (768px) ============ */
+@media (max-width: 768px) {
+  .hero {
+    padding: 32px 20px 40px;
+  }
+
+  .headline {
+    font-size: clamp(36px, 9vw, 52px);
+  }
+
+  .headline .line {
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+  }
+
+  .inline-img {
+    width: clamp(80px, 20vw, 140px);
+    height: clamp(40px, 10vw, 70px);
+  }
+
+  .idea-pill {
+    padding: 6px 10px 6px 16px;
+  }
+
+  .idea-pill .txt {
+    font-size: clamp(10px, 2.5vw, 14px);
+  }
+
+  /* Hide large ambient orbs on mobile to prevent overflow */
+  .ambient-1,
+  .ambient-2 {
+    display: none;
+  }
+
+  .hero-orb-one,
+  .hero-orb-two,
+  .hero-orb-three {
+    width: clamp(100px, 20vw, 200px);
+  }
+
+  /* Accordion panels - proper sizing */
+  .accordion-container {
+    gap: 12px;
+  }
+
+  .cinematic-panel.main-panel {
+    height: 280px;
+  }
+
+  .cinematic-panel.thumb-panel {
+    height: 90px;
+  }
+
+  /* Grid: 2 columns for tablets */
+  .why-grid-6 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .why-card-6 {
+    padding: 26px 20px;
+  }
+
+  .why-card-title {
+    font-size: 18px;
+  }
+
+  .why-card-desc {
+    font-size: 14px;
+  }
+
+  .section-container-why {
+    padding: 0 18px;
+  }
+}
+
+/* ============ MOBILE PORTRAIT (480px and below) ============ */
+@media (max-width: 480px) {
+  .hero {
+    padding: 24px 12px 32px;
+  }
+
+  .headline {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+
+  .headline .line {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    padding: 0 4px;
+  }
+
+  .section {
+    padding: 40px 10px;
+  }
+
+  .section-title {
+    font-size: clamp(22px, 6vw, 32px);
+  }
+
+  .section-text {
+    font-size: 14px;
+  }
+
+  .pillars-frame {
+    padding: 20px 14px;
+    border-radius: 16px;
+  }
+
+  /* Accordion - proper mobile sizing */
+  .accordion-container {
+    gap: 10px;
+  }
+
+  .cinematic-panel.main-panel {
+    height: 240px;
+  }
+
+  .cinematic-panel.thumb-panel {
+    height: 100px;
+  }
+
+  .panel-content {
+    padding: 20px 16px;
+  }
+
+  .panel-content h2 {
+    font-size: 20px;
+  }
+
+  .panel-content p {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .action-btn {
+    padding: 10px 20px;
+    font-size: 12px;
+    min-height: 44px;
+  }
+
+  /* Grid: single column on mobile */
+  .why-grid-6 {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .why-card-6 {
+    padding: 22px 16px;
+  }
+
+  .why-card-title {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+
+  .why-card-desc {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .why-card-icon {
+    width: 44px;
+    height: 44px;
+    margin-bottom: 16px;
+  }
+
+  .section-container-why {
+    padding: 0 14px;
+  }
+
+  .section-head-why {
+    margin-bottom: 40px;
+  }
+
+  .section-title-why {
+    font-size: clamp(22px, 5vw, 32px);
+  }
+
+  .section-desc-why {
+    font-size: 14px;
+  }
+
+  .why-konsalta-section {
+    padding: 20px 0 50px;
+  }
+}
+
+/* ============ SMALL MOBILE (320px and below) ============ */
+@media (max-width: 320px) {
+  .hero {
+    padding: 20px 10px 28px;
+  }
+
+  .headline {
+    font-size: clamp(24px, 7vw, 32px);
+  }
+
+  /* Accordion */
+  .accordion-container {
+    gap: 8px;
+  }
+
+  .cinematic-panel.main-panel {
+    height: 200px;
+  }
+
+  .cinematic-panel.thumb-panel {
+    height: 90px;
+  }
+
+  .panel-content {
+    padding: 16px 14px;
+  }
+
+  .panel-content h2 {
+    font-size: 18px;
+  }
+
+  /* Cards */
+  .why-card-6 {
+    padding: 18px 14px;
+  }
+
+  .why-card-title {
+    font-size: 16px;
+  }
+
+  .why-card-desc {
+    font-size: 13px;
+  }
+
+  .section-container-why {
+    padding: 0 12px;
+  }
+}
+
+/* Galaxy Fold / ultra-narrow foldables */
+@media (max-width: 280px) {
+  .hero { padding: 16px 8px 24px; }
+  .headline { font-size: 22px; }
   
-  /* Accordion panels */
-  .accordion-container { gap: 10px; }
-  .cinematic-panel.main-panel { height: 200px; }
+  .accordion-container { gap: 6px; }
+  .cinematic-panel.main-panel { height: 180px; }
   .cinematic-panel.thumb-panel { height: 80px; }
   
-  /* Cards */
-  .why-grid-6 { gap: 12px; }
-  .why-card-6 { padding: 16px 14px; }
+  .why-grid-6 { grid-template-columns: 1fr; gap: 10px; }
+  .why-card-6 { padding: 16px 12px; }
+  .why-card-title { font-size: 15px; }
+  .why-card-desc { font-size: 12px; }
+  
+  .section-container-why { padding: 0 10px; }
 }
 
-/* Dynamic viewport units for notched/foldable screens */
+/* Landscape foldables */
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero { padding: 12px 16px 16px; }
+  
+  .accordion-container { gap: 8px; }
+  .cinematic-panel.main-panel { height: 180px; }
+  .cinematic-panel.thumb-panel { height: 70px; }
+  
+  .why-grid-6 { gap: 10px; }
+  .why-card-6 { padding: 14px 12px; }
+}
+
+/* Dynamic viewport units */
 @supports (height: 100dvh) {
-  .why-us-hero { min-height: 100dvh; }
+  .hero { min-height: auto; }
 }
 
 /* Reduced motion preference */
 @media (prefers-reduced-motion: reduce) {
-  .why-us-item, .stat-card { transition: none; transform: none !important; }
+  .why-card-6, .cinematic-panel { transition: none; transform: none !important; }
   html { scroll-behavior: auto; }
 }
