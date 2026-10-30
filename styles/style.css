@@ -1384,9 +1384,20 @@ body.has-custom-cursor .cursor {
     line-height: 1.6;
   }
 }
+@media (max-width: 768px) {
+  /* Hide hero SVG/GIF on mobile devices */
+  .hero-image {
+    display: none;
+  }
+  .hero-right {
+    display: none;
+  }
+}
+
 @media (max-width: 380px) {
   .hero-right {
     min-height: 320px;
+    display: none;
   }
   .constellation {
     transform: scale(0.44);
@@ -1394,6 +1405,7 @@ body.has-custom-cursor .cursor {
   }
   .hero-image {
     width: 280px;
+    display: none;
   }
   .hero-actions {
     align-items: stretch;

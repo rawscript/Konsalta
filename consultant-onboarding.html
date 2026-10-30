@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konsalta - Consultant Onboarding</title>
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js" as="script">
+    <link rel="icon" href="./public/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="./public/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./public/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./public/apple-touch-icon.png">
+    <link rel="manifest" href="./public/site.webmanifest">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="./styles/consultant-onboarding.css">
+    <link rel="stylesheet" href="./styles/footer.css">
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+        <div class="progress-info">
+            <span class="progress-label">Completion</span>
+            <span class="progress-value">0%</span>
+        </div>
+    </div>
+
+    <section class="intro">
+        <a class="back-link" href="./contactUs.html">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m0 0 7 7m-7-7 7-7" /></svg>
+            <span>Back to Contact</span>
+        </a>
+        <p class="eyebrow">Join our network</p>
+        <h1>Consultant Onboarding</h1>
+        <p>Help us deliver evidence, insights and impact. Complete the form below to join our expert network.</p>
+    </section>
+
+    <main class="form-container">
+        <form id="consultantForm" class="consultant-form" novalidate>
+            
+            <!-- Section 1: Personal Information -->
+            <div class="form-section" data-section="personal">
+                <button type="button" class="section-header" aria-expanded="true" aria-controls="section-personal">
+                    <div class="header-left">
+                        <span class="section-number">01</span>
+                        <div class="section-title-group">
+                            <h2 class="section-title">Personal Information</h2>
+                            <span class="section-subtitle">Basic details to get started</span>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <span class="section-status" aria-label="Section status"></span>
+                        <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </button>
+                <div class="section-content" id="section-personal">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="phone">Phone Number <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" placeholder="+XX XXX XXX XXXX" required>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="country">Country of Residence <span class="required">*</span></label>
+                            <input type="text" id="country" name="country" placeholder="Where are you based?" required>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="nationality">Nationality</label>
+                            <input type="text" id="nationality" name="nationality" placeholder="Your nationality (optional)">
+                        </div>
+                        <div class="form-field">
+                            <label for="linkedin">LinkedIn Profile</label>
+                            <input type="url" id="linkedin" name="linkedin" placeholder="https://linkedin.com/in/yourprofile">
+                        </div>
+                        <div class="form-field full-width">
+                            <label for="website">Personal Website / Portfolio</label>
+                            <input type="url" id="website" name="website" placeholder="https://yourwebsite.com">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Professional Background -->
+            <div class="form-section" data-section="professional">
+                <button type="button" class="section-header" aria-expanded="false" aria-controls="section-professional">
+                    <div class="header-left">
+                        <span class="section-number">02</span>
+                        <div class="section-title-group">
+                            <h2 class="section-title">Professional Background</h2>
+                            <span class="section-subtitle">Your career journey</span>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <span class="section-status" aria-label="Section status"></span>
+                        <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </button>
+                <div class="section-content" id="section-professional">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="currentPosition">Current Position / Title <span class="required">*</span></label>
+                            <input type="text" id="currentPosition" name="currentPosition" placeholder="Your current role" required>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="currentOrg">Current Organization <span class="required">*</span></label>
+                            <input type="text" id="currentOrg" name="currentOrg" placeholder="Organization name or 'Independent'" required>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="yearsExperience">Years of Experience <span class="required">*</span></label>
+                            <select id="yearsExperience" name="yearsExperience" required>
+                                <option value="" disabled selected>Select your experience</option>
+                                <option value="0-5">0–5 years</option>
+                                <option value="6-10">6–10 years</option>
+                                <option value="11-15">11–15 years</option>
+                                <option value="16-20">16–20 years</option>
+                                <option value="20+">20+ years</option>
+                            </select>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                        <div class="form-field full-width">
+                            <label for="bio">Short Professional Bio <span class="required">*</span></label>
+                            <textarea id="bio" name="bio" rows="5" placeholder="Tell us about your professional journey, key achievements, and what drives your work (250–500 words)" minlength="250" maxlength="5000" required></textarea>
+                            <div class="char-count"><span id="bioCount">0</span> / 5000 characters (min 250)</div>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Expertise & Skills -->
+            <div class="form-section" data-section="expertise">
+                <button type="button" class="section-header" aria-expanded="false" aria-controls="section-expertise">
+                    <div class="header-left">
+                        <span class="section-number">03</span>
+                        <div class="section-title-group">
+                            <h2 class="section-title">Expertise & Skills</h2>
+                            <span class="section-subtitle">Your areas of specialization</span>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <span class="section-status" aria-label="Section status"></span>
+                        <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </button>
+                <div class="section-content" id="section-expertise">
+                    <div class="form-grid">
+                        <div class="form-field full-width">
+                            <fieldset>
+                                <legend>Areas of Expertise <span class="required">*</span> <span class="hint">(Select all that apply)</span></legend>
+                                <div class="checkbox-grid">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Research & Analytics">
+                                        <span class="checkmark"></span>
+                                        Research & Analytics
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Monitoring, Evaluation and Learning (MEL)">
+                                        <span class="checkmark"></span>
+                                        Monitoring, Evaluation and Learning (MEL)
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Impact Evaluation">
+                                        <span class="checkmark"></span>
+                                        Impact Evaluation
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Public Policy & Governance">
+                                        <span class="checkmark"></span>
+                                        Public Policy & Governance
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Poverty & Equity Analysis">
+                                        <span class="checkmark"></span>
+                                        Poverty & Equity Analysis
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Fiscal Policy & Public Finance">
+                                        <span class="checkmark"></span>
+                                        Fiscal Policy & Public Finance
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Social Protection">
+                                        <span class="checkmark"></span>
+                                        Social Protection
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Gender & Inclusion">
+                                        <span class="checkmark"></span>
+                                        Gender & Inclusion
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Refugee Inclusion & Forced Displacement">
+                                        <span class="checkmark"></span>
+                                        Refugee Inclusion & Forced Displacement
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Data Systems Strengthening">
+                                        <span class="checkmark"></span>
+                                        Data Systems Strengthening
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Capacity Development">
+                                        <span class="checkmark"></span>
+                                        Capacity Development
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Strategic Planning">
+                                        <span class="checkmark"></span>
+                                        Strategic Planning
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Knowledge Management">
+                                        <span class="checkmark"></span>
+                                        Knowledge Management
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Communications & Stakeholder Engagement">
+                                        <span class="checkmark"></span>
+                                        Communications & Stakeholder Engagement
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Private Sector Development">
+                                        <span class="checkmark"></span>
+                                        Private Sector Development
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Climate & Resilience">
+                                        <span class="checkmark"></span>
+                                        Climate & Resilience
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Agriculture & Rural Development">
+                                        <span class="checkmark"></span>
+                                        Agriculture & Rural Development
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Education">
+                                        <span class="checkmark"></span>
+                                        Education
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="expertise" value="Health">
+                                        <span class="checkmark"></span>
+                                        Health
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="form-field full-width">
+                            <label for="otherExpertise">Other Areas of Expertise</label>
+                            <input type="text" id="otherExpertise" name="otherExpertise" placeholder="Any other areas not listed above">
+                        </div>
+                        <div class="form-field full-width">
+                            <fieldset>
+                                <legend>Technical Skills <span class="hint">(Select all that apply)</span></legend>
+                                <div class="checkbox-grid">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="skills" value="Quantitative Analysis">
+                                        <span class="checkmark"></span>
+                                        Quantitative Analysis
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="skills" value="Qualitative Research">
+                                        <span class="checkmark"></span>
+                                        Qualitative Research
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="skills" value="Survey Design">
+                                        <span class="checkmark"></span>
+                                        Survey Design
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="skills" value="Statistical Modeling">
+                                        <span class="checkmark"></span>
+                                        Statistical Modeling
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="skills" value="Econometrics">
+                                        <span class="checkmark"></span>
+                                        Econometrics
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="skills" value="Data Visualization">
+                                        <span class="checkmark"></span>
+                                        Data Visualization
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="skills" value="Facilitation & Training">
+                                        <span class="checkmark"></span>
+                                        Facilitation & Training
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="skills" value="Policy Analysis">
+                                        <span class="checkmark"></span>
+                                        Policy Analysis
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="skills" value="Programme Evaluation">
+                                        <span class="checkmark"></span>
+                                        Programme Evaluation
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="skills" value="Project Management">
+                                        <span class="checkmark"></span>
+                                        Project Management
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="skills" value="Report Writing">
+                                        <span class="checkmark"></span>
+                                        Report Writing
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" name="skills" value="Business Development">
+                                        <span class="checkmark"></span>
+                                        Business Development
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="form-field full-width">
+                            <label for="otherSkills">Other Technical Skills</label>
+                            <input type="text" id="otherSkills" name="otherSkills" placeholder="Any other skills not listed above">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: Geographic Experience & Languages -->
+            <div class="form-section" data-section="geographic">
+                <button type="button" class="section-header" aria-expanded="false" aria-controls="section-geographic">
+                    <div class="header-left">
+                        <span class="section-number">04</span>
+                        <div class="section-title-group">
+                            <h2 class="section-title">Geographic Experience & Languages</h2>
+                            <span class="section-subtitle">Where you've worked and languages you speak</span>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <span class="section-status" aria-label="Section status"></span>
+                        <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </button>
+                <div class="section-content" id="section-geographic">
+                    <div class="form-grid">
+                        <div class="form-field full-width">
+                            <label for="countriesWorked">Countries Where You Have Worked</label>
+                            <input type="text" id="countriesWorked" name="countriesWorked" placeholder="List the countries where you have professional experience">
+                        </div>
+                        <div class="form-field full-width">
+                            <label for="regions">Regions of Expertise</label>
+                            <select id="regions" name="regions" multiple size="6">
+                                <option value="Global">Global</option>
+                                <option value="Africa">Africa (continent-wide)</option>
+                                <option value="Eastern Africa">Eastern Africa</option>
+                                <option value="Southern Africa">Southern Africa</option>
+                                <option value="West Africa">West Africa</option>
+                                <option value="Central Africa">Central Africa</option>
+                                <option value="North Africa">North Africa</option>
+                                <option value="Other">Other regions</option>
+                            </select>
+                            <span class="hint">Hold Ctrl/Cmd to select multiple</span>
+                        </div>
+                        <div class="form-field full-width">
+                            <fieldset>
+                                <legend>Language Proficiency</legend>
+                                <div class="language-grid">
+                                    <div class="language-header">
+                                        <span>Language</span>
+                                        <span>Basic</span>
+                                        <span>Intermediate</span>
+                                        <span>Fluent</span>
+                                        <span>Native</span>
+                                    </div>
+                                    <div class="language-row">
+                                        <span>English</span>
+                                        <label class="radio-label"><input type="radio" name="englishLevel" value="Basic"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="englishLevel" value="Intermediate"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="englishLevel" value="Fluent"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="englishLevel" value="Native"><span class="radio-mark"></span></label>
+                                    </div>
+                                    <div class="language-row">
+                                        <span>French</span>
+                                        <label class="radio-label"><input type="radio" name="frenchLevel" value="Basic"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="frenchLevel" value="Intermediate"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="frenchLevel" value="Fluent"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="frenchLevel" value="Native"><span class="radio-mark"></span></label>
+                                    </div>
+                                    <div class="language-row">
+                                        <span>Portuguese</span>
+                                        <label class="radio-label"><input type="radio" name="portugueseLevel" value="Basic"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="portugueseLevel" value="Intermediate"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="portugueseLevel" value="Fluent"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="portugueseLevel" value="Native"><span class="radio-mark"></span></label>
+                                    </div>
+                                    <div class="language-row">
+                                        <span>Arabic</span>
+                                        <label class="radio-label"><input type="radio" name="arabicLevel" value="Basic"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="arabicLevel" value="Intermediate"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="arabicLevel" value="Fluent"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="arabicLevel" value="Native"><span class="radio-mark"></span></label>
+                                    </div>
+                                    <div class="language-row">
+                                        <span>Swahili</span>
+                                        <label class="radio-label"><input type="radio" name="swahiliLevel" value="Basic"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="swahiliLevel" value="Intermediate"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="swahiliLevel" value="Fluent"><span class="radio-mark"></span></label>
+                                        <label class="radio-label"><input type="radio" name="swahiliLevel" value="Native"><span class="radio-mark"></span></label>
+                                    </div>
+                                </div>
+                                <div class="form-field" style="margin-top: 1rem;">
+                                    <label for="otherLanguage">Other Languages</label>
+                                    <input type="text" id="otherLanguage" name="otherLanguage" placeholder="e.g., Amharic (Fluent), Yoruba (Basic)">
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Education & Availability -->
+            <div class="form-section" data-section="education">
+                <button type="button" class="section-header" aria-expanded="false" aria-controls="section-education">
+                    <div class="header-left">
+                        <span class="section-number">05</span>
+                        <div class="section-title-group">
+                            <h2 class="section-title">Education & Availability</h2>
+                            <span class="section-subtitle">Your qualifications and schedule</span>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <span class="section-status" aria-label="Section status"></span>
+                        <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </button>
+                <div class="section-content" id="section-education">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="qualification">Highest Qualification <span class="required">*</span></label>
+                            <input type="text" id="qualification" name="qualification" placeholder="e.g., PhD, MBA, MSc" required>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="fieldOfStudy">Field of Study <span class="required">*</span></label>
+                            <input type="text" id="fieldOfStudy" name="fieldOfStudy" placeholder="e.g., Economics, Public Health" required>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="consultingExperience">Previous Consulting Experience <span class="required">*</span></label>
+                            <select id="consultingExperience" name="consultingExperience" required>
+                                <option value="" disabled selected>Select</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="availability">Current Availability</label>
+                            <select id="availability" name="availability">
+                                <option value="" disabled selected>Select availability</option>
+                                <option value="Immediately Available">Immediately Available</option>
+                                <option value="Available Within 1 Month">Available Within 1 Month</option>
+                                <option value="Available Within 3 Months">Available Within 3 Months</option>
+                                <option value="Available Upon Request">Available Upon Request</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: Documents & References -->
+            <div class="form-section" data-section="documents">
+                <button type="button" class="section-header" aria-expanded="false" aria-controls="section-documents">
+                    <div class="header-left">
+                        <span class="section-number">06</span>
+                        <div class="section-title-group">
+                            <h2 class="section-title">Documents & References</h2>
+                            <span class="section-subtitle">Supporting materials</span>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <span class="section-status" aria-label="Section status"></span>
+                        <svg class="chevron-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M6 9l6 6 6-6"/>
+                        </svg>
+                    </div>
+                </button>
+                <div class="section-content" id="section-documents">
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="cv">CV/Resume <span class="required">*</span></label>
+                            <div class="file-upload">
+                                <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required>
+                                <div class="file-upload-label">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="17 8 12 3 7 8"/>
+                                        <line x1="12" y1="3" x2="12" y2="15"/>
+                                    </svg>
+                                    <span class="file-text">Choose file or drag here</span>
+                                    <span class="file-hint">PDF, DOC, DOCX (Max 5MB)</span>
+                                </div>
+                            </div>
+                            <span class="error-message" aria-live="polite"></span>
+                        </div>
+                        <div class="form-field">
+                            <label for="writingSample">Writing Sample</label>
+                            <div class="file-upload">
+                                <input type="file" id="writingSample" name="writingSample" accept=".pdf,.doc,.docx">
+                                <div class="file-upload-label">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="17 8 12 3 7 8"/>
+                                        <line x1="12" y1="3" x2="12" y2="15"/>
+                                    </svg>
+                                    <span class="file-text">Choose file or drag here</span>
+                                    <span class="file-hint">PDF, DOC, DOCX (optional)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="sampleReport">Sample Report or Publication</label>
+                            <div class="file-upload">
+                                <input type="file" id="sampleReport" name="sampleReport" accept=".pdf,.doc,.docx">
+                                <div class="file-upload-label">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="17 8 12 3 7 8"/>
+                                        <line x1="12" y1="3" x2="12" y2="15"/>
+                                    </svg>
+                                    <span class="file-text">Choose file or drag here</span>
+                                    <span class="file-hint">PDF, DOC, DOCX (optional)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-field">
+                            <label for="references">References</label>
+                            <div class="file-upload">
+                                <input type="file" id="references" name="references" accept=".pdf,.doc,.docx">
+                                <div class="file-upload-label">
+                                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                                        <polyline points="17 8 12 3 7 8"/>
+                                        <line x1="12" y1="3" x2="12" y2="15"/>
+                                    </svg>
+                                    <span class="file-text">Choose file or drag here</span>
+                                    <span class="file-hint">PDF, DOC, DOCX (optional)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-field full-width">
+                            <div class="consent-group">
+                                <label class="checkbox-label consent-label">
+                                    <input type="checkbox" name="confirmAccuracy" required>
+                                    <span class="checkmark"></span>
+                                    I confirm that the information provided is accurate. <span class="required">*</span>
+                                </label>
+                                <label class="checkbox-label consent-label">
+                                    <input type="checkbox" name="consentStorage" required>
+                                    <span class="checkmark"></span>
+                                    I consent to Konsalta storing my information for the purposes of identifying opportunities for collaboration. <span class="required">*</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Section -->
+            <div class="submit-section">
+                <div class="submit-info">
+                    <p class="submit-note"><strong>Note:</strong> Online submission is not available yet. Please contact <a href="mailto:engage@konsaltahub.org">engage@konsaltahub.org</a> to discuss how to share your application securely.</p>
+                </div>
+                <button type="button" class="submit-btn" disabled>
+                    <span>Submit Application</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 12h14M13 6l6 6-6 6"/>
+                    </svg>
+                </button>
+                <p class="form-status" role="status" aria-live="polite"></p>
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-top">
+                <div class="footer-brand">
+                    <a class="footer-logo" href="index.html" aria-label="Konsalta home">
+                        <img src="public/Konsalta-white.png" alt="Konsalta" />
+                    </a>
+                    <p>A women-led, Africa-focused research, consulting, and advisory firm delivering actionable insights and systemic impact.</p>
+                </div>
+                <div class="footer-cols">
+                    <div class="footer-col">
+                        <h4>Services</h4>
+                        <a href="services.html#services-grid">Research &amp; Evaluation</a>
+                        <a href="services.html#services-grid">Strategy &amp; Advisory</a>
+                        <a href="services.html#services-grid">Market Intelligence</a>
+                        <a href="services.html#services-grid">Policy &amp; Systems</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Company</h4>
+                        <a href="aboutUs.html">About Konsalta</a>
+                        <a href="contactUs.html#expert-network">Join the Expert Network</a>
+                        <a href="insights.html">Our Insights</a>
+                        <a href="contactUs.html#consultation">Request a consultation</a>
+                    </div>
+                    <div class="footer-col footer-contact">
+                        <h4>Find Us</h4>
+                        <p><svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Harare, Zimbabwe</p>
+                        <a href="https://www.linkedin.com/company/konsalta-hub-africa/" target="_blank" rel="noopener noreferrer"><svg class="footer-icon footer-icon-brand" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v10M5 5v.01M10 19v-6a4 4 0 0 1 8 0v6M10 9v10M3 3h18v18H3z"></path></svg>LinkedIn</a>
+                        <a href="contactUs.html">FAQs</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 Konsalta. All rights reserved.</span>
+                <span>Developed by Momentum Labs</span>
+                <span>Better Decisions. Greater Impact.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="./scripts/consultant-onboarding.js"></script>
+</body>
+</html>

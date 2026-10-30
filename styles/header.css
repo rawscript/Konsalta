@@ -35,6 +35,19 @@
   display: block;
 }
 
+/* Desktop: use logo.png */
+.site-header .logo-dot img[src*="logo-small.png"] {
+  content: url('../public/logo.png');
+}
+
+/* Mobile: use logo-small.png */
+@media (max-width: 768px) {
+  .site-header .logo-dot img {
+    content: url('../public/logo-small.png');
+    max-height: 38px;
+  }
+}
+
 .site-header .header-nav {
   display: flex;
   gap: clamp(20px, 2.2vw, 34px);

@@ -41,10 +41,17 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const planeGroup = overlay.querySelector(".plane-group");
-    const shadow = overlay.querySelector(".plane-shadow");
-    const trail = overlay.querySelector(".flight-trail");
     const checkmark = overlay.querySelector(".checkmark-group");
+    
+    // Play success sound if supported
+    try {
+      const successSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZizcIHm/F8t9+M' +
+        'AIZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZizcIHm/F8t9+MwIZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZizcIHm/F8t9+M');
+      successSound.volume = 0.3;
+      successSound.play().catch(() => {}); // Silently fail if audio not supported
+    } catch (e) {
+      // Audio not supported or blocked
+    }
 
     card.classList.add("is-hidden");
     overlay.classList.add("is-visible");
@@ -53,107 +60,37 @@ document.addEventListener("DOMContentLoaded", () => {
       defaults: { ease: "power2.inOut" },
     });
 
-    tl.set(planeGroup, {
-      x: 0,
-      y: 0,
-      rotation: -24,
-      rotateX: 22,
-      rotateY: -14,
-      scale: 0.62,
-      opacity: 0,
-      transformOrigin: "50% 50%",
-    })
-      .set(shadow, { opacity: 0, scale: 0.7, x: 0, y: 0 })
-      .set(trail, { strokeDashoffset: 100, opacity: 0 })
-      .set(checkmark, { opacity: 0, scale: 0.5, x: 0, y: 0 })
-      .to(card, { opacity: 0, duration: 0.18 }, 0)
-      .to(
-        trail,
-        { opacity: 1, strokeDashoffset: 0, duration: 0.7, ease: "power1.out" },
-        0.15,
-      )
-      .to(
-        planeGroup,
-        {
-          opacity: 1,
-          x: 110,
-          y: -42,
-          rotation: -8,
-          rotateX: 14,
-          rotateY: -6,
-          scale: 0.88,
-          duration: 0.7,
-          ease: "power3.out",
-        },
-        0.15,
-      )
-      .to(
-        planeGroup,
-        {
-          x: 290,
-          y: -180,
-          rotation: 18,
-          rotateX: 4,
-          rotateY: 10,
-          scale: 1.04,
-          duration: 1.1,
-          ease: "power2.out",
-        },
-        0.8,
-      )
-      .to(
-        shadow,
-        {
-          opacity: 0.9,
-          x: 170,
-          y: 55,
-          scale: 0.9,
-          duration: 1.1,
-          ease: "power2.out",
-        },
-        0.8,
-      )
-      .to(
-        planeGroup,
-        {
-          x: 345,
-          y: -230,
-          rotation: 28,
-          rotateX: -8,
-          rotateY: 18,
-          scale: 1.12,
-          duration: 0.5,
-          ease: "power1.in",
-        },
-        1.9,
-      )
-      .to(
-        planeGroup,
-        {
-          opacity: 0,
-          duration: 0.12,
-        },
-        2.25,
-      )
+    tl.set(checkmark, { opacity: 0, scale: 0.5, x: 0, y: 0 })
+      .to(card, { opacity: 0, duration: 0.3 }, 0)
+      .to(overlay, { opacity: 1, duration: 0.2 }, 0)
       .to(
         checkmark,
         {
           opacity: 1,
-          scale: 1,
-          duration: 0.28,
-          ease: "back.out(1.7)",
+          scale: 1.15,
+          duration: 0.4,
+          ease: "back.out(2)",
         },
-        2.2,
+        0.3,
+      )
+      .to(
+        checkmark,
+        {
+          scale: 1,
+          duration: 0.2,
+          ease: "power2.out",
+        },
+        0.7,
       )
       .to(
         overlay,
         {
           opacity: 0,
-          duration: 0.42,
+          duration: 0.5,
           ease: "power2.inOut",
           onComplete: () => overlay.classList.remove("is-visible"),
         },
-        2.9,
+        1.5,
       )
       .to(
         card,
@@ -161,11 +98,11 @@ document.addEventListener("DOMContentLoaded", () => {
           opacity: 1,
           y: 0,
           scale: 1,
-          duration: 0.7,
+          duration: 0.6,
           ease: "power3.out",
           onStart: () => card.classList.remove("is-hidden"),
         },
-        2.9,
+        1.5,
       );
   };
 
