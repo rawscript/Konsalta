@@ -44,7 +44,7 @@ body {
   min-height: 100vh;
   background-color: var(--bg);
   color: var(--ink);
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   overflow-x: hidden;
 }
 
@@ -205,7 +205,7 @@ body.has-custom-cursor .cursor {
 }
 
 .headline {
-  font-family: "Playfair Display", sans-serif;
+  : "Playfair Display", sans-serif;
   font-weight: 800;
   font-size: clamp(60px, 7.8vw, 126px);
   line-height: 1.05;
@@ -325,7 +325,7 @@ body.has-custom-cursor .cursor {
   will-change: transform;
 }
 .idea-pill .txt {
-  font-family: "Inter", sans-serif;
+  : "Inter", sans-serif;
   font-weight: 600;
   font-size: clamp(11px, 1.2vw, 18px);
   line-height: 1.15;
@@ -475,7 +475,7 @@ body.has-custom-cursor .cursor {
 
 .section-title {
   margin: 0 0 24px;
-  font-family: "Playfair Display", serif;
+  : "Playfair Display", serif;
   font-size: clamp(32px, 5vw, 56px);
   font-weight: 600;
   line-height: 1.1;
@@ -487,7 +487,7 @@ body.has-custom-cursor .cursor {
 .section-text {
   margin: 0 auto;
   max-width: 62ch;
-  font-family: "Playfair Display", serif;
+  : "Playfair Display", serif;
   font-size: clamp(16px, 1.6vw, 19px);
   line-height: 1.8;
   color: var(--ink-soft);
@@ -505,7 +505,7 @@ body.has-custom-cursor .cursor {
 
 /* Editorial drop-cap on the first letter (optional) */
 .section-text::first-letter {
-  font-family: "Playfair Display", serif;
+  : "Playfair Display", serif;
   font-size: 1.6em;
   font-weight: 600;
   color: var(--orange);
@@ -524,7 +524,7 @@ body.has-custom-cursor .cursor {
 .section-subtitle {
   display: block;
   text-align: center;
-  font-family: "Playfair Display", serif;
+  : "Playfair Display", serif;
   font-size: clamp(14px, 1.2vw, 18px);
   font-weight: 600;
   letter-spacing: 1.5px;
@@ -603,7 +603,7 @@ body.has-custom-cursor .cursor {
   position: absolute;
   top: 24px;
   left: 24px;
-  font-family: "Playfair Display", serif;
+  : "Playfair Display", serif;
   font-size: 18px;
   color: var(--bg);
   z-index: 2;
@@ -652,7 +652,7 @@ body.has-custom-cursor .cursor {
 }
 
 .panel-content h2 {
-  font-family: "Playfair Display", serif;
+  : "Playfair Display", serif;
   font-size: 40px;
   font-weight: 600;
   color: var(--text-white);
@@ -808,7 +808,7 @@ body.has-custom-cursor .cursor {
 }
 
 .why-card-title {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-size: 21px;
   font-weight: 700;
   color: var(--navy);
@@ -842,7 +842,7 @@ body.has-custom-cursor .cursor {
 }
 
 .section-title-why {
-  font-family: "Playfair Display", sans-serif;
+  : "Playfair Display", sans-serif;
   font-size: clamp(32px, 4.2vw, 48px);
   font-weight: 800;
   color: var(--navy);

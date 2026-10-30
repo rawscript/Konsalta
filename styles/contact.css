@@ -31,7 +31,7 @@ body {
   margin: 0;
   padding: 0;
   background: linear-gradient(180deg, #f7f4ef 0%, #ffffff 100%);
-  font-family: "DM Sans", "Inter", sans-serif;
+  : "DM Sans", "Inter", sans-serif;
   color: var(--ink);
 }
 
@@ -444,7 +444,7 @@ img {
 }
 
 .footer-col h4 {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -471,7 +471,7 @@ img {
   border-top: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;

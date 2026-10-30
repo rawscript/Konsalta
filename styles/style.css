@@ -58,7 +58,7 @@ html {
 
 body {
   background: var(--bg);
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   color: var(--ink);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -174,7 +174,7 @@ body.has-custom-cursor .cursor {
   display: flex;
   gap: 32px;
   align-items: center;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 600;
 }
@@ -215,7 +215,7 @@ body.has-custom-cursor .cursor {
   align-items: center;
   gap: 8px;
   padding: 12px 22px;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 13px;
   font-weight: 700;
   color: var(--navy);
@@ -267,7 +267,7 @@ body.has-custom-cursor .cursor {
   background: var(--orange-soft);
   border: 1px solid var(--orange-tint);
   border-radius: 999px;
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   font-weight: 600;
   color: var(--orange-deep);
@@ -285,7 +285,7 @@ body.has-custom-cursor .cursor {
 }
 
 .hero-title {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
   font-size: clamp(40px, 5.2vw, 84px);
   line-height: 1.05;
@@ -332,7 +332,7 @@ body.has-custom-cursor .cursor {
   align-items: center;
   gap: 12px;
   padding: 16px 30px;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 15px;
   font-weight: 700;
   color: var(--white);
@@ -403,7 +403,7 @@ body.has-custom-cursor .cursor {
   align-items: center;
   gap: 8px;
   padding: 16px 26px;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 15px;
   font-weight: 700;
   color: var(--navy);
@@ -731,7 +731,7 @@ body.has-custom-cursor .cursor {
 }
 
 .section-eyebrow {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.2em;
@@ -751,7 +751,7 @@ body.has-custom-cursor .cursor {
 }
 
 .features h2 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
   font-size: clamp(38px, 4.8vw, 70px);
   line-height: 1.05;
@@ -761,7 +761,7 @@ body.has-custom-cursor .cursor {
 }
 
 .features-meta {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
@@ -825,7 +825,7 @@ body.has-custom-cursor .cursor {
 }
 
 .feature-card .fc-num {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.16em;
@@ -834,7 +834,7 @@ body.has-custom-cursor .cursor {
 }
 
 .feature-card h3 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
   font-size: clamp(24px, 1.9vw, 30px);
   line-height: 1.2;
@@ -884,13 +884,13 @@ body.has-custom-cursor .cursor {
   line-height: 0.6;
   color: var(--orange);
   margin-bottom: 24px;
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
   opacity: 0.9;
 }
 
 .quote-section blockquote {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-weight: 700;
   font-size: clamp(30px, 3.8vw, 54px);
   line-height: 1.25;
@@ -901,7 +901,7 @@ body.has-custom-cursor .cursor {
 }
 
 .quote-author {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
@@ -946,7 +946,7 @@ body.has-custom-cursor .cursor {
 }
 
 .final-cta h2 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
   font-size: clamp(40px, 5.2vw, 76px);
   line-height: 1.08;
@@ -1046,7 +1046,7 @@ body.has-custom-cursor .cursor {
 }
 
 .footer-col h4 {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -1073,7 +1073,7 @@ body.has-custom-cursor .cursor {
   border-top: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;

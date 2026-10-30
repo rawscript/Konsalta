@@ -44,7 +44,7 @@ body {
 }
 
 body {
-  font-family: "Funnel Display", system-ui, sans-serif;
+  : "Funnel Display", system-ui, sans-serif;
   background: var(--bg);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
@@ -144,7 +144,7 @@ body {
     var(--orange-deep) 100%
   );
   color: #ffffff;
-  font-family: inherit;
+  : inherit;
   font-size: 17px;
   font-weight: 700;
   letter-spacing: -0.005em;

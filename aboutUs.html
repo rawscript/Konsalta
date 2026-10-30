@@ -33,8 +33,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
     />
 
     <!-- Stylesheets -->
@@ -47,6 +47,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="scripts/header.js" defer></script>
     <script src="scripts/aboutUS.js" defer></script>
+    <script>
+  if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("js-ready");
+  }
+</script>
   </head>
 
   <body>
@@ -108,16 +113,81 @@
               Turning Knowledge <span class="highlight">To Impact</span>
             </h1>
 
-            <p class="hero-lead-text">
-              <strong style="color: #f26522">Who We Are: </strong> Since its
-              inception in 2024, Konsalta has built a multidisciplinary network
-              of experts who bring deep, hands-on experience to help
-              organisations across Africa and beyond turn knowledge into impact.
-              We partner with clients to solve complex challenges, translate
-              evidence into action, strengthen institutional capability and
-              deliver lasting
-              <strong style="color: #f26522">real-world impact</strong>
-            </p>
+            <section>
+              <div id="app">
+  <div class="papers" style="--total: 5">
+    
+    <div class="paper -rogue" style="--i: 0">
+      <div class="segment">
+        <div class="segment">
+          <div class="segment">
+            <div class="segment">
+              <div class="segment"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="paper" style="--i: 1">
+      <div class="segment">
+        <div class="segment">
+          <div class="segment">
+            <div class="segment">
+              <div class="segment"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="paper" style="--i: 2">
+      <div class="segment">
+        <div class="segment">
+          <div class="segment">
+            <div class="segment">
+              <div class="segment"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        
+    <div class="paper" style="--i: 3">
+      <div class="segment">
+        <div class="segment">
+          <div class="segment">
+            <div class="segment">
+              <div class="segment"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="paper" style="--i: 4">
+      <div class="segment">
+        <div class="segment">
+          <div class="segment">
+            <div class="segment">
+              <div class="segment"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="shadow">
+    <div class="paper-shadow" style="--i: 0"></div>
+    <div class="paper-shadow" style="--i: 1"></div>
+    <div class="paper-shadow" style="--i: 2"></div>
+    <div class="paper-shadow" style="--i: 3"></div>
+    <div class="paper-shadow" style="--i: 4"></div>
+  </div>
+</div>
+            </section>
 
             <div class="hero-actions">
               <a href="#who-we-serve" class="btn-primary">
@@ -181,6 +251,752 @@
           </div>
         </div>
       </section>
+
+
+           <!-- ============================================================
+         2. WHO WE SERVE
+         ============================================================ -->
+      <section class="who-we-serve-section" id="who-we-serve">
+        <!-- Ambient Interactive Inverted Stars Field -->
+        <div class="serve-stars-field" aria-hidden="true">
+          <!-- 42 stars · euclidean scatter · sizes 11–40px · filled + outline mix · unique tilts -->
+
+          <!-- ─── TOP ZONE (0–14%) ─────────────────────────────────────── -->
+          <!-- ① orange filled 28px -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-22"
+               style="top:6%;left:2.5%;width:28px;height:28px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ② blue outline 20px -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="37"
+               style="top:11%;right:3%;width:20px;height:20px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ③ orange outline 15px -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-45"
+               style="top:2%;left:23%;width:15px;height:15px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ④ blue filled 34px -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="18"
+               style="top:3%;right:15%;width:34px;height:34px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑤ orange filled 13px -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-33"
+               style="top:5%;left:52%;width:13px;height:13px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑥ blue filled 17px — upper inner-left -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="31"
+               style="top:8%;left:13%;width:17px;height:17px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑦ orange outline 11px — tiny, far top-left low -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-58"
+               style="top:13%;left:5%;width:11px;height:11px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑧ blue outline 14px — upper right-centre -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="67"
+               style="top:8%;right:25%;width:14px;height:14px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑨ orange filled 20px — top centre-right gap -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-15"
+               style="top:1%;left:38%;width:20px;height:20px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑩ blue filled 25px — upper right inner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="44"
+               style="top:14%;right:6%;width:25px;height:25px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑪ orange outline 24px — upper left inner -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-38"
+               style="top:13%;left:44%;width:24px;height:24px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑫ blue outline 40px — top-right, large anchor -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="25"
+               style="top:0%;right:42%;width:40px;height:40px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑬ orange filled 16px — upper right edge -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="51"
+               style="top:9%;right:12%;width:16px;height:16px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑭ blue filled 12px — tiny, top-left mid -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-71"
+               style="top:11%;left:31%;width:12px;height:12px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+
+          <!-- ─── UPPER-MIDDLE ZONE (15–40%) ────────────────────────────── -->
+          <!-- ⑮ blue outline 38px — mid-left large anchor -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="52"
+               style="top:30%;left:1.5%;width:38px;height:38px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑯ orange filled 22px — mid-right -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-17"
+               style="top:27%;right:1.5%;width:22px;height:22px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑰ orange outline 32px — upper-mid left inner -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-38"
+               style="top:22%;left:12%;width:32px;height:32px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑱ blue filled 18px — mid-right inner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="25"
+               style="top:18%;right:12%;width:18px;height:18px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑲ blue filled 13px — mid-right edge small -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-70"
+               style="top:35%;right:4%;width:13px;height:13px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑳ orange filled 20px — mid-left inner -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="49"
+               style="top:40%;left:3.5%;width:20px;height:20px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉑ blue outline 16px — mid right-inner edge -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-19"
+               style="top:44%;right:3%;width:16px;height:16px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉒ orange outline 12px — mid-centre tiny -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="57"
+               style="top:37%;left:45%;width:12px;height:12px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉓ blue outline 24px — upper-mid centre-left -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="28"
+               style="top:16%;left:45%;width:24px;height:24px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉔ orange outline 16px — upper-mid right -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-60"
+               style="top:25%;right:18%;width:16px;height:16px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉕ blue filled 19px — mid centre-right -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-44"
+               style="top:43%;left:48%;width:19px;height:19px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉖ orange filled 35px — mid-left near-edge large -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="36"
+               style="top:20%;left:1%;width:35px;height:35px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉗ blue filled 11px — mid-right tiny -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="55"
+               style="top:50%;right:12%;width:11px;height:11px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉘ orange outline 28px — mid-right inner-low -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-23"
+               style="top:38%;right:14%;width:28px;height:28px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+
+          <!-- ─── LOWER-MIDDLE ZONE (41–70%) ────────────────────────────── -->
+          <!-- ㉙ blue filled 16px — lower-mid left edge -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="64"
+               style="top:48%;left:1%;width:16px;height:16px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉚ orange outline 30px — lower-mid right edge -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-28"
+               style="top:53%;right:1.8%;width:30px;height:30px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉛ blue outline 28px — lower-left inner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-35"
+               style="top:58%;left:4%;width:28px;height:28px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉜ orange filled 19px — lower-right inner -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="42"
+               style="top:60%;right:4%;width:19px;height:19px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉝ orange filled 18px — lower-centre -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-30"
+               style="top:62%;left:42%;width:18px;height:18px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉞ blue filled 24px — lower-left -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="23"
+               style="top:68%;left:2.5%;width:24px;height:24px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉟ blue outline 28px — lower-right inner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="48"
+               style="top:70%;right:18%;width:28px;height:28px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+
+          <!-- ─── BOTTOM ZONE (71–100%) ──────────────────────────────────── -->
+          <!-- ㊱ orange filled 15px — lower-right margin -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-55"
+               style="top:72%;right:3%;width:15px;height:15px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊲ orange outline 14px — lower-left inner -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-62"
+               style="top:75%;left:12%;width:14px;height:14px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊳ blue filled 22px — lower-right inner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="16"
+               style="top:78%;right:8%;width:22px;height:22px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊴ blue outline 20px — bottom off-centre left -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="38"
+               style="top:80%;left:38%;width:20px;height:20px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊵ blue outline 16px — bottom-left inner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-47"
+               style="top:83%;left:5%;width:16px;height:16px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊶ orange filled 13px — bottom-right inner small -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="73"
+               style="top:85%;right:12%;width:13px;height:13px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊷ orange outline 26px — bottom off-centre right -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-42"
+               style="top:87%;right:28%;width:26px;height:26px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊸ blue filled 30px — bottom-centre large -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-25"
+               style="top:89%;left:22%;width:30px;height:30px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊹ orange outline 17px — bottom-centre right -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="51"
+               style="top:91%;right:45%;width:17px;height:17px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊺ blue filled 13px — bottom-left corner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="29"
+               style="top:92%;left:7%;width:13px;height:13px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊻ orange filled 22px — bottom left-centre -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-13"
+               style="top:95%;left:28%;width:22px;height:22px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊼ blue filled 15px — far bottom-right -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="39"
+               style="top:97%;right:20%;width:15px;height:15px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊽ orange filled 14px — bottom-centre-left -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-22"
+               style="top:82%;left:52%;width:14px;height:14px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊾ blue outline 11px — very bottom right corner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="66"
+               style="top:98%;right:5%;width:11px;height:11px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+        </div>
+
+        <div class="section-container">
+          <div class="section-head">
+            <h2 class="section-title">
+              Who We <span class="accent">Serve</span>
+            </h2>
+            <p class="section-desc">
+              Since its inception in 2024, Konsalta has built a multidisciplinary network of experts who bring deep, hands-on experience to help organisations across Africa and beyond turn knowledge into impact. We partner with clients to solve complex challenges, translate evidence into action, strengthen institutional capability and deliver lasting real-world impact.
+            </p>
+          </div>
+
+          <div class="serve-grid">
+            <!-- 1. Governments & public institutions -->
+            <article class="serve-card">
+              <div class="serve-card-top">
+                <div class="serve-icon-wrap" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2l10 8H2l10-8z"
+                    />
+                  </svg>
+                </div>
+                <span class="serve-num-badge">01 / 05</span>
+              </div>
+              <h3 class="serve-title">Governments & Public Institutions</h3>
+              <p class="serve-desc">
+                Evidence to inform policy and decision-making, strengthen public programmes and systems, and build institutional capacity.
+              </p>
+             
+            </article>
+
+            <!-- 2. Development partners -->
+            <article class="serve-card">
+              <div class="serve-card-top">
+                <div class="serve-icon-wrap" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path
+                      d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                    />
+                  </svg>
+                </div>
+                <span class="serve-num-badge">02 / 05</span>
+              </div>
+              <h3 class="serve-title">Development Partners & International Organisations</h3>
+              <p class="serve-desc">
+                High-quality research, programme design support, monitoring and evaluation, and strategic advisory to guide investments.
+              </p>
+             
+            </article>
+
+            <!-- 3. Private sector -->
+            <article class="serve-card">
+              <div class="serve-card-top">
+                <div class="serve-icon-wrap" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                  </svg>
+                </div>
+                <span class="serve-num-badge">03 / 05</span>
+              </div>
+              <h3 class="serve-title">Private Sector Organisations</h3>
+              <p class="serve-desc">
+                Equipping forward-thinking enterprises, investors, and startup
+                innovators with data-driven insights, strategic advisory, market-entry and ESG compliance strategies, and sustainable growth
+                roadmaps across African markets.
+              </p>
+             
+            </article>
+
+            <!-- 4. Academic & research institutions -->
+            <article class="serve-card">
+              <div class="serve-card-top">
+                <div class="serve-icon-wrap" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                  </svg>
+                </div>
+                <span class="serve-num-badge">04 / 05</span>
+              </div>
+              <h3 class="serve-title">Academic & Research Institutions</h3>
+              <p class="serve-desc">
+                Research, evaluation, data analysis and capacity development.
+              </p>
+              
+            </article>
+
+            <!-- 5. Civil society -->
+            <article class="serve-card">
+              <div class="serve-card-top">
+                <div class="serve-icon-wrap" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </div>
+                <span class="serve-num-badge">05 / 05</span>
+              </div>
+              <h3 class="serve-title">Civil Society</h3>
+              <p class="serve-desc">
+                Demonstrating impact and mobilising resources for change.
+              </p>
+              
+            </article>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================
+         3. OUR APPROACH: SEVEN PRINCIPLES, ONE ASSIGNMENT AT A TIME
+         ============================================================ -->
+      <section class="approach-section" id="our-approach">
+        <!-- Ambient Muted Fading Brand Blue Dots Field (Smooth Circular Vignette) -->
+        <svg class="approach-dots-bg" aria-hidden="true" width="100%" height="100%">
+          <defs>
+            <pattern id="dotPattern" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+              <circle class="bgDot" cx="8" cy="8" r="1.6" />
+            </pattern>
+            <!-- Edge-only circular vignette: full dot presence across interior, fading smoothly only near the outer edge -->
+            <radialGradient id="dotsVignette" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+              <stop offset="70%" stop-color="#ffffff" stop-opacity="1" />
+              <stop offset="82%" stop-color="#ffffff" stop-opacity="0.75" />
+              <stop offset="92%" stop-color="#ffffff" stop-opacity="0.32" />
+              <stop offset="98%" stop-color="#ffffff" stop-opacity="0.08" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+            </radialGradient>
+            <mask id="dotsMask">
+              <rect x="0" y="0" width="100%" height="100%" fill="url(#dotsVignette)" />
+            </mask>
+          </defs>
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#dotPattern)" mask="url(#dotsMask)" />
+        </svg>
+
+        <div class="section-container">
+          <div class="approach-quote-box">
+            <div class="quote-eyebrow">Guiding Methodology</div>
+            <div class="quote-statement">
+              “No two assignments are the same. Each client faces a unique
+              combination of challenges, stakeholders, and opportunities. We
+              bring <em>seven principles</em> together, one assignment at a
+              time.”
+            </div>
+          </div>
+
+          <div class="section-head">
+            <h2 class="section-title">
+              Seven Principles,
+              <span class="accent">One Assignment at a Time</span>
+            </h2>
+            <p class="section-desc">
+              Explore the seven operational principles that govern how we scope,
+              assemble, execute, and deliver lasting value for every client
+              partnership.
+            </p>
+          </div>
+
+          <div class="principles-layout">
+            <!-- Interactive Selector -->
+            <div
+              class="principles-nav"
+              role="tablist"
+              aria-label="Our Approach Principles"
+            >
+              <button
+                class="principle-tab active"
+                data-target="principle-1"
+                role="tab"
+              >
+                <span class="principle-tab-num">01</span>
+                <span>Start With The Problem</span>
+              </button>
+              <button
+                class="principle-tab"
+                data-target="principle-2"
+                role="tab"
+              >
+                <span class="principle-tab-num">02</span>
+                <span>Build The Right Team</span>
+              </button>
+              <button
+                class="principle-tab"
+                data-target="principle-3"
+                role="tab"
+              >
+                <span class="principle-tab-num">03</span>
+                <span>Generate Credible Evidence</span>
+              </button>
+              <button
+                class="principle-tab"
+                data-target="principle-4"
+                role="tab"
+              >
+                <span class="principle-tab-num">04</span>
+                <span>Bring Context To Evidence</span>
+              </button>
+              <button
+                class="principle-tab"
+                data-target="principle-5"
+                role="tab"
+              >
+                <span class="principle-tab-num">05</span>
+                <span>Translate Into Action</span>
+              </button>
+              <button
+                class="principle-tab"
+                data-target="principle-6"
+                role="tab"
+              >
+                <span class="principle-tab-num">06</span>
+                <span>Strengthen Capacity</span>
+              </button>
+              <button
+                class="principle-tab"
+                data-target="principle-7"
+                role="tab"
+              >
+                <span class="principle-tab-num">07</span>
+                <span>Engage Throughout</span>
+              </button>
+            </div>
+
+            <!-- In-Depth Principle Cards -->
+            <div class="principles-display">
+              <!-- Principle 1 -->
+              <article class="principle-card active-target" id="principle-1">
+                <div class="principle-card-head">
+                  <span class="principle-badge">01. </span>
+                  <h3 class="principle-title">
+                    Start with the problem, not predetermined solutions.
+                  </h3>
+                </div>
+                <p class="principle-body">
+                  We initiate every engagement by understanding the client’s
+                  core challenge, their operating environment, identifying key
+                  stakeholders, critical constraints and desired outcomes.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                  <span>Deep diagnostic inquiry & stakeholder mapping</span>
+                </div>
+              </article>
+
+              <!-- Principle 2 -->
+              <article class="principle-card" id="principle-2">
+                <div class="principle-card-head">
+                  <span class="principle-badge">02. </span>
+                  <h3 class="principle-title">Build the right team.</h3>
+                </div>
+                <p class="principle-body">
+                  We assemble tailored, multidisciplinary teams for each
+                  assignment, combining the expertise needed to deliver results
+                  with clear leadership and accountability.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  <span
+                    >Bespoke multidisciplinary squads under senior
+                    leadership</span
+                  >
+                </div>
+              </article>
+
+              <!-- Principle 3 -->
+              <article class="principle-card" id="principle-3">
+                <div class="principle-card-head">
+                  <span class="principle-badge">03. </span>
+                  <h3 class="principle-title">Generate credible evidence.</h3>
+                </div>
+                <p class="principle-body">
+                  We apply rigorous, fit-for-purpose methods grounded in
+                  professional standards, tailored to align with the unique
+                  objectives and context of each client.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                    />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                  </svg>
+                  <span
+                    >Scientific methodologies & transparent verification</span
+                  >
+                </div>
+              </article>
+
+              <!-- Principle 4 -->
+              <article class="principle-card" id="principle-4">
+                <div class="principle-card-head">
+                  <span class="principle-badge">04. </span>
+                  <h3 class="principle-title">
+                    Bring context to the evidence.
+                  </h3>
+                </div>
+                <p class="principle-body">
+                  We combine analytical rigor with knowledge of African policy,
+                  institutional, market, social and cultural contexts to
+                  interpret findings and how they can realistically be applied.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="16" x2="12" y2="12" />
+                    <line x1="12" y1="8" x2="12.01" y2="8" />
+                  </svg>
+                  <span>Cultural alignment & institutional empathy</span>
+                </div>
+              </article>
+
+              <!-- Principle 5 -->
+              <article class="principle-card" id="principle-5">
+                <div class="principle-card-head">
+                  <span class="principle-badge">05. </span>
+                  <h3 class="principle-title">
+                    Translate evidence into action.
+                  </h3>
+                </div>
+                <p class="principle-body">
+                  We turn knowledge into recommendations, policies, strategies,
+                  implementation plans, communication approaches and other
+                  practical actions.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                  <span>Action-oriented frameworks & executive blueprints</span>
+                </div>
+              </article>
+
+              <!-- Principle 6 -->
+              <article class="principle-card" id="principle-6">
+                <div class="principle-card-head">
+                  <span class="principle-badge">06. </span>
+                  <h3 class="principle-title">
+                    Strengthen capacity as we deliver.
+                  </h3>
+                </div>
+                <p class="principle-body">
+                  Where appropriate, we work alongside client teams and emerging
+                  professionals, transferring knowledge and strengthening skills
+                  throughout the assignment. This enables the value of an
+                  engagement to extend beyond the delivery of a final product.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 20h9" />
+                    <path
+                      d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"
+                    />
+                  </svg>
+                  <span>Capability transfer & internal skills enhancement</span>
+                </div>
+              </article>
+
+              <!-- Principle 7 -->
+              <article class="principle-card" id="principle-7">
+                <div class="principle-card-head">
+                  <span class="principle-badge">07. </span>
+                  <h3 class="principle-title">
+                    Engage continuously throughout the process.
+                  </h3>
+                </div>
+                <p class="principle-body">
+                  We maintain continuous engagement with clients, creating
+                  opportunities to test assumptions, review emerging findings,
+                  and stay aligned with changing circumstances.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"
+                    />
+                  </svg>
+                  <span>Transparent governance & collaborative iteration</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
 
 
       <!-- ============================================================
@@ -597,783 +1413,9 @@
       </section>
 
 
-      <!-- ============================================================
-         2. WHO WE SERVE
-         ============================================================ -->
-      <section class="who-we-serve-section" id="who-we-serve">
-        <!-- Ambient Interactive Inverted Stars Field -->
-        <div class="serve-stars-field" aria-hidden="true">
-          <!-- 42 stars · euclidean scatter · sizes 11–40px · filled + outline mix · unique tilts -->
+ 
 
-          <!-- ─── TOP ZONE (0–14%) ─────────────────────────────────────── -->
-          <!-- ① orange filled 28px -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-22"
-               style="top:6%;left:2.5%;width:28px;height:28px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ② blue outline 20px -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="37"
-               style="top:11%;right:3%;width:20px;height:20px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ③ orange outline 15px -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-45"
-               style="top:2%;left:23%;width:15px;height:15px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ④ blue filled 34px -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="18"
-               style="top:3%;right:15%;width:34px;height:34px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑤ orange filled 13px -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-33"
-               style="top:5%;left:52%;width:13px;height:13px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑥ blue filled 17px — upper inner-left -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="31"
-               style="top:8%;left:13%;width:17px;height:17px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑦ orange outline 11px — tiny, far top-left low -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-58"
-               style="top:13%;left:5%;width:11px;height:11px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑧ blue outline 14px — upper right-centre -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="67"
-               style="top:8%;right:25%;width:14px;height:14px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑨ orange filled 20px — top centre-right gap -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-15"
-               style="top:1%;left:38%;width:20px;height:20px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑩ blue filled 25px — upper right inner -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="44"
-               style="top:14%;right:6%;width:25px;height:25px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑪ orange outline 24px — upper left inner -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-38"
-               style="top:13%;left:44%;width:24px;height:24px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑫ blue outline 40px — top-right, large anchor -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="25"
-               style="top:0%;right:42%;width:40px;height:40px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑬ orange filled 16px — upper right edge -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="51"
-               style="top:9%;right:12%;width:16px;height:16px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑭ blue filled 12px — tiny, top-left mid -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-71"
-               style="top:11%;left:31%;width:12px;height:12px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-
-          <!-- ─── UPPER-MIDDLE ZONE (15–40%) ────────────────────────────── -->
-          <!-- ⑮ blue outline 38px — mid-left large anchor -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="52"
-               style="top:30%;left:1.5%;width:38px;height:38px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑯ orange filled 22px — mid-right -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-17"
-               style="top:27%;right:1.5%;width:22px;height:22px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑰ orange outline 32px — upper-mid left inner -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-38"
-               style="top:22%;left:12%;width:32px;height:32px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑱ blue filled 18px — mid-right inner -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="25"
-               style="top:18%;right:12%;width:18px;height:18px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑲ blue filled 13px — mid-right edge small -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-70"
-               style="top:35%;right:4%;width:13px;height:13px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ⑳ orange filled 20px — mid-left inner -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="49"
-               style="top:40%;left:3.5%;width:20px;height:20px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉑ blue outline 16px — mid right-inner edge -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-19"
-               style="top:44%;right:3%;width:16px;height:16px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉒ orange outline 12px — mid-centre tiny -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="57"
-               style="top:37%;left:45%;width:12px;height:12px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉓ blue outline 24px — upper-mid centre-left -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="28"
-               style="top:16%;left:45%;width:24px;height:24px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉔ orange outline 16px — upper-mid right -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-60"
-               style="top:25%;right:18%;width:16px;height:16px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉕ blue filled 19px — mid centre-right -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-44"
-               style="top:43%;left:48%;width:19px;height:19px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉖ orange filled 35px — mid-left near-edge large -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="36"
-               style="top:20%;left:1%;width:35px;height:35px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉗ blue filled 11px — mid-right tiny -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="55"
-               style="top:50%;right:12%;width:11px;height:11px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉘ orange outline 28px — mid-right inner-low -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-23"
-               style="top:38%;right:14%;width:28px;height:28px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-
-          <!-- ─── LOWER-MIDDLE ZONE (41–70%) ────────────────────────────── -->
-          <!-- ㉙ blue filled 16px — lower-mid left edge -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="64"
-               style="top:48%;left:1%;width:16px;height:16px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉚ orange outline 30px — lower-mid right edge -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-28"
-               style="top:53%;right:1.8%;width:30px;height:30px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉛ blue outline 28px — lower-left inner -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-35"
-               style="top:58%;left:4%;width:28px;height:28px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉜ orange filled 19px — lower-right inner -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="42"
-               style="top:60%;right:4%;width:19px;height:19px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉝ orange filled 18px — lower-centre -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-30"
-               style="top:62%;left:42%;width:18px;height:18px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉞ blue filled 24px — lower-left -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="23"
-               style="top:68%;left:2.5%;width:24px;height:24px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㉟ blue outline 28px — lower-right inner -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="48"
-               style="top:70%;right:18%;width:28px;height:28px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-
-          <!-- ─── BOTTOM ZONE (71–100%) ──────────────────────────────────── -->
-          <!-- ㊱ orange filled 15px — lower-right margin -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-55"
-               style="top:72%;right:3%;width:15px;height:15px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊲ orange outline 14px — lower-left inner -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-62"
-               style="top:75%;left:12%;width:14px;height:14px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊳ blue filled 22px — lower-right inner -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="16"
-               style="top:78%;right:8%;width:22px;height:22px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊴ blue outline 20px — bottom off-centre left -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="38"
-               style="top:80%;left:38%;width:20px;height:20px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊵ blue outline 16px — bottom-left inner -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-47"
-               style="top:83%;left:5%;width:16px;height:16px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊶ orange filled 13px — bottom-right inner small -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="73"
-               style="top:85%;right:12%;width:13px;height:13px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊷ orange outline 26px — bottom off-centre right -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-42"
-               style="top:87%;right:28%;width:26px;height:26px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊸ blue filled 30px — bottom-centre large -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-25"
-               style="top:89%;left:22%;width:30px;height:30px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊹ orange outline 17px — bottom-centre right -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="51"
-               style="top:91%;right:45%;width:17px;height:17px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊺ blue filled 13px — bottom-left corner -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="29"
-               style="top:92%;left:7%;width:13px;height:13px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊻ orange filled 22px — bottom left-centre -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-13"
-               style="top:95%;left:28%;width:22px;height:22px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊼ blue filled 15px — far bottom-right -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="39"
-               style="top:97%;right:20%;width:15px;height:15px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊽ orange filled 14px — bottom-centre-left -->
-          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-22"
-               style="top:82%;left:52%;width:14px;height:14px;">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-          <!-- ㊾ blue outline 11px — very bottom right corner -->
-          <div class="serve-star star-blue" data-star-color="blue" data-tilt="66"
-               style="top:98%;right:5%;width:11px;height:11px;">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
-          </div>
-        </div>
-
-        <div class="section-container">
-          <div class="section-head">
-            <h2 class="section-title">
-              Who We <span class="accent">Serve</span>
-            </h2>
-            <p class="section-desc">
-              We partner with diverse institutions operating at the frontlines
-              of African socioeconomic transformation, delivering tailored
-              intelligence, institutional capacity, and actionable strategies.
-            </p>
-          </div>
-
-          <div class="serve-grid">
-            <!-- 1. Governments & public institutions -->
-            <article class="serve-card">
-              <div class="serve-card-top">
-                <div class="serve-icon-wrap" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path
-                      d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2l10 8H2l10-8z"
-                    />
-                  </svg>
-                </div>
-                <span class="serve-num-badge">01 / 05</span>
-              </div>
-              <h3 class="serve-title">Governments & Public Institutions</h3>
-              <p class="serve-desc">
-                Supporting national ministries, regional development agencies,
-                and local government bodies with evidence-informed policymaking,
-                regulatory review, public sector modernisation, and
-                institutional delivery architecture.
-              </p>
-              <ul class="serve-bullets">
-                <li>Evidence-informed policy formulation</li>
-                <li>Public finance & macroeconomic reviews</li>
-                <li>Institutional delivery & reform roadmaps</li>
-              </ul>
-            </article>
-
-            <!-- 2. Development partners -->
-            <article class="serve-card">
-              <div class="serve-card-top">
-                <div class="serve-icon-wrap" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <path
-                      d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                    />
-                  </svg>
-                </div>
-                <span class="serve-num-badge">02 / 05</span>
-              </div>
-              <h3 class="serve-title">Development Partners</h3>
-              <p class="serve-desc">
-                Partnering with bilateral donors, multilateral development
-                banks, and philanthropic foundations to design, monitor, and
-                evaluate high-stakes programs across African nations.
-              </p>
-              <ul class="serve-bullets">
-                <li>Comprehensive Monitoring, Evaluation & Learning (MEL)</li>
-                <li>Multi-country evidence synthesis</li>
-                <li>Impact assessment & program benchmarking</li>
-              </ul>
-            </article>
-
-            <!-- 3. Private sector -->
-            <article class="serve-card">
-              <div class="serve-card-top">
-                <div class="serve-icon-wrap" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                  </svg>
-                </div>
-                <span class="serve-num-badge">03 / 05</span>
-              </div>
-              <h3 class="serve-title">Private Sector</h3>
-              <p class="serve-desc">
-                Equipping forward-thinking enterprises, investors, and startup
-                innovators with rigorous market intelligence, competitive
-                landscapes, ESG compliance strategies, and sustainable growth
-                roadmaps across African markets.
-              </p>
-              <ul class="serve-bullets">
-                <li>African market-entry & sector feasibility</li>
-                <li>ESG advisory & corporate sustainability</li>
-                <li>Data-driven commercial decision intelligence</li>
-              </ul>
-            </article>
-
-            <!-- 4. Academic & research institutions -->
-            <article class="serve-card">
-              <div class="serve-card-top">
-                <div class="serve-icon-wrap" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                  </svg>
-                </div>
-                <span class="serve-num-badge">04 / 05</span>
-              </div>
-              <h3 class="serve-title">Academic & Research Institutions</h3>
-              <p class="serve-desc">
-                Collaborating with African universities, global think tanks, and
-                research consortia to execute applied fieldwork, complex survey
-                design, econometric modeling, and knowledge translation that
-                bridges research with policy.
-              </p>
-              <ul class="serve-bullets">
-                <li>Large-scale fieldwork & survey execution</li>
-                <li>Advanced quantitative & qualitative analytics</li>
-                <li>Knowledge translation & peer publications</li>
-              </ul>
-            </article>
-
-            <!-- 5. Civil society -->
-            <article class="serve-card">
-              <div class="serve-card-top">
-                <div class="serve-icon-wrap" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                  </svg>
-                </div>
-                <span class="serve-num-badge">05 / 05</span>
-              </div>
-              <h3 class="serve-title">Civil Society</h3>
-              <p class="serve-desc">
-                Empowering grassroots advocacy groups, NGOs, and community-led
-                initiatives with verifiable evidence, stakeholder mobilization
-                data, organizational strengthening, and compelling impact
-                narratives that unlock resources.
-              </p>
-              <ul class="serve-bullets">
-                <li>Grassroots impact documentation</li>
-                <li>Evidence-based advocacy campaigns</li>
-                <li>Resource mobilization & donor reporting</li>
-              </ul>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <!-- ============================================================
-         3. OUR APPROACH: SEVEN PRINCIPLES, ONE ASSIGNMENT AT A TIME
-         ============================================================ -->
-      <section class="approach-section" id="our-approach">
-        <!-- Ambient Muted Fading Brand Blue Dots Field (Smooth Circular Vignette) -->
-        <svg class="approach-dots-bg" aria-hidden="true" width="100%" height="100%">
-          <defs>
-            <pattern id="dotPattern" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
-              <circle class="bgDot" cx="8" cy="8" r="1.6" />
-            </pattern>
-            <!-- Edge-only circular vignette: full dot presence across interior, fading smoothly only near the outer edge -->
-            <radialGradient id="dotsVignette" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
-              <stop offset="70%" stop-color="#ffffff" stop-opacity="1" />
-              <stop offset="82%" stop-color="#ffffff" stop-opacity="0.75" />
-              <stop offset="92%" stop-color="#ffffff" stop-opacity="0.32" />
-              <stop offset="98%" stop-color="#ffffff" stop-opacity="0.08" />
-              <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
-            </radialGradient>
-            <mask id="dotsMask">
-              <rect x="0" y="0" width="100%" height="100%" fill="url(#dotsVignette)" />
-            </mask>
-          </defs>
-          <rect x="0" y="0" width="100%" height="100%" fill="url(#dotPattern)" mask="url(#dotsMask)" />
-        </svg>
-
-        <div class="section-container">
-          <div class="approach-quote-box">
-            <div class="quote-eyebrow">Guiding Methodology</div>
-            <div class="quote-statement">
-              “No two assignments are the same. Each client faces a unique
-              combination of challenges, stakeholders, and opportunities. We
-              bring <em>seven principles</em> together, one assignment at a
-              time.”
-            </div>
-          </div>
-
-          <div class="section-head">
-            <h2 class="section-title">
-              Seven Principles,
-              <span class="accent">One Assignment at a Time</span>
-            </h2>
-            <p class="section-desc">
-              Explore the seven operational principles that govern how we scope,
-              assemble, execute, and deliver lasting value for every client
-              partnership.
-            </p>
-          </div>
-
-          <div class="principles-layout">
-            <!-- Interactive Selector -->
-            <div
-              class="principles-nav"
-              role="tablist"
-              aria-label="Our Approach Principles"
-            >
-              <button
-                class="principle-tab active"
-                data-target="principle-1"
-                role="tab"
-              >
-                <span class="principle-tab-num">01</span>
-                <span>Start With The Problem</span>
-              </button>
-              <button
-                class="principle-tab"
-                data-target="principle-2"
-                role="tab"
-              >
-                <span class="principle-tab-num">02</span>
-                <span>Build The Right Team</span>
-              </button>
-              <button
-                class="principle-tab"
-                data-target="principle-3"
-                role="tab"
-              >
-                <span class="principle-tab-num">03</span>
-                <span>Generate Credible Evidence</span>
-              </button>
-              <button
-                class="principle-tab"
-                data-target="principle-4"
-                role="tab"
-              >
-                <span class="principle-tab-num">04</span>
-                <span>Bring Context To Evidence</span>
-              </button>
-              <button
-                class="principle-tab"
-                data-target="principle-5"
-                role="tab"
-              >
-                <span class="principle-tab-num">05</span>
-                <span>Translate Into Action</span>
-              </button>
-              <button
-                class="principle-tab"
-                data-target="principle-6"
-                role="tab"
-              >
-                <span class="principle-tab-num">06</span>
-                <span>Strengthen Capacity</span>
-              </button>
-              <button
-                class="principle-tab"
-                data-target="principle-7"
-                role="tab"
-              >
-                <span class="principle-tab-num">07</span>
-                <span>Engage Throughout</span>
-              </button>
-            </div>
-
-            <!-- In-Depth Principle Cards -->
-            <div class="principles-display">
-              <!-- Principle 1 -->
-              <article class="principle-card active-target" id="principle-1">
-                <div class="principle-card-head">
-                  <span class="principle-badge">01. </span>
-                  <h3 class="principle-title">
-                    Start with the problem, not predetermined solutions.
-                  </h3>
-                </div>
-                <p class="principle-body">
-                  We initiate every engagement by understanding the client’s
-                  core challenge, their operating environment, identifying key
-                  stakeholders, critical constraints and desired outcomes.
-                </p>
-                <div class="principle-meta-pill">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                    <polyline points="22 4 12 14.01 9 11.01" />
-                  </svg>
-                  <span>Deep diagnostic inquiry & stakeholder mapping</span>
-                </div>
-              </article>
-
-              <!-- Principle 2 -->
-              <article class="principle-card" id="principle-2">
-                <div class="principle-card-head">
-                  <span class="principle-badge">02. </span>
-                  <h3 class="principle-title">Build the right team.</h3>
-                </div>
-                <p class="principle-body">
-                  We assemble tailored, multidisciplinary teams for each
-                  assignment, combining the expertise needed to deliver results
-                  with clear leadership and accountability.
-                </p>
-                <div class="principle-meta-pill">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                    <circle cx="9" cy="7" r="4" />
-                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                  </svg>
-                  <span
-                    >Bespoke multidisciplinary squads under senior
-                    leadership</span
-                  >
-                </div>
-              </article>
-
-              <!-- Principle 3 -->
-              <article class="principle-card" id="principle-3">
-                <div class="principle-card-head">
-                  <span class="principle-badge">03. </span>
-                  <h3 class="principle-title">Generate credible evidence.</h3>
-                </div>
-                <p class="principle-body">
-                  We apply rigorous, fit-for-purpose methods grounded in
-                  professional standards, tailored to align with the unique
-                  objectives and context of each client.
-                </p>
-                <div class="principle-meta-pill">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path
-                      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                    />
-                    <polyline points="14 2 14 8 20 8" />
-                    <line x1="16" y1="13" x2="8" y2="13" />
-                    <line x1="16" y1="17" x2="8" y2="17" />
-                    <polyline points="10 9 9 9 8 9" />
-                  </svg>
-                  <span
-                    >Scientific methodologies & transparent verification</span
-                  >
-                </div>
-              </article>
-
-              <!-- Principle 4 -->
-              <article class="principle-card" id="principle-4">
-                <div class="principle-card-head">
-                  <span class="principle-badge">04. </span>
-                  <h3 class="principle-title">
-                    Bring context to the evidence.
-                  </h3>
-                </div>
-                <p class="principle-body">
-                  We combine analytical rigor with knowledge of African policy,
-                  institutional, market, social and cultural contexts to
-                  interpret findings and how they can realistically be applied.
-                </p>
-                <div class="principle-meta-pill">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="12" y1="16" x2="12" y2="12" />
-                    <line x1="12" y1="8" x2="12.01" y2="8" />
-                  </svg>
-                  <span>Cultural alignment & institutional empathy</span>
-                </div>
-              </article>
-
-              <!-- Principle 5 -->
-              <article class="principle-card" id="principle-5">
-                <div class="principle-card-head">
-                  <span class="principle-badge">05. </span>
-                  <h3 class="principle-title">
-                    Translate evidence into action.
-                  </h3>
-                </div>
-                <p class="principle-body">
-                  We turn knowledge into recommendations, policies, strategies,
-                  implementation plans, communication approaches and other
-                  practical actions.
-                </p>
-                <div class="principle-meta-pill">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
-                  </svg>
-                  <span>Action-oriented frameworks & executive blueprints</span>
-                </div>
-              </article>
-
-              <!-- Principle 6 -->
-              <article class="principle-card" id="principle-6">
-                <div class="principle-card-head">
-                  <span class="principle-badge">06. </span>
-                  <h3 class="principle-title">
-                    Strengthen capacity as we deliver.
-                  </h3>
-                </div>
-                <p class="principle-body">
-                  Where appropriate, we work alongside client teams and emerging
-                  professionals, transferring knowledge and strengthening skills
-                  throughout the assignment. This enables the value of an
-                  engagement to extend beyond the delivery of a final product.
-                </p>
-                <div class="principle-meta-pill">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M12 20h9" />
-                    <path
-                      d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"
-                    />
-                  </svg>
-                  <span>Capability transfer & internal skills enhancement</span>
-                </div>
-              </article>
-
-              <!-- Principle 7 -->
-              <article class="principle-card" id="principle-7">
-                <div class="principle-card-head">
-                  <span class="principle-badge">07. </span>
-                  <h3 class="principle-title">
-                    Engage continuously throughout the process.
-                  </h3>
-                </div>
-                <p class="principle-body">
-                  We maintain continuous engagement with clients, creating
-                  opportunities to test assumptions, review emerging findings,
-                  and stay aligned with changing circumstances.
-                </p>
-                <div class="principle-meta-pill">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path
-                      d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"
-                    />
-                  </svg>
-                  <span>Transparent governance & collaborative iteration</span>
-                </div>
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      
       
      
    

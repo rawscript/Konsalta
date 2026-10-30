@@ -39,7 +39,7 @@
   display: flex;
   gap: clamp(20px, 2.2vw, 34px);
   align-items: center;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 600;
   list-style: none;
@@ -60,7 +60,7 @@
   gap: 4px;
   transition: color 0.25s ease, transform 0.2s ease;
   position: relative;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   line-height: 1.2;
 }
 
@@ -85,7 +85,7 @@
   align-items: center;
   gap: 8px;
   padding: 10px 22px;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 13px;
   font-weight: 700;
   color: var(--navy, #0B2D53);

@@ -46,7 +46,7 @@ html {
 }
 
 body {
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   background: var(--bg);
   color: var(--ink);
   -webkit-font-smoothing: antialiased;
@@ -288,7 +288,7 @@ body.has-custom-cursor .cursor {
   display: flex;
   gap: 32px;
   align-items: center;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 600;
 }
@@ -324,7 +324,7 @@ body.has-custom-cursor .cursor {
   align-items: center;
   gap: 8px;
   padding: 12px 22px;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 13px;
   font-weight: 700;
   color: var(--navy);
@@ -383,7 +383,7 @@ body.has-custom-cursor .cursor {
   border: none;
   background: transparent;
   color: var(--ink-soft);
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 13.5px;
   font-weight: 700;
   cursor: pointer;
@@ -391,7 +391,7 @@ body.has-custom-cursor .cursor {
 }
 
 .subpage-tab .subpage-badge {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   padding: 2px 7px;
   border-radius: 12px;
@@ -460,7 +460,7 @@ body.has-custom-cursor .cursor {
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--glass-border);
   border-radius: 100px;
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -490,7 +490,7 @@ body.has-custom-cursor .cursor {
 
 .insights-hero-title,
 .subpage-title {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-size: clamp(35px, 5.5vw, 58px);
   font-weight: 800;
   line-height: 1.1;
@@ -603,7 +603,7 @@ body.has-custom-cursor .cursor {
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 100px;
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.05em;
@@ -629,7 +629,7 @@ body.has-custom-cursor .cursor {
 }
 
 .meta-tag {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 10.5px;
   padding: 4px 10px;
   background: rgba(255, 255, 255, 0.15);
@@ -642,7 +642,7 @@ body.has-custom-cursor .cursor {
 }
 
 .overlay-quote p {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-size: clamp(17px, 2.2vw, 24px);
   font-weight: 700;
   line-height: 1.35;
@@ -651,7 +651,7 @@ body.has-custom-cursor .cursor {
 }
 
 .overlay-quote .quote-author {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 12px;
   color: var(--orange-tint);
   letter-spacing: 0.06em;
@@ -718,14 +718,14 @@ body.has-custom-cursor .cursor {
 }
 
 .signal-title {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-size: 13.5px;
   font-weight: 700;
   color: var(--navy);
 }
 
 .signal-sub {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   color: var(--ink-soft);
 }
@@ -759,7 +759,7 @@ body.has-custom-cursor .cursor {
 }
 
 .stream-num {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 13px;
   font-weight: 700;
   color: var(--orange);
@@ -767,7 +767,7 @@ body.has-custom-cursor .cursor {
 }
 
 .stream-card h3 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-size: 19px;
   font-weight: 700;
   color: var(--navy);
@@ -784,7 +784,7 @@ body.has-custom-cursor .cursor {
 
 .stream-tag {
   align-self: flex-start;
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   font-weight: 600;
   padding: 4px 10px;
@@ -808,7 +808,7 @@ body.has-custom-cursor .cursor {
   backdrop-filter: var(--glass-blur);
   border: 1.5px solid var(--navy);
   border-radius: 100px;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 14.5px;
   font-weight: 700;
   color: var(--navy);
@@ -870,7 +870,7 @@ body.has-custom-cursor .cursor {
 }
 
 .hub-meta h3 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-size: 22px;
   font-weight: 800;
   color: var(--navy);
@@ -891,7 +891,7 @@ body.has-custom-cursor .cursor {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 14.5px;
   font-weight: 700;
   color: var(--navy);
@@ -919,7 +919,7 @@ body.has-custom-cursor .cursor {
   background: var(--white);
   border: 1.5px solid var(--line);
   color: var(--ink);
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
@@ -1015,7 +1015,7 @@ body.has-custom-cursor .cursor {
   background: var(--white);
   border: 1.5px solid var(--line);
   color: var(--navy);
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 15.5px;
   font-weight: 600;
   outline: none;
@@ -1045,7 +1045,7 @@ body.has-custom-cursor .cursor {
   background: linear-gradient(135deg, var(--orange-light) 0%, var(--orange) 100%);
   color: var(--white);
   border: none;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
@@ -1114,7 +1114,7 @@ body.has-custom-cursor .cursor {
 }
 
 .preview-badge {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.1em;
@@ -1125,7 +1125,7 @@ body.has-custom-cursor .cursor {
 }
 
 .preview-header h3 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-size: 16px;
   font-weight: 700;
   color: var(--navy);
@@ -1176,7 +1176,7 @@ body.has-custom-cursor .cursor {
   position: absolute;
   top: 12px;
   left: 12px;
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 10px;
   font-weight: 700;
   padding: 4px 10px;
@@ -1209,14 +1209,14 @@ body.has-custom-cursor .cursor {
 }
 
 .mockup-logo {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-weight: 800;
   color: var(--white);
   font-size: 14px;
 }
 
 .mockup-badge {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 9px;
   background: rgba(255, 255, 255, 0.2);
   color: var(--white);
@@ -1297,7 +1297,7 @@ body.has-custom-cursor .cursor {
 .radar-dot.dot-3 { top: 55%; left: 65%; }
 
 .news-feed-ticker {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 10px;
   color: var(--orange-tint);
   display: flex;
@@ -1307,7 +1307,7 @@ body.has-custom-cursor .cursor {
 
 /* Preview Details */
 .stream-type-pill {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   font-weight: 700;
   text-transform: uppercase;
@@ -1317,7 +1317,7 @@ body.has-custom-cursor .cursor {
 }
 
 .preview-details h4 {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-size: 24px;
   font-weight: 800;
   color: var(--navy);
@@ -1347,14 +1347,14 @@ body.has-custom-cursor .cursor {
 }
 
 .metric-val {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-size: 18px;
   font-weight: 800;
   color: var(--navy);
 }
 
 .metric-lbl {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 10.5px;
   color: var(--ink-soft);
 }
@@ -1411,7 +1411,7 @@ body.has-custom-cursor .cursor {
 }
 
 .footer-col h4 {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -1693,7 +1693,7 @@ body.has-custom-cursor .cursor {
 }
 
 .rss-card-date {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 10.5px;
   font-weight: 600;
   color: var(--orange);
@@ -1716,7 +1716,7 @@ body.has-custom-cursor .cursor {
   font-size: 12px;
   font-weight: 700;
   color: var(--navy);
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   margin-top: auto;
   transition: color 0.2s ease;
 }
@@ -1788,7 +1788,7 @@ body.has-custom-cursor .cursor {
   backdrop-filter: var(--glass-blur);
   border: 1.5px solid var(--navy);
   border-radius: 100px;
-  font-family: "Manrope", sans-serif;
+  : "Manrope", sans-serif;
   font-size: 14px;
   font-weight: 700;
   color: var(--navy);
@@ -1833,7 +1833,7 @@ body.has-custom-cursor .cursor {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.14em;
@@ -1847,7 +1847,7 @@ body.has-custom-cursor .cursor {
 }
 
 .sector-showcase-title {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-size: clamp(22px, 3vw, 32px);
   font-weight: 800;
   color: var(--navy);
@@ -1916,7 +1916,7 @@ body.has-custom-cursor .cursor {
 }
 
 .sector-num {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 11px;
   font-weight: 700;
   color: var(--ink-soft);
@@ -1966,7 +1966,7 @@ body.has-custom-cursor .cursor {
 
 /* ── Title & desc ── */
 .sector-card-title {
-  font-family: "Plus Jakarta Sans", sans-serif;
+  : "Plus Jakarta Sans", sans-serif;
   font-size: 16px;
   font-weight: 800;
   color: var(--navy);
@@ -1991,7 +1991,7 @@ body.has-custom-cursor .cursor {
 }
 
 .sector-tags span {
-  font-family: "JetBrains Mono", monospace;
+  : "JetBrains Mono", monospace;
   font-size: 10.5px;
   font-weight: 600;
   padding: 3px 9px;
