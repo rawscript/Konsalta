@@ -1,142 +1,206 @@
 # We ended up removing a lot of stuff, that we think are nice, but were rejected
 
-- anyway to build the css, run `npm run build:css`
 
-# Konsalta Contact Form API
+# Konsalta Website
 
-Contact form submissions are handled by this API and sent via SMTP to the Konsalta inbox.
+A professional consulting website with integrated contact and consultant onboarding forms.
 
-**Webmail vs SMTP:** Webmail provides the interface for reading emails. SMTP (mail.konsaltahub.org) handles sending emails - this is what the API uses. Both services run on the same mail server and work independently.
+## Overview
 
-**Single Deployment:** The Express server serves both the static website files (HTML, CSS, JS) AND handles the email API endpoint. Everything deploys together as one Node.js application:
+This application serves the Konsalta website and handles form submissions via email. The Express.js server serves static files and processes contact form and consultant onboarding submissions through SMTP.
 
+**Architecture:**
 ```
 server.js handles:
-├── GET /* → serves HTML, CSS, JS, images (static files)
-└── POST /api/contact → sends email via SMTP
+├── Static files (HTML, CSS, JS, images)
+├── POST /api/contact → Contact form submissions
+└── POST /api/contact → Consultant onboarding submissions
 ```
 
-## Setup
+## Quick Start
 
-1. **Install dependencies:**
-   ```bash
-   cd api
-   npm install
-   ```
+### Prerequisites
+- Node.js 18.x or higher
+- SMTP email server credentials
 
-2. **Configure environment variables:**
-   The `.env` file contains the cPanel email settings:
-   - SMTP Host: mail.konsaltahub.org
-   - SMTP Port: 465 (SSL)
-   - Username: no-reply@konsaltahub.org
-   - Reply-to: engage@konsaltahub.org
+### Installation
 
-3. **Run the server locally:**
-   ```bash
-   npm start
-   ```
-   Navigate to http://localhost:3000/contactUs.html
+1. Install root dependencies:
+```bash
+npm install
+```
 
-## Production Deployment (Single App)
+2. Install API dependencies:
+```bash
+cd api
+npm install
+```
 
-### Option 1: Deploy to cPanel (Recommended - Same Server as Email)
+3. Configure environment variables:
 
-When email is hosted on cPanel, deploying the Node.js app on the same server works best:
+Create `api/.env` file with the following configuration:
+```env
+SMTP_HOST=mail.konsaltahub.org
+SMTP_PORT=465
+SMTP_SECURE=true
+SMTP_USER=no-reply@konsaltahub.org
+SMTP_PASSWORD=your_password_here
+REPLY_TO=engage@konsaltahub.org
+PORT=3000
+NODE_ENV=development
+```
 
-1. **Access cPanel** and go to "Setup Node.js App"
+4. Start the application:
+```bash
+cd api
+npm start
+```
 
-2. **Create a new application:**
+The application will be available at `http://localhost:3000`
+
+## Building Styles
+
+To compile SCSS to CSS:
+```bash
+npm run build:css
+```
+
+To watch for changes during development:
+```bash
+npm run watch:css
+```
+
+## Deployment
+
+### Environment Variables Required
+
+Set the following environment variables in production:
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| SMTP_HOST | SMTP server hostname | mail.konsaltahub.org |
+| SMTP_PORT | SMTP server port | 465 |
+| SMTP_SECURE | Use SSL/TLS | true |
+| SMTP_USER | SMTP authentication username | no-reply@konsaltahub.org |
+| SMTP_PASSWORD | SMTP authentication password | (secure password) |
+| REPLY_TO | Reply-to email address | engage@konsaltahub.org |
+| PORT | Application port | 3000 |
+| NODE_ENV | Environment | production |
+
+### Deployment Options
+
+#### Option 1: cPanel Node.js Application
+
+1. Access cPanel and navigate to "Setup Node.js App"
+2. Configure application:
    - Node.js version: 18.x or higher
    - Application mode: Production
-   - Application root: `/home/youruser/konsalta/api`
-   - Application URL: choose a subdomain or path (e.g., `api.konsaltahub.org` or `/api`)
+   - Application root: Path to `api` directory
    - Application startup file: `server.js`
+3. Upload application files to the configured directory
+4. Set environment variables in the Node.js app interface
+5. Install dependencies using "Run NPM Install" or terminal
+6. Start the application
 
-3. **Upload files** to the application root directory
+#### Option 2: Standard VPS/Server
 
-4. **Set environment variables** in cPanel's Node.js app settings:
-   ```
-   SMTP_HOST=mail.konsaltahub.org
-   SMTP_PORT=465
-   SMTP_SECURE=true
-   SMTP_USER=no-reply@konsaltahub.org
-   SMTP_PASSWORD=GEqotEi73C!U15
-   REPLY_TO=engage@konsaltahub.org
-   NODE_ENV=production
-   ```
+1. Upload files to server
+2. Set environment variables in `.env` file or system environment
+3. Install dependencies: `npm install`
+4. Start with process manager (PM2 recommended):
+```bash
+npm install -g pm2
+pm2 start server.js --name konsalta
+pm2 save
+pm2 startup
+```
 
-5. **Install dependencies** via cPanel terminal or the "Run NPM Install" button
+#### Option 3: Docker
 
-### Option 2: Deploy to Vercel/Netlify with Serverless Functions
+Create `Dockerfile` in the api directory:
+```dockerfile
+FROM node:18-alpine
+WORKDIR /app
+COPY package*.json ./
+RUN npm install --production
+COPY . .
+EXPOSE 3000
+CMD ["node", "server.js"]
+```
 
-Platforms like Vercel or Netlify require adapting the code to serverless functions:
+Build and run:
+```bash
+docker build -t konsalta .
+docker run -p 3000:3000 --env-file .env konsalta
+```
 
-**Vercel example:**
+## Application Structure
 
-1. Create `vercel.json` in the root:
-   ```json
-   {
-     "version": 2,
-     "functions": {
-       "api/**/*.js": {
-         "runtime": "@vercel/node"
-       }
-     }
-   }
-   ```
+```
+├── api/
+│   ├── .env              # Environment configuration (not in git)
+│   ├── server.js         # Express server and email handler
+│   ├── package.json      # API dependencies
+│   └── README.md         # API documentation
+├── styles/               # CSS and SCSS files
+│   ├── style.scss        # Main stylesheet source
+│   └── *.css             # Compiled and component styles
+├── scripts/              # JavaScript files
+│   ├── contact.js        # Contact form handler
+│   ├── consultant-onboarding.js  # Onboarding form handler
+│   └── *.js              # Other page scripts
+├── public/               # Images and static assets
+├── *.html                # Website pages
+├── package.json          # Root dependencies (SCSS build)
+└── README.md             # This file
+```
 
-2. Set environment variables in the Vercel dashboard
+## Form Submissions
 
-**Note:** Some serverless platforms block SMTP ports. A transactional email service like SendGrid, Mailgun, or AWS SES provides better deliverability on these platforms.
+### Contact Form
+**Endpoint:** `POST /api/contact`
 
-### Option 3: Use a Transactional Email Service
+Fields:
+- name (required)
+- email (required)
+- company (optional)
+- projectType (required)
+- message (required)
 
-For better deliverability and easier serverless deployment:
+### Consultant Onboarding
+**Endpoint:** `POST /api/contact` with `type: "consultant-onboarding"`
 
-1. **SendGrid:**
-   - Free tier: 100 emails/day
-   - Easy integration
-   - Good deliverability
+Comprehensive consultant application with personal information, professional background, expertise, skills, and geographic experience.
 
-2. **Mailgun:**
-   - Free tier: 5,000 emails/month for 3 months
-   - Then pay-as-you-go
+## Security Considerations
 
-3. **Resend:**
-   - Free tier: 3,000 emails/month
-   - Modern API, easy setup
-
-## Testing
-
-1. Start the server locally
-2. Navigate to http://localhost:3000/contactUs.html
-3. Fill out and submit the form
-4. Check the engage@konsaltahub.org inbox for the message
-
-## Security Notes
-
-- The `.env` file contains sensitive credentials - **never commit to version control**
-- The `.gitignore` file excludes `.env` from git
-- In production, always use environment variables
-- Consider adding rate limiting for the contact endpoint to prevent abuse
-- Form inputs are validated on both client and server side
+- Environment variables must be configured securely
+- `.env` file is excluded from version control
+- Server-side validation on all form inputs
+- CORS configured for same-origin requests
+- SMTP credentials transmitted securely
+- Rate limiting recommended for production
 
 ## Troubleshooting
 
-**Email not sending?**
-- Check SMTP credentials in `.env`
-- Verify the email password is correct
-- Some hosting providers block outbound SMTP - contact the host for assistance
-- Check server logs for detailed error messages
+### Email Not Sending
+- Verify SMTP credentials in environment variables
+- Check SMTP server is accessible from deployment server
+- Review server logs for detailed error messages
+- Confirm SMTP port is not blocked by firewall
 
-**CORS errors?**
-- Ensure the frontend loads from the same origin, or update the CORS settings in `server.js`
+### Application Not Starting
+- Verify Node.js version (18.x or higher required)
+- Check all dependencies are installed
+- Confirm environment variables are set
+- Review console output for error messages
 
-## Form Fields
+### Static Files Not Loading
+- Verify file paths are correct
+- Check server is serving from correct directory
+- Confirm all files are uploaded to server
+- Review server console for 404 errors
 
-The contact form collects:
-- **name** (required): Full name
-- **email** (required): Email address
-- **company** (optional): Organization name
-- **projectType** (required): Type of service needed
-- **message** (required): The enquiry message
+## Support
+
+For deployment assistance or technical issues, refer to the server logs and error messages for detailed information.

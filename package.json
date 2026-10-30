@@ -1,11 +1,18 @@
 {
-  "name": "konsalta",
+  "name": "konsalta-website",
   "version": "1.0.0",
-  "description": "Konsalta website",
+  "description": "Konsalta corporate website with contact and consultant onboarding forms",
   "scripts": {
     "build:css": "sass styles/style.scss styles/style.css --no-source-map",
-    "watch:css": "sass styles/style.scss styles/style.css --no-source-map --watch"
+    "watch:css": "sass styles/style.scss styles/style.css --no-source-map --watch",
+    "start": "cd api && npm start",
+    "install:all": "npm install && cd api && npm install",
+    "dev": "npm run watch:css"
   },
+  "keywords": ["konsalta", "consulting", "website", "contact-form"],
+  "author": "Konsalta",
+  "license": "UNLICENSED",
+  "private": true,
   "devDependencies": {
     "sass": "^1.89.2"
   }

@@ -1,10 +1,18 @@
 {
-  "name": "konsalta-contact-api",
+  "name": "konsalta-api",
   "version": "1.0.0",
-  "description": "Contact form API for Konsalta",
+  "description": "API server for Konsalta website - handles contact and consultant onboarding form submissions",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["api", "contact-form", "email", "smtp", "express"],
+  "author": "Konsalta",
+  "license": "UNLICENSED",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
   },
   "dependencies": {
     "cors": "^2.8.5",
