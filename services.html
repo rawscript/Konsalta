@@ -1,635 +1,1042 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Our Services - Better Decisions. Greater Impact</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Funnel+Display:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/services.css" />
+    <link rel="stylesheet" href="styles/our-services.css" />
+    <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="scripts/header.js" defer></script>
+    <script src="scripts/our-services.js" defer></script>
+    <script src="scripts/services.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Services - Better Decisions. Greater Impact</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Wix+Madefor+Display:wght@400;500;600;700;800&family=Funnel+Display:wght@300;400;500;600;700;800&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="styles/services.css" />
-  <link rel="stylesheet" href="styles/our-services.css" />
-  <link rel="stylesheet" href="styles/header.css" />
-  <link rel="stylesheet" href="styles/footer.css" />
-  <!-- GSAP & ScrollTrigger -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="scripts/header.js" defer></script>
-  <script src="scripts/our-services.js" defer></script>
-  <script src="scripts/services.js" defer></script>
-</head>
-
-<body>
-
-  <!-- Ambient Background Glows -->
+  <body>
+    <!-- Ambient Background Glows -->
     <div class="ambient-1" aria-hidden="true"></div>
     <div class="ambient-2" aria-hidden="true"></div>
     <div class="cursor" aria-hidden="true"></div>
-    
-  <header class="site-header">
-    <a href="index.html" class="logo" aria-label="Konsalta Home">
-      <span class="logo-dot"><img src="https://i.ibb.co/zVycVPh8/Logo-3.png" alt="Konsalta Logo"></span>
-    </a>
-    <button class="header-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
-    </button>
-    <nav class="header-nav" id="primary-navigation">
-      <a href="aboutUs.html">About Konsalta</a>
-      <a href="services.html" class="active">Explore Our Services</a>
-      <a href="whyUs.html">Why Choose Us</a>
-      <a href="insights.html">Our Insights</a>
-    </nav>
-    <a href="contactUs.html" class="header-btn">Contact Us
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M5 12h14M13 6l6 6-6 6" />
-      </svg>
-    </a>
-  </header>
 
-  <div class="page">
-    <canvas class="page-grid-canvas" id="pageGridCanvas" aria-hidden="true"></canvas>
+    <header class="site-header">
+      <a href="index.html" class="logo" aria-label="Konsalta Home">
+        <span class="logo-dot"
+          ><img src="public/logo-small.png" alt="Konsalta Logo"
+        /></span>
+      </a>
+      <button
+        class="header-menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        aria-label="Open navigation menu"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+      <nav class="header-nav" id="primary-navigation">
+        <a href="aboutUs.html">About Konsalta</a>
+        <a href="services.html" class="active">Explore Our Services</a>
+        <a href="whyUs.html">Why Choose Us</a>
+        <a href="insights.html">Our Insights</a>
+      </nav>
+      <a href="contactUs.html" class="header-btn"
+        >Contact Us
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </a>
+    </header>
 
-    <!-- ============= HERO ============= -->
-    <main class="hero">
-      <h1 class="headline" id="headline">
-        <span class="word">From</span>
-        <span class="word">capability to</span>
-        <span class="word">impact,</span>
-        <span class="word">across</span>
-        <span class="word">Africa's</span>
-        <span class="word">critical Sectors</span>
-        <span class="arrow">
-          <svg viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M 6 38 L 18 26 L 26 32 L 38 16" stroke="currentColor" stroke-width="4" stroke-linecap="round"
-              stroke-linejoin="round" />
-            <path d="M 30 14 L 40 14 L 40 24" stroke="currentColor" stroke-width="4" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-        </span>
-      </h1>
+    <div class="page">
+      <canvas
+        class="page-grid-canvas"
+        id="pageGridCanvas"
+        aria-hidden="true"
+      ></canvas>
 
-      <p class="subtitle" id="subtitle">
-        We partner with organisations to turn complex regional challenges into clear, sustainable progress.
-      </p>
+      <!-- ============= HERO ============= -->
+      <main class="hero">
+        <h1 class="headline" id="headline">
+          <span class="word">From</span>
+          <span class="word">capability to</span>
+          <span class="word">impact,</span>
+          <span class="word">across</span>
+          <span class="word">Africa's</span>
+          <span class="word">critical Sectors</span>
+          <span class="arrow">
+            <svg
+              viewBox="0 0 50 50"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M 6 38 L 18 26 L 26 32 L 38 16"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M 30 14 L 40 14 L 40 24"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </span>
+        </h1>
 
-      
-    </main>
+        <p class="subtitle" id="subtitle">
+          We partner with organisations to turn complex regional challenges into
+          clear, sustainable progress.
+        </p>
+      </main>
 
-    <!-- ============= CARDS GRID ============= -->
-    <section class="cards-grid">
-      <!-- Services -->
-      <div class="card-base services-card" id="servicesCard">
-        <h2 class="card-title">Research and Evidence Generation</h2>
-        <div class="tags-container" id="tagsContainer">
-          <span class="tag white" data-tag="branding" style="top: 2%; left: -2%; transform: rotate(3deg)">Executive
-            Coaching and Leadership Development</span>
-          <span class="tag black" data-tag="web" style="top: 20%; left: 18%; transform: rotate(-4deg)">Data Science, AI
-            and Analytics</span>
-          <span class="tag white" data-tag="social" style="top: 42%; left: 0%; transform: rotate(-3deg)">Policy
-            Advisory</span>
-          <span class="tag black" data-tag="marketing" style="top: 42%; left: 45%; transform: rotate(-5deg)">Capacity
-            Strengthening</span>
-          <span class="tag white" data-tag="paid" style="top: 62%; left: 14%; transform: rotate(2deg)">
-            <span class="tag-icon">
-              <svg viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M 6 1 L 7.2 4.8 L 11 6 L 7.2 7.2 L 6 11 L 4.8 7.2 L 1 6 L 4.8 4.8 Z" fill="currentColor" />
-              </svg>
+      <!-- ============= CARDS GRID ============= -->
+      <section class="cards-grid">
+        <!-- Services -->
+        <div class="card-base services-card" id="servicesCard">
+          <h2 class="card-title">Research and Evidence Generation</h2>
+          <div class="tags-container" id="tagsContainer">
+            <span
+              class="tag white"
+              data-tag="branding"
+              style="top: 2%; left: -2%; transform: rotate(3deg)"
+              >Executive Coaching and Leadership Development</span
+            >
+            <span
+              class="tag black"
+              data-tag="web"
+              style="top: 20%; left: 18%; transform: rotate(-4deg)"
+              >Data Science, AI and Analytics</span
+            >
+            <span
+              class="tag white"
+              data-tag="social"
+              style="top: 42%; left: 0%; transform: rotate(-3deg)"
+              >Policy Advisory</span
+            >
+            <span
+              class="tag black"
+              data-tag="marketing"
+              style="top: 42%; left: 45%; transform: rotate(-5deg)"
+              >Capacity Strengthening</span
+            >
+            <span
+              class="tag white"
+              data-tag="paid"
+              style="top: 62%; left: 14%; transform: rotate(2deg)"
+            >
+              <span class="tag-icon">
+                <svg
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M 6 1 L 7.2 4.8 L 11 6 L 7.2 7.2 L 6 11 L 4.8 7.2 L 1 6 L 4.8 4.8 Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              MEL
             </span>
-            MEL
-          </span>
-          <span class="tag white" data-tag="branding" style="top: 62%; left: 55%; transform: rotate(4deg)">Knowledge
-            Translation</span>
-          <span class="tag black" data-tag="content" style="top: 84%; left: 6%; transform: rotate(-2deg)">Market
-            Intelligence and Insight</span>
-        </div>
-      </div>
-
-      <!-- Stats -->
-      <div class="stats-card">
-        <div class="stat-half stat-dark" id="statTop">
-          <div>
-            <div class="stat-number" id="stat1Num">9</div>
+            <span
+              class="tag white"
+              data-tag="branding"
+              style="top: 62%; left: 55%; transform: rotate(4deg)"
+              >Knowledge Translation</span
+            >
+            <span
+              class="tag black"
+              data-tag="content"
+              style="top: 84%; left: 6%; transform: rotate(-2deg)"
+              >Market Intelligence and Insight</span
+            >
           </div>
-          <p class="stat-desc">
-            Our Core Service Offering.
-          </p>
         </div>
-        <div class="stat-half stat-light" id="statBottom">
-          <div>
-            <div class="stat-number" id="stat2Num">100%</div>
-          </div>
-          <p class="stat-desc">
-            data-driven and evidence-backed solutions for public & private sector decision-makers.
-          </p>
-        </div>
-      </div>
 
-      <!-- Testimonial -->
-      <div class="card-base testimonial-card">
-        <div class="quote-mark">&ldquo;</div>
-        <div class="testimonial-text" id="testimonialText">
-          <p id="testimonialP1">
-            Sustainable transformation across Africa begins with evidence tailored to local economic realities.
-          </p>
-          <p id="testimonialP2">Impressed with the results!</p>
+        <!-- Stats -->
+        <div class="stats-card">
+          <div class="stat-half stat-dark" id="statTop">
+            <div>
+              <div class="stat-number" id="stat1Num">9</div>
+            </div>
+            <p class="stat-desc">Our Core Service Offering.</p>
+          </div>
+          <div class="stat-half stat-light" id="statBottom">
+            <div>
+              <div class="stat-number" id="stat2Num">100%</div>
+            </div>
+            <p class="stat-desc">
+              data-driven and evidence-backed solutions for public & private
+              sector decision-makers.
+            </p>
+          </div>
         </div>
-        <div class="testimonial-avatars" id="testimonialAvatars">
-          <span class="avatar-mini">
-            <svg class="fb" viewBox="0 0 32 32">
-              <circle cx="16" cy="12" r="5" fill="rgba(255,255,255,0.4)" />
-              <path d="M 4 30 Q 4 20 16 20 Q 28 20 28 30 Z" fill="rgba(255,255,255,0.4)" />
-            </svg>
-            <img src="public/Samantha.jpeg" alt="" aria-hidden="true" />
-          </span>
-          <span class="avatar-mini">
-            <svg class="fb" viewBox="0 0 32 32">
-              <circle cx="16" cy="12" r="5" fill="rgba(255,255,255,0.4)" />
-              <path d="M 4 30 Q 4 20 16 20 Q 28 20 28 30 Z" fill="rgba(255,255,255,0.4)" />
-            </svg>
-            <img src="public/Thulisile.jpeg" alt="" aria-hidden="true" />
-          </span>
-          <span class="author-label" id="authorInitials">AS.</span>
+
+        <!-- Testimonial -->
+        <div class="card-base testimonial-card">
+          <div class="quote-mark">&ldquo;</div>
+          <div class="testimonial-text" id="testimonialText">
+            <p id="testimonialP1">
+              Sustainable transformation across Africa begins with evidence
+              tailored to local economic realities.
+            </p>
+            <p id="testimonialP2">Impressed with the results!</p>
+          </div>
+          <div class="testimonial-avatars" id="testimonialAvatars">
+            <span class="avatar-mini">
+              <svg class="fb" viewBox="0 0 32 32">
+                <circle cx="16" cy="12" r="5" fill="rgba(255,255,255,0.4)" />
+                <path
+                  d="M 4 30 Q 4 20 16 20 Q 28 20 28 30 Z"
+                  fill="rgba(255,255,255,0.4)"
+                />
+              </svg>
+              <img src="public/Samantha.jpeg" alt="" aria-hidden="true" />
+            </span>
+            <span class="avatar-mini">
+              <svg class="fb" viewBox="0 0 32 32">
+                <circle cx="16" cy="12" r="5" fill="rgba(255,255,255,0.4)" />
+                <path
+                  d="M 4 30 Q 4 20 16 20 Q 28 20 28 30 Z"
+                  fill="rgba(255,255,255,0.4)"
+                />
+              </svg>
+              <img src="public/Thulisile.jpeg" alt="" aria-hidden="true" />
+            </span>
+            <span class="author-label" id="authorInitials">AS.</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ============ SERVICES SPECTRUM & FILTER TABS ============ -->
+    <section class="services-spectrum-section" id="services-grid">
+      <div class="section-container">
+        <div class="spectrum-header">
+          <div class="eyebrow-tag">PRACTICE AREAS & CAPABILITIES</div>
+          <h2 class="spectrum-title">Our 9 Core Service Offerings</h2>
+          <p class="spectrum-subtitle">
+            Structured into three integrated pillars to support organizations at
+            every stage of their decision-making and execution lifecycle.
+          </p>
+
+          <!-- Filter Pills -->
+          <div
+            class="filter-tabs"
+            role="tablist"
+            aria-label="Service Category Filters"
+          >
+            <button
+              class="filter-tab active"
+              data-filter="all"
+              role="tab"
+              aria-selected="true"
+            >
+              All Capabilities <span class="tab-count">9</span>
+            </button>
+            <button
+              class="filter-tab"
+              data-filter="pillar-1"
+              role="tab"
+              aria-selected="false"
+            >
+              Pillar 1: Evidence & Data <span class="tab-count">3</span>
+            </button>
+            <button
+              class="filter-tab"
+              data-filter="pillar-2"
+              role="tab"
+              aria-selected="false"
+            >
+              Pillar 2: Strategy & Policy <span class="tab-count">3</span>
+            </button>
+            <button
+              class="filter-tab"
+              data-filter="pillar-3"
+              role="tab"
+              aria-selected="false"
+            >
+              Pillar 3: Capability & Leadership <span class="tab-count">3</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- ============= 9 SERVICES BENTO GRID ============= -->
+        <div class="services-grid" id="servicesContainer">
+          <!-- SERVICE 1 -->
+          <article
+            class="service-card"
+            data-category="pillar-1"
+            data-keywords="research evidence evaluation survey assessment synthesis insights data"
+          >
+            <div class="card-glow"></div>
+            <div class="card-top">
+              <span class="pillar-badge"
+                >Pillar 01 — Evidence & Intelligence</span
+              >
+              <span class="service-num">01</span>
+            </div>
+            <div class="service-icon-box">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                ></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+            <h3 class="service-title">Research and Evidence Generation</h3>
+            <p class="service-description">
+              Rigorous research, evaluations, surveys, assessments, evidence
+              synthesis, and applied analysis that generate credible insights
+              for decision-making.
+            </p>
+            <div class="capability-chips">
+              <span class="chip">Surveys & Fieldwork</span>
+              <span class="chip">Evaluations</span>
+              <span class="chip">Evidence Synthesis</span>
+              <span class="chip">Applied Analysis</span>
+            </div>
+            <div class="card-footer">
+              <a href="contactUs.html" class="service-link">
+                <span>Discuss a Project</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- SERVICE 2 -->
+          <article
+            class="service-card"
+            data-category="pillar-1"
+            data-keywords="market intelligence insights stakeholder consumer sector intelligence opportunity mapping investment"
+          >
+            <div class="card-glow"></div>
+            <div class="card-top">
+              <span class="pillar-badge"
+                >Pillar 01 — Evidence & Intelligence</span
+              >
+              <span class="service-num">02</span>
+            </div>
+            <div class="service-icon-box">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <polygon
+                  points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"
+                ></polygon>
+              </svg>
+            </div>
+            <h3 class="service-title">Market Intelligence and Insights</h3>
+            <p class="service-description">
+              Market assessments, stakeholder analysis, customer and consumer
+              research, sector intelligence, and opportunity mapping that
+              support strategic, policy, and investment decisions.
+            </p>
+            <div class="capability-chips">
+              <span class="chip">Market Assessments</span>
+              <span class="chip">Stakeholder Mapping</span>
+              <span class="chip">Sector Intelligence</span>
+              <span class="chip">Opportunity Mapping</span>
+            </div>
+            <div class="card-footer">
+              <a href="contactUs.html" class="service-link">
+                <span>Explore Market Insights</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- SERVICE 3 -->
+          <article
+            class="service-card"
+            data-category="pillar-1"
+            data-keywords="data science ai artificial intelligence analytics statistical modelling dashboards visualization digital tools"
+          >
+            <div class="card-glow"></div>
+            <div class="card-top">
+              <span class="pillar-badge"
+                >Pillar 01 — Evidence & Intelligence</span
+              >
+              <span class="service-num">03</span>
+            </div>
+            <div class="service-icon-box">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                ></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+              </svg>
+            </div>
+            <h3 class="service-title">Data Science, AI and Analytics</h3>
+            <p class="service-description">
+              Advanced analytics, statistical modelling, dashboards, data
+              visualization, AI-enabled solutions, and digital tools that
+              strengthen evidence generation and decision-making.
+            </p>
+            <div class="capability-chips">
+              <span class="chip">AI-Enabled Solutions</span>
+              <span class="chip">Statistical Modelling</span>
+              <span class="chip">Interactive Dashboards</span>
+              <span class="chip">Data Visualizations</span>
+            </div>
+            <div class="card-footer">
+              <a href="contactUs.html" class="service-link">
+                <span>Inquire on AI & Analytics</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- SERVICE 4 -->
+          <article
+            class="service-card"
+            data-category="pillar-2"
+            data-keywords="policy advisory regulatory reviews policy design evidence to policy translation government governance"
+          >
+            <div class="card-glow"></div>
+            <div class="card-top">
+              <span class="pillar-badge"
+                >Pillar 02 — Strategy, Policy & Systems</span
+              >
+              <span class="service-num">04</span>
+            </div>
+            <div class="service-icon-box">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3 class="service-title">
+              Policy Advisory and Evidence-to-Policy Translation
+            </h3>
+            <p class="service-description">
+              Policy analysis, regulatory reviews, policy design, evidence
+              synthesis, and stakeholder engagement that help translate research
+              into effective policy solutions.
+            </p>
+            <div class="capability-chips">
+              <span class="chip">Policy Design</span>
+              <span class="chip">Regulatory Reviews</span>
+              <span class="chip">Evidence Translation</span>
+              <span class="chip">Stakeholder Dialogues</span>
+            </div>
+            <div class="card-footer">
+              <a href="contactUs.html" class="service-link">
+                <span>Consult on Policy Solutions</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- SERVICE 5 -->
+          <article
+            class="service-card"
+            data-category="pillar-2"
+            data-keywords="strategy strategic planning organizational diagnostics risk assessment change management advisory decision support"
+          >
+            <div class="card-glow"></div>
+            <div class="card-top">
+              <span class="pillar-badge"
+                >Pillar 02 — Strategy, Policy & Systems</span
+              >
+              <span class="service-num">05</span>
+            </div>
+            <div class="service-icon-box">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="2"></circle>
+                <path
+                  d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="service-title">
+              Strategy, Advisory and Change Management
+            </h3>
+            <p class="service-description">
+              Strategic planning, organizational diagnostics, risk assessment,
+              decision support, and change management approaches for navigating
+              complexity.
+            </p>
+            <div class="capability-chips">
+              <span class="chip">Strategic Planning</span>
+              <span class="chip">Org Diagnostics</span>
+              <span class="chip">Risk Assessment</span>
+              <span class="chip">Change Management</span>
+            </div>
+            <div class="card-footer">
+              <a href="contactUs.html" class="service-link">
+                <span>Start Strategic Advisory</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- SERVICE 6 -->
+          <article
+            class="service-card"
+            data-category="pillar-2"
+            data-keywords="monitoring evaluation learning mel impact measurement frameworks results based management learning agendas"
+          >
+            <div class="card-glow"></div>
+            <div class="card-top">
+              <span class="pillar-badge"
+                >Pillar 02 — Strategy, Policy & Systems</span
+              >
+              <span class="service-num">06</span>
+            </div>
+            <div class="service-icon-box">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
+            <h3 class="service-title">
+              Monitoring, Evaluation and Learning (MEL)
+            </h3>
+            <p class="service-description">
+              Monitoring systems, evaluations, impact measurement frameworks,
+              learning agendas, and results-based management approaches.
+            </p>
+            <div class="capability-chips">
+              <span class="chip">Impact Measurement</span>
+              <span class="chip">MEL Systems</span>
+              <span class="chip">Results-Based Mgmt</span>
+              <span class="chip">Learning Agendas</span>
+            </div>
+            <div class="card-footer">
+              <a href="contactUs.html" class="service-link">
+                <span>Design a MEL System</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- SERVICE 7 -->
+          <article
+            class="service-card"
+            data-category="pillar-3"
+            data-keywords="capacity strengthening training facilitation institutional capacity assessments organizational development systems resilience"
+          >
+            <div class="card-glow"></div>
+            <div class="card-top">
+              <span class="pillar-badge"
+                >Pillar 03 — Capability & Leadership</span
+              >
+              <span class="service-num">07</span>
+            </div>
+            <div class="service-icon-box">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3 class="service-title">Capacity Strengthening</h3>
+            <p class="service-description">
+              Training, facilitation, institutional capacity assessments,
+              organizational development, and systems strengthening for
+              long-term capability and resilience.
+            </p>
+            <div class="capability-chips">
+              <span class="chip">Institutional Audits</span>
+              <span class="chip">Bespoke Training</span>
+              <span class="chip">Org Development</span>
+              <span class="chip">Systems Resilience</span>
+            </div>
+            <div class="card-footer">
+              <a href="contactUs.html" class="service-link">
+                <span>Build Capacity</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- SERVICE 8 -->
+          <article
+            class="service-card"
+            data-category="pillar-3"
+            data-keywords="executive coaching leadership development programmes mentoring team coaching leadership effectiveness"
+          >
+            <div class="card-glow"></div>
+            <div class="card-top">
+              <span class="pillar-badge"
+                >Pillar 03 — Capability & Leadership</span
+              >
+              <span class="service-num">08</span>
+            </div>
+            <div class="service-icon-box">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polygon
+                  points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                ></polygon>
+              </svg>
+            </div>
+            <h3 class="service-title">
+              Executive Coaching and Leadership Development
+            </h3>
+            <p class="service-description">
+              Individual coaching, leadership development programmes, mentoring,
+              and team coaching that strengthen leadership effectiveness and
+              organizational culture.
+            </p>
+            <div class="capability-chips">
+              <span class="chip">Executive Coaching</span>
+              <span class="chip">Leadership Programmes</span>
+              <span class="chip">Mentoring Tracks</span>
+              <span class="chip">Team Cohesion</span>
+            </div>
+            <div class="card-footer">
+              <a
+                href="contactUs.html?service=executive-coaching"
+                class="service-link"
+              >
+                <span>Engage Coaching</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+          </article>
+
+          <!-- SERVICE 9 -->
+          <article
+            class="service-card"
+            data-category="pillar-3"
+            data-keywords="knowledge translation strategic communication policy briefs reports science communication advocacy support knowledge products"
+          >
+            <div class="card-glow"></div>
+            <div class="card-top">
+              <span class="pillar-badge"
+                >Pillar 03 — Capability & Leadership</span
+              >
+              <span class="service-num">09</span>
+            </div>
+            <div class="service-icon-box">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+                ></path>
+              </svg>
+            </div>
+            <h3 class="service-title">
+              Knowledge Translation and Strategic Communication
+            </h3>
+            <p class="service-description">
+              Policy briefs, reports, stakeholder engagement, science
+              communication, advocacy support, and knowledge products that make
+              evidence accessible and actionable.
+            </p>
+            <div class="capability-chips">
+              <span class="chip">Policy Briefs</span>
+              <span class="chip">Science Communication</span>
+              <span class="chip">Advocacy Strategy</span>
+              <span class="chip">Knowledge Toolkits</span>
+            </div>
+            <div class="card-footer">
+              <a href="contactUs.html" class="service-link">
+                <span>Craft Knowledge Products</span>
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
-  </div>
 
-  <!-- ============ SERVICES SPECTRUM & FILTER TABS ============ -->
-  <section class="services-spectrum-section" id="services-grid">
-    <div class="section-container">
-      <div class="spectrum-header">
-        <div class="eyebrow-tag">PRACTICE AREAS & CAPABILITIES</div>
-        <h2 class="spectrum-title">Our 9 Core Service Offerings</h2>
-        <p class="spectrum-subtitle">
-          Structured into three integrated pillars to support organizations at every stage of their decision-making
-          and execution lifecycle.
+    <section class="focus-section" id="focus-areas">
+      <div class="section-container">
+        <div class="focus-head">
+          <div class="focus-eyebrow">Thematic focus areas</div>
+          <h2 class="focus-title-main">
+            Where we apply our capabilities
+            <span class="accent">across Africa</span>
+          </h2>
+          <p class="focus-intro" style="font-weight: bold">
+            We bring these capabilities to life across the key policy,
+            development, institutional, and commercial challenges and
+            opportunities shaping Africa’s future.
+          </p>
+        </div>
+
+        <ol class="focus-list">
+          <li class="focus-item">
+            <span class="focus-num" aria-hidden="true"></span>
+            <h3 class="focus-title">Macroeconomics and Economic Policy</h3>
+            <p class="focus-desc">
+              Supporting evidence-based economic policymaking, fiscal
+              management, labour market analysis, economic transformation, and
+              inclusive growth.
+            </p>
+          </li>
+
+          <li class="focus-item">
+            <span class="focus-num" aria-hidden="true"></span>
+            <h3 class="focus-title">Governance and Public Policy</h3>
+            <p class="focus-desc">
+              Strengthening institutions, improving public service delivery, and
+              promoting effective, accountable, and responsive governance.
+            </p>
+          </li>
+
+          <li class="focus-item">
+            <span class="focus-num" aria-hidden="true"></span>
+            <h3 class="focus-title">
+              Data Governance, Statistics and Digital Transformation
+            </h3>
+            <p class="focus-desc">
+              Strengthening data governance frameworks, statistical systems, and
+              digital ecosystems to support decision-making, accountability, and
+              innovation.
+            </p>
+          </li>
+
+          <li class="focus-item">
+            <span class="focus-num" aria-hidden="true"></span>
+            <h3 class="focus-title">
+              Poverty, Inequality, Livelihoods and Social Protection
+            </h3>
+            <p class="focus-desc">
+              Advancing policies and programmes that reduce poverty, expand
+              economic opportunities, strengthen livelihoods, and improve
+              resilience among vulnerable populations.
+            </p>
+          </li>
+
+          <li class="focus-item">
+            <span class="focus-num" aria-hidden="true"></span>
+            <h3 class="focus-title">Human Development and Demography</h3>
+            <p class="focus-desc">
+              Improving outcomes in health, education, skills development, human
+              capital, population dynamics, urbanisation, and demographic
+              change.
+            </p>
+          </li>
+
+          <li class="focus-item">
+            <span class="focus-num" aria-hidden="true"></span>
+            <h3 class="focus-title">Gender, Diversity &amp; Inclusion</h3>
+            <p class="focus-desc">
+              Embedding equality metrics, workplace diversity frameworks, and
+              social safeguards into large-scale organizational models.
+            </p>
+          </li>
+
+          <li class="focus-item">
+            <span class="focus-num" aria-hidden="true"></span>
+            <h3 class="focus-title">
+              Forced Displacement, Migration and Inclusion
+            </h3>
+            <p class="focus-desc">
+              Supporting evidence-based responses to displacement, migration,
+              refugee inclusion, and social cohesion.
+            </p>
+          </li>
+
+          <li class="focus-item">
+            <span class="focus-num" aria-hidden="true"></span>
+            <h3 class="focus-title">
+              Private Sector Development and Market Systems
+            </h3>
+            <p class="focus-desc">
+              Supporting enterprise development, market systems strengthening,
+              value chain development, financial inclusion, and investment
+              readiness.
+            </p>
+          </li>
+
+          <li class="focus-item">
+            <span class="focus-num" aria-hidden="true"></span>
+            <h3 class="focus-title">
+              Corporate Performance and Commercial Growth
+            </h3>
+            <p class="focus-desc">
+              Supporting businesses with agile scaling strategies, executive
+              alignment, resilient leadership pipelines, and investment-ready
+              narrative positioning.
+            </p>
+          </li>
+
+          <li class="focus-item">
+            <span class="focus-num" aria-hidden="true"></span>
+            <h3 class="focus-title">
+              Climate Change and Environmental Resilience
+            </h3>
+            <p class="focus-desc">
+              Supporting climate adaptation, resilience, sustainability, and
+              climate-informed policy, planning, and investment decisions.
+            </p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ FINAL CTA SECTION ============ -->
+    <section class="final-cta" id="start">
+      <div class="final-cta-card">
+        <span class="orb orb-1" aria-hidden="true"></span>
+        <span class="orb orb-2" aria-hidden="true"></span>
+        <h2 class="final-cta-h2">
+          Ready to turn evidence into
+          <span class="accent">lasting impact?</span>
+        </h2>
+        <p>
+          Partner with our Africa-focused research and advisory collective to
+          make confident, future-ready decisions for your institution.
         </p>
-
-        <!-- Filter Pills -->
-        <div class="filter-tabs" role="tablist" aria-label="Service Category Filters">
-          <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">
-            All Capabilities <span class="tab-count">9</span>
-          </button>
-          <button class="filter-tab" data-filter="pillar-1" role="tab" aria-selected="false">
-            Pillar 1: Evidence & Data <span class="tab-count">3</span>
-          </button>
-          <button class="filter-tab" data-filter="pillar-2" role="tab" aria-selected="false">
-            Pillar 2: Strategy & Policy <span class="tab-count">3</span>
-          </button>
-          <button class="filter-tab" data-filter="pillar-3" role="tab" aria-selected="false">
-            Pillar 3: Capability & Leadership <span class="tab-count">3</span>
-          </button>
-        </div>
+        <a href="contactUs.html" class="cta-btn">
+          Start a Conversation
+          <span class="cta-arrow" aria-hidden="true">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </span>
+        </a>
       </div>
+    </section>
 
-      <!-- ============= 9 SERVICES BENTO GRID ============= -->
-      <div class="services-grid" id="servicesContainer">
-
-        <!-- SERVICE 1 -->
-        <article class="service-card" data-category="pillar-1"
-          data-keywords="research evidence evaluation survey assessment synthesis insights data">
-          <div class="card-glow"></div>
-          <div class="card-top">
-            <span class="pillar-badge">Pillar 01 — Evidence & Intelligence</span>
-            <span class="service-num">01</span>
-          </div>
-          <div class="service-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-              <polyline points="14 2 14 8 20 8"></polyline>
-              <line x1="16" y1="13" x2="8" y2="13"></line>
-              <line x1="16" y1="17" x2="8" y2="17"></line>
-              <polyline points="10 9 9 9 8 9"></polyline>
-            </svg>
-          </div>
-          <h3 class="service-title">Research and Evidence Generation</h3>
-          <p class="service-description">
-            Rigorous research, evaluations, surveys, assessments, evidence synthesis, and applied analysis that
-            generate credible insights for decision-making.
-          </p>
-          <div class="capability-chips">
-            <span class="chip">Surveys & Fieldwork</span>
-            <span class="chip">Evaluations</span>
-            <span class="chip">Evidence Synthesis</span>
-            <span class="chip">Applied Analysis</span>
-          </div>
-          <div class="card-footer">
-            <a href="contactUs.html" class="service-link">
-              <span>Discuss a Project</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
+    <footer class="site-footer" id="contact">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="footer-logo" href="index.html" aria-label="Konsalta home">
+              <img src="public/Konsalta-white.png" alt="Konsalta" />
             </a>
+            <p>
+              A women-led, Africa-focused research, consulting, and advisory
+              firm delivering actionable insights and systemic impact.
+            </p>
           </div>
-        </article>
-
-        <!-- SERVICE 2 -->
-        <article class="service-card" data-category="pillar-1"
-          data-keywords="market intelligence insights stakeholder consumer sector intelligence opportunity mapping investment">
-          <div class="card-glow"></div>
-          <div class="card-top">
-            <span class="pillar-badge">Pillar 01 — Evidence & Intelligence</span>
-            <span class="service-num">02</span>
-          </div>
-          <div class="service-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <circle cx="12" cy="12" r="10"></circle>
-              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
-            </svg>
-          </div>
-          <h3 class="service-title">Market Intelligence and Insights</h3>
-          <p class="service-description">
-            Market assessments, stakeholder analysis, customer and consumer research, sector intelligence, and
-            opportunity mapping that support strategic, policy, and investment decisions.
-          </p>
-          <div class="capability-chips">
-            <span class="chip">Market Assessments</span>
-            <span class="chip">Stakeholder Mapping</span>
-            <span class="chip">Sector Intelligence</span>
-            <span class="chip">Opportunity Mapping</span>
-          </div>
-          <div class="card-footer">
-            <a href="contactUs.html" class="service-link">
-              <span>Explore Market Insights</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- SERVICE 3 -->
-        <article class="service-card" data-category="pillar-1"
-          data-keywords="data science ai artificial intelligence analytics statistical modelling dashboards visualization digital tools">
-          <div class="card-glow"></div>
-          <div class="card-top">
-            <span class="pillar-badge">Pillar 01 — Evidence & Intelligence</span>
-            <span class="service-num">03</span>
-          </div>
-          <div class="service-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path
-                d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-              </path>
-              <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-              <line x1="12" y1="22.08" x2="12" y2="12"></line>
-            </svg>
-          </div>
-          <h3 class="service-title">Data Science, AI and Analytics</h3>
-          <p class="service-description">
-            Advanced analytics, statistical modelling, dashboards, data visualization, AI-enabled solutions, and
-            digital tools that strengthen evidence generation and decision-making.
-          </p>
-          <div class="capability-chips">
-            <span class="chip">AI-Enabled Solutions</span>
-            <span class="chip">Statistical Modelling</span>
-            <span class="chip">Interactive Dashboards</span>
-            <span class="chip">Data Visualizations</span>
-          </div>
-          <div class="card-footer">
-            <a href="contactUs.html" class="service-link">
-              <span>Inquire on AI & Analytics</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- SERVICE 4 -->
-        <article class="service-card" data-category="pillar-2"
-          data-keywords="policy advisory regulatory reviews policy design evidence to policy translation government governance">
-          <div class="card-glow"></div>
-          <div class="card-top">
-            <span class="pillar-badge">Pillar 02 — Strategy, Policy & Systems</span>
-            <span class="service-num">04</span>
-          </div>
-          <div class="service-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-            </svg>
-          </div>
-          <h3 class="service-title">Policy Advisory and Evidence-to-Policy Translation</h3>
-          <p class="service-description">
-            Policy analysis, regulatory reviews, policy design, evidence synthesis, and stakeholder engagement that
-            help translate research into effective policy solutions.
-          </p>
-          <div class="capability-chips">
-            <span class="chip">Policy Design</span>
-            <span class="chip">Regulatory Reviews</span>
-            <span class="chip">Evidence Translation</span>
-            <span class="chip">Stakeholder Dialogues</span>
-          </div>
-          <div class="card-footer">
-            <a href="contactUs.html" class="service-link">
-              <span>Consult on Policy Solutions</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- SERVICE 5 -->
-        <article class="service-card" data-category="pillar-2"
-          data-keywords="strategy strategic planning organizational diagnostics risk assessment change management advisory decision support">
-          <div class="card-glow"></div>
-          <div class="card-top">
-            <span class="pillar-badge">Pillar 02 — Strategy, Policy & Systems</span>
-            <span class="service-num">05</span>
-          </div>
-          <div class="service-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <circle cx="12" cy="12" r="2"></circle>
-              <path
-                d="M16.24 7.76a6 6 0 0 1 0 8.49m-8.48-.01a6 6 0 0 1 0-8.49m11.31-2.82a10 10 0 0 1 0 14.14m-14.14 0a10 10 0 0 1 0-14.14">
-              </path>
-            </svg>
-          </div>
-          <h3 class="service-title">Strategy, Advisory and Change Management</h3>
-          <p class="service-description">
-            Strategic planning, organizational diagnostics, risk assessment, decision support, and change management
-            approaches for navigating complexity.
-          </p>
-          <div class="capability-chips">
-            <span class="chip">Strategic Planning</span>
-            <span class="chip">Org Diagnostics</span>
-            <span class="chip">Risk Assessment</span>
-            <span class="chip">Change Management</span>
-          </div>
-          <div class="card-footer">
-            <a href="contactUs.html" class="service-link">
-              <span>Start Strategic Advisory</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- SERVICE 6 -->
-        <article class="service-card" data-category="pillar-2"
-          data-keywords="monitoring evaluation learning mel impact measurement frameworks results based management learning agendas">
-          <div class="card-glow"></div>
-          <div class="card-top">
-            <span class="pillar-badge">Pillar 02 — Strategy, Policy & Systems</span>
-            <span class="service-num">06</span>
-          </div>
-          <div class="service-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <line x1="18" y1="20" x2="18" y2="10"></line>
-              <line x1="12" y1="20" x2="12" y2="4"></line>
-              <line x1="6" y1="20" x2="6" y2="14"></line>
-            </svg>
-          </div>
-          <h3 class="service-title">Monitoring, Evaluation and Learning (MEL)</h3>
-          <p class="service-description">
-            Monitoring systems, evaluations, impact measurement frameworks, learning agendas, and results-based
-            management approaches.
-          </p>
-          <div class="capability-chips">
-            <span class="chip">Impact Measurement</span>
-            <span class="chip">MEL Systems</span>
-            <span class="chip">Results-Based Mgmt</span>
-            <span class="chip">Learning Agendas</span>
-          </div>
-          <div class="card-footer">
-            <a href="contactUs.html" class="service-link">
-              <span>Design a MEL System</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- SERVICE 7 -->
-        <article class="service-card" data-category="pillar-3"
-          data-keywords="capacity strengthening training facilitation institutional capacity assessments organizational development systems resilience">
-          <div class="card-glow"></div>
-          <div class="card-top">
-            <span class="pillar-badge">Pillar 03 — Capability & Leadership</span>
-            <span class="service-num">07</span>
-          </div>
-          <div class="service-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="9" cy="7" r="4"></circle>
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-            </svg>
-          </div>
-          <h3 class="service-title">Capacity Strengthening</h3>
-          <p class="service-description">
-            Training, facilitation, institutional capacity assessments, organizational development, and systems
-            strengthening for long-term capability and resilience.
-          </p>
-          <div class="capability-chips">
-            <span class="chip">Institutional Audits</span>
-            <span class="chip">Bespoke Training</span>
-            <span class="chip">Org Development</span>
-            <span class="chip">Systems Resilience</span>
-          </div>
-          <div class="card-footer">
-            <a href="contactUs.html" class="service-link">
-              <span>Build Capacity</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- SERVICE 8 -->
-        <article class="service-card" data-category="pillar-3"
-          data-keywords="executive coaching leadership development programmes mentoring team coaching leadership effectiveness">
-          <div class="card-glow"></div>
-          <div class="card-top">
-            <span class="pillar-badge">Pillar 03 — Capability & Leadership</span>
-            <span class="service-num">08</span>
-          </div>
-          <div class="service-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <polygon
-                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-              </polygon>
-            </svg>
-          </div>
-          <h3 class="service-title">Executive Coaching and Leadership Development</h3>
-          <p class="service-description">
-            Individual coaching, leadership development programmes, mentoring, and team coaching that strengthen
-            leadership effectiveness and organizational culture.
-          </p>
-          <div class="capability-chips">
-            <span class="chip">Executive Coaching</span>
-            <span class="chip">Leadership Programmes</span>
-            <span class="chip">Mentoring Tracks</span>
-            <span class="chip">Team Cohesion</span>
-          </div>
-          <div class="card-footer">
-            <a href="contactUs.html?service=executive-coaching" class="service-link">
-              <span>Engage Coaching</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-        <!-- SERVICE 9 -->
-        <article class="service-card" data-category="pillar-3"
-          data-keywords="knowledge translation strategic communication policy briefs reports science communication advocacy support knowledge products">
-          <div class="card-glow"></div>
-          <div class="card-top">
-            <span class="pillar-badge">Pillar 03 — Capability & Leadership</span>
-            <span class="service-num">09</span>
-          </div>
-          <div class="service-icon-box">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            </svg>
-          </div>
-          <h3 class="service-title">Knowledge Translation and Strategic Communication</h3>
-          <p class="service-description">
-            Policy briefs, reports, stakeholder engagement, science communication, advocacy support, and knowledge
-            products that make evidence accessible and actionable.
-          </p>
-          <div class="capability-chips">
-            <span class="chip">Policy Briefs</span>
-            <span class="chip">Science Communication</span>
-            <span class="chip">Advocacy Strategy</span>
-            <span class="chip">Knowledge Toolkits</span>
-          </div>
-          <div class="card-footer">
-            <a href="contactUs.html" class="service-link">
-              <span>Craft Knowledge Products</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </a>
-          </div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ HOW WE DELIVER VALUE ============ -->
-  <section class="delivery-model-section">
-    <div class="section-container">
-      <div class="delivery-head">
-        <div class="eyebrow-tag">THE KONSALTA ADVANTAGE</div>
-        <h2 class="delivery-title">How We Deliver Value</h2>
-        <p class="delivery-desc">
-          Moving beyond bureaucratic overhead to deliver tailored, agile, and high-impact advisory solutions.
-        </p>
-      </div>
-
-      <div class="delivery-cards">
-        <div class="delivery-card">
-          <div class="delivery-num">01</div>
-          <h3>Agile Network Collective</h3>
-          <p>
-            We assemble multidisciplinary teams shaped specifically around your project requirements, drawing from
-            top-tier African and international subject matter experts.
-          </p>
-        </div>
-        <div class="delivery-card">
-          <div class="delivery-num">02</div>
-          <h3>Local Nuance, Global Rigor</h3>
-          <p>
-            Our solutions are grounded in deep contextual understanding of African policy, market, and social
-            landscapes, backed by rigorous analytical standards.
-          </p>
-        </div>
-        <div class="delivery-card">
-          <div class="delivery-num">03</div>
-          <h3>Actionable & Practical</h3>
-          <p>
-            We avoid academic shelfware. Every deliverable—from data pipelines to policy briefs—is crafted to enable
-            immediate, confident decision-making.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FINAL CTA SECTION ============ -->
-  <section class="final-cta" id="start">
-    <div class="final-cta-card">
-      <span class="orb orb-1" aria-hidden="true"></span>
-      <span class="orb orb-2" aria-hidden="true"></span>
-      <h2 class="final-cta-h2">
-        Ready to turn evidence into
-        <span class="accent">lasting impact?</span>
-      </h2>
-      <p>
-        Partner with our Africa-focused research and advisory collective to
-        make confident, future-ready decisions for your institution.
-      </p>
-      <a href="contactUs.html" class="cta-btn">
-        Start a Conversation
-        <span class="cta-arrow" aria-hidden="true">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-        </span>
-      </a>
-    </div>
-  </section>
-
-  <footer class="site-footer" id="contact">
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <a class="footer-logo" href="index.html" aria-label="Konsalta home">
-            <img src="public/Konsalta-white.png" alt="Konsalta" />
-          </a>
-          <p>A women-led, Africa-focused research, consulting, and advisory firm delivering actionable insights and systemic impact.</p>
-        </div>
-        <div class="footer-cols">
-          <div class="footer-col">
-            <h4>Services</h4>
-            <a href="services.html#services-grid">Research &amp; Evaluation</a>
-            <a href="services.html#services-grid">Strategy &amp; Advisory</a>
-            <a href="services.html#services-grid">Market Intelligence</a>
-            <a href="services.html#services-grid">Policy &amp; Systems</a>
-          </div>
-          <div class="footer-col">
-            <h4>Company</h4>
-            <a href="aboutUs.html">About Konsalta</a>
-            <a href="whyUs.html">Why Choose Us</a>
-            <a href="insights.html">Our Insights</a>
-            <a href="contactUs.html">Contact Us</a>
-          </div>
-          <div class="footer-col footer-contact">
-            <h4>Find Us</h4>
-            <p><svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>Harare, Zimbabwe</p>
-            <a href="https://www.linkedin.com/company/konsalta-hub-africa/" target="_blank" rel="noopener noreferrer"><svg class="footer-icon footer-icon-brand" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9v10M5 5v.01M10 19v-6a4 4 0 0 1 8 0v6M10 9v10M3 3h18v18H3z"></path></svg>LinkedIn</a>
+          <div class="footer-cols">
+            <div class="footer-col">
+              <h4>Services</h4>
+              <a href="services.html#services-grid"
+                >Research &amp; Evaluation</a
+              >
+              <a href="services.html#services-grid">Strategy &amp; Advisory</a>
+              <a href="services.html#services-grid">Market Intelligence</a>
+              <a href="services.html#services-grid">Policy &amp; Systems</a>
+            </div>
+            <div class="footer-col">
+              <h4>Company</h4>
+              <a href="aboutUs.html">About Konsalta</a>
+              <a href="whyUs.html">Why Choose Us</a>
+              <a href="insights.html">Our Insights</a>
+              <a href="contactUs.html">Contact Us</a>
+            </div>
+            <div class="footer-col footer-contact">
+              <h4>Find Us</h4>
+              <p>
+                <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+                  ></path>
+                  <circle cx="12" cy="10" r="2.5"></circle></svg
+                >Harare, Zimbabwe
+              </p>
+              <a
+                href="https://www.linkedin.com/company/konsalta-hub-africa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><svg
+                  class="footer-icon footer-icon-brand"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 9v10M5 5v.01M10 19v-6a4 4 0 0 1 8 0v6M10 9v10M3 3h18v18H3z"
+                  ></path></svg
+                >LinkedIn</a
+              >
+            </div>
           </div>
         </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 Konsalta. All rights reserved.</span>
+          <span>Developed by Momentum Labs</span>
+          <span>Better Decisions. Greater Impact.</span>
+        </div>
       </div>
-      <div class="footer-bottom">
-        <span>&copy; 2026 Konsalta. All rights reserved.</span>
-        <span>Developed by Momentum Labs</span>
-        <span>Better Decisions. Greater Impact.</span>
-      </div>
-    </div>
-  </footer>
-</body>
-
+    </footer>
+  </body>
 </html>

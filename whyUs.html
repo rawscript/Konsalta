@@ -29,64 +29,65 @@
     <script src="scripts/whyUs.js" defer></script>
   </head>
   <body>
-     <!-- Ambient Background Glows -->
+    <!-- Ambient Background Glows -->
     <div class="ambient-1" aria-hidden="true"></div>
     <div class="ambient-2" aria-hidden="true"></div>
     <div class="cursor" aria-hidden="true"></div>
 
     <!-- Interactive Multi-Hub Connection Mesh Background -->
-    <canvas id="hubMeshCanvas" class="hub-mesh-canvas" aria-hidden="true"></canvas>
+    <canvas
+      id="hubMeshCanvas"
+      class="hub-mesh-canvas"
+      aria-hidden="true"
+    ></canvas>
 
     <header class="site-header">
       <a href="index.html" class="logo" aria-label="Konsalta Home">
         <span class="logo-dot"
-          ><img
-            src="https://i.ibb.co/zVycVPh8/Logo-3.png"
-            alt="Konsalta Logo"
+          ><img src="public/logo-small.png" alt="Konsalta Logo"
         /></span>
       </a>
-        <button
-          class="header-menu-toggle"
-          type="button"
-          aria-expanded="false"
-          aria-controls="primary-navigation"
-          aria-label="Open navigation menu"
+      <button
+        class="header-menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        aria-label="Open navigation menu"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+      <nav class="header-nav" id="primary-navigation">
+        <a href="aboutUs.html">About Konsalta</a>
+        <a href="services.html">Explore Our Services</a>
+        <a href="whyUs.html" class="active" aria-current="page"
+          >Why Choose Us</a
         >
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 7h16M4 12h16M4 17h16" />
-          </svg>
-        </button>
-        <nav class="header-nav" id="primary-navigation">
-          <a href="aboutUs.html">About Konsalta</a>
-          <a href="services.html">Explore Our Services</a>
-          <a href="whyUs.html" class="active" aria-current="page">Why Choose Us</a>
-          <a href="insights.html">Our Insights</a>
-        </nav>
-        <a href="contactUs.html" class="header-btn"
-          >Contact Us
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-        </a>
-      </header>
-
+        <a href="insights.html">Our Insights</a>
+      </nav>
+      <a href="contactUs.html" class="header-btn"
+        >Contact Us
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </a>
+    </header>
 
     <div class="grain"></div>
 
-
     <!-- ============ HERO + PILLARS PARALLAX STAGE ============ -->
     <div class="parallax-stage">
-
       <!-- Shared animated orbs — bleed across hero AND pillars section -->
       <span class="hero-orb hero-orb-one" aria-hidden="true"></span>
       <span class="hero-orb hero-orb-two" aria-hidden="true"></span>
@@ -120,30 +121,39 @@
           <div class="section-content">
             <h2 class="section-title">Our 5 Pillars</h2>
             <p class="section-text">
-              At Konsalta, we partner with diverse institutions operating at the frontlines of African socioeconomic transformation, delivering tailored intelligence, institutional capacity, and actionable strategies. We have five clear reasons why Africa's foremost institutions trust our collective to deliver enduring outcomes.
+              At Konsalta, we partner with diverse institutions operating at the
+              frontlines of African socioeconomic transformation, delivering
+              tailored intelligence, institutional capacity, and actionable
+              strategies. We have five clear reasons why Africa's foremost
+              institutions trust our collective to deliver enduring outcomes.
             </p>
           </div>
           <span class="section-subtitle">They Are:</span>
         </div>
       </section>
-
-    </div><!-- end .parallax-stage -->
+    </div>
+    <!-- end .parallax-stage -->
 
     <div class="wrapper">
       <div class="accordion-container">
         <div
           id="mainDisplay"
           class="cinematic-panel main-panel"
-          style="background-image: url('https://images.unsplash.com/photo-1577401159468-3bbc7ee440b5?w=1400&q=80&auto=format&fit=crop')"
+          style="
+            background-image: url(&quot;https://images.unsplash.com/photo-1577401159468-3bbc7ee440b5?w=1400&q=80&auto=format&fit=crop&quot;);
+          "
         >
           <span class="panel-number" id="displayNum">01</span>
           <div class="panel-content" id="displayContent">
-            <span class="panel-category" id="displayCategory"
-              >Evidence</span
-            >
-            <h2 id="displayTitle">Grounded Empirical Evidence Over Unchecked Assumptions</h2>
+            <span class="panel-category" id="displayCategory">Evidence</span>
+            <h2 id="displayTitle">
+              Grounded Empirical Evidence Over Unchecked Assumptions
+            </h2>
             <p id="displayDesc">
-              Every analysis, strategy, and recommendation we generate is rigorously anchored in verified, real-world African field data—protecting our clients from expensive strategic missteps based on superficial assumptions.
+              Every analysis, strategy, and recommendation we generate is
+              rigorously anchored in verified, real-world African field
+              data—protecting our clients from expensive strategic missteps
+              based on superficial assumptions.
             </p>
             <a href="contactUs.html" class="action-btn">Explore More</a>
           </div>
@@ -169,7 +179,7 @@
           class="cinematic-panel thumb-panel"
           tabindex="0"
           style="
-            background-image: url('./public/baobab-unsplash.jpg');
+            background-image: url(&quot;./public/baobab-unsplash.jpg&quot;);
           "
           data-img="./public/baobab-unsplash.jpg"
           data-num="03"
@@ -184,10 +194,8 @@
         <div
           class="cinematic-panel thumb-panel"
           tabindex="0"
-          style="
-            background-image: url('./public/integrity2.jpg');
-          "
-          data-img="./public/integrity2.jpg"
+          style="background-image: url(&quot;./public/integrity2.jpg&quot;)"
+          data-img="./public/integrity.jpg"
           data-num="04"
           data-category="Integrity"
           data-title="Uncompromising Independence, Integrity and Analysis"
@@ -200,9 +208,7 @@
         <div
           class="cinematic-panel thumb-panel"
           tabindex="0"
-          style="
-            background-image: url('./public/sustainability.jpg');
-          "
+          style="background-image: url(&quot;./public/sustainability.jpg&quot;)"
           data-img="./public/sustainability.jpg"
           data-num="05"
           data-category="Sustainability"
@@ -214,8 +220,7 @@
         </div>
       </div>
 
-
-        <!-- ============================================================
+      <!-- ============================================================
          4. WHY KONSALTA: 6 VALUE DRIVERS
          ============================================================ -->
       <section class="why-konsalta-section" id="why-konsalta-pillars">
@@ -347,9 +352,9 @@
               </div>
               <h3 class="why-card-title">Rigour with a practical edge:</h3>
               <p class="why-card-desc">
-                We bridge the gap between evidence and action — we
-                are credible, actionable, and focused on delivering practical
-                solutions that can be implemented in the real world.
+                We bridge the gap between evidence and action — we are credible,
+                actionable, and focused on delivering practical solutions that
+                can be implemented in the real world.
               </p>
             </article>
 
@@ -379,11 +384,9 @@
           </div>
         </div>
       </section>
-
     </div>
 
-
-      <!-- <div class="widget">
+    <!-- <div class="widget">
         <p class="widget-title">Official Partners & Supporters</p>
         <a href="https://siammakemoney.com/en" target="_blank">
           <img
@@ -423,7 +426,9 @@
           <div class="footer-cols">
             <div class="footer-col">
               <h4>Services</h4>
-              <a href="services.html#services-grid">Research &amp; Evaluation</a>
+              <a href="services.html#services-grid"
+                >Research &amp; Evaluation</a
+              >
               <a href="services.html#services-grid">Strategy &amp; Advisory</a>
               <a href="services.html#services-grid">Market Intelligence</a>
               <a href="services.html#services-grid">Policy &amp; Systems</a>
@@ -439,21 +444,26 @@
               <h4>Find Us</h4>
               <p>
                 <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
-                  <circle cx="12" cy="10" r="2.5"></circle>
-                </svg>Harare, Zimbabwe
+                  <path
+                    d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+                  ></path>
+                  <circle cx="12" cy="10" r="2.5"></circle></svg
+                >Harare, Zimbabwe
               </p>
               <a
                 href="https://www.linkedin.com/company/konsalta-hub-africa/"
                 target="_blank"
                 rel="noopener noreferrer"
-              ><svg
-                class="footer-icon footer-icon-brand"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
+                ><svg
+                  class="footer-icon footer-icon-brand"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 9v10M5 5v.01M10 19v-6a4 4 0 0 1 8 0v6M10 9v10M3 3h18v18H3z"
+                  ></path></svg
+                >LinkedIn</a
               >
-                <path d="M5 9v10M5 5v.01M10 19v-6a4 4 0 0 1 8 0v6M10 9v10M3 3h18v18H3z"></path>
-              </svg>LinkedIn</a>
             </div>
           </div>
         </div>

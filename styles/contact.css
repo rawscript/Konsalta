@@ -444,7 +444,7 @@ img {
 }
 
 .footer-col h4 {
-  : "JetBrains Mono", monospace;
+font-family: "JetBrains Mono", monospace;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -471,7 +471,7 @@ img {
   border-top: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
-  : "JetBrains Mono", monospace;
+font-family: "JetBrains Mono", monospace;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;

@@ -1,0 +1,12 @@
+{
+  "name": "konsalta",
+  "version": "1.0.0",
+  "description": "Konsalta website",
+  "scripts": {
+    "build:css": "sass styles/style.scss styles/style.css --no-source-map",
+    "watch:css": "sass styles/style.scss styles/style.css --no-source-map --watch"
+  },
+  "devDependencies": {
+    "sass": "^1.89.2"
+  }
+}
