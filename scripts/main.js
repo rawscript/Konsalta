@@ -292,48 +292,4 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     });
   }
-
-  // ============ FEATURE CARD 3D HOVER ============
-  if (isFinePointer) {
-    document.querySelectorAll(".feature-card").forEach((card) => {
-      card.addEventListener("mousemove", (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width - 0.5;
-        const y = (e.clientY - rect.top) / rect.height - 0.5;
-        gsap.to(card, {
-          rotationY: x * 8,
-          rotationX: -y * 8,
-          y: -10,
-          duration: 0.4,
-          transformPerspective: 1200,
-          ease: "power2.out",
-        });
-      });
-      card.addEventListener("mouseleave", () => {
-        gsap.to(card, {
-          rotationY: 0,
-          rotationX: 0,
-          y: 0,
-          duration: 0.7,
-          ease: "elastic.out(1, 0.5)",
-        });
-      });
-    });
-  }
-
-  // ============ FINAL CTA PULSE ON ENTRY ============
-  gsap.from(".final-cta-card", {
-    scale: 0.94,
-    opacity: 0,
-    duration: 1.1,
-    ease: "power3.out",
-    scrollTrigger: {
-      trigger: ".final-cta-card",
-      start: "top 80%",
-      toggleActions: "play none none reverse",
-    },
-  });
-
-  // Refresh
-  ScrollTrigger.refresh();
 });

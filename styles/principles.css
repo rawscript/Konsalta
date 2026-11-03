@@ -1,0 +1,265 @@
+/* ============================================================
+   OUR APPROACH — Seven principles (scoped: .principles / .pr-*)
+   Load after about.css. Uses site tokens: --navy --orange --cream
+   --font --section-pad --ink-soft --fs-sm
+   ============================================================ */
+
+.principles {
+  --pr-s: 48px; /* slant depth */
+  --pr-gap: 6px; /* seam between cards */
+  position: relative;
+  padding: var(--section-pad) 0;
+}
+
+.principles .section-head {
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.pr-hint {
+  margin-top: 16px;
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+}
+
+/* ---------- Stage ---------- */
+.pr-stage {
+  display: flex;
+  width: 100%;
+  height: clamp(520px, 68svh, 720px);
+}
+
+.pr-card {
+  --tl: 0px;
+  --tr: 0px;
+  --bl: 0px;
+  --br: 0px;
+  --mx: 50%;
+  --my: 30%;
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow: hidden;
+  cursor: pointer;
+  color: var(--cream);
+  margin-left: calc(var(--pr-gap) - var(--pr-s));
+  /* shape is driven by JS (parallelogram when open, trapezoid otherwise) */
+  clip-path: polygon(
+    var(--tl) 0,
+    calc(100% - var(--tr)) 0,
+    calc(100% - var(--br)) 100%,
+    var(--bl) 100%
+  );
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.pr-card:first-child {
+  margin-left: 0;
+}
+.pr-card[aria-expanded="true"] {
+  color: var(--navy);
+}
+
+/* Layers */
+.pr-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    170deg,
+    color-mix(in srgb, var(--navy), var(--cream) var(--m, 0%)),
+    var(--navy)
+  );
+}
+.pr-fill {
+  position: absolute;
+  inset: 0;
+  background: var(--orange);
+  opacity: 0;
+}
+/* faded outer ends */
+.pr-card:first-child .pr-bg {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 min(120px, 16%));
+  mask-image: linear-gradient(to right, transparent, #000 min(120px, 16%));
+}
+.pr-card:last-child .pr-bg {
+  -webkit-mask-image: linear-gradient(to left, transparent, #000 min(120px, 16%));
+  mask-image: linear-gradient(to left, transparent, #000 min(120px, 16%));
+}
+/* cursor-follow highlight */
+.pr-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    280px circle at var(--mx) var(--my),
+    rgba(246, 243, 238, 0.16),
+    transparent 70%
+  );
+}
+.pr-card:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border: 4px solid var(--navy);
+  pointer-events: none;
+}
+
+/* ---------- Collapsed label ---------- */
+.pr-tag {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0 32px;
+  pointer-events: none;
+}
+.pr-tag b {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--orange);
+  font-variant-numeric: tabular-nums;
+}
+.pr-tag i {
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-style: normal;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* ---------- Expanded content ---------- */
+.pr-body {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: min(540px, 100%);
+  padding: 36px calc(var(--pr-s) + 20px) 40px calc(var(--pr-s) + 16px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 14px;
+  pointer-events: none;
+}
+.pr-card:first-child .pr-body {
+  padding-left: calc(var(--pr-s) + min(110px, 14%));
+}
+.pr-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.pr-num {
+  font-size: 3.4rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--navy);
+}
+.pr-title {
+  margin: 0;
+  max-width: 16ch;
+  font-size: clamp(1.7rem, 2.8vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: inherit;
+}
+.pr-text {
+  margin: 0;
+  max-width: 42ch;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+/* ---------- Tablet ---------- */
+@media (min-width: 761px) and (max-width: 1000px) {
+  .principles {
+    --pr-s: 34px;
+  }
+  .pr-tag i {
+    font-size: 0.95rem;
+  }
+}
+
+/* ---------- Mobile: vertical stack ---------- */
+@media (max-width: 760px) {
+  .principles {
+    --pr-s: 26px;
+  }
+  .pr-stage {
+    flex-direction: column;
+    height: clamp(680px, 100svh, 860px);
+  }
+  .pr-card {
+    margin-left: 0;
+    margin-top: calc(var(--pr-gap) - var(--pr-s));
+    clip-path: polygon(
+      0 var(--tl),
+      100% var(--tr),
+      100% calc(100% - var(--br)),
+      0 calc(100% - var(--bl))
+    );
+  }
+  .pr-card:first-child {
+    margin-top: 0;
+  }
+  .pr-card:first-child .pr-bg {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 min(64px, 18%));
+    mask-image: linear-gradient(to bottom, transparent, #000 min(64px, 18%));
+  }
+  .pr-card:last-child .pr-bg {
+    -webkit-mask-image: linear-gradient(to top, transparent, #000 min(64px, 18%));
+    mask-image: linear-gradient(to top, transparent, #000 min(64px, 18%));
+  }
+  .pr-tag {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 14px;
+    padding: 0 24px;
+  }
+  .pr-tag b {
+    font-size: 1.5rem;
+  }
+  .pr-tag i {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 1.05rem;
+  }
+  .pr-body {
+    width: 100%;
+    padding: calc(var(--pr-s) + 10px) 24px calc(var(--pr-s) + 12px);
+    justify-content: center;
+    gap: 10px;
+  }
+  .pr-card:first-child .pr-body {
+    padding-left: 24px;
+    padding-top: calc(var(--pr-s) + 52px);
+  }
+  .pr-card:last-child .pr-body {
+    padding-bottom: calc(var(--pr-s) + 52px);
+  }
+  .pr-num {
+    font-size: 2.4rem;
+  }
+  .pr-title {
+    max-width: none;
+    font-size: 1.9rem;
+  }
+  .pr-text {
+    font-size: 1.02rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pr-reveal {
+    transform: none;
+  }
+}

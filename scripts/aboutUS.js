@@ -74,12 +74,6 @@ document.addEventListener("DOMContentLoaded", () => {
         0
       )
       .fromTo(
-        ".hero-content .section-badge",
-        { opacity: 0, y: -12, scale: 0.9 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "back.out(1.6)" },
-        0.15
-      )
-      .fromTo(
         ".hero-main-title",
         { opacity: 0, y: 30 },
         { opacity: 1, y: 0, duration: 0.85 },
@@ -703,3 +697,146 @@ function initServeStars() {
     });
   });
 }
+
+
+
+
+// =========== SEVEN PRINCIPLES STAGE ============
+document.addEventListener("DOMContentLoaded", () => {
+  const stage = document.getElementById('stage');
+  if (!stage) return; // guard — #stage not present on this page
+
+  const items = [
+    ["Start with the problem", "Start with the problem", "We initiate every engagement by understanding the client's core challenge, their operating environment, identifying key stakeholders, critical constraints and desired outcomes."],
+    ["Build the right team", "Build the right team", "We assemble tailored, multidisciplinary teams for each assignment, combining the expertise needed to deliver results with clear leadership and accountability."],
+    ["Credible evidence", "Generate credible evidence", "We apply rigorous, fit-for-purpose methods grounded in professional standards, tailored to align with the unique objectives and context of each client."],
+    ["Bring context", "Bring context to the evidence", "We combine analytical rigor with knowledge of African policy, institutional, market, social and cultural contexts to interpret findings and how they can realistically be applied."],
+    ["Evidence into action", "Translate evidence into action", "We turn knowledge into recommendations, policies, strategies, implementation plans, communication approaches and other practical actions."],
+    ["Strengthen capacity", "Strengthen capacity as we deliver", "Where appropriate, we work alongside client teams and emerging professionals, transferring knowledge and strengthening skills throughout the assignment. This enables the value of an engagement to extend beyond the delivery of a final product."],
+    ["Engage throughout", "Engage throughout the process", "We maintain continuous engagement with clients, creating opportunities to test assumptions, review emerging findings, and stay aligned with changing circumstances."]
+  ];
+
+  const reduce = matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const D = v => reduce ? 0 : v;
+
+  stage.innerHTML = items.map((d, i) => `
+<article class="card" style="--m:${i * 2}%" role="button" tabindex="0" aria-expanded="false" aria-label="Principle ${i + 1}: ${d[1]}">
+  <div class="bg"><div class="fill"></div></div>
+  <div class="tag"><b>${i + 1}</b><i>${d[0]}</i></div>
+  <div class="body">
+    <span class="num reveal">${i + 1}</span>
+    <h3 class="reveal">${d[1]}</h3>
+    <p class="reveal">${d[2]}</p>
+  </div>
+</article>`).join('');
+
+  const cards = [...stage.children];
+  const N = cards.length;
+  const mqV = matchMedia('(max-width:760px)');
+  const mqHover = matchMedia('(hover:hover) and (pointer:fine)');
+  const st = cards.map(() => ({ tl: 0, tr: 0, bl: 0, br: 0 }));
+  const write = (el, o) => { for (const k in o) el.style.setProperty('--' + k, o[k] + 'px'); };
+
+  function targets(active) {
+    const S = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--s')) || 48;
+    const dir = e => e >= active - 1 && e <= active ? true : (e < active - 1 ? (active - 1 - e) % 2 === 0 : (e - active) % 2 === 0);
+    const trail = d => d ? [0, S] : [S, 0], lead = d => d ? [S, 0] : [0, S];
+    return cards.map((_, j) => {
+      const L = lead(dir(j - 1)), T = trail(dir(j));
+      return mqV.matches ? { tl: L[0], tr: L[1], bl: T[0], br: T[1] } : { tl: L[0], bl: L[1], tr: T[0], br: T[1] };
+    });
+  }
+
+  let active = -1, pinned = 0;
+
+  function shape(i, animate) {
+    const t = targets(i);
+    cards.forEach((c, j) => {
+      if (!animate) { Object.assign(st[j], t[j]); write(c, st[j]); return; }
+      gsap.to(st[j], { ...t[j], duration: D(.75), ease: 'power3.inOut', overwrite: 'auto', onUpdate: () => write(c, st[j]) });
+    });
+  }
+
+  function open(i, force) {
+    if (i === active && !force) return;
+    active = i;
+    const grow = mqV.matches ? 9 : 6;
+    cards.forEach((c, j) => {
+      const on = j === i;
+      c.setAttribute('aria-expanded', on);
+      gsap.to(c, { flexGrow: on ? grow : 1, duration: D(.75), ease: 'power3.inOut', overwrite: 'auto' });
+      gsap.to(c.querySelector('.tag'), { opacity: on ? 0 : 1, duration: D(.25), overwrite: 'auto' });
+      gsap.to(c.querySelector('.fill'), { opacity: on ? 1 : 0, duration: D(.5), ease: 'power2.out', overwrite: 'auto' });
+      gsap.to(c.querySelectorAll('.reveal'), { opacity: on ? 1 : 0, y: on ? 0 : 14, duration: D(on ? .5 : .15), delay: on ? D(.3) : 0, stagger: on ? D(.08) : 0, ease: 'power2.out', overwrite: 'auto' });
+    });
+    shape(i, true);
+  }
+
+  gsap.set(cards, { flexGrow: 1 });
+  shape(0, false);
+  open(0, true);
+  mqV.addEventListener('change', () => { shape(active, false); open(active, true); });
+  if (!reduce) gsap.from(cards, { opacity: 0, duration: .9, stagger: .08, ease: 'power2.out' });
+
+  cards.forEach((c, i) => {
+    c.addEventListener('pointerenter', () => { if (mqHover.matches) open(i); });
+    c.addEventListener('click', () => { pinned = i; open(i); });
+    c.addEventListener('focus', () => open(i));
+    c.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pinned = i; open(i); }
+      const k = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+      if (k) { e.preventDefault(); cards[(i + k + N) % N].focus(); }
+    });
+    c.addEventListener('pointermove', e => {
+      const r = c.getBoundingClientRect();
+      gsap.to(c, { '--mx': (e.clientX - r.left) + 'px', '--my': (e.clientY - r.top) + 'px', duration: D(.35), overwrite: 'auto' });
+    });
+  });
+
+  stage.addEventListener('pointerleave', () => { if (mqHover.matches) open(pinned); });
+
+  // ============ FEATURE CARD 3D HOVER ============
+  const isFinePointerLocal = window.matchMedia("(pointer: fine)").matches;
+  if (isFinePointerLocal) {
+    document.querySelectorAll(".feature-card").forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        gsap.to(card, {
+          rotationY: x * 8,
+          rotationX: -y * 8,
+          y: -10,
+          duration: 0.4,
+          transformPerspective: 1200,
+          ease: "power2.out",
+        });
+      });
+      card.addEventListener("mouseleave", () => {
+        gsap.to(card, {
+          rotationY: 0,
+          rotationX: 0,
+          y: 0,
+          duration: 0.7,
+          ease: "elastic.out(1, 0.5)",
+        });
+      });
+    });
+  }
+
+  // ============ FINAL CTA PULSE ON ENTRY ============
+  if (typeof ScrollTrigger !== "undefined") {
+    gsap.from(".final-cta-card", {
+      scale: 0.94,
+      opacity: 0,
+      duration: 1.1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".final-cta-card",
+        start: "top 80%",
+        toggleActions: "play none none reverse",
+      },
+    });
+    ScrollTrigger.refresh();
+  }
+});
