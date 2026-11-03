@@ -1,287 +1,1533 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Konsalta</title>
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js" as="script">
-    <link rel="icon" href="./public/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="./public/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./public/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="./public/apple-touch-icon.png">
-    <link rel="manifest" href="./public/site.webmanifest">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us — Konsalta | Better Decisions. Greater Impact</title>
+    <meta
+      name="description"
+      content="Konsalta is a women-led, Africa-focused research, consulting and advisory firm bridging local insight with global perspective."
+    />
+
+    <link rel="icon" href="./public/favicon.ico" sizes="any" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./public/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./public/favicon-16x16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./public/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="./public/site.webmanifest" />
+
+    <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="./styles/about.css" />
-</head>
-<body>
+    <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+    />
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/header.css" />
+    <link rel="stylesheet" href="styles/about.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
+
+    <!-- GSAP & Motion Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="scripts/header.js" defer></script>
+    <script src="scripts/aboutUS.js" defer></script>
+    <script>
+  if (window.gsap && window.ScrollTrigger && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    document.documentElement.classList.add("js-ready");
+  }
+</script>
+  </head>
+
+  <body>
+    <!-- Ambient Background Glows -->
+    <div class="ambient-1" aria-hidden="true"></div>
+    <div class="ambient-2" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"></div>
+
+    <!-- ============ GLOBAL SITE HEADER ============ -->
+    <header class="site-header">
+      <a href="index.html" class="logo" aria-label="Konsalta Home">
+        <span class="logo-dot">
+          <picture>
+            <source media="(max-width: 767px)" srcset="public/Logo-5.png" />
+            <img src="public/Logo-3.png" alt="Konsalta Logo" />
+          </picture>
+        </span>
+      </a>
+      <button
+        class="header-menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        aria-label="Open navigation menu"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+      <nav class="header-nav" id="primary-navigation">
+        <a href="aboutUs.html" class="active">About Konsalta</a>
+        <a href="services.html">Explore Our Services</a>
+        <a href="whyUs.html">Why Choose Us</a>
+        <a href="insights.html">Our Insights</a>
+      </nav>
+      <a href="contactUs.html" class="header-btn"
+        >Contact Us
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </a>
+    </header>
+
+    <main class="about-page">
+      <!-- ============================================================
+         1. HERO: WHO WE ARE
+         ============================================================ -->
+      <section class="who-we-are-hero" id="who-we-are">
+        <!-- 3D Paper Animation Background -->
+        <section class="hero-bg-app" aria-hidden="true">
+          <div id="app">
+            <div class="papers" style="--total: 5">
+              <div class="paper -rogue" style="--i: 0">
+                <div class="segment">
+                  <div class="segment">
+                    <div class="segment">
+                      <div class="segment">
+                        <div class="segment"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="paper" style="--i: 1">
+                <div class="segment">
+                  <div class="segment">
+                    <div class="segment">
+                      <div class="segment">
+                        <div class="segment"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="paper" style="--i: 2">
+                <div class="segment">
+                  <div class="segment">
+                    <div class="segment">
+                      <div class="segment">
+                        <div class="segment"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                  
+              <div class="paper" style="--i: 3">
+                <div class="segment">
+                  <div class="segment">
+                    <div class="segment">
+                      <div class="segment">
+                        <div class="segment"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="paper" style="--i: 4">
+                <div class="segment">
+                  <div class="segment">
+                    <div class="segment">
+                      <div class="segment">
+                        <div class="segment"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="shadow">
+              <div class="paper-shadow" style="--i: 0"></div>
+              <div class="paper-shadow" style="--i: 1"></div>
+              <div class="paper-shadow" style="--i: 2"></div>
+              <div class="paper-shadow" style="--i: 3"></div>
+              <div class="paper-shadow" style="--i: 4"></div>
+            </div>
+          </div>
+        </section>
+
+        <div class="section-container">
+          <div class="hero-content">
+            <h1 class="hero-main-title">
+              Turning Knowledge <span class="highlight">To Impact</span>
+            </h1>
+
+            <p class="hero-lead-text">
+              <strong style="color: #f26522">Who We Are: </strong> Since its
+              inception in 2024, Konsalta has built a multidisciplinary network
+              of experts who bring deep, hands-on experience to help
+              organisations across Africa and beyond turn knowledge into impact.
+              We partner with clients to solve complex challenges, translate
+              evidence into action, strengthen institutional capability and
+              deliver lasting
+              <strong style="color: #f26522">real-world impact</strong>
+            </p>
+
+            <div class="hero-actions">
+              <a href="#who-we-serve" class="btn-primary">
+                Who We Serve
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </a>
+              <a href="#our-approach" class="btn-secondary"
+                >Explore Our Approach</a
+              >
+            </div>
+
+            <!-- Highlight Metrics Strip -->
+            <div class="hero-stats-grid">
+              <div class="hero-stat-card">
+                <div class="hero-stat-number">2024</div>
+                <div class="hero-stat-title">Year Founded</div>
+                <div class="hero-stat-desc">
+                  Established to pioneer an agile, high-impact consulting model.
+                </div>
+              </div>
+
+              <div class="hero-stat-card">
+                <div class="hero-stat-number">5<span class="plus">+</span></div>
+                <div class="hero-stat-title">Client Sectors</div>
+                <div class="hero-stat-desc">
+                  Public, multilateral, corporate, philanthropic & civil society
+                  partners.
+                </div>
+              </div>
+
+              <div class="hero-stat-card">
+                <div class="hero-stat-number">7</div>
+                <div class="hero-stat-title">Guiding Principles</div>
+                <div class="hero-stat-desc">
+                  Rigorous methodology tailored one assignment at a time.
+                </div>
+              </div>
+
+              <div class="hero-stat-card">
+                <div class="hero-stat-number">
+                  100<span class="plus">%</span>
+                </div>
+                <div class="hero-stat-title">Evidence-Led</div>
+                <div class="hero-stat-desc">
+                  Every recommendation is anchored in credible, field-tested
+                  research.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+           <!-- ============================================================
+         2. WHO WE SERVE
+         ============================================================ -->
+      <section class="who-we-serve-section" id="who-we-serve">
+        <!-- Ambient Interactive Inverted Stars Field -->
+        <div class="serve-stars-field" aria-hidden="true">
+          <!-- 42 stars · euclidean scatter · sizes 11–40px · filled + outline mix · unique tilts -->
+
+          <!-- ─── TOP ZONE (0–14%) ─────────────────────────────────────── -->
+          <!-- ① orange filled 28px -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-22"
+               style="top:6%;left:2.5%;width:28px;height:28px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ② blue outline 20px -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="37"
+               style="top:11%;right:3%;width:20px;height:20px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ③ orange outline 15px -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-45"
+               style="top:2%;left:23%;width:15px;height:15px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ④ blue filled 34px -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="18"
+               style="top:3%;right:15%;width:34px;height:34px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑤ orange filled 13px -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-33"
+               style="top:5%;left:52%;width:13px;height:13px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑥ blue filled 17px — upper inner-left -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="31"
+               style="top:8%;left:13%;width:17px;height:17px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑦ orange outline 11px — tiny, far top-left low -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-58"
+               style="top:13%;left:5%;width:11px;height:11px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑧ blue outline 14px — upper right-centre -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="67"
+               style="top:8%;right:25%;width:14px;height:14px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑨ orange filled 20px — top centre-right gap -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-15"
+               style="top:1%;left:38%;width:20px;height:20px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑩ blue filled 25px — upper right inner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="44"
+               style="top:14%;right:6%;width:25px;height:25px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑪ orange outline 24px — upper left inner -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-38"
+               style="top:13%;left:44%;width:24px;height:24px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑫ blue outline 40px — top-right, large anchor -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="25"
+               style="top:0%;right:42%;width:40px;height:40px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑬ orange filled 16px — upper right edge -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="51"
+               style="top:9%;right:12%;width:16px;height:16px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑭ blue filled 12px — tiny, top-left mid -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-71"
+               style="top:11%;left:31%;width:12px;height:12px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+
+          <!-- ─── UPPER-MIDDLE ZONE (15–40%) ────────────────────────────── -->
+          <!-- ⑮ blue outline 38px — mid-left large anchor -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="52"
+               style="top:30%;left:1.5%;width:38px;height:38px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑯ orange filled 22px — mid-right -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-17"
+               style="top:27%;right:1.5%;width:22px;height:22px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑰ orange outline 32px — upper-mid left inner -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-38"
+               style="top:22%;left:12%;width:32px;height:32px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑱ blue filled 18px — mid-right inner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="25"
+               style="top:18%;right:12%;width:18px;height:18px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑲ blue filled 13px — mid-right edge small -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-70"
+               style="top:35%;right:4%;width:13px;height:13px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ⑳ orange filled 20px — mid-left inner -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="49"
+               style="top:40%;left:3.5%;width:20px;height:20px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉑ blue outline 16px — mid right-inner edge -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-19"
+               style="top:44%;right:3%;width:16px;height:16px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉒ orange outline 12px — mid-centre tiny -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="57"
+               style="top:37%;left:45%;width:12px;height:12px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉓ blue outline 24px — upper-mid centre-left -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="28"
+               style="top:16%;left:45%;width:24px;height:24px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉔ orange outline 16px — upper-mid right -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-60"
+               style="top:25%;right:18%;width:16px;height:16px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉕ blue filled 19px — mid centre-right -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-44"
+               style="top:43%;left:48%;width:19px;height:19px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉖ orange filled 35px — mid-left near-edge large -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="36"
+               style="top:20%;left:1%;width:35px;height:35px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉗ blue filled 11px — mid-right tiny -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="55"
+               style="top:50%;right:12%;width:11px;height:11px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉘ orange outline 28px — mid-right inner-low -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-23"
+               style="top:38%;right:14%;width:28px;height:28px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+
+          <!-- ─── LOWER-MIDDLE ZONE (41–70%) ────────────────────────────── -->
+          <!-- ㉙ blue filled 16px — lower-mid left edge -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="64"
+               style="top:48%;left:1%;width:16px;height:16px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉚ orange outline 30px — lower-mid right edge -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-28"
+               style="top:53%;right:1.8%;width:30px;height:30px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉛ blue outline 28px — lower-left inner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-35"
+               style="top:58%;left:4%;width:28px;height:28px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉜ orange filled 19px — lower-right inner -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="42"
+               style="top:60%;right:4%;width:19px;height:19px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉝ orange filled 18px — lower-centre -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-30"
+               style="top:62%;left:42%;width:18px;height:18px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉞ blue filled 24px — lower-left -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="23"
+               style="top:68%;left:2.5%;width:24px;height:24px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㉟ blue outline 28px — lower-right inner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="48"
+               style="top:70%;right:18%;width:28px;height:28px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+
+          <!-- ─── BOTTOM ZONE (71–100%) ──────────────────────────────────── -->
+          <!-- ㊱ orange filled 15px — lower-right margin -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-55"
+               style="top:72%;right:3%;width:15px;height:15px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊲ orange outline 14px — lower-left inner -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-62"
+               style="top:75%;left:12%;width:14px;height:14px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊳ blue filled 22px — lower-right inner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="16"
+               style="top:78%;right:8%;width:22px;height:22px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊴ blue outline 20px — bottom off-centre left -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="38"
+               style="top:80%;left:38%;width:20px;height:20px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊵ blue outline 16px — bottom-left inner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-47"
+               style="top:83%;left:5%;width:16px;height:16px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊶ orange filled 13px — bottom-right inner small -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="73"
+               style="top:85%;right:12%;width:13px;height:13px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊷ orange outline 26px — bottom off-centre right -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-42"
+               style="top:87%;right:28%;width:26px;height:26px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊸ blue filled 30px — bottom-centre large -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="-25"
+               style="top:89%;left:22%;width:30px;height:30px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊹ orange outline 17px — bottom-centre right -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="51"
+               style="top:91%;right:45%;width:17px;height:17px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊺ blue filled 13px — bottom-left corner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="29"
+               style="top:92%;left:7%;width:13px;height:13px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊻ orange filled 22px — bottom left-centre -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-13"
+               style="top:95%;left:28%;width:22px;height:22px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊼ blue filled 15px — far bottom-right -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="39"
+               style="top:97%;right:20%;width:15px;height:15px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊽ orange filled 14px — bottom-centre-left -->
+          <div class="serve-star star-orange" data-star-color="orange" data-tilt="-22"
+               style="top:82%;left:52%;width:14px;height:14px;">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+          <!-- ㊾ blue outline 11px — very bottom right corner -->
+          <div class="serve-star star-blue" data-star-color="blue" data-tilt="66"
+               style="top:98%;right:5%;width:11px;height:11px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M12 0L14.6 9.4L24 12L14.6 14.6L12 24L9.4 14.6L0 12L9.4 9.4Z"/></svg>
+          </div>
+        </div>
+
+        <div class="section-container">
+          <div class="section-head">
+            <h2 class="section-title">
+              Who We <span class="accent">Serve</span>
+            </h2>
+            
+          </div>
+
+          <div class="serve-grid">
+            <!-- 1. Governments & public institutions -->
+            <article class="serve-card">
+              <div class="serve-card-top">
+                <div class="serve-icon-wrap" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2l10 8H2l10-8z"
+                    />
+                  </svg>
+                </div>
+                <span class="serve-num-badge">01 / 05</span>
+              </div>
+              <h3 class="serve-title">Governments & Public Institutions</h3>
+              <p class="serve-desc">
+                Evidence to inform policy and decision-making, strengthen public programmes and systems, and build institutional capacity.
+              </p>
+             
+            </article>
+
+            <!-- 2. Development partners -->
+            <article class="serve-card">
+              <div class="serve-card-top">
+                <div class="serve-icon-wrap" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <path
+                      d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+                    />
+                  </svg>
+                </div>
+                <span class="serve-num-badge">02 / 05</span>
+              </div>
+              <h3 class="serve-title">Development Partners & International Organisations</h3>
+              <p class="serve-desc">
+                High-quality research, programme design support, monitoring and evaluation, and strategic advisory to guide investments.
+              </p>
+             
+            </article>
+
+            <!-- 3. Private sector -->
+            <article class="serve-card">
+              <div class="serve-card-top">
+                <div class="serve-icon-wrap" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                    <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                  </svg>
+                </div>
+                <span class="serve-num-badge">03 / 05</span>
+              </div>
+              <h3 class="serve-title">Private Sector Organisations</h3>
+              <p class="serve-desc">
+                Equipping forward-thinking enterprises, investors, and startup
+                innovators with data-driven insights, strategic advisory, market-entry and ESG compliance strategies, and sustainable growth
+                roadmaps across African markets.
+              </p>
+             
+            </article>
+
+            <!-- 4. Academic & research institutions -->
+            <article class="serve-card">
+              <div class="serve-card-top">
+                <div class="serve-icon-wrap" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                  </svg>
+                </div>
+                <span class="serve-num-badge">04 / 05</span>
+              </div>
+              <h3 class="serve-title">Academic & Research Institutions</h3>
+              <p class="serve-desc">
+                Research, evaluation, data analysis and capacity development.
+              </p>
+              
+            </article>
+
+            <!-- 5. Civil society -->
+            <article class="serve-card">
+              <div class="serve-card-top">
+                <div class="serve-icon-wrap" aria-hidden="true">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                </div>
+                <span class="serve-num-badge">05 / 05</span>
+              </div>
+              <h3 class="serve-title">Civil Society</h3>
+              <p class="serve-desc">
+                Demonstrating impact and mobilising resources for change.
+              </p>
+              
+            </article>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================
+         3. OUR APPROACH: SEVEN PRINCIPLES, ONE ASSIGNMENT AT A TIME
+         ============================================================ -->
+      <section class="approach-section" id="our-approach">
+        <!-- Ambient Muted Fading Brand Blue Dots Field (Smooth Circular Vignette) -->
+        <svg class="approach-dots-bg" aria-hidden="true" width="100%" height="100%">
+          <defs>
+            <pattern id="dotPattern" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+              <circle class="bgDot" cx="8" cy="8" r="1.6" />
+            </pattern>
+            <!-- Edge-only circular vignette: full dot presence across interior, fading smoothly only near the outer edge -->
+            <radialGradient id="dotsVignette" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="1" />
+              <stop offset="70%" stop-color="#ffffff" stop-opacity="1" />
+              <stop offset="82%" stop-color="#ffffff" stop-opacity="0.75" />
+              <stop offset="92%" stop-color="#ffffff" stop-opacity="0.32" />
+              <stop offset="98%" stop-color="#ffffff" stop-opacity="0.08" />
+              <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+            </radialGradient>
+            <mask id="dotsMask">
+              <rect x="0" y="0" width="100%" height="100%" fill="url(#dotsVignette)" />
+            </mask>
+          </defs>
+          <rect x="0" y="0" width="100%" height="100%" fill="url(#dotPattern)" mask="url(#dotsMask)" />
+        </svg>
+
+        <div class="section-container">
+          <div class="approach-quote-box">
+            <div class="quote-eyebrow">Guiding Methodology</div>
+            <div class="quote-statement">
+              “No two assignments are the same. Each client faces a unique
+              combination of challenges, stakeholders, and opportunities. We
+              bring <em>seven principles</em> together, one assignment at a
+              time.”
+            </div>
+          </div>
+
+          <div class="section-head">
+            <h2 class="section-title">
+              Seven Principles,
+              <span class="accent">One Assignment at a Time</span>
+            </h2>
+            <p class="section-desc">
+              Explore the seven operational principles that govern how we scope,
+              assemble, execute, and deliver lasting value for every client
+              partnership.
+            </p>
+          </div>
+
+          <div class="principles-layout">
+            <!-- Interactive Selector -->
+            <div
+              class="principles-nav"
+              role="tablist"
+              aria-label="Our Approach Principles"
+            >
+              <button
+                class="principle-tab active"
+                data-target="principle-1"
+                role="tab"
+              >
+                <span class="principle-tab-num">01</span>
+                <span>Start With The Problem</span>
+              </button>
+              <button
+                class="principle-tab"
+                data-target="principle-2"
+                role="tab"
+              >
+                <span class="principle-tab-num">02</span>
+                <span>Build The Right Team</span>
+              </button>
+              <button
+                class="principle-tab"
+                data-target="principle-3"
+                role="tab"
+              >
+                <span class="principle-tab-num">03</span>
+                <span>Generate Credible Evidence</span>
+              </button>
+              <button
+                class="principle-tab"
+                data-target="principle-4"
+                role="tab"
+              >
+                <span class="principle-tab-num">04</span>
+                <span>Bring Context To Evidence</span>
+              </button>
+              <button
+                class="principle-tab"
+                data-target="principle-5"
+                role="tab"
+              >
+                <span class="principle-tab-num">05</span>
+                <span>Translate Into Action</span>
+              </button>
+              <button
+                class="principle-tab"
+                data-target="principle-6"
+                role="tab"
+              >
+                <span class="principle-tab-num">06</span>
+                <span>Strengthen Capacity</span>
+              </button>
+              <button
+                class="principle-tab"
+                data-target="principle-7"
+                role="tab"
+              >
+                <span class="principle-tab-num">07</span>
+                <span>Engage Throughout</span>
+              </button>
+            </div>
+
+            <!-- In-Depth Principle Cards -->
+            <div class="principles-display">
+              <!-- Principle 1 -->
+              <article class="principle-card active-target" id="principle-1">
+                <div class="principle-card-head">
+                  <span class="principle-badge">01. </span>
+                  <h3 class="principle-title">
+                    Start with the problem, not predetermined solutions.
+                  </h3>
+                </div>
+                <p class="principle-body">
+                  We initiate every engagement by understanding the client’s
+                  core challenge, their operating environment, identifying key
+                  stakeholders, critical constraints and desired outcomes.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <polyline points="22 4 12 14.01 9 11.01" />
+                  </svg>
+                  <span>Deep diagnostic inquiry & stakeholder mapping</span>
+                </div>
+              </article>
+
+              <!-- Principle 2 -->
+              <article class="principle-card" id="principle-2">
+                <div class="principle-card-head">
+                  <span class="principle-badge">02. </span>
+                  <h3 class="principle-title">Build the right team.</h3>
+                </div>
+                <p class="principle-body">
+                  We assemble tailored, multidisciplinary teams for each
+                  assignment, combining the expertise needed to deliver results
+                  with clear leadership and accountability.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  <span
+                    >Bespoke multidisciplinary squads under senior
+                    leadership</span
+                  >
+                </div>
+              </article>
+
+              <!-- Principle 3 -->
+              <article class="principle-card" id="principle-3">
+                <div class="principle-card-head">
+                  <span class="principle-badge">03. </span>
+                  <h3 class="principle-title">Generate credible evidence.</h3>
+                </div>
+                <p class="principle-body">
+                  We apply rigorous, fit-for-purpose methods grounded in
+                  professional standards, tailored to align with the unique
+                  objectives and context of each client.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                    />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                  </svg>
+                  <span
+                    >Scientific methodologies & transparent verification</span
+                  >
+                </div>
+              </article>
+
+              <!-- Principle 4 -->
+              <article class="principle-card" id="principle-4">
+                <div class="principle-card-head">
+                  <span class="principle-badge">04. </span>
+                  <h3 class="principle-title">
+                    Bring context to the evidence.
+                  </h3>
+                </div>
+                <p class="principle-body">
+                  We combine analytical rigor with knowledge of African policy,
+                  institutional, market, social and cultural contexts to
+                  interpret findings and how they can realistically be applied.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="12" y1="16" x2="12" y2="12" />
+                    <line x1="12" y1="8" x2="12.01" y2="8" />
+                  </svg>
+                  <span>Cultural alignment & institutional empathy</span>
+                </div>
+              </article>
+
+              <!-- Principle 5 -->
+              <article class="principle-card" id="principle-5">
+                <div class="principle-card-head">
+                  <span class="principle-badge">05. </span>
+                  <h3 class="principle-title">
+                    Translate evidence into action.
+                  </h3>
+                </div>
+                <p class="principle-body">
+                  We turn knowledge into recommendations, policies, strategies,
+                  implementation plans, communication approaches and other
+                  practical actions.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                  </svg>
+                  <span>Action-oriented frameworks & executive blueprints</span>
+                </div>
+              </article>
+
+              <!-- Principle 6 -->
+              <article class="principle-card" id="principle-6">
+                <div class="principle-card-head">
+                  <span class="principle-badge">06. </span>
+                  <h3 class="principle-title">
+                    Strengthen capacity as we deliver.
+                  </h3>
+                </div>
+                <p class="principle-body">
+                  Where appropriate, we work alongside client teams and emerging
+                  professionals, transferring knowledge and strengthening skills
+                  throughout the assignment. This enables the value of an
+                  engagement to extend beyond the delivery of a final product.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 20h9" />
+                    <path
+                      d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"
+                    />
+                  </svg>
+                  <span>Capability transfer & internal skills enhancement</span>
+                </div>
+              </article>
+
+              <!-- Principle 7 -->
+              <article class="principle-card" id="principle-7">
+                <div class="principle-card-head">
+                  <span class="principle-badge">07. </span>
+                  <h3 class="principle-title">
+                    Engage continuously throughout the process.
+                  </h3>
+                </div>
+                <p class="principle-body">
+                  We maintain continuous engagement with clients, creating
+                  opportunities to test assumptions, review emerging findings,
+                  and stay aligned with changing circumstances.
+                </p>
+                <div class="principle-meta-pill">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9"
+                    />
+                  </svg>
+                  <span>Transparent governance & collaborative iteration</span>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+      <!-- ============================================================
+         5. MEET THE TEAM: 5 TEAMS WITH IN-DEPTH EXPLANATIONS
+         ============================================================ -->
+      <section class="team-section" id="meet-the-team">
+        <div class="section-container">
+          <div class="section-head">
+            <div class="section-badge">
+              <span class="badge-dot"></span> Core Practice Leads
+            </div>
+            <h2 class="section-title">
+              Meet the <span class="accent">Team</span>
+            </h2>
+            <p class="section-desc">
+              Konsalta is built around a select, experienced core team managing
+              day-to-day delivery and strategy, supported by an Advisory Board
+              and a wider network of trusted specialists.
+            </p>
+          </div>
+
+          <!-- Creative Animated Carousel Showcase -->
+          <div class="team-showcase-carousel" id="teamCarousel">
+            <!-- Top Interactive Pill Navigation -->
+            <div
+              class="team-nav-pills"
+              role="tablist"
+              aria-label="Select Team Member"
+            >
+              <button
+                type="button"
+                class="team-nav-pill is-active"
+                data-index="0"
+                role="tab"
+                aria-selected="true"
+              >
+                <span
+                  class="pill-avatar-thumb"
+                  style="background-image: url(&quot;public/Simie.jpeg&quot;)"
+                ></span>
+                <span class="pill-info">
+                  <span class="pill-name">Simiso Ncube</span>
+                  <span class="pill-role">Managing Partner</span>
+                </span>
+              </button>
+              <button
+                type="button"
+                class="team-nav-pill"
+                data-index="1"
+                role="tab"
+                aria-selected="false"
+              >
+                <span
+                  class="pill-avatar-thumb"
+                  style="background-image: url(&quot;public/Dr.jpeg&quot;)"
+                ></span>
+                <span class="pill-info">
+                  <span class="pill-name">Dr Afaf Hassan</span>
+                  <span class="pill-role">Senior Economist</span>
+                </span>
+              </button>
+              <button
+                type="button"
+                class="team-nav-pill"
+                data-index="2"
+                role="tab"
+                aria-selected="false"
+              >
+                <span
+                  class="pill-avatar-thumb"
+                  style="
+                    background-image: url(&quot;public/Thulisile.jpeg&quot;);
+                  "
+                ></span>
+                <span class="pill-info">
+                  <span class="pill-name">Dr. Thulisile Zikhali</span>
+                  <span class="pill-role">Impact &amp; MEL Lead</span>
+                </span>
+              </button>
+              <button
+                type="button"
+                class="team-nav-pill"
+                data-index="3"
+                role="tab"
+                aria-selected="false"
+              >
+                <span
+                  class="pill-avatar-thumb"
+                  style="background-image: url(&quot;public/Tristan.jpeg&quot;)"
+                ></span>
+                <span class="pill-info">
+                  <span class="pill-name">Tristan Ndlhovu</span>
+                  <span class="pill-role">Associate Consultant</span>
+                </span>
+              </button>
+              <button
+                type="button"
+                class="team-nav-pill"
+                data-index="4"
+                role="tab"
+                aria-selected="false"
+              >
+                <span
+                  class="pill-avatar-thumb"
+                  style="
+                    background-image: url(&quot;public/Samantha.jpeg&quot;);
+                  "
+                ></span>
+                <span class="pill-info">
+                  <span class="pill-name">Samantha Ncube</span>
+                  <span class="pill-role">Project Administrator</span>
+                </span>
+              </button>
+            </div>
+
+            <!-- Carousel Stage Area -->
+            <div class="team-carousel-stage">
+              <!-- Left Arrow Button -->
+              <button
+                type="button"
+                class="carousel-nav-btn btn-prev"
+                aria-label="Previous Team Member"
+                title="Previous"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+
+              <!-- Viewport -->
+              <div class="team-carousel-viewport">
+                <div class="team-carousel-track">
+                  <!-- Slide 0: Simiso Ncube -->
+                  <div class="team-carousel-slide is-active" data-slide="0">
+                    <div class="service-details">
+                      <img
+                        src="public/Simie.jpeg"
+                        alt="Simiso Ncube"
+                      />
+                      <div class="service-hover-text">
+                        <h4 class="service-head">Strategic Leadership &amp; Partnerships</h4>
+                        <h4>Managing Partner &amp; Head of Partnerships</h4>
+                        <div class="dossier-panel" data-panel="mandate">
+                          <div class="dossier-badge-label">Executive Role &amp; Mandate</div>
+                          <p class="dossier-text">
+                            Simiso provides overall strategic leadership for Konsalta, setting the firm’s vision and ensuring every engagement delivers meaningful, outcome-focused results. Drives business expansion by building trust-based institutional relationships and cultivating a premier network of technical experts. Working closely with clients and senior consultants, Simiso oversees high-level engagement strategy and guides complex projects from inception to successful execution.
+                          </p>
+                        </div>
+                        <div class="service-hover-footer">
+                          <a href="mailto:admin@konsaltahub.org" class="service-contact-btn">
+                            <span>Connect with Simiso</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <line x1="5" y1="12" x2="19" y2="12"></line>
+                              <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="service-white service-text">
+                        <span class="service-badge">Leadership</span>
+                        <p>Simiso Ncube</p>
+                        <a href="mailto:admin@konsaltahub.org">@simie</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Slide 1: Dr Afaf Hassan Abdel Rahim -->
+                  <div class="team-carousel-slide" data-slide="1">
+                    <div class="service-details">
+                      <img
+                        src="public/Dr.jpeg"
+                        alt="Dr Afaf Hassan Abdel Rahim"
+                      />
+                      <div class="service-hover-text">
+                        <h4 class="service-head">Quantitative Economics &amp; Data Science</h4>
+                        <h4>Senior Development Economist Consultant</h4>
+                        <div class="dossier-panel" data-panel="mandate">
+                          <div class="dossier-badge-label">Executive Role &amp; Mandate</div>
+                          <p class="dossier-text">
+                            Serving as Konsalta’s principal quantitative authority, Afaf designs end-to-end research cycles, complex sampling models, and large-scale household surveys. She deploys advanced data analytics using Stata, Python, and GIS to analyze livelihoods, food security, and displacement dynamics within fragile and displacement-affected contexts. Converting complex empirical datasets into high-quality technical reports and policy-relevant strategic insights for our clients.
+                          </p>
+                        </div>
+                        <div class="service-hover-footer">
+                          <a href="mailto:director@konsaltahub.org" class="service-contact-btn">
+                            <span>Connect with Dr. Afaf</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <line x1="5" y1="12" x2="19" y2="12"></line>
+                              <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="service-white service-text">
+                        <span class="service-badge">Economics</span>
+                        <p>Dr Afaf Hassan Abdel Rahim</p>
+                        <a href="mailto:director@konsaltahub.org">@dr.afaf</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Slide 2: Dr. Thulisile Zikhali -->
+                  <div class="team-carousel-slide" data-slide="2">
+                    <div class="service-details">
+                      <img
+                        src="public/Thulisile.jpeg"
+                        alt="Dr. Thulisile Zikhali"
+                      />
+                      <div class="service-hover-text">
+                        <h4 class="service-head">Impact Evaluation &amp; MEL Practice</h4>
+                        <h4>Senior Consultant – Impact &amp; MEL</h4>
+                        <div class="dossier-panel" data-panel="mandate">
+                          <div class="dossier-badge-label">Executive Role &amp; Mandate</div>
+                          <p class="dossier-text">
+                            Leads Konsalta’s monitoring, evaluation, and learning initiatives, ensuring all projects are anchored in robust qualitative and mixed-methods research design. She manages interdisciplinary research projects from coordination to quality control, bringing deep thematic expertise in community development, gender dynamics, and migration. Thulisile synthesizes complex data into clear, human-centric narratives that help clients measure systemic social impact and make data-driven decisions.
+                          </p>
+                        </div>
+                        <div class="service-hover-footer">
+                          <a href="mailto:projects@konsaltahub.org" class="service-contact-btn">
+                            <span>Connect with Dr. Thulisile</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <line x1="5" y1="12" x2="19" y2="12"></line>
+                              <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="service-white service-text">
+                        <span class="service-badge">Impact &amp; MEL</span>
+                        <p>Dr. Thulisile Zikhali</p>
+                        <a href="mailto:projects@konsaltahub.org">@t.zikhali</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Slide 3: Tristan Ndlhovu -->
+                  <div class="team-carousel-slide" data-slide="3">
+                    <div class="service-details">
+                      <img
+                        src="public/Tristan.jpeg"
+                        alt="Tristan Ndlhovu"
+                      />
+                      <div class="service-hover-text">
+                        <h4 class="service-head">Applied Research &amp; Analytics</h4>
+                        <h4>Associate Consultant – Impact &amp; MEL</h4>
+                        <div class="dossier-panel" data-panel="mandate">
+                          <div class="dossier-badge-label">Executive Role &amp; Mandate</div>
+                          <p class="dossier-text">
+                            Provides vital analytical, research, and project management support across Konsalta’s project portfolio. He executes mixed-methods secondary research, field data collection, and extensive literature reviews across diverse sectors. Tristan ensures smooth operational delivery by managing day-to-day project milestones, tracking timelines, and supporting senior team members in drafting high-quality client reports and presentations.
+                          </p>
+                        </div>
+                        <div class="service-hover-footer">
+                          <a href="mailto:consultants@konsaltahub.org" class="service-contact-btn">
+                            <span>Connect with Tristan</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <line x1="5" y1="12" x2="19" y2="12"></line>
+                              <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="service-white service-text">
+                        <span class="service-badge">Research</span>
+                        <p>Tristan Ndlhovu</p>
+                        <a href="mailto:consultants@konsaltahub.org">@tristan</a>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Slide 4: Samantha Ncube -->
+                  <div class="team-carousel-slide" data-slide="4">
+                    <div class="service-details">
+                      <img
+                        src="public/Samantha.jpeg"
+                        alt="Samantha Ncube"
+                      />
+                      <div class="service-hover-text">
+                        <h4 class="service-head">Operations &amp; Early-Career Pathway</h4>
+                        <h4>Project Administrator &amp; Intern</h4>
+                        <div class="dossier-panel" data-panel="mandate">
+                          <div class="dossier-badge-label">Executive Role &amp; Mandate</div>
+                          <p class="dossier-text">
+                            Samantha sits at the intersection of operational support and professional growth, managing day-to-day office logistics, project scheduling, and team coordination to keep Konsalta running smoothly. Concurrently, through Konsalta's early-career pathway, she gains hands-on, practical experience by assisting with real-world research, strategy, and project administration. Working alongside the core team and specialist network, Samantha actively builds practical, consulting-ready skills while ensuring seamless operational execution.
+                          </p>
+                        </div>
+                        <div class="service-hover-footer">
+                          <a href="mailto:engage@konsaltahub.org" class="service-contact-btn">
+                            <span>Connect with Samantha</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                              <line x1="5" y1="12" x2="19" y2="12"></line>
+                              <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                      <div class="service-white service-text">
+                        <span class="service-badge">Operations</span>
+                        <p>Samantha Ncube</p>
+                        <a href="mailto:consultants@konsaltahub.org">@s.ncube.ops</a>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Arrow Button -->
+              <button
+                type="button"
+                class="carousel-nav-btn btn-next"
+                aria-label="Next Team Member"
+                title="Next"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <!-- Bottom Control Deck -->
+            <div class="team-carousel-controls">
+              <!-- Numeric Counter -->
+              <div class="carousel-counter-display">
+                <span class="counter-num active-num" id="currentSlideNum"
+                  >01</span
+                >
+                <span class="counter-sep">/</span>
+                <span class="counter-num total-num">05</span>
+              </div>
+
+              <!-- Slide Progress Track -->
+              <div class="carousel-progress-track">
+                <div
+                  class="carousel-progress-bar"
+                  id="carouselProgressBar"
+                  style="width: 20%"
+                ></div>
+              </div>
+
+              <!-- Dot Indicators -->
+              <div
+                class="carousel-dots-group"
+                role="tablist"
+                aria-label="Slide Dots"
+              >
+                <button
+                  type="button"
+                  class="carousel-dot is-active"
+                  data-index="0"
+                  aria-label="Go to Simiso Ncube"
+                ></button>
+                <button
+                  type="button"
+                  class="carousel-dot"
+                  data-index="1"
+                  aria-label="Go to Dr Afaf Hassan"
+                ></button>
+                <button
+                  type="button"
+                  class="carousel-dot"
+                  data-index="2"
+                  aria-label="Go to Dr Thulisile Zikhali"
+                ></button>
+                <button
+                  type="button"
+                  class="carousel-dot"
+                  data-index="3"
+                  aria-label="Go to Tristan Ndlhovu"
+                ></button>
+                <button
+                  type="button"
+                  class="carousel-dot"
+                  data-index="4"
+                  aria-label="Go to Samantha Ncube"
+                ></button>
+              </div>
+
+              <!-- Autoplay Pause / Play Control -->
+              <button
+                type="button"
+                class="carousel-toggle-play"
+                id="carouselPlayToggle"
+                aria-label="Pause slide rotation"
+                title="Pause / Resume Rotation"
+              >
+                <span class="play-state-icon state-pause">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+                    <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+                  </svg>
+                </span>
+                <span class="play-state-icon state-play" style="display: none">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+ 
+
+      
+      
+     
    
-<div class="grain"></div>
 
-<!-- NAV -->
-<nav class="nav" id="nav">
-  <div class="logo">
-    <span class="logo-dot"><img src="https://i.ibb.co/mFD5XKvd/logo.png" alt="konsalta-logo" srcset=""></span>
-    
-  </div>
-  <button class="nav-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" aria-label="Open navigation menu">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
-  </button>
-  <ul class="nav-links liquid-glass" id="primary-navigation">
-    <!-- <li><a href="aboutUs.html">About Us</a></li> --->
-    <li><a href="services.html">Our Services</a></li>
-    <li><a href="whyUs.html">Why Choose Us</a></li>
-    <li><a href="insights.html">Our insights</a></li>
-  </ul>
-    <button class="nav-cta" onclick="window.location.href='contactUs.html'">
-      Contact Us
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-      <line x1="7" y1="17" x2="17" y2="7" />
-      <polyline points="7 7 17 7 17 17" />
-    </svg>
-  </button>
-</nav>
+      
+       <!-- ============================================================
+         7. CALL TO ACTION BANNER
+         ============================================================ -->
+      <section class="about-cta-section">
+        <div class="section-container">
+          <div class="about-cta-card">
+            <h2 class="about-cta-title">
+              Ready to Turn Knowledge Into Impact?
+            </h2>
+            <p class="about-cta-subtitle">
+              Whether you are evaluating a multimillion-dollar development
+              portfolio, designing national policy, or mapping pan-African
+              market opportunities, our multidisciplinary collective is ready to
+              support you.
+            </p>
+            <a href="contactUs.html" class="cta-btn-glow">
+              Start a Conversation With Our Team
+              <svg
+                width="15"
+                height="15"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
 
-<!-- HERO -->
-
-<!-- ============ SECTION 2: WHO WE ARE ============ -->
-<section class="team-section">
-  <section class="who-we-are quote-section" aria-labelledby="who-we-are-heading">
-    <h2 id="who-we-are-heading"><em class="emphasis"> What we stand for.</em></h2>
-    <div class="quote-mark" aria-hidden="true">“</div>
-    <p class="summary quote-text">Since its inception in 2024, Konsalta has built a multidisciplinary network of experts who bring deep, hands-on experience to help organisations across Africa and beyond turn knowledge into impact. We partner with clients to solve complex challenges, translate evidence into action, strengthen institutional capability and deliver lasting real-world impact.</p>
-  </section>
-   <section class="who-we-serve" aria-labelledby="who-we-serve-heading">
-    <div class="approach-carousel who-serve-carousel" aria-label="Who Konsalta serves">
-    <h2 class="carousel-heading" id="who-we-serve-heading">Who We Serve</h2>
-      <article class="approach-slide">
-        <img class="approach-image" src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
-        <div class="approach-copy">
-          <span class="approach-number">01 / 05</span>
-          <h3>Governments &amp; public institutions</h3>
-          <p>Evidence-informed policymaking and effective public service delivery.</p>
+    <footer class="site-footer" id="contact">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="footer-logo" href="index.html" aria-label="Konsalta home">
+              <img src="public/logo-small.png" alt="Konsalta" />
+            </a>
+            <p>
+              A women-led, Africa-focused research, consulting, and advisory
+              firm delivering actionable insights and systemic impact.
+            </p>
+          </div>
+          <div class="footer-cols">
+            <div class="footer-col">
+              <h4>Services</h4>
+              <a href="services.html#services-grid"
+                >Research &amp; Evaluation</a
+              >
+              <a href="services.html#services-grid">Strategy &amp; Advisory</a>
+              <a href="services.html#services-grid">Market Intelligence</a>
+              <a href="services.html#services-grid">Policy &amp; Systems</a>
+            </div>
+            <div class="footer-col">
+              <h4>Company</h4>
+              <a href="aboutUs.html">About Konsalta</a>
+              <a href="whyUs.html">Why Choose Us</a>
+              <a href="insights.html">Our Insights</a>
+              <a href="contactUs.html">Contact Us</a>
+            </div>
+            <div class="footer-col footer-contact">
+              <h4>Find Us</h4>
+              <p>
+                <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+                  ></path>
+                  <circle cx="12" cy="10" r="2.5"></circle></svg
+                >Harare, Zimbabwe
+              </p>
+              <a
+                href="https://www.linkedin.com/company/konsalta-hub-africa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><svg
+                  class="footer-icon footer-icon-brand"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 9v10M5 5v.01M10 19v-6a4 4 0 0 1 8 0v6M10 9v10M3 3h18v18H3z"
+                  ></path></svg
+                >LinkedIn</a
+              >
+            </div>
+          </div>
         </div>
-      </article>
-      <article class="approach-slide">
-        <img class="approach-image" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
-        <div class="approach-copy">
-          <span class="approach-number">02 / 05</span>
-          <h3>Development partners</h3>
-          <p>Generating evidence and strengthening learning to inform programmes.</p>
-        </div>
-      </article>
-      <article class="approach-slide">
-        <img class="approach-image" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
-        <div class="approach-copy">
-          <span class="approach-number">03 / 05</span>
-          <h3>Private sector</h3>
-          <p>Data-driven insights, strategic advisory, market-entry, and ESG support.</p>
-        </div>
-      </article>
-      <article class="approach-slide">
-        <img class="approach-image" src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
-        <div class="approach-copy">
-          <span class="approach-number">04 / 05</span>
-          <h3>Civil society</h3>
-          <p>Demonstrating impact and mobilising resources for change.</p>
-        </div>
-      </article>
-      <article class="approach-slide">
-        <img class="approach-image" src="https://i.ibb.co/Y4QvJ8hK/research.jpg" alt="" />
-        <div class="approach-copy">
-          <span class="approach-number">05 / 05</span>
-          <h3>Academic &amp; research institutions</h3>
-          <p>Research, evaluation, data analysis and capacity development.</p>
-        </div>
-      </article>
-      <nav class="approach-pagination" aria-label="Choose an audience">
-        <button type="button" aria-label="Show audience 1" aria-current="true"></button>
-        <button type="button" aria-label="Show audience 2"></button>
-        <button type="button" aria-label="Show audience 3"></button>
-        <button type="button" aria-label="Show audience 4"></button>
-        <button type="button" aria-label="Show audience 5"></button>
-      </nav>
-    </div>
-  </section>
-  <section class="approach-intro quote-section" aria-labelledby="approach-intro-heading">
-    <h2 id="approach-intro-heading"><em class="emphasis">Seven principles, one assignment</em></h2>
-    <div class="quote-mark" aria-hidden="true">“</div>
-    <p class="summary quote-text">No two assignments are the same. Each client faces a unique combination of challenges, stakeholders, contexts and objectives. We bring together a strong core team and a wider multidisciplinary network to assemble the expertise each assignment needs.</p>
-  </section>
-  <section class="approach" aria-labelledby="approach-heading">
-    <div class="approach-carousel" aria-label="Seven principles guiding every assignment">
-      <h2 class="carousel-heading" id="approach-heading">Our Approach</h2>
-      <article class="approach-slide">
-        <img class="approach-image" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
-        <div class="approach-copy">
-          <span class="approach-number">01 / 07</span>
-          <h3>Start with the problem.</h3>
-          <p>We begin by understanding the client's core challenge and operating environment, identifying key stakeholders, critical constraints and desired outcomes.</p>
-        </div>
-      </article>
-      <article class="approach-slide">
-        <img class="approach-image" src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
-        <div class="approach-copy">
-          <span class="approach-number">02 / 07</span>
-          <h3>Build the right team.</h3>
-          <p>We assemble a multidisciplinary team for each assignment, bringing together the expertise needed to deliver results, with clear leadership and accountability.</p>
-        </div>
-      </article>
-      <article class="approach-slide">
-        <img class="approach-image" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
-        <div class="approach-copy">
-          <span class="approach-number">03 / 07</span>
-          <h3>Generate credible evidence.</h3>
-          <p>We use rigorous, fit-for-purpose methods grounded in professional standards and tailored to each client's objectives and context.</p>
-        </div>
-      </article>
-      <article class="approach-slide">
-        <img class="approach-image" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
-        <div class="approach-copy">
-          <span class="approach-number">04 / 07</span>
-          <h3>Bring context to the evidence.</h3>
-          <p>We combine analytical rigor with knowledge of African policy, institutional, market, social and cultural contexts to interpret findings and assess how they can be applied in practice.</p>
-        </div>
-      </article>
-      <article class="approach-slide">
-        <img class="approach-image" src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
-        <div class="approach-copy">
-          <span class="approach-number">05 / 07</span>
-          <h3>Translate evidence into action.</h3>
-          <p>We turn knowledge into practical recommendations, policies, strategies, implementation plans and communication approaches.</p>
-        </div>
-      </article>
-      <article class="approach-slide">
-        <img class="approach-image" src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
-        <div class="approach-copy">
-          <span class="approach-number">06 / 07</span>
-          <h3>Strengthen capacity as we deliver.</h3>
-          <p>Where appropriate, we work alongside client teams and emerging professionals, sharing knowledge and strengthening skills throughout the assignment. This helps the value of our work extend beyond the final deliverable.</p>
-        </div>
-      </article>
-      <article class="approach-slide">
-        <img class="approach-image" src="https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&amp;fit=crop&amp;w=2400&amp;q=85" alt="" />
-        <div class="approach-copy">
-          <span class="approach-number">07 / 07</span>
-          <h3>Engage throughout the process.</h3>
-          <p>We stay closely engaged with clients, creating opportunities to test assumptions, review emerging findings and adapt as circumstances change.</p>
-        </div>
-      </article>
-      <nav class="approach-pagination" aria-label="Choose an approach principle">
-        <button type="button" aria-label="Show principle 1" aria-current="true"></button>
-        <button type="button" aria-label="Show principle 2"></button>
-        <button type="button" aria-label="Show principle 3"></button>
-        <button type="button" aria-label="Show principle 4"></button>
-        <button type="button" aria-label="Show principle 5"></button>
-        <button type="button" aria-label="Show principle 6"></button>
-        <button type="button" aria-label="Show principle 7"></button>
-      </nav>
-    </div>
-  </section>
-  <div class="team-grid" id="teamGrid">
-   </div>
-<section class="impact-gallery" aria-labelledby="impact-gallery-heading">
-  <div class="impact-gallery-heading">
-    <p class="impact-gallery-kicker"> MEET THE TEAM </p>
-    <h2 id="impact-gallery-heading"></h2>
-  </div>
-  <div class="impact-gallery-viewport">
-    <div class="impact-gallery-track">
-      <article class="impact-gallery-card">
-        <img src="https://i.ibb.co/5W4372jd/Dr.jpg" alt="Analysts reviewing research data" />
-        <div class="impact-gallery-card-copy"><span>Senior Development Economist Consultant  </span><h3> Dr Afaf Hassan Abdel Rahim </h3></div>
-      </article>
-      <article class="impact-gallery-card">
-        <img src="https://i.ibb.co/bR3SZctw/Thulisile.jpg" alt="Consultants collaborating around a table" />
-        <div class="impact-gallery-card-copy"><span>Senior Consultant – Impact & MEL</span><h3>Dr. Thulisile Zikhali </h3></div>
-      </article>
-      <article class="impact-gallery-card">
-        <img src="https://i.ibb.co/XrQL1DYn/Samantha.jpg" alt="A team planning together in a workshop" />
-        <div class="impact-gallery-card-copy"><span>Project Administrator & Intern</span><h3>Samantha Ncube</h3></div>
-      </article>
-      <article class="impact-gallery-card">
-        <img src="https://i.ibb.co/x8Gp8HYf/Tristan.jpg" alt="Students learning together in a classroom" />
-        <div class="impact-gallery-card-copy"><span>Associate Consultant – Impact & MEL</span><h3>Tristan Ndlhovu </h3></div>
-      </article>
-      <article class="impact-gallery-card">
-        <img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?auto=format&amp;fit=crop&amp;w=1200&amp;q=85" alt="Community members working together" />
-        <div class="impact-gallery-card-copy"><span> Managing Partner & Head of Partnerships</span><h3>Simiso Ncube </h3></div>
-      </article>
-    </div>
-  </div>
-  <nav class="impact-gallery-pagination" aria-label="Choose a work area">
-    <button type="button" aria-label="Show research and evaluation" aria-current="true"></button>
-    <button type="button" aria-label="Show strategy and advisory"></button>
-    <button type="button" aria-label="Show market intelligence"></button>
-    <button type="button" aria-label="Show policy and systems"></button>
-    <button type="button" aria-label="Show learning and capacity"></button>
-  </nav>
-</section>
-<!-- ============ SECTION 3: STATS ============ -->
-<section class="stats">
-  <div class="stats-inner">
-    <h3>Evidence into<br /> <em>lasting impact</em>.</h3>
-    <div class="stat-block">
-      <div class="num" data-count="2024"><span>0</span></div>
-      <div class="lbl">Year Konsalta was founded</div>
-    </div>
-    <div class="stat-block">
-      <div class="num" data-count="7"><span>0</span></div>
-      <div class="lbl">Guiding principles</div>
-    </div>
-    <div class="stat-block">
-      <div class="num" data-count="5"><span>0</span></div>
-      <div class="lbl">Client groups</div>
-    </div>
-  </div>
-</section>
-
-<footer class="site-footer" id="contact">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <span class="logo-dot"><img src="https://i.ibb.co/mFD5XKvd/logo.png" alt="Konsalta Logo"></span>
-        </div>
-        <p>
-          A women-led, Africa-focused research, consulting and advisory firm
-          delivering actionable insights and systemic impact.
-        </p>
-      </div>
-      <div class="footer-cols">
-        <div class="footer-col">
-          <h4>Services</h4>
-          <a href="services.html#research">Research & Evaluation</a>
-          <a href="services.html#strategy">Strategy & Advisory</a>
-          <a href="services.html#insights">Market Intelligence</a>
-          <a href="services.html#policy">Policy & Systems</a>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <a href="aboutUs.html">About Konsalta</a>
-          <a href="whyUs.html">Why Choose Us</a>
-          <a href="insights.html">Our Insights</a>
-          <a href="contactUs.html">Contact Us</a>
-        </div>
-        <div class="footer-col">
-          <h4>Governance</h4>
-          <a href="#ethics">Ethics & Integrity</a>
-          <a href="#privacy">Privacy Policy</a>
-          <a href="#terms">Terms of Engagement</a>
+        <div class="footer-bottom">
+          <span>&copy; 2026 Konsalta. All rights reserved.</span>
+          <span>Developed by Momentum Labs</span>
+          <span>Better Decisions. Greater Impact.</span>
         </div>
       </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 Konsalta. All rights reserved.</span>
-      <span>Better Decisions. Greater Impact.</span>
-    </div>
-  </footer>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="scripts/aboutUS.js"></script>
-</body>
+    </footer>
+  </body>
 </html>
