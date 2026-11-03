@@ -1,0 +1,237 @@
+/* ============================================================
+   SERVICES SHOWCASE — 9 expanding image panels
+   Scoped: .services-showcase / .sv-*
+   Uses site tokens: --navy --navy-mid --orange --r-lg --section-pad
+   ============================================================ */
+
+.services-showcase {
+  padding: var(--section-pad) 0;
+  position: relative;
+}
+
+.services-showcase .section-head {
+  margin-bottom: clamp(24px, 3vw, 40px);
+}
+
+.sv-hint {
+  margin-top: 16px;
+  font-size: var(--fs-sm);
+  color: var(--ink-soft);
+}
+
+/* ---------- Stage ---------- */
+.sv-stage {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  height: clamp(480px, 64svh, 640px);
+}
+
+/* Collapsed panels have a fixed width; the open one takes the rest. */
+.sv-panel {
+  position: relative;
+  flex: 0 0 64px;
+  min-width: 0;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--r-lg);
+  background: var(--navy-mid); /* shows if an image fails to load */
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.sv-panel:first-child {
+  flex-grow: 1; /* no-JS / pre-JS fallback; JS takes over */
+}
+.sv-panel:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: -5px;
+}
+
+/* ---------- Layers ---------- */
+.sv-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.12);
+  -webkit-user-drag: none;
+  user-select: none;
+}
+.sv-tint,
+.sv-grad {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.sv-tint {
+  background: rgba(11, 45, 83, 0.58);
+}
+.sv-grad {
+  opacity: 0;
+  background: linear-gradient(
+    to top,
+    rgba(6, 26, 50, 0.94) 0%,
+    rgba(11, 45, 83, 0.6) 42%,
+    rgba(11, 45, 83, 0.12) 100%
+  );
+}
+
+/* ---------- Collapsed short label ---------- */
+.sv-short {
+  position: absolute;
+  z-index: 2;
+  top: 22px;
+  left: 50%;
+  translate: -50% 0;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  pointer-events: none;
+}
+
+/* ---------- Icon + info ---------- */
+.sv-label {
+  position: absolute;
+  z-index: 2;
+  left: 12px;
+  bottom: 12px;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  transition:
+    left 0.6s cubic-bezier(0.05, 0.61, 0.41, 0.95),
+    bottom 0.6s cubic-bezier(0.05, 0.61, 0.41, 0.95);
+}
+.sv-panel[aria-expanded="true"] .sv-label {
+  left: 24px;
+  bottom: 24px;
+}
+
+.sv-icon {
+  flex: 0 0 40px;
+  width: 40px;
+  height: 40px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--navy);
+  transition:
+    background 0.4s ease,
+    color 0.4s ease;
+}
+.sv-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.sv-panel[aria-expanded="true"] .sv-icon {
+  background: var(--orange);
+  color: #fff;
+}
+
+.sv-info {
+  width: min(460px, 44vw);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.sv-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.sv-no {
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--orange-light, var(--orange));
+}
+.sv-title {
+  margin: 0;
+  font-size: clamp(1.3rem, 2vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fff;
+}
+.sv-desc {
+  margin: 0;
+  font-size: var(--fs-sm);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ---------- Tablet ---------- */
+@media (min-width: 761px) and (max-width: 1000px) {
+  .sv-stage {
+    gap: 8px;
+  }
+  .sv-panel {
+    flex-basis: 52px;
+  }
+  .sv-label {
+    left: 6px;
+  }
+  .sv-short {
+    font-size: var(--fs-xs);
+  }
+  .sv-info {
+    width: min(380px, 52vw);
+  }
+}
+
+/* ---------- Mobile: vertical accordion ---------- */
+@media (max-width: 760px) {
+  .sv-stage {
+    flex-direction: column;
+    gap: 8px;
+    height: clamp(780px, 112svh, 920px);
+  }
+  .sv-panel {
+    flex-basis: 56px;
+  }
+  .sv-short {
+    top: auto;
+    left: 68px;
+    bottom: 8px;
+    translate: 0 0;
+    line-height: 40px;
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+  .sv-label {
+    left: 8px;
+    bottom: 8px;
+    right: 16px;
+  }
+  .sv-panel[aria-expanded="true"] .sv-label {
+    left: 16px;
+    bottom: 16px;
+  }
+  .sv-info {
+    flex: 1;
+    min-width: 0;
+    width: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sv-reveal {
+    transform: none;
+  }
+  .sv-label {
+    transition: none;
+  }
+}

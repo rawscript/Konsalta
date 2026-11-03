@@ -156,8 +156,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ===== ANIMATED COUNTERS =====
-    animateCounter("#stat1Num", 1.2, "M+", 1.6);
-    animateCounter("#stat2Num", 3, "M", 1.6, "$");
+    animateCounter("#stat1Num", 9, " Services", 1.6);
+    animateCounter("#stat2Num", 100, "%", 1.6, "");
   }
 
   function animateCounter(selector, target, suffix, duration, prefix = "") {
@@ -401,48 +401,55 @@ document.addEventListener("DOMContentLoaded", () => {
   setInterval(cycleTestimonial, 7000);
 
   // ===== BOOK A CALL ATTENTION =====
-  document.getElementById("ctaBig").addEventListener("click", function () {
-    if (typeof gsap === "undefined") return;
-    gsap.fromTo(
-      this,
-      { scale: 0.94 },
-      { scale: 1, duration: 0.6, ease: "elastic.out(1.2, 0.4)" },
-    );
-    // Pulse the headline arrow
-    gsap.fromTo(
-      ".headline .arrow",
-      { scale: 1 },
-      {
-        scale: 1.3,
-        rotation: 15,
-        duration: 0.4,
-        yoyo: true,
-        repeat: 1,
-        ease: "power2.inOut",
-      },
-    );
-  });
+  const ctaBig = document.getElementById("ctaBig");
+  if (ctaBig) {
+    ctaBig.addEventListener("click", function () {
+      if (typeof gsap === "undefined") return;
+      gsap.fromTo(
+        this,
+        { scale: 0.94 },
+        { scale: 1, duration: 0.6, ease: "elastic.out(1.2, 0.4)" },
+      );
+      // Pulse the headline arrow
+      gsap.fromTo(
+        ".headline .arrow",
+        { scale: 1 },
+        {
+          scale: 1.3,
+          rotation: 15,
+          duration: 0.4,
+          yoyo: true,
+          repeat: 1,
+          ease: "power2.inOut",
+        },
+      );
+    });
+  }
 
-  document.getElementById("bookCtaNav").addEventListener("click", function () {
-    // Smooth scroll to the big CTA + pulse it
-    const target = document.getElementById("ctaBig");
-    target.scrollIntoView({ behavior: "smooth", block: "center" });
-    if (typeof gsap !== "undefined") {
-      setTimeout(() => {
-        gsap.fromTo(
-          target,
-          { scale: 1 },
-          {
-            scale: 1.08,
-            duration: 0.4,
-            yoyo: true,
-            repeat: 2,
-            ease: "power2.inOut",
-          },
-        );
-      }, 400);
-    }
-  });
+  const bookCtaNav = document.getElementById("bookCtaNav");
+  if (bookCtaNav) {
+    bookCtaNav.addEventListener("click", function () {
+      // Smooth scroll to the big CTA + pulse it
+      const target = document.getElementById("ctaBig");
+      if (!target) return;
+      target.scrollIntoView({ behavior: "smooth", block: "center" });
+      if (typeof gsap !== "undefined") {
+        setTimeout(() => {
+          gsap.fromTo(
+            target,
+            { scale: 1 },
+            {
+              scale: 1.08,
+              duration: 0.4,
+              yoyo: true,
+              repeat: 2,
+              ease: "power2.inOut",
+            },
+          );
+        }, 400);
+      }
+    });
+  }
 
   // Stat half hover triggers counter replay
   document.getElementById("statTop").addEventListener("click", () => {
