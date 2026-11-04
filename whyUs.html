@@ -16,9 +16,9 @@
     />
     <link rel="stylesheet" href="styles/why-us.css" />
     <link rel="stylesheet" href="styles/header.css" />
-    <link rel="stylesheet" href="styles/services-showcase.css" />
-    <link rel="stylesheet" href="styles/why-cards.css" />
     <link rel="stylesheet" href="styles/footer.css" />
+    <link rel="stylesheet" href="styles/why-cards.css" />
+    <link rel="stylesheet" href="styles/linkedin-feed.css" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
       defer
@@ -29,8 +29,8 @@
     ></script>
     <script src="scripts/header.js" defer></script>
     <script src="scripts/whyUs.js" defer></script>
-    <script src="scripts/services-showcase.js" defer></script>
     <script src="scripts/why-cards.js" defer></script>
+    <script src="scripts/linkedin-feed.js" defer></script>
   </head>
   <body>
     <!-- Ambient Background Glows -->
@@ -47,9 +47,12 @@
 
     <header class="site-header">
       <a href="index.html" class="logo" aria-label="Konsalta Home">
-        <span class="logo-dot"
-          ><img src="public/logo.png" alt="Konsalta Logo"
-        /></span>
+        <span class="logo-dot">
+          <picture>
+            <source media="(max-width: 767px)" srcset="public/Logo-5.png" />
+            <img src="public/Logo-3.png" alt="Konsalta Logo" />
+          </picture>
+        </span>
       </a>
       <button
         class="header-menu-toggle"
@@ -68,6 +71,7 @@
         <a href="whyUs.html" class="active" aria-current="page"
           >Why Choose Us</a
         >
+        <!-- <a href="insights.html">Our Insights</a> -->
       </nav>
       <a href="contactUs.html" class="header-btn"
         >Contact Us
@@ -100,473 +104,60 @@
       <section class="hero">
         <h1 class="headline" id="headline">
           <span class="line line-1">
-            <span class="word hero-accent"><span>Bespoke</span></span>
-            <span class="word headline-navy"><span>Teams</span></span>
+            <span class="word hero-accent"><span>Perspective</span></span>
+            <span class="word headline-navy"><span>is</span></span>
           </span>
           <span class="line line-2">
             <span class="inline-img" id="inlineImg"></span>
-            <span class="word headline-navy"><span>Around</span></span>
+            <span class="word headline-navy"><span>on</span></span>
             <span class="idea-pill" id="ideaPill">
               <span class="txt">Behind every<br />great idea</span>
               <span class="leaf"></span>
             </span>
           </span>
           <span class="line line-3">
-            <span class="word headline-navy"><span>Analytical</span></span>
-            <span class="word headline-navy"><span>Work</span></span>
+            <span class="word headline-navy"><span>the</span></span>
+            <span class="word headline-navy"><span>way</span></span>
           </span>
         </h1>
+        <h2>
+          Our team of senior experts is currently assembling insights, policy analyses, and executive thought pieces
+        </h2>
       </section>
     </div>
     <!-- end .parallax-stage -->
 
-    <div class="wrapper">
-      <!-- ============================================================
-         4. WHY KONSALTA: 6 VALUE DRIVERS
-         ============================================================ -->
-      <section class="why-konsalta-section" id="why-konsalta-pillars">
-        <div class="section-container-why">
-          <div class="section-head-why">
-            <h2 class="section-title-why">
-              Our <span class="accent">Services</span>
-            </h2>
-            <p class="section-desc-why">
-              We partner with organisations to turn complex regional challenges
-              into clear, sustainable progress. We organise our work into two
-              interconnected areas: the core capabilities we use to guide your
-              organisation, and the thematic focus areas where we apply that
-              expertise.
-            </p>
+    <!-- ============================================================
+       PILLARS INTRO + WHY CARDS — unified glassmorphism section
+       ============================================================ -->
+    <div class="why-unified-section">
+
+      <div class="wrapper">
+        <section class="why-konsalta-section" id="why-konsalta-pillars">
+          <div class="section-container-why">
+
+            <!-- ============ OUR 5 PILLARS ============ -->
+            <section class="section section-1">
+              <div class="pillars-frame">
+                <div class="section-content">
+                  <h2 class="section-title">Our 5 Pillars</h2>
+                  <p class="section-text">
+                    At Konsalta, we partner with diverse institutions operating at
+                    the frontlines of African socioeconomic transformation,
+                    delivering tailored intelligence, institutional capacity, and
+                    actionable strategies. We have five clear reasons why Africa's
+                    foremost institutions trust our collective to deliver enduring
+                    outcomes.
+                  </p>
+                </div>
+                <span class="section-subtitle">They Are:</span>
+              </div>
+            </section>
           </div>
-          <!-- ============================================================
-     OUR SERVICES — 9 expanding image panels
-     Paste into services.html (footer links already point to #services-grid)
-     ============================================================ -->
-          <section
-            class="services-showcase"
-            id="services-grid"
-            aria-labelledby="services-title"
-          >
-            <div class="section-container">
-              <!-- <div class="section-head">
-                <h2 class="section-title" id="services-title">
-                  Our <span class="accent">Services</span>
-                </h2>
-              </div> -->
+        </section>
+      </div>
 
-              <div class="sv-stage" id="svStage">
-                <div
-                  class="sv-panel"
-                  role="button"
-                  tabindex="0"
-                  aria-expanded="false"
-                  aria-label="Research and Evidence Generation"
-                  aria-describedby="sv-d1"
-                >
-                  <img
-                    class="sv-img"
-                    src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=70"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    width="900"
-                    height="1200"
-                  />
-                  <div class="sv-tint"></div>
-                  <div class="sv-grad"></div>
-                  <span class="sv-short" aria-hidden="true">Research</span>
-                  <div class="sv-label">
-                    <span class="sv-icon" aria-hidden="true"
-                      ><svg viewBox="0 0 24 24">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.35-4.35" /></svg
-                    ></span>
-                    <div class="sv-info">
-                      <span class="sv-no sv-reveal" aria-hidden="true"
-                        >01 / 09</span
-                      >
-                      <h3 class="sv-title sv-reveal">
-                        Research and Evidence Generation
-                      </h3>
-                      <p class="sv-desc sv-reveal" id="sv-d1">
-                        Rigorous research, evaluations, surveys, assessments,
-                        evidence synthesis, and applied analysis that generate
-                        credible insights for decision-making.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="sv-panel"
-                  role="button"
-                  tabindex="0"
-                  aria-expanded="false"
-                  aria-label="Market Intelligence and Insights"
-                  aria-describedby="sv-d2"
-                >
-                  <img
-                    class="sv-img"
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=70"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    width="900"
-                    height="1200"
-                  />
-                  <div class="sv-tint"></div>
-                  <div class="sv-grad"></div>
-                  <span class="sv-short" aria-hidden="true"
-                    >Market Intelligence</span
-                  >
-                  <div class="sv-label">
-                    <span class="sv-icon" aria-hidden="true"
-                      ><svg viewBox="0 0 24 24">
-                        <path d="m22 7-8.5 8.5-5-5L2 17" />
-                        <path d="M16 7h6v6" /></svg
-                    ></span>
-                    <div class="sv-info">
-                      <span class="sv-no sv-reveal" aria-hidden="true"
-                        >02 / 09</span
-                      >
-                      <h3 class="sv-title sv-reveal">
-                        Market Intelligence and Insights
-                      </h3>
-                      <p class="sv-desc sv-reveal" id="sv-d2">
-                        Market assessments, stakeholder analysis, customer and
-                        consumer research, sector intelligence, and opportunity
-                        mapping that support strategic, policy, and investment
-                        decisions.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="sv-panel"
-                  role="button"
-                  tabindex="0"
-                  aria-expanded="false"
-                  aria-label="Data Science, AI and Analytics"
-                  aria-describedby="sv-d3"
-                >
-                  <img
-                    class="sv-img"
-                    src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=900&q=70"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    width="900"
-                    height="1200"
-                  />
-                  <div class="sv-tint"></div>
-                  <div class="sv-grad"></div>
-                  <span class="sv-short" aria-hidden="true">Data &amp; AI</span>
-                  <div class="sv-label">
-                    <span class="sv-icon" aria-hidden="true"
-                      ><svg viewBox="0 0 24 24">
-                        <rect x="4" y="4" width="16" height="16" rx="2" />
-                        <rect x="9" y="9" width="6" height="6" />
-                        <path
-                          d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"
-                        /></svg
-                    ></span>
-                    <div class="sv-info">
-                      <span class="sv-no sv-reveal" aria-hidden="true"
-                        >03 / 09</span
-                      >
-                      <h3 class="sv-title sv-reveal">
-                        Data Science, AI and Analytics
-                      </h3>
-                      <p class="sv-desc sv-reveal" id="sv-d3">
-                        Advanced analytics, statistical modelling, dashboards,
-                        data visualization, AI-enabled solutions, and digital
-                        tools that strengthen evidence generation and
-                        decision-making.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="sv-panel"
-                  role="button"
-                  tabindex="0"
-                  aria-expanded="false"
-                  aria-label="Policy Advisory and Evidence-to-Policy Translation"
-                  aria-describedby="sv-d4"
-                >
-                  <img
-                    class="sv-img"
-                    src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=900&q=70"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    width="900"
-                    height="1200"
-                  />
-                  <div class="sv-tint"></div>
-                  <div class="sv-grad"></div>
-                  <span class="sv-short" aria-hidden="true"
-                    >Policy Advisory</span
-                  >
-                  <div class="sv-label">
-                    <span class="sv-icon" aria-hidden="true"
-                      ><svg viewBox="0 0 24 24">
-                        <path
-                          d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                        />
-                        <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" /></svg
-                    ></span>
-                    <div class="sv-info">
-                      <span class="sv-no sv-reveal" aria-hidden="true"
-                        >04 / 09</span
-                      >
-                      <h3 class="sv-title sv-reveal">
-                        Policy Advisory and Evidence-to-Policy Translation
-                      </h3>
-                      <p class="sv-desc sv-reveal" id="sv-d4">
-                        Policy analysis, regulatory reviews, policy design,
-                        evidence synthesis, and stakeholder engagement that help
-                        translate research into effective policy solutions.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="sv-panel"
-                  role="button"
-                  tabindex="0"
-                  aria-expanded="false"
-                  aria-label="Strategy, Advisory and Change Management"
-                  aria-describedby="sv-d5"
-                >
-                  <img
-                    class="sv-img"
-                    src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=900&q=70"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    width="900"
-                    height="1200"
-                  />
-                  <div class="sv-tint"></div>
-                  <div class="sv-grad"></div>
-                  <span class="sv-short" aria-hidden="true"
-                    >Strategy &amp; Change</span
-                  >
-                  <div class="sv-label">
-                    <span class="sv-icon" aria-hidden="true"
-                      ><svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10" />
-                        <circle cx="12" cy="12" r="6" />
-                        <circle cx="12" cy="12" r="2" /></svg
-                    ></span>
-                    <div class="sv-info">
-                      <span class="sv-no sv-reveal" aria-hidden="true"
-                        >05 / 09</span
-                      >
-                      <h3 class="sv-title sv-reveal">
-                        Strategy, Advisory and Change Management
-                      </h3>
-                      <p class="sv-desc sv-reveal" id="sv-d5">
-                        Strategic planning, organizational diagnostics, risk
-                        assessment, decision support, and change management
-                        approaches for navigating complexity.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="sv-panel"
-                  role="button"
-                  tabindex="0"
-                  aria-expanded="false"
-                  aria-label="Monitoring, Evaluation and Learning (MEL)"
-                  aria-describedby="sv-d6"
-                >
-                  <img
-                    class="sv-img"
-                    src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=70"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    width="900"
-                    height="1200"
-                  />
-                  <div class="sv-tint"></div>
-                  <div class="sv-grad"></div>
-                  <span class="sv-short" aria-hidden="true">MEL</span>
-                  <div class="sv-label">
-                    <span class="sv-icon" aria-hidden="true"
-                      ><svg viewBox="0 0 24 24">
-                        <path d="M12 20V10M18 20V4M6 20v-4" /></svg
-                    ></span>
-                    <div class="sv-info">
-                      <span class="sv-no sv-reveal" aria-hidden="true"
-                        >06 / 09</span
-                      >
-                      <h3 class="sv-title sv-reveal">
-                        Monitoring, Evaluation and Learning (MEL)
-                      </h3>
-                      <p class="sv-desc sv-reveal" id="sv-d6">
-                        Monitoring systems, evaluations, impact measurement
-                        frameworks, learning agendas, and results-based
-                        management approaches.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="sv-panel"
-                  role="button"
-                  tabindex="0"
-                  aria-expanded="false"
-                  aria-label="Capacity Strengthening"
-                  aria-describedby="sv-d7"
-                >
-                  <img
-                    class="sv-img"
-                    src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=70"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    width="900"
-                    height="1200"
-                  />
-                  <div class="sv-tint"></div>
-                  <div class="sv-grad"></div>
-                  <span class="sv-short" aria-hidden="true">Capacity</span>
-                  <div class="sv-label">
-                    <span class="sv-icon" aria-hidden="true"
-                      ><svg viewBox="0 0 24 24">
-                        <path d="m12 2 10 5-10 5L2 7z" />
-                        <path d="m2 17 10 5 10-5M2 12l10 5 10-5" /></svg
-                    ></span>
-                    <div class="sv-info">
-                      <span class="sv-no sv-reveal" aria-hidden="true"
-                        >07 / 09</span
-                      >
-                      <h3 class="sv-title sv-reveal">Capacity Strengthening</h3>
-                      <p class="sv-desc sv-reveal" id="sv-d7">
-                        Training, facilitation, institutional capacity
-                        assessments, organizational development, and systems
-                        strengthening for long-term capability and resilience.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="sv-panel"
-                  role="button"
-                  tabindex="0"
-                  aria-expanded="false"
-                  aria-label="Executive Coaching and Leadership Development"
-                  aria-describedby="sv-d8"
-                >
-                  <img
-                    class="sv-img"
-                    src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=900&q=70"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    width="900"
-                    height="1200"
-                  />
-                  <div class="sv-tint"></div>
-                  <div class="sv-grad"></div>
-                  <span class="sv-short" aria-hidden="true">Coaching</span>
-                  <div class="sv-label">
-                    <span class="sv-icon" aria-hidden="true"
-                      ><svg viewBox="0 0 24 24">
-                        <path
-                          d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8z"
-                        /></svg
-                    ></span>
-                    <div class="sv-info">
-                      <span class="sv-no sv-reveal" aria-hidden="true"
-                        >08 / 09</span
-                      >
-                      <h3 class="sv-title sv-reveal">
-                        Executive Coaching and Leadership Development
-                      </h3>
-                      <p class="sv-desc sv-reveal" id="sv-d8">
-                        Individual coaching, leadership development programmes,
-                        mentoring, and team coaching that strengthen leadership
-                        effectiveness.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  class="sv-panel"
-                  role="button"
-                  tabindex="0"
-                  aria-expanded="false"
-                  aria-label="Knowledge Translation and Strategic Communication"
-                  aria-describedby="sv-d9"
-                >
-                  <img
-                    class="sv-img"
-                    src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=900&q=70"
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    width="900"
-                    height="1200"
-                  />
-                  <div class="sv-tint"></div>
-                  <div class="sv-grad"></div>
-                  <span class="sv-short" aria-hidden="true"
-                    >Knowledge &amp; Comms</span
-                  >
-                  <div class="sv-label">
-                    <span class="sv-icon" aria-hidden="true"
-                      ><svg viewBox="0 0 24 24">
-                        <path d="m3 11 18-5v12L3 14z" />
-                        <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" /></svg
-                    ></span>
-                    <div class="sv-info">
-                      <span class="sv-no sv-reveal" aria-hidden="true"
-                        >09 / 09</span
-                      >
-                      <h3 class="sv-title sv-reveal">
-                        Knowledge Translation and Strategic Communication
-                      </h3>
-                      <p class="sv-desc sv-reveal" id="sv-d9">
-                        Policy briefs, reports, stakeholder engagement, science
-                        communication, advocacy support, and knowledge products
-                        that make evidence accessible.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <!-- ============ OUR 5 PILLARS ============ -->
-          <section class="section section-1">
-            <div class="pillars-frame">
-              <div class="section-content">
-                <h2 class="section-title">Our 5 Pillars</h2>
-                <p class="section-text">
-                  At Konsalta, we partner with diverse institutions operating at
-                  the frontlines of African socioeconomic transformation,
-                  delivering tailored intelligence, institutional capacity, and
-                  actionable strategies. We have five clear reasons why Africa's
-                  foremost institutions trust our collective to deliver enduring
-                  outcomes.
-                </p>
-              </div>
-              <span class="section-subtitle">They Are:</span>
-            </div>
-          </section>
-        </div>
-      </section>
-    </div>
-
-    <section>
-      <div class="why-block" id="why-konsalta">
-        
-
+      <section class="why-cards-section" aria-label="Why Konsalta">
         <ul class="wc-grid">
           <li class="wc-item">
             <article class="wc-card">
@@ -690,67 +281,140 @@
           </li>
         </ul>
       </div>
-      <br/>
-      <br/>
+     
     </section>
+    <!-- end .why-unified-section -->
+    </div>
 
-    <!-- <div class="widget">
-        <p class="widget-title">Official Partners & Supporters</p>
-        <a href="https://siammakemoney.com/en" target="_blank">
-          <img
-            src="https://siamwebtools.com/toolsbox/images/siammakemoney.webp"
-            alt="Siam Make Money Logo"
-            class="sticky-logo"
-          />
-        </a>
-        <a href="https://directoryplus.org/" target="_blank">
-          <img
-            src="https://directoryplus.org/images/logo.png"
-            alt="Directory Plus Logo"
-            class="sticky-logo"
-          />
-        </a>
-        <a href="https://siamwebtools.com/toolsbox/" target="_blank">
-          <img
-            src="https://siamwebtools.com/toolsbox/images/sm-tools2.png"
-            alt="Siam Web Tools Logo"
-            class="sticky-logo"
-          />
-        </a>
-      </div> -->
+   <!-- ============================================================
+     LINKEDIN FEED — 
+     ============================================================ -->
+<section class="lf" id="linkedin-feed" aria-labelledby="lf-title">
+  <div class="lf-panel">
+    <div class="lf-head">
+      <div class="lf-head-text">
+        <span class="lf-badge"><span class="lf-dot"></span> Insights</span>
+        <h2 class="lf-title" id="lf-title">Latest on <span class="accent">LinkedIn</span></h2>
+        <p class="lf-lead">
+          Research updates, project highlights and perspectives from the Konsalta team, shared as we publish them.
+        </p>
+      </div>
+      <a class="lf-follow" href="https://www.linkedin.com/company/konsalta-hub-africa/" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        Follow on LinkedIn
+      </a>
+    </div>
+
+    <div class="lf-grid">
+      <!-- ============ FEATURED POST ============ -->
+      <a class="lf-card lf-card--featured" href="https://www.linkedin.com/company/konsalta-hub-africa/" target="_blank" rel="noopener noreferrer">
+        <div class="lf-media">
+          <img src="public/linkedin/post-1.jpeg" alt="" width="1600" height="1000" loading="lazy" decoding="async" onerror="this.remove()" />
+        </div>
+        <div class="lf-body">
+          <div class="lf-meta">
+            <span class="lf-tag">Featured</span>
+            <time datetime="2026-01-01">Recently</time>
+          </div>
+          <p class="lf-text"><span style="text-decoration: underline;">Our network model</span>
+          Consulting doesn't have to mean a fixed bench of generalists parachuted into every project.
+          Konsalta operates as a flexible, network-driven collective. For every...</p>
+          <span class="lf-cta">Read on LinkedIn
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+          <span class="lf-sr">(opens in a new tab)</span>
+        </div>
+      </a>
+
+      <!-- ============ SMALLER POST 1 ============ -->
+      <a class="lf-card lf-card--small" href="https://www.linkedin.com/company/konsalta-hub-africa/" target="_blank" rel="noopener noreferrer">
+        <!-- <div class="lf-media">
+          <img src="public/linkedin/post-2.jpeg" alt="" width="800" height="450" loading="lazy" decoding="async" onerror="this.remove()" />
+        </div> -->
+        <div class="lf-body">
+          <div class="lf-meta"><time datetime="2026-01-01">Recently</time></div>
+          <p class="lf-text"><span style="text-decoration: underline;">The evidence-to-impact cycle</span>
+            Most organizations don't have an evidence problem. They have an application problem.
+            Data gets collected. Reports get written. And then... </p>
+          <span class="lf-cta">Read on LinkedIn
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+          <span class="lf-sr">(opens in a new tab)</span>
+        </div>
+      </a>
+
+      <!-- ============ SMALLER POST 2 ============ -->
+      <a class="lf-card lf-card--small" href="https://www.linkedin.com/company/konsalta-hub-africa/" target="_blank" rel="noopener noreferrer">
+        <!-- <div class="lf-media">
+          <img src="public/linkedin/post-3.jpg" alt="" width="800" height="450" loading="lazy" decoding="async" onerror="this.remove()" />
+        </div> -->
+        <div class="lf-body">
+          <div class="lf-meta"><time datetime="2026-01-01">Recently</time></div>
+          <p class="lf-text">Good decisions need good evidence. But evidence alone doesn't change anything — impact comes from translating it into action.That's the gap Konsalta was built to close.</p>
+          <span class="lf-cta">Read on LinkedIn
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+          <span class="lf-sr">(opens in a new tab)</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
 
     <footer class="site-footer" id="contact">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <div class="footer-logo">
-            <span class="logo-dot">
-              <img src="public/Logo-3.png" alt="Konsalta Logo" />
-            </span>
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="footer-logo" href="index.html" aria-label="Konsalta home">
+              <img src="public/Logo-2.png" alt="Konsalta" />
+            </a>
+            <p>
+              A women-led, Africa-focused research, consulting, and advisory
+              firm delivering actionable insights and systemic impact.
+            </p>
           </div>
-          <p>
-            A women-led, Africa-focused research, consulting and advisory firm
-            delivering actionable insights and systemic impact.
-          </p>
-        </div>
-        <div class="footer-cols">
-          <div class="footer-col">
-            <h4>Services</h4>
-            <a href="services.html#research">Research &amp; Evaluation</a>
-            <a href="services.html#strategy">Strategy &amp; Advisory</a>
-            <a href="services.html#insights">Market Intelligence</a>
-            <a href="services.html#policy">Policy &amp; Systems</a>
-          </div>
-          <div class="footer-col">
-            <h4>Company</h4>
-            <a href="aboutUs.html">About Konsalta</a>
-            <a href="whyUs.html">Why Choose Us</a>
-            <a href="contactUs.html">Contact Us</a>
-          </div>
-          <div class="footer-col">
-            <h4>Governance</h4>
-            <a href="#ethics">Ethics &amp; Integrity</a>
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#terms">Terms of Engagement</a>
+          <div class="footer-cols">
+            <div class="footer-col">
+              <h4>Services</h4>
+              <a href="services.html#services-grid"
+                >Research &amp; Evaluation</a
+              >
+              <a href="services.html#services-grid">Strategy &amp; Advisory</a>
+              <a href="services.html#services-grid">Market Intelligence</a>
+              <a href="services.html#services-grid">Policy &amp; Systems</a>
+            </div>
+            <div class="footer-col">
+              <h4>Company</h4>
+              <a href="aboutUs.html">About Konsalta</a>
+              <a href="whyUs.html">Why Choose Us</a>
+              <!-- <a href="insights.html">Our Insights</a> -->
+              <a href="contactUs.html">Contact Us</a>
+            </div>
+            <div class="footer-col footer-contact">
+              <h4>Find Us</h4>
+              <p>
+                <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+                  ></path>
+                  <circle cx="12" cy="10" r="2.5"></circle></svg
+                >Harare, Zimbabwe
+              </p>
+              <a
+                href="https://www.linkedin.com/company/konsalta-hub-africa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><svg
+                  class="footer-icon footer-icon-brand"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 9v10M5 5v.01M10 19v-6a4 4 0 0 1 8 0v6M10 9v10M3 3h18v18H3z"
+                  ></path></svg
+                >LinkedIn</a
+              >
+            </div>
           </div>
         </div>
       </div>

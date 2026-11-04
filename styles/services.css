@@ -2150,3 +2150,29 @@ body.has-custom-cursor .cursor {
     transition: none;
   }
 }
+
+.section-title-why {
+  font-family: "Playfair Display", sans-serif;
+  font-size: clamp(32px, 4.2vw, 48px);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.18;
+  letter-spacing: -0.025em;
+  margin-bottom: 18px;
+}
+
+.section-title-why .accent {
+  color: var(--orange);
+}
+
+.section-desc-why {
+  font-size: 17px;
+  color: var(--ink-soft);
+  line-height: 1.7;
+}
+
+.section-head-why {
+  position: relative;
+  z-index: 4;
+}
+

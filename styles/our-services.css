@@ -571,19 +571,6 @@ nav {
     0 2px 6px rgba(242, 101, 34, 0.35);
 }
 
-/* Animation initial state */
-.js-ready .top-bar,
-.js-ready nav,
-.js-ready .headline .word,
-.js-ready .headline .arrow,
-.js-ready .subtitle,
-.js-ready .cta-yellow,
-.js-ready .card-base,
-.js-ready .stat-half,
-.js-ready .tag {
-  opacity: 0;
-}
-
 /* Responsive */
 @media (max-width: 1100px) {
   .page {

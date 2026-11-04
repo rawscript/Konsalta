@@ -1,0 +1,217 @@
+/* Services page visual alignment with the index page. */
+body {
+  font-family: "Manrope", system-ui, sans-serif;
+  background: #f8f6f0;
+  color: var(--navy);
+}
+
+.page {
+  width: 100%;
+  max-width: none;
+}
+
+.page-grid-canvas {
+  display: none;
+}
+
+.headline {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(36px, 4.4vw, 64px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--navy);
+}
+
+.headline .word:nth-child(3) {
+  color: var(--orange);
+}
+
+.subtitle {
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+
+.cards-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+}
+
+.card-base,
+.stat-half {
+  border-radius: 24px;
+}
+
+.card-base {
+  padding: 30px;
+  min-height: 360px;
+}
+
+.services-card,
+.testimonial-card {
+  background: #fff;
+  border: 1px solid rgba(11, 45, 83, 0.08);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 12px 30px rgba(11, 45, 83, 0.07);
+}
+
+.card-title {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 22px;
+  line-height: 1.25;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 0;
+  margin-top: 16px;
+}
+
+.tag {
+  position: static;
+  max-width: 100%;
+  padding: 8px 12px;
+  font-family: "Manrope", system-ui, sans-serif;
+  font-size: 12px;
+  line-height: 1.35;
+  white-space: normal;
+  transform: none !important;
+}
+
+.stats-card {
+  gap: 14px;
+}
+
+.stat-half {
+  padding: 26px;
+}
+
+.stat-number {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(38px, 4vw, 52px);
+}
+
+.testimonial-text {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 17px;
+}
+
+.services-showcase .section-title-why {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  letter-spacing: -0.035em;
+}
+
+.services-showcase .section-desc-why {
+  font-family: "Manrope", system-ui, sans-serif;
+}
+
+@media (min-width: 1101px) {
+  .site-header {
+    position: relative;
+    top: auto;
+    padding: 22px 48px;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .site-header .header-nav {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .page {
+    padding: 32px 48px 64px;
+  }
+
+  .hero {
+    min-height: 0;
+    padding: 48px 0 32px;
+    text-align: center;
+  }
+
+  .headline {
+    max-width: 1000px;
+    margin: 0 auto 24px;
+  }
+
+  .subtitle {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cards-grid {
+    margin-top: 40px;
+  }
+
+  .services-showcase .section-head-why {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: end;
+    gap: 24px 48px;
+    width: min(100% - 96px, 1240px);
+    max-width: none;
+    margin: 0 auto 44px;
+    text-align: left;
+  }
+
+  .services-showcase .section-title-why {
+    margin: 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stats-card {
+    flex-direction: row;
+  }
+
+  .headline {
+    font-size: 60px;
+  }
+}
+
+@media (max-width: 720px) {
+  .stats-card {
+    flex-direction: column;
+  }
+
+  .card-base,
+  .stat-half {
+    padding: 24px;
+  }
+
+  .stat-number {
+    font-size: 44px;
+  }
+
+  .headline {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 480px) {
+  .headline {
+    font-size: 32px;
+  }
+
+  .subtitle {
+    font-size: 14px;
+  }
+}

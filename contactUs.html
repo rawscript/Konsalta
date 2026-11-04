@@ -1,164 +1,269 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Konsalta - Contact US</title>
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js" as="script">
-    <link rel="icon" href="./public/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="./public/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="./public/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="./public/apple-touch-icon.png">
-    <link rel="manifest" href="./public/site.webmanifest">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+    <link
+      rel="preload"
+      href="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"
+      as="script"
+    />
+    <link rel="icon" href="./public/favicon.ico" sizes="any" />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./public/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="./public/favicon-16x16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="./public/apple-touch-icon.png"
+    />
+    <link rel="manifest" href="./public/site.webmanifest" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap" rel="stylesheet" />
-   <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
-   <link rel="stylesheet" href="./styles/contact.css">
-   <link rel="stylesheet" href="./styles/footer.css">
-</head>
-<body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+    <link rel="stylesheet" href="./styles/contact.css" />
+    <link rel="stylesheet" href="./styles/footer.css" />
+  </head>
+  <body>
     <section class="intro">
-        <a class="back-link" href="./index.html">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m0 0 7 7m-7-7 7-7" /></svg>
-            <span>Back to home</span>
-        </a>
-        <p class="eyebrow">Start a conversation</p>
-        <h1>Contact Us</h1>
-        <p>Tell us about your needs and we’ll help you move from insight to action.</p>
+      <a class="back-link" href="./index.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M19 12H5m0 0 7 7m-7-7 7-7" />
+        </svg>
+        <span>Back to home</span>
+      </a>
+      <p class="eyebrow">Start a conversation</p>
+      <h1>Contact Us</h1>
+      <p>
+        Tell us about your needs and we’ll help you move from insight to action.
+      </p>
     </section>
 
     <section class="contact-wrap" aria-label="Contact form section">
-        <div class="contact-card">
-            <div class="contact-copy">
-                <p class="eyebrow accent">Let’s talk</p>
-                <h2>Need sharper insight for your next decision?</h2>
-                <p>
-                    Whether you are planning a new market move, evaluating impact, or seeking strategic guidance,
-                    our team can help you design a fit-for-purpose approach.
-                </p>
-                <ul class="contact-points">
-                    <li>Research &amp; evaluation</li>
-                    <li>Strategy &amp; advisory</li>
-                    <li>Market intelligence</li>
-                </ul>
-            </div>
-
-            <form id="contactForm" class="contact-form" novalidate>
-                <div class="field-row">
-                    <label>
-                        Full name
-                        <input type="text" name="name" id="name" placeholder="Your name" required>
-                    </label>
-                    <label>
-                        Email address
-                        <input type="email" name="email" id="email" placeholder="you@example.com" required>
-                    </label>
-                </div>
-
-                <div class="field-row">
-                    <label>
-                        Organisation
-                        <input type="text" name="company" id="company" placeholder="Organisation name">
-                    </label>
-                    <label>
-                        Project type
-                        <select name="projectType" id="projectType" required>
-                            <option value="" selected disabled>Select an option</option>
-                            <option value="research">Research &amp; evaluation</option>
-                            <option value="strategy">Strategy &amp; advisory</option>
-                            <option value="market-intelligence">Market intelligence</option>
-                            <option value="policy">Policy &amp; systems</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </label>
-                </div>
-
-                <label>
-                    Your message
-                    <textarea name="message" id="message" rows="6" placeholder="Tell us a little about your goals, timelines, and the challenge you're trying to solve." required></textarea>
-                </label>
-
-                <div class="form-footer">
-                    <button type="submit">Send enquiry</button>
-                    <span class="helper-text">We typically respond within 2 business days.</span>
-                </div>
-
-                <p class="form-status" role="status" aria-live="polite"></p>
-            </form>
+      <div class="contact-card">
+        <div class="contact-copy">
+          <p class="eyebrow accent">Let’s talk</p>
+          <h2>Need sharper insight for your next decision?</h2>
+          <p>
+            Whether you are planning a new market move, evaluating impact, or
+            seeking strategic guidance, our team can help you design a
+            fit-for-purpose approach.
+          </p>
+          <ul class="contact-points">
+            <li>Research &amp; evaluation</li>
+            <li>Strategy &amp; advisory</li>
+            <li>Market intelligence</li>
+          </ul>
         </div>
+
+        <form id="contactForm" class="contact-form" novalidate>
+          <div class="field-row">
+            <label>
+              Full name
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Your name"
+                required
+              />
+            </label>
+            <label>
+              Email address
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="you@example.com"
+                required
+              />
+            </label>
+          </div>
+
+          <div class="field-row">
+            <label>
+              Organisation
+              <input
+                type="text"
+                name="company"
+                id="company"
+                placeholder="Organisation name"
+              />
+            </label>
+            <label>
+              Project type
+              <select name="projectType" id="projectType" required>
+                <option value="" selected disabled>Select an option</option>
+                <option value="research">Research &amp; evaluation</option>
+                <option value="strategy">Strategy &amp; advisory</option>
+                <option value="market-intelligence">Market intelligence</option>
+                <option value="policy">Policy &amp; systems</option>
+                <option value="other">Other</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Your message
+            <textarea
+              name="message"
+              id="message"
+              rows="6"
+              placeholder="Tell us a little about your goals, timelines, and the challenge you're trying to solve."
+              required
+            ></textarea>
+          </label>
+
+          <div class="form-footer">
+            <button type="submit">Send enquiry</button>
+            <a href="./consultant-onboarding.html" class="onboarding-link"
+              >Interested in joining as a consultant?</a
+            >
+            <span class="helper-text"
+              >We typically respond within 2 business days.</span
+            >
+          </div>
+
+          <p class="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
     </section>
 
     <div class="send-overlay" aria-hidden="true">
-        <div class="send-scene">
-            <svg class="flight-path" viewBox="0 0 900 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path class="flight-trail" d="M110 370 C 205 335, 250 270, 320 215 C 390 165, 470 100, 590 90 C 680 82, 770 105, 820 155" />
-            </svg>
+      <div class="send-scene">
+        <svg
+          class="flight-path"
+          viewBox="0 0 900 520"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path
+            class="flight-trail"
+            d="M110 370 C 205 335, 250 270, 320 215 C 390 165, 470 100, 590 90 C 680 82, 770 105, 820 155"
+          />
+        </svg>
 
-            <div class="plane-group">
-                <div class="plane-shadow"></div>
-                <img class="paper-plane" src="./public/plane/paper-plane.svg" alt="Paper plane">
-            </div>
-
-            <div class="checkmark-group" aria-hidden="true">
-                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M15 49L39 73L85 27" />
-                </svg>
-            </div>
+        <div class="plane-group">
+          <div class="plane-shadow"></div>
+          <img
+            class="paper-plane"
+            src="./public/plane/paper-plane.svg"
+            alt="Paper plane"
+          />
         </div>
+
+        <div class="checkmark-group" aria-hidden="true">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 49L39 73L85 27" />
+          </svg>
+        </div>
+      </div>
     </div>
 
     <section class="footer-banner">
-        <div class="banner">
+      <div class="banner">
         <span></span>
         <span></span>
         <span></span>
-
-        </div>
-    </section>
-   <footer class="site-footer" id="contact">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <div class="footer-logo">
-            <span class="logo-dot">
-              <img src="public/Logo-3.png" alt="Konsalta Logo" />
-            </span>
-          </div>
-          <p>
-            A women-led, Africa-focused research, consulting and advisory firm
-            delivering actionable insights and systemic impact.
-          </p>
-        </div>
-        <div class="footer-cols">
-          <div class="footer-col">
-            <h4>Services</h4>
-            <a href="services.html#research">Research &amp; Evaluation</a>
-            <a href="services.html#strategy">Strategy &amp; Advisory</a>
-            <a href="services.html#insights">Market Intelligence</a>
-            <a href="services.html#policy">Policy &amp; Systems</a>
-          </div>
-          <div class="footer-col">
-            <h4>Company</h4>
-            <a href="aboutUs.html">About Konsalta</a>
-            <a href="whyUs.html">Why Choose Us</a>
-            <a href="contactUs.html">Contact Us</a>
-          </div>
-          <div class="footer-col">
-            <h4>Governance</h4>
-            <a href="#ethics">Ethics &amp; Integrity</a>
-            <a href="#privacy">Privacy Policy</a>
-            <a href="#terms">Terms of Engagement</a>
-          </div>
-        </div>
       </div>
-      <div class="footer-bottom">
-        <span>© 2026 Konsalta. All rights reserved.</span>
-        <span>Better Decisions. Greater Impact.</span>
+    </section>
+    <footer class="site-footer" id="contact">
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <a class="footer-logo" href="index.html" aria-label="Konsalta home">
+              <img src="public/Logo-2.png" alt="Konsalta" />
+            </a>
+            <p>
+              A women-led, Africa-focused research, consulting, and advisory
+              firm delivering actionable insights and systemic impact.
+            </p>
+          </div>
+          <div class="footer-cols">
+            <div class="footer-col">
+              <h4>Services</h4>
+              <a href="services.html#services-grid"
+                >Research &amp; Evaluation</a
+              >
+              <a href="services.html#services-grid">Strategy &amp; Advisory</a>
+              <a href="services.html#services-grid">Market Intelligence</a>
+              <a href="services.html#services-grid">Policy &amp; Systems</a>
+            </div>
+            <div class="footer-col">
+              <h4>Company</h4>
+              <a href="aboutUs.html">About Konsalta</a>
+              <a href="whyUs.html">Why Choose Us</a>
+              <a href="insights.html">Our Insights</a>
+              <a href="consultant-onboarding.html">Join Our Network</a>
+            </div>
+            <div class="footer-col footer-contact">
+              <h4>Find Us</h4>
+              <p>
+                <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"
+                  ></path>
+                  <circle cx="12" cy="10" r="2.5"></circle></svg
+                >Harare, Zimbabwe
+              </p>
+              <a
+                href="https://www.linkedin.com/company/konsalta-hub-africa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><svg
+                  class="footer-icon footer-icon-brand"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 9v10M5 5v.01M10 19v-6a4 4 0 0 1 8 0v6M10 9v10M3 3h18v18H3z"
+                  ></path></svg
+                >LinkedIn</a
+              >
+              <a
+                href="consultant-onboarding.html"
+                class="footer-consultant-link"
+                ><svg
+                  class="footer-icon"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg
+                >Join as Consultant</a
+              >
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>&copy; 2026 Konsalta. All rights reserved.</span>
+          <span>Developed by Momentum Labs</span>
+          <span>Better Decisions. Greater Impact.</span>
+        </div>
       </div>
     </footer>
     <script src="./scripts/contact.js"></script>
-</body>
+  </body>
 </html>
