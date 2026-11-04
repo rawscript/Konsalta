@@ -122,7 +122,7 @@ body.has-custom-cursor .cursor {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 28px 56px;
+  padding: 28px 16px;
   position: relative;
   z-index: 10;
 }
@@ -1046,7 +1046,7 @@ body.has-custom-cursor .cursor {
   }
 
   .site-header {
-    padding: 20px 32px;
+    padding: 16px 12px;
   }
 
   .feature-cards {
