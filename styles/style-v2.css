@@ -9,6 +9,17 @@
   padding-inline: max(var(--pad), calc((100% - var(--max)) / 2));
 }
 
+@media (min-width: 851px) {
+  .site-header { padding-inline: 48px; }
+  .hero { padding-left: 48px; }
+  .site-header .header-nav {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
 /* ---------- Ambient glows: navy leads, orange is faint ---------- */
 .ambient-1 { opacity: 0.45; }
 .ambient-2 { width: 760px; height: 760px; opacity: 1; }
@@ -16,8 +27,14 @@
 /* ---------- Hero ---------- */
 .hero { min-height: 640px; padding-block: 32px 56px; }
 .hero-title { font-size: clamp(36px, 4.4vw, 64px); }
-.hero-desc { font-size: 16px; max-width: 480px; }
+.hero-desc { font-size: 16px; max-width: 780px; }
 .hero-badge { background: var(--navy-soft); border-color: var(--navy-tint); color: var(--navy); }
+
+/* Arrange the four hero tiles evenly around a circular path. */
+.constellation .tile-hands { top: 62px; left: 220px; }
+.constellation .tile-histogram { top: 262px; left: 420px; }
+.constellation .tile-db { top: 450px; left: 205px; }
+.constellation .tile-search { top: 262px; left: 20px; }
 
 /* Cursor spotlight dot-grid (JS sets --mx / --my) */
 .hero::before {
@@ -167,7 +184,12 @@
 }
 
 /* ---------- Footer / buttons ---------- */
-.site-footer { padding-block: 48px 32px; background: linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 100%); color:#fff; }
+.site-footer {
+  padding-inline: min(48px, var(--pad));
+  padding-block: 48px 32px;
+  background: linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 100%);
+  color: #fff;
+}
 .cta-btn { transition: box-shadow 0.35s; } /* x/y handled by GSAP magnet */
 .cta-btn:hover { transform: none; }
 
