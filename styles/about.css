@@ -313,7 +313,8 @@ section[id] {
 }
 
 .hero-main-title .highlight {
-  color: var(--orange);
+  color: #fff;
+  mix-blend-mode: difference;
 }
 
 .hero-lead-text {
