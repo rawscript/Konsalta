@@ -530,110 +530,47 @@ body.has-custom-cursor .cursor {
   color: var(--white);
 }
 
-/* Tile sizes */
+/* Tile sizes (fewer tiles, so each one gets bigger) */
 .tile.size-main {
-  width: 142px;
-  height: 118px;
+  width: 160px;
+  height: 136px;
 }
 
 .tile.size-big {
-  width: 156px;
-  height: 132px;
+  width: 190px;
+  height: 160px;
 }
 
-.tile.size-pill {
-  width: 64px;
-  height: 64px;
-}
-
-.tile.size-pill .tile-inner {
-  border-radius: 50%;
-}
-
-/* Tile positions */
-.tile-lock {
-  top: 0;
-  left: calc(50% - 32px);
-  --dur: 4s;
-  --delay: 0s;
-  --float: -6px;
-}
-
-.tile-expand {
-  top: 95px;
-  left: 95px;
+/* Tile positions (600 x 660 stage)
+   Order of preference from client:
+   1. center icon  2. partnership hands  3. histogram  4. magnifying glass */
+.tile-hands {
+  top: 60px;
+  left: 60px;
   --dur: 5.5s;
   --delay: 0.4s;
   --float: -10px;
 }
 
-.tile-chart {
-  top: 95px;
-  left: 365px;
+.tile-histogram {
+  top: 60px;
+  left: 380px;
   --dur: 5s;
   --delay: 0.8s;
   --float: -8px;
 }
 
-.tile-cloud {
-  top: 245px;
-  left: 5px;
-  --dur: 6s;
-  --delay: 1.2s;
-  --float: -12px;
-}
-
 .tile-db {
-  top: 240px;
-  left: 222px;
+  top: 250px;
+  left: 205px;
   --dur: 4.5s;
   --delay: 0.2s;
   --float: -7px;
 }
 
-.tile-thumb {
-  top: 245px;
-  left: 455px;
-  --dur: 5.5s;
-  --delay: 0.6s;
-  --float: -10px;
-}
-
-.tile-cursor {
-  top: 405px;
-  left: 45px;
-  --dur: 4s;
-  --delay: 1s;
-  --float: -8px;
-}
-
-.tile-person {
-  top: 395px;
-  left: 145px;
-  --dur: 5s;
-  --delay: 0.3s;
-  --float: -9px;
-}
-
-.tile-globe {
-  top: 395px;
-  left: 315px;
-  --dur: 5.5s;
-  --delay: 0.7s;
-  --float: -11px;
-}
-
-.tile-thumbpill {
-  top: 405px;
-  left: 495px;
-  --dur: 4.5s;
-  --delay: 0.5s;
-  --float: -7px;
-}
-
-.tile-hex {
-  top: 545px;
-  left: 230px;
+.tile-search {
+  top: 500px;
+  left: 220px;
   --dur: 6s;
   --delay: 0.9s;
   --float: -10px;

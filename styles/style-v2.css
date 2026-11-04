@@ -30,6 +30,12 @@
 .hero-desc { font-size: 16px; max-width: 780px; }
 .hero-badge { background: var(--navy-soft); border-color: var(--navy-tint); color: var(--navy); }
 
+/* Arrange the four hero tiles evenly around a circular path. */
+.constellation .tile-hands { top: 62px; left: 220px; }
+.constellation .tile-histogram { top: 262px; left: 420px; }
+.constellation .tile-db { top: 450px; left: 205px; }
+.constellation .tile-search { top: 262px; left: 20px; }
+
 /* Cursor spotlight dot-grid (JS sets --mx / --my) */
 .hero::before {
   content: "";
@@ -178,7 +184,12 @@
 }
 
 /* ---------- Footer / buttons ---------- */
-.site-footer { padding-block: 48px 32px; background: linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 100%); color:#fff; }
+.site-footer {
+  padding-inline: min(48px, var(--pad));
+  padding-block: 48px 32px;
+  background: linear-gradient(160deg, var(--navy-deep) 0%, var(--navy) 100%);
+  color: #fff;
+}
 .cta-btn { transition: box-shadow 0.35s; } /* x/y handled by GSAP magnet */
 .cta-btn:hover { transform: none; }
 
