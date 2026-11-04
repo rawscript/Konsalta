@@ -7,6 +7,11 @@
    ============================================================ */
 
 .why-block {
+  /* self-contained: these tokens exist on the About page but not on why-us.css */
+  --cream: #f6f3ee;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.9375rem;
+  --fs-lg: 1.25rem;
   --wc-gap: clamp(16px, 2vw, 24px);
   --wc-cut: 28px; /* clipped corner, echoes the slanted shapes elsewhere */
   --wc-bg: var(--white);
@@ -177,6 +182,7 @@
 }
 
 .wc-title {
+  font-family: "Manrope", system-ui, sans-serif;
   position: relative;
   z-index: 1;
   margin: 0 0 10px;

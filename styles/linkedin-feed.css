@@ -1,0 +1,459 @@
+/* ============================================================
+   LINKEDIN FEED — one featured post + two smaller ones
+   Scoped: .lf / .lf-*   (+ .why-cards-section layout fix)
+   Self-contained: literal brand values, no reliance on page tokens.
+   Load AFTER why-us.css and why-cards.css.
+   ============================================================ */
+
+/* ---------- Fix: give the Why Konsalta cards a container ----------
+   - same max-width as .wrapper
+   - sits above the fixed mesh canvas (z-index 1) so lines don't cross cards */
+.why-cards-section {
+  position: relative;
+  z-index: 3;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 20px clamp(32px, 5vw, 64px);
+}
+
+/* ---------- Section shell ---------- */
+.lf {
+  --lf-navy: #0b2d53;
+  --lf-navy-mid: #103866;
+  --lf-navy-light: #16487e;
+  --lf-navy-deep: #061a32;
+  --lf-orange: #f26522;
+  --lf-cream: #f6f3ee;
+  --lf-cut: 28px; /* clipped corner, same motif as the Why Konsalta cards */
+  position: relative;
+  z-index: 3;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: clamp(8px, 2vw, 24px) 20px clamp(48px, 7vw, 96px);
+  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+}
+
+.lf-panel {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 28px;
+  padding: clamp(24px, 4vw, 56px);
+  color: var(--lf-cream);
+  background:
+    radial-gradient(ellipse 620px 380px at 92% 0%, rgba(242, 101, 34, 0.24), transparent 70%),
+    radial-gradient(ellipse 720px 520px at 0% 100%, rgba(22, 72, 126, 0.6), transparent 70%),
+    linear-gradient(150deg, var(--lf-navy-mid) 0%, var(--lf-navy) 50%, var(--lf-navy-deep) 100%);
+  box-shadow: 0 28px 64px -20px rgba(6, 26, 50, 0.5);
+}
+/* slanted band echoing the trapezoid language used across the site */
+.lf-panel::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: -6%;
+  bottom: 0;
+  width: 40%;
+  background: rgba(246, 243, 238, 0.04);
+  clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
+  pointer-events: none;
+}
+/* fine dot grid, fading downwards */
+.lf-panel::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background-image: radial-gradient(rgba(246, 243, 238, 0.1) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 65%);
+  mask-image: linear-gradient(to bottom, #000, transparent 65%);
+  pointer-events: none;
+}
+
+/* ---------- Header ---------- */
+.lf-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px 32px;
+  margin-bottom: clamp(24px, 3.2vw, 44px);
+}
+.lf-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border: 1px solid rgba(246, 243, 238, 0.24);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.lf-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lf-orange);
+}
+.lf-title {
+  margin: 16px 0 12px;
+  max-width: 16ch;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--lf-cream);
+  text-wrap: balance;
+}
+.lf-title .accent {
+  color: var(--lf-orange);
+}
+.lf-lead {
+  margin: 0;
+  max-width: 52ch;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(246, 243, 238, 0.82);
+}
+
+.lf-follow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: 14px;
+  background: var(--lf-orange);
+  color: var(--lf-navy-deep);
+  font-family: "Manrope", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 4px 0 #d34e0d;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+.lf-follow:hover {
+  background: var(--lf-cream);
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 rgba(246, 243, 238, 0.45);
+}
+.lf-follow:focus-visible,
+.lf-card:focus-visible {
+  outline: none;
+}
+.lf-follow:focus-visible {
+  box-shadow: 0 0 0 3px var(--lf-navy), 0 0 0 6px var(--lf-cream);
+}
+.lf-follow svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+/* ---------- Grid ---------- */
+.lf-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(14px, 1.8vw, 22px);
+}
+@media (min-width: 700px) {
+  .lf-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .lf-card--featured {
+    grid-column: 1 / -1;
+  }
+}
+@media (min-width: 1080px) {
+  .lf-grid {
+    grid-template-columns: 1.4fr 1fr;
+    grid-template-rows: 1fr 1fr;
+  }
+  .lf-card--featured {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+  .lf-card--small {
+    grid-column: 2;
+    flex-direction: row;
+  }
+}
+
+/* ---------- Card base ---------- */
+.lf-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+  color: inherit;
+  text-decoration: none;
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--lf-cut)),
+    calc(100% - var(--lf-cut)) 100%,
+    0 100%
+  );
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lf-card:hover {
+  transform: translateY(-5px);
+}
+.lf-card:focus-visible::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  border: 3px solid var(--lf-orange);
+  pointer-events: none;
+}
+
+/* media: image sits on top of a designed fallback panel, so a missing
+   image (onerror removes it) still looks intentional */
+.lf-media {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--lf-navy-light) 0%, var(--lf-navy) 60%, var(--lf-navy-deep) 100%);
+}
+.lf-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(115deg, transparent 0 22px, rgba(246, 243, 238, 0.045) 22px 23px);
+}
+.lf-media::after {
+  content: "";
+  position: absolute;
+  top: 12%;
+  right: 8%;
+  width: 34%;
+  aspect-ratio: 1;
+  opacity: 0.12;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f6f3ee'%3E%3Cpath d='M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.lf-media img {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lf-card:hover .lf-media img {
+  transform: scale(1.05);
+}
+
+.lf-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.lf-meta time::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--lf-orange);
+}
+.lf-tag {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--lf-orange);
+  color: var(--lf-navy-deep);
+}
+
+.lf-text {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lf-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.lf-cta svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lf-card:hover .lf-cta svg {
+  transform: translateX(5px);
+}
+
+.lf-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---------- Featured card ---------- */
+.lf-card--featured {
+  min-height: clamp(440px, 52vw, 600px);
+  justify-content: flex-end;
+  color: var(--lf-cream);
+  background: var(--lf-navy-deep);
+}
+.lf-card--featured .lf-media {
+  position: absolute;
+  inset: 0;
+}
+.lf-card--featured::before {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(6, 26, 50, 0.96) 0%,
+    rgba(11, 45, 83, 0.72) 45%,
+    rgba(11, 45, 83, 0.08) 100%
+  );
+}
+.lf-card--featured .lf-body {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 640px;
+  padding: clamp(22px, 3vw, 40px);
+  padding-bottom: calc(clamp(22px, 3vw, 40px) + 8px);
+}
+.lf-card--featured .lf-text {
+  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.5;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
+}
+.lf-card--featured .lf-cta {
+  color: var(--lf-cream);
+  padding-bottom: 4px;
+  border-bottom: 2px solid var(--lf-orange);
+  align-self: flex-start;
+}
+
+/* ---------- Smaller cards ---------- */
+.lf-card--small {
+  background: var(--lf-cream);
+  color: var(--lf-navy);
+}
+.lf-card--small:hover {
+  background: #fff;
+}
+.lf-card--small .lf-media {
+  flex: 0 0 auto;
+  aspect-ratio: 16 / 9;
+}
+@media (min-width: 1080px) {
+  .lf-card--small .lf-media {
+    flex: 0 0 40%;
+    aspect-ratio: auto;
+    min-height: 100%;
+  }
+}
+.lf-card--small .lf-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px 22px 26px;
+}
+.lf-card--small .lf-meta {
+  color: var(--lf-navy-light);
+}
+.lf-card--small .lf-text {
+  font-size: 0.98rem;
+  font-weight: 500;
+  line-height: 1.6;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+.lf-card--small .lf-cta {
+  color: var(--lf-navy);
+}
+/* orange rule that draws across the bottom on hover */
+.lf-card--small::before {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 4px;
+  background: var(--lf-orange);
+  transform: scaleX(0.14);
+  transform-origin: left;
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lf-card--small:hover::before {
+  transform: scaleX(1);
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 540px) {
+  .lf {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .lf-panel {
+    border-radius: 20px;
+  }
+  .lf-card {
+    --lf-cut: 20px;
+  }
+  .lf-follow {
+    width: 100%;
+    justify-content: center;
+  }
+  .lf-card--featured {
+    min-height: 420px;
+  }
+}
+@media (hover: none) {
+  .lf-card:hover {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lf-card,
+  .lf-media img,
+  .lf-cta svg,
+  .lf-card--small::before,
+  .lf-follow {
+    transition: none;
+  }
+}
