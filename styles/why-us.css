@@ -768,8 +768,52 @@ body.has-custom-cursor .cursor {
 }
 
 /* ============================================================
-   4. WHY KONSALTA (6 PILLARS / EXPLANATIONS)
+   UNIFIED PILLARS + WHY CARDS SECTION
    ============================================================ */
+.why-unified-section {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+  /* shared glass surface */
+  background:
+    radial-gradient(
+      ellipse 70% 50% at 15% 20%,
+      rgba(242, 101, 34, 0.07),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 60% at 85% 80%,
+      rgba(11, 45, 83, 0.08),
+      transparent 60%
+    ),
+    rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border-top: 1px solid rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(226, 221, 211, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 8px 40px -8px rgba(11, 45, 83, 0.08);
+}
+
+/* Remove the standalone glass frame from pillars-frame since
+   the parent now provides the glass surface */
+.why-unified-section .pillars-frame {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+  box-shadow: none;
+  padding-top: clamp(24px, 4vw, 48px);
+  padding-bottom: 0;
+}
+
+/* Soft divider between intro text and the cards */
+.why-unified-section .why-cards-section {
+  border-top: 1px solid rgba(226, 221, 211, 0.45);
+  padding-top: clamp(24px, 3vw, 40px);
+}
+
 .why-konsalta-section {
   padding: 10px 0 80px;
   border-top: 1px solid var(--line-light);

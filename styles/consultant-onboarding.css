@@ -1,0 +1,1331 @@
+/* Consultant Onboarding Form Styles */
+/* Matches Konsalta brand colors and typography */
+
+:root {
+    /* Brand Core Colors */
+    --navy: #0b2d53;
+    --navy-deep: #061a32;
+    --navy-light: #16487e;
+    --navy-soft: #edf4fc;
+    --navy-tint: #d4e4f7;
+    --orange: #f26522;
+    --orange-deep: #d34e0d;
+    --orange-light: #ff7e42;
+    --orange-soft: #fff2eb;
+    --orange-tint: #fedbc9;
+    /* Neutrals */
+    --bg: #f8f6f0;
+    --bg-warm: #f0ece1;
+    --bg-card: #ffffff;
+    --ink: #0b2d53;
+    --ink-dark: #071526;
+    --ink-soft: #4e5e73;
+    --line: #e2ddd3;
+    --white: #ffffff;
+    /* Form specific */
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* ============================================================
+   PROGRESS BAR - Enhanced Design
+   ============================================================ */
+
+.progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+    padding: 16px 32px;
+    box-shadow: 
+        0 2px 8px rgba(11, 45, 83, 0.06),
+        0 8px 24px rgba(11, 45, 83, 0.04);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid rgba(11, 45, 83, 0.08);
+}
+
+.progress-bar {
+    flex: 1;
+    height: 12px;
+    background: linear-gradient(90deg, 
+        rgba(237, 244, 252, 0.8) 0%, 
+        rgba(212, 228, 247, 0.6) 100%);
+    border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 
+        inset 0 2px 4px rgba(11, 45, 83, 0.08),
+        0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 0.4) 0%, 
+        transparent 100%);
+    border-radius: 100px 100px 0 0;
+    pointer-events: none;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, 
+        #ff8f5f 0%,
+        var(--orange) 50%, 
+        var(--orange-deep) 100%);
+    border-radius: 100px;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    box-shadow: 
+        0 2px 8px rgba(242, 101, 34, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 0.5) 0%, 
+        transparent 100%);
+    border-radius: 100px 100px 0 0;
+}
+
+/* Animated shimmer effect when progressing */
+.progress-fill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(255, 255, 255, 0.4) 50%,
+        transparent 100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+    100% {
+        left: 200%;
+    }
+}
+
+.progress-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 90px;
+    background: linear-gradient(135deg, 
+        rgba(242, 101, 34, 0.08) 0%, 
+        rgba(242, 101, 34, 0.04) 100%);
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(242, 101, 34, 0.12);
+}
+
+.progress-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--orange);
+    font-weight: 700;
+    margin-bottom: 2px;
+}
+
+.progress-value {
+    font-size: 22px;
+    font-weight: 800;
+    background: linear-gradient(135deg, 
+        var(--orange) 0%, 
+        var(--orange-deep) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+/* ============================================================
+   INTRO SECTION
+   ============================================================ */
+
+.intro {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 100px 24px 48px;
+    text-align: center;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--navy);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 24px;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background: var(--white);
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    background: var(--navy-soft);
+    transform: translateX(-4px);
+}
+
+.back-link svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
+.eyebrow {
+    display: inline-block;
+    margin: 0 0 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--orange);
+}
+
+.intro h1 {
+    margin: 0 0 16px;
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+}
+
+.intro p {
+    margin: 0;
+    font-size: 16px;
+    color: var(--ink-soft);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   FORM CONTAINER
+   ============================================================ */
+
+.form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+}
+
+.consultant-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ============================================================
+   FORM SECTIONS (COLLAPSIBLE)
+   ============================================================ */
+
+.form-section {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(11, 45, 83, 0.06);
+    border: 1px solid transparent;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.form-section:hover {
+    box-shadow: 0 4px 16px rgba(11, 45, 83, 0.1);
+}
+
+.form-section.active {
+    border-color: var(--orange-tint);
+    box-shadow: 0 4px 20px rgba(242, 101, 34, 0.12);
+}
+
+.section-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s ease;
+    min-height: 80px;
+}
+
+.section-header:hover {
+    background: var(--navy-soft);
+}
+
+.section-header:focus {
+    outline: none;
+    background: var(--navy-soft);
+}
+
+.section-header:focus-visible {
+    outline: 2px solid var(--orange);
+    outline-offset: -2px;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.section-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.form-section.active .section-number {
+    background: var(--orange);
+}
+
+.section-title-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.section-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.section-subtitle {
+    font-size: 13px;
+    color: var(--ink-soft);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.section-status {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--line);
+    border: 2px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.section-status::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ink-soft);
+    transition: all 0.3s ease;
+}
+
+.section-status.complete {
+    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
+    border-color: var(--orange);
+    box-shadow: 0 0 0 4px rgba(242, 101, 34, 0.12);
+}
+
+.section-status.complete::before {
+    content: '✓';
+    color: white;
+    font-weight: 900;
+    font-size: 14px;
+    width: auto;
+    height: auto;
+    background: none;
+}
+
+.section-status.incomplete {
+    background: rgba(255, 193, 7, 0.12);
+    border-color: #ffc107;
+}
+
+.section-status.incomplete::before {
+    background: #ffc107;
+}
+
+.chevron-icon {
+    width: 24px;
+    height: 24px;
+    stroke: var(--ink-soft);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.section-header[aria-expanded="true"] .chevron-icon {
+    transform: rotate(180deg);
+}
+
+.section-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.section-content.expanded {
+    max-height: 2000px;
+}
+
+.section-content > .form-grid {
+    padding: 0 24px 24px;
+}
+
+/* ============================================================
+   FORM GRID & FIELDS
+   ============================================================ */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-field.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-field label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+}
+
+.required {
+    color: var(--orange);
+}
+
+.hint {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--ink-soft);
+}
+
+.form-field input[type="text"],
+.form-field input[type="email"],
+.form-field input[type="tel"],
+.form-field input[type="url"],
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+    color: var(--ink-soft);
+}
+
+.form-field input:hover,
+.form-field select:hover,
+.form-field textarea:hover {
+    border-color: var(--navy-light);
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+    outline: none;
+    border-color: var(--orange);
+    background: var(--white);
+    box-shadow: 0 0 0 3px var(--orange-soft);
+}
+
+.form-field input:invalid:not(:placeholder-shown),
+.form-field select:invalid:not([data-placeholder-shown]),
+.form-field textarea:invalid:not(:placeholder-shown) {
+    border-color: var(--error);
+}
+
+.form-field input:valid:not(:placeholder-shown),
+.form-field textarea:valid:not(:placeholder-shown) {
+    border-color: var(--success);
+}
+
+.form-field textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.char-count {
+    font-size: 12px;
+    color: var(--ink-soft);
+    text-align: right;
+}
+
+.error-message {
+    font-size: 12px;
+    color: var(--error);
+    min-height: 16px;
+}
+
+/* Select styling */
+.form-field select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%234e5e73' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 18px;
+    padding-right: 40px;
+}
+
+.form-field select[multiple] {
+    background-image: none;
+    padding-right: 16px;
+}
+
+/* ============================================================
+   CHECKBOX & RADIO STYLES
+   ============================================================ */
+
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: var(--bg);
+    transition: all 0.2s ease;
+    font-size: 14px;
+    color: var(--ink);
+}
+
+.checkbox-label:hover {
+    background: var(--navy-soft);
+}
+
+.checkbox-label input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.checkmark {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--navy-light);
+    border-radius: 4px;
+    background: var(--white);
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.checkbox-label input:checked ~ .checkmark {
+    background: var(--orange);
+    border-color: var(--orange);
+}
+
+.checkmark::after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--white);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-label input:checked ~ .checkmark::after {
+    display: block;
+}
+
+.checkbox-label input:focus-visible ~ .checkmark {
+    outline: 2px solid var(--orange);
+    outline-offset: 2px;
+}
+
+/* Radio buttons */
+.language-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.language-header {
+    display: grid;
+    grid-template-columns: 2fr repeat(4, 1fr);
+    gap: 8px;
+    padding: 8px 0;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    text-align: center;
+}
+
+.language-header span:first-child {
+    text-align: left;
+}
+
+.language-row {
+    display: grid;
+    grid-template-columns: 2fr repeat(4, 1fr);
+    gap: 8px;
+    align-items: center;
+    padding: 12px;
+    background: var(--bg);
+    border-radius: 8px;
+}
+
+.language-row > span:first-child {
+    font-weight: 500;
+    color: var(--navy);
+}
+
+.radio-label {
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.radio-mark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--navy-light);
+    border-radius: 50%;
+    background: var(--white);
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.radio-label input:checked ~ .radio-mark {
+    border-color: var(--orange);
+}
+
+.radio-mark::after {
+    content: '';
+    position: absolute;
+    display: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--orange);
+}
+
+.radio-label input:checked ~ .radio-mark::after {
+    display: block;
+}
+
+.radio-label input:focus-visible ~ .radio-mark {
+    outline: 2px solid var(--orange);
+    outline-offset: 2px;
+}
+
+/* ============================================================
+   FILE UPLOAD
+   ============================================================ */
+
+.file-upload {
+    position: relative;
+}
+
+.file-upload input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-upload-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: var(--bg);
+    border: 2px dashed var(--line);
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.file-upload:hover .file-upload-label {
+    border-color: var(--orange);
+    background: var(--orange-soft);
+}
+
+.file-upload input:focus + .file-upload-label {
+    outline: 2px solid var(--orange);
+    outline-offset: 2px;
+}
+
+.file-upload-label svg {
+    width: 32px;
+    height: 32px;
+    stroke: var(--navy-light);
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    margin-bottom: 8px;
+}
+
+.file-text {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--navy);
+}
+
+.file-hint {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+}
+
+/* ============================================================
+   CONSENT & SUBMIT
+   ============================================================ */
+
+.consent-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    background: var(--bg);
+    border-radius: 12px;
+    margin-top: 12px;
+}
+
+.consent-label {
+    margin: 0;
+    padding: 12px;
+    background: var(--white);
+    border-radius: 8px;
+    border: 1px solid var(--line);
+}
+
+.submit-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 32px;
+    background: var(--white);
+    border-radius: 16px;
+    text-align: center;
+    margin-top: 16px;
+}
+
+.submit-info {
+    max-width: 500px;
+}
+
+.submit-note {
+    margin: 0;
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+}
+
+.submit-note a {
+    color: var(--orange);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.submit-note a:hover {
+    text-decoration: underline;
+}
+
+.submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--white);
+    background: var(--navy);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.submit-btn:disabled {
+    background: var(--line);
+    color: var(--ink-soft);
+    cursor: not-allowed;
+}
+
+.submit-btn:not(:disabled):hover {
+    background: var(--orange);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(242, 101, 34, 0.3);
+}
+
+.submit-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
+.form-status {
+    font-size: 14px;
+    color: var(--success);
+    min-height: 20px;
+}
+
+/* ============================================================
+   FOOTER CTA BUTTON
+   ============================================================ */
+
+.footer-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    color: var(--white);
+    background: var(--orange);
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.footer-cta-btn:hover {
+    background: var(--orange-light);
+    transform: translateX(4px);
+}
+
+.footer-cta-btn svg {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+    transition: transform 0.2s ease;
+}
+
+.footer-cta-btn:hover svg {
+    transform: translateX(4px);
+}
+
+/* ============================================================
+   RESPONSIVE DESIGN
+   ============================================================ */
+
+@media (max-width: 768px) {
+    .progress-container {
+        padding: 12px 20px;
+        gap: 16px;
+    }
+
+    .progress-bar {
+        height: 10px;
+    }
+
+    .progress-info {
+        min-width: 75px;
+        padding: 6px 12px;
+    }
+
+    .progress-value {
+        font-size: 20px;
+    }
+
+    .progress-label {
+        font-size: 8px;
+    }
+
+    .intro {
+        padding: 80px 16px 32px;
+    }
+
+    .form-container {
+        padding: 0 16px 60px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .section-header {
+        padding: 16px 20px;
+        min-height: auto;
+    }
+
+    .section-number {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+    }
+
+    .section-title {
+        font-size: 16px;
+    }
+
+    .section-subtitle {
+        display: none;
+    }
+
+    .section-content > .form-grid {
+        padding: 0 20px 20px;
+    }
+
+    .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .language-header {
+        grid-template-columns: 1.5fr repeat(4, 1fr);
+        font-size: 10px;
+    }
+
+    .language-row {
+        grid-template-columns: 1.5fr repeat(4, 1fr);
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .radio-mark {
+        width: 18px;
+        height: 18px;
+    }
+
+    .radio-mark::after {
+        width: 8px;
+        height: 8px;
+    }
+
+    .submit-section {
+        padding: 24px 16px;
+    }
+
+    .submit-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .progress-container {
+        gap: 12px;
+        padding: 10px 16px;
+    }
+
+    .progress-bar {
+        height: 8px;
+    }
+
+    .progress-info {
+        padding: 6px 10px;
+        min-width: 65px;
+    }
+
+    .progress-label {
+        font-size: 7px;
+    }
+
+    .progress-value {
+        font-size: 18px;
+    }
+
+    .intro h1 {
+        font-size: 28px;
+    }
+
+    .header-left {
+        gap: 12px;
+    }
+
+    .section-number {
+        width: 28px;
+        height: 28px;
+        font-size: 12px;
+    }
+
+    .file-upload-label {
+        padding: 16px;
+    }
+
+    .file-upload-label svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .language-header {
+        display: none;
+    }
+
+    .language-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+        text-align: left;
+    }
+
+    .language-row > span:first-child {
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+
+    .language-row label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
+}
+
+/* ============================================================
+   REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .progress-fill {
+        transition: none;
+    }
+
+    .chevron-icon {
+        transition: none;
+    }
+
+    .section-content {
+        transition: none;
+    }
+}
+
+/* ============================================================
+   FOLDABLE DEVICE SUPPORT
+   ============================================================ */
+
+@media (max-width: 280px) {
+    .progress-container {
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .progress-bar {
+        height: 6px;
+    }
+
+    .progress-info {
+        min-width: 55px;
+        padding: 4px 8px;
+    }
+
+    .progress-value {
+        font-size: 16px;
+    }
+
+    .progress-label {
+        font-size: 7px;
+    }
+
+    .intro {
+        padding: 60px 10px 24px;
+    }
+
+    .form-container {
+        padding: 0 10px 40px;
+    }
+
+    .section-header {
+        padding: 12px 14px;
+    }
+
+    .section-content > .form-grid {
+        padding: 0 14px 14px;
+    }
+}
+
+/* Landscape foldables */
+@media (max-height: 500px) and (orientation: landscape) {
+    .intro {
+        padding: 80px 24px 24px;
+    }
+
+    .progress-container {
+        padding: 8px 24px;
+    }
+}
+
+
+/* Success Overlay Styles */
+.success-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(247, 244, 239, 0.92) 0%, rgba(255, 255, 255, 0.85) 100%);
+  backdrop-filter: blur(12px);
+  z-index: 10000;
+  opacity: 0;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.success-card {
+  background: white;
+  border-radius: 20px;
+  padding: 48px 40px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 
+    0 20px 60px rgba(11, 45, 83, 0.15),
+    0 8px 16px rgba(11, 45, 83, 0.08);
+  border: 1px solid rgba(11, 45, 83, 0.08);
+}
+
+.success-checkmark {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--orange-soft, #fff2eb) 0%, #fff8f4 100%);
+  box-shadow: 
+    0 0 0 12px rgba(242, 101, 34, 0.08),
+    0 20px 40px rgba(242, 101, 34, 0.15);
+  display: grid;
+  place-items: center;
+}
+
+.success-checkmark svg {
+  width: 60px;
+  height: 60px;
+  stroke: var(--orange, #f26522);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+  filter: drop-shadow(0 2px 4px rgba(242, 101, 34, 0.2));
+}
+
+.success-card h2 {
+  margin: 0 0 16px;
+  font-size: 2rem;
+  color: var(--navy, #0b2d53);
+  letter-spacing: -0.02em;
+}
+
+.success-card p {
+  margin: 0 0 12px;
+  font-size: 1.05rem;
+  color: var(--ink-soft, #4e5e73);
+  line-height: 1.6;
+}
+
+.success-subtext {
+  font-size: 0.95rem;
+  color: var(--ink-soft, #4e5e73);
+  margin-bottom: 28px;
+}
+
+.success-btn {
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--orange, #f26522), #ff8f5f);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 12px 24px rgba(242, 101, 34, 0.2);
+  font-family: inherit;
+}
+
+.success-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 32px rgba(242, 101, 34, 0.25);
+}
+
+.success-btn:active {
+  transform: translateY(0);
+}
+
+/* Error Overlay Styles */
+.error-overlay .success-card {
+  border-color: rgba(183, 52, 42, 0.15);
+}
+
+.error-icon {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffe5e5 0%, #fff0f0 100%);
+  box-shadow: 
+    0 0 0 12px rgba(183, 52, 42, 0.08),
+    0 20px 40px rgba(183, 52, 42, 0.12);
+  display: grid;
+  place-items: center;
+  color: #b7342a;
+}
+
+.error-icon svg {
+  width: 60px;
+  height: 60px;
+}
+
+.error-card h2 {
+  color: #b7342a;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 560px) {
+  .success-card {
+    padding: 36px 24px;
+    width: 95%;
+  }
+
+  .success-checkmark,
+  .error-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .success-checkmark svg,
+  .error-icon svg {
+    width: 50px;
+    height: 50px;
+  }
+
+  .success-card h2 {
+    font-size: 1.6rem;
+  }
+
+  .success-card p {
+    font-size: 1rem;
+  }
+
+  .success-btn {
+    width: 100%;
+    padding: 16px 24px;
+  }
+}

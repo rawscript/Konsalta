@@ -16,6 +16,14 @@
   padding: 0 20px clamp(32px, 5vw, 64px);
 }
 
+/* Inside the unified section the wrapper already handles max-width/padding */
+.why-unified-section .why-cards-section {
+  max-width: 100%;
+  margin: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
 /* ---------- Section shell ---------- */
 .lf {
   --lf-navy: #0b2d53;
@@ -41,9 +49,22 @@
   padding: clamp(24px, 4vw, 56px);
   color: var(--lf-cream);
   background:
-    radial-gradient(ellipse 620px 380px at 92% 0%, rgba(242, 101, 34, 0.24), transparent 70%),
-    radial-gradient(ellipse 720px 520px at 0% 100%, rgba(22, 72, 126, 0.6), transparent 70%),
-    linear-gradient(150deg, var(--lf-navy-mid) 0%, var(--lf-navy) 50%, var(--lf-navy-deep) 100%);
+    radial-gradient(
+      ellipse 620px 380px at 92% 0%,
+      rgba(242, 101, 34, 0.24),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 720px 520px at 0% 100%,
+      rgba(22, 72, 126, 0.6),
+      transparent 70%
+    ),
+    linear-gradient(
+      150deg,
+      var(--lf-navy-mid) 0%,
+      var(--lf-navy) 50%,
+      var(--lf-navy-deep) 100%
+    );
   box-shadow: 0 28px 64px -20px rgba(6, 26, 50, 0.5);
 }
 /* slanted band echoing the trapezoid language used across the site */
@@ -65,7 +86,10 @@
   position: absolute;
   z-index: -1;
   inset: 0;
-  background-image: radial-gradient(rgba(246, 243, 238, 0.1) 1px, transparent 1px);
+  background-image: radial-gradient(
+    rgba(246, 243, 238, 0.1) 1px,
+    transparent 1px
+  );
   background-size: 22px 22px;
   -webkit-mask-image: linear-gradient(to bottom, #000, transparent 65%);
   mask-image: linear-gradient(to bottom, #000, transparent 65%);
@@ -150,7 +174,9 @@
   outline: none;
 }
 .lf-follow:focus-visible {
-  box-shadow: 0 0 0 3px var(--lf-navy), 0 0 0 6px var(--lf-cream);
+  box-shadow:
+    0 0 0 3px var(--lf-navy),
+    0 0 0 6px var(--lf-cream);
 }
 .lf-follow svg {
   width: 18px;
@@ -222,13 +248,22 @@
 .lf-media {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--lf-navy-light) 0%, var(--lf-navy) 60%, var(--lf-navy-deep) 100%);
+  background: linear-gradient(
+    135deg,
+    var(--lf-navy-light) 0%,
+    var(--lf-navy) 60%,
+    var(--lf-navy-deep) 100%
+  );
 }
 .lf-media::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: repeating-linear-gradient(115deg, transparent 0 22px, rgba(246, 243, 238, 0.045) 22px 23px);
+  background: repeating-linear-gradient(
+    115deg,
+    transparent 0 22px,
+    rgba(246, 243, 238, 0.045) 22px 23px
+  );
 }
 .lf-media::after {
   content: "";
@@ -238,7 +273,8 @@
   width: 34%;
   aspect-ratio: 1;
   opacity: 0.12;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f6f3ee'%3E%3Cpath d='M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z'/%3E%3C/svg%3E") center / contain no-repeat;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f6f3ee'%3E%3Cpath d='M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z'/%3E%3C/svg%3E")
+    center / contain no-repeat;
 }
 .lf-media img {
   position: absolute;

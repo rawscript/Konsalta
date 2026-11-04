@@ -31,7 +31,7 @@ body {
   margin: 0;
   padding: 0;
   background: linear-gradient(180deg, #f7f4ef 0%, #ffffff 100%);
-  font-family: "DM Sans", "Inter", sans-serif;
+  : "DM Sans", "Inter", sans-serif;
   color: var(--ink);
 }
 
@@ -258,10 +258,40 @@ img {
 
 .form-footer {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.form-footer button {
+  align-self: stretch;
+}
+
+.onboarding-link {
+  color: var(--orange);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease, color 0.2s ease;
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.onboarding-link::after {
+  content: "→";
+  font-size: 1.1em;
+  transition: transform 0.2s ease;
+}
+
+.onboarding-link:hover {
+  color: var(--orange-deep);
+  border-bottom-color: var(--orange-deep);
+}
+
+.onboarding-link:hover::after {
+  transform: translateX(3px);
 }
 
 .contact-form button {
@@ -317,8 +347,8 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(247, 244, 239, 0.58);
-  backdrop-filter: blur(1.5px);
+  background: linear-gradient(135deg, rgba(247, 244, 239, 0.92) 0%, rgba(255, 255, 255, 0.85) 100%);
+  backdrop-filter: blur(12px);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -387,27 +417,32 @@ img {
 
 .checkmark-group {
   position: absolute;
-  right: 13%;
-  top: 12%;
-  width: 110px;
-  height: 110px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  background: var(--orange-soft);
-  box-shadow: 0 0 0 12px rgba(242, 101, 34, 0.08);
+  background: linear-gradient(135deg, var(--orange-soft) 0%, #fff8f4 100%);
+  box-shadow: 
+    0 0 0 12px rgba(242, 101, 34, 0.08),
+    0 20px 40px rgba(242, 101, 34, 0.15),
+    0 8px 16px rgba(11, 45, 83, 0.1);
   display: grid;
   place-items: center;
   opacity: 0;
-  transform: scale(0.5);
+  transform: translate(-50%, -50%) scale(0.5);
 }
 
 .checkmark-group svg {
-  width: 62px;
-  height: 62px;
+  width: 70px;
+  height: 70px;
   stroke: var(--orange);
-  stroke-width: 8;
+  stroke-width: 7;
   stroke-linecap: round;
   stroke-linejoin: round;
   fill: none;
+  filter: drop-shadow(0 2px 4px rgba(242, 101, 34, 0.2));
 }
 
 /* ============ FOOTER ============ */
@@ -444,7 +479,7 @@ img {
 }
 
 .footer-col h4 {
-  font-family: "JetBrains Mono", monospace;
+font-family: "JetBrains Mono", monospace;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.18em;
@@ -466,12 +501,32 @@ img {
   color: var(--orange);
 }
 
+.footer-consultant-link {
+  font-weight: 600 !important;
+  color: var(--orange) !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  padding: 8px 0;
+  transition: all 0.2s ease;
+}
+
+.footer-consultant-link:hover {
+  color: var(--orange-deep) !important;
+  transform: translateX(4px);
+}
+
+.footer-consultant-link .footer-icon {
+  color: var(--orange);
+}
+
 .footer-bottom {
   padding-top: 32px;
   border-top: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
-  font-family: "JetBrains Mono", monospace;
+font-family: "JetBrains Mono", monospace;
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
@@ -508,6 +563,9 @@ img {
   .back-link {
     top: 24px;
     left: 20px;
+    min-height: var(--touch-min, 44px);
+    display: inline-flex;
+    align-items: center;
   }
 
   .contact-copy,
@@ -515,9 +573,29 @@ img {
     padding: 28px 20px;
   }
 
-  .form-footer {
-    align-items: flex-start;
-    flex-direction: column;
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    min-height: var(--touch-min, 44px);
+    padding: 12px 14px;
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+
+  .contact-form label {
+    gap: 10px;
+  }
+
+  .contact-form button {
+    width: 100%;
+    min-height: var(--touch-min, 44px);
+    padding: 14px 24px;
+    font-size: 15px;
+  }
+
+  .footer-col a {
+    min-height: var(--touch-min, 44px);
+    display: flex;
+    align-items: center;
   }
 }
 
@@ -527,5 +605,62 @@ img {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============ FOLDABLE DEVICE SUPPORT ============ */
+
+/* Foldable devices in folded narrow mode (Galaxy Fold, etc.) */
+@media (max-width: 280px) {
+  .intro {
+    padding: 80px 16px 24px;
+  }
+
+  .intro h1 {
+    font-size: 2rem;
+  }
+
+  .intro p:last-child {
+    font-size: 0.95rem;
+  }
+
+  .back-link {
+    font-size: 0.85rem;
+  }
+
+  .contact-copy,
+  .contact-form {
+    padding: 24px 16px;
+  }
+
+  .contact-copy h2 {
+    font-size: 1.5rem;
+  }
+
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  .contact-form button {
+    padding: 12px 20px;
+    font-size: 14px;
+  }
+}
+
+/* Landscape orientation on foldables */
+@media (max-height: 500px) and (orientation: landscape) {
+  .intro {
+    padding: 60px 20px 24px;
+  }
+
+  .intro h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+  }
+
+  .contact-wrap {
+    padding: 16px 20px 40px;
   }
 }
