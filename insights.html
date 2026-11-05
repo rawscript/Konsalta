@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="styles/header.css" />
     <link rel="stylesheet" href="styles/insights.css" />
     <link rel="stylesheet" href="styles/footer.css" />
     <script
@@ -25,6 +26,7 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
       defer
     ></script>
+    <script src="scripts/header.js" defer></script>
     <script src="scripts/insights.js" defer></script>
   </head>
   <body>
@@ -208,10 +210,22 @@
           </picture>
         </span>
       </a>
-      <nav class="header-nav">
+      <button
+        class="header-menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-navigation"
+        aria-label="Open navigation menu"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+      <nav class="header-nav" id="primary-navigation">
         <a href="aboutUs.html">About Konsalta</a>
         <a href="services.html">Our Services</a>
         <a href="whyUs.html">Why Choose Us</a>
+        <a href="contactUs.html" class="mobile-nav-contact">Contact Us</a>
       </nav>
       <a href="contactUs.html" class="header-btn">
         Contact Us
@@ -620,6 +634,7 @@
       </div>
       <div class="footer-bottom">
         <span>© 2026 Konsalta. All rights reserved.</span>
+        <span>Powered by Momentum Labs</span>
         <span>Better Decisions. Greater Impact.</span>
       </div>
     </footer>
