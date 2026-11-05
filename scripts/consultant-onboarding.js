@@ -151,87 +151,55 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
 
     if (!form.checkValidity()) {
-      form.reportValidity();
+      const invalidField = form.querySelector(":invalid");
+      const invalidSection = invalidField?.closest(".form-section");
+      if (invalidSection) {
+        invalidSection.querySelector(".section-content").classList.add("expanded");
+        invalidSection
+          .querySelector(".section-header")
+          .setAttribute("aria-expanded", "true");
+        window.setTimeout(() => {
+          invalidField.focus();
+          form.reportValidity();
+        }, 400);
+      } else {
+        form.reportValidity();
+      }
       return;
     }
 
     const formData = new FormData(form);
     const name = (formData.get("fullName") || "").toString().trim();
-    const email = (formData.get("email") || "").toString().trim();
 
-    // Collect all form data
-    const data = {
-      fullName: formData.get("fullName"),
-      email: email,
-      phone: formData.get("phone"),
-      country: formData.get("country"),
-      nationality: formData.get("nationality"),
-      linkedin: formData.get("linkedin"),
-      website: formData.get("website"),
-      currentPosition: formData.get("currentPosition"),
-      currentOrg: formData.get("currentOrg"),
-      yearsExperience: formData.get("yearsExperience"),
-      bio: formData.get("bio"),
-      expertise: formData.getAll("expertise"),
-      otherExpertise: formData.get("otherExpertise"),
-      skills: formData.getAll("skills"),
-      otherSkills: formData.get("otherSkills"),
-      countriesWorked: formData.get("countriesWorked"),
-      regions: formData.getAll("regions"),
-      languages: {
-        english: formData.get("englishLevel"),
-        french: formData.get("frenchLevel"),
-        portuguese: formData.get("portugueseLevel"),
-        arabic: formData.get("arabicLevel"),
-        swahili: formData.get("swahiliLevel"),
-      },
-      type: "consultant-onboarding"
-    };
-
-    // Disable submit button while sending
     const submitBtn = form.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn.textContent;
+    const submitLabel = submitBtn.querySelector("span");
+    const originalBtnText = submitLabel.textContent;
     submitBtn.disabled = true;
-    submitBtn.textContent = "Submitting...";
+    submitLabel.textContent = "Submitting...";
 
     try {
-      // Determine API URL based on environment
-      const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:3000/api/contact'
-        : '/api/contact';
-
-      console.log('Sending consultant onboarding to:', apiUrl);
-
-      const response = await fetch(apiUrl, {
+      const response = await fetch("/api/consultant-onboarding", {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data)
+        body: formData
       });
+      const result = await response.json().catch(() => null);
 
-      console.log('Response status:', response.status);
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Server error:', errorText);
-        throw new Error(`Server error: ${response.status}`);
+      if (!response.ok || !result?.success) {
+        throw new Error(
+          result?.error || "Your application could not be submitted. Please try again.",
+        );
       }
-
-      const result = await response.json();
-      console.log('Result:', result);
-
-      if (result.success) {
-        showSuccessMessage(name);
-      } else {
-        throw new Error(result.error || 'Failed to submit application');
-      }
+      showSuccessMessage(name);
     } catch (error) {
-      console.error('Consultant onboarding error:', error);
-      showErrorMessage();
+      console.error("Consultant application submission failed:", error);
+      showErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Your application could not be submitted. Please try again or email engage@konsaltahub.org.",
+      );
     } finally {
       submitBtn.disabled = false;
-      submitBtn.textContent = originalBtnText;
+      submitLabel.textContent = originalBtnText;
     }
   });
 
@@ -258,11 +226,13 @@ document.addEventListener("DOMContentLoaded", () => {
           </svg>
         </div>
         <h2>Welcome to Konsalta!</h2>
-        <p>Thank you${name ? `, ${name}` : ""} for your interest in joining our expert network.</p>
+        <p class="success-greeting"></p>
         <p class="success-subtext">Your application has been received and our team will review it shortly. We'll be in touch soon!</p>
         <button class="success-btn" onclick="this.closest('.success-overlay').remove()">Close</button>
       </div>
     `;
+    overlay.querySelector(".success-greeting").textContent =
+      `Thank you${name ? `, ${name}` : ""} for your interest in joining our expert network.`;
 
     document.body.appendChild(overlay);
 
@@ -290,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateProgress();
   }
 
-  function showErrorMessage() {
+  function showErrorMessage(message) {
     const overlay = document.createElement("div");
     overlay.className = "success-overlay error-overlay";
     overlay.innerHTML = `
@@ -302,11 +272,12 @@ document.addEventListener("DOMContentLoaded", () => {
           </svg>
         </div>
         <h2>Something went wrong</h2>
-        <p>We couldn't submit your application at this time.</p>
+        <p class="error-message"></p>
         <p class="success-subtext">Please try again or contact us directly at engage@konsaltahub.org</p>
         <button class="success-btn" onclick="this.closest('.success-overlay').remove()">Close</button>
       </div>
     `;
+    overlay.querySelector(".error-message").textContent = message;
 
     document.body.appendChild(overlay);
 

@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
       email: formData.get("email"),
       company: formData.get("company"),
       projectType: formData.get("projectType"),
-      message: formData.get("message")
+      message: formData.get("message"),
     };
 
     // Disable submit button while sending
@@ -137,44 +137,32 @@ document.addEventListener("DOMContentLoaded", () => {
     submitBtn.textContent = "Sending...";
 
     try {
-      // Determine API URL based on environment
-      const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:3000/api/contact'
-        : '/api/contact';
-
-      console.log('Sending to:', apiUrl);
-
-      const response = await fetch(apiUrl, {
+      const response = await fetch("/api/contact", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data)
       });
+      const result = await response.json().catch(() => null);
 
-      console.log('Response status:', response.status);
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error('Server error:', errorText);
-        throw new Error(`Server error: ${response.status}`);
+      if (!response.ok || !result?.success) {
+        throw new Error(
+          result?.error || "Sorry, your enquiry could not be sent. Please try again.",
+        );
       }
 
-      const result = await response.json();
-      console.log('Result:', result);
-
-      if (result.success) {
-        status.textContent = `Thanks${name && name !== "there" ? `, ${name}` : ""}. Your enquiry has been received and the Konsalta team will get back to you soon.`;
-        status.classList.remove("error");
-        status.classList.add("success");
-        form.reset();
-        playSendAnimation();
-      } else {
-        throw new Error(result.error || 'Failed to send message');
-      }
+      status.textContent = `Thanks${name && name !== "there" ? `, ${name}` : ""}. Your enquiry has been received and the Konsalta team will get back to you soon.`;
+      status.classList.remove("error");
+      status.classList.add("success");
+      form.reset();
+      playSendAnimation();
     } catch (error) {
-      console.error('Contact form error:', error);
-      status.textContent = error.message || "Sorry, there was a problem sending your enquiry. Please email us directly at engage@konsaltahub.org";
+      console.error("Contact form submission failed:", error);
+      status.textContent =
+        error instanceof Error
+          ? error.message
+          : "Sorry, there was a problem sending your enquiry. Please email engage@konsaltahub.org.";
       status.classList.remove("success");
       status.classList.add("error");
     } finally {

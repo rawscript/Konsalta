@@ -1,0 +1,23 @@
+{
+  "name": "konsalta-api",
+  "version": "1.0.0",
+  "description": "Konsalta website server for contact and consultant submissions",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.7.3",
+    "multer": "^2.5.0",
+    "nodemailer": "^10.2.1"
+  }
+}
