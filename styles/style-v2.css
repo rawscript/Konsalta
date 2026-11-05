@@ -20,6 +20,10 @@
   }
 }
 
+@media (min-width: 1101px) {
+  .hero-right .constellation { margin-left: 55px; transform: translateX(55px); }
+}
+
 /* ---------- Ambient glows: navy leads, orange is faint ---------- */
 .ambient-1 { opacity: 0.45; }
 .ambient-2 { width: 760px; height: 760px; opacity: 1; }
