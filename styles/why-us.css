@@ -817,7 +817,7 @@ body.has-custom-cursor .cursor {
   border: none;
   box-shadow: none;
   padding-top: clamp(24px, 4vw, 48px);
-  padding-bottom: 0;
+  padding-bottom: clamp(36px, 5vw, 56px);
   text-align: center;
 }
 
