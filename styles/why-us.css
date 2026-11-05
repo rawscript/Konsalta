@@ -163,7 +163,7 @@ body.has-custom-cursor .cursor {
 .parallax-stage {
   position: relative;
   z-index: 2;
-  /* no overflow:hidden — lets orbs bleed freely */
+  overflow-x: clip;
   background:
     radial-gradient(
       circle at 15% 20%,
@@ -180,6 +180,18 @@ body.has-custom-cursor .cursor {
   position: relative;
   z-index: 3;
   /* background removed — stage handles it */
+}
+
+.hero > h2 {
+  max-width: 850px;
+  margin: 28px auto 0;
+  color: var(--ink-soft);
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(17px, 1.8vw, 22px);
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -0.02em;
+  text-wrap: pretty;
 }
 
 .hero-orb {
@@ -806,6 +818,47 @@ body.has-custom-cursor .cursor {
   box-shadow: none;
   padding-top: clamp(24px, 4vw, 48px);
   padding-bottom: 0;
+  text-align: center;
+}
+
+.why-konsalta-section .section-content {
+  max-width: 820px;
+}
+
+.why-konsalta-section .section-title {
+  margin-bottom: 18px;
+  font-size: clamp(30px, 4vw, 48px);
+  line-height: 1.15;
+}
+
+.why-konsalta-section .section-text {
+  max-width: 68ch;
+  font-size: clamp(16px, 1.45vw, 18px);
+  line-height: 1.75;
+  text-align: center;
+  text-align-last: center;
+  hyphens: none;
+  -webkit-hyphens: none;
+}
+
+.why-konsalta-section .section-text::first-letter {
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+
+.why-konsalta-section .section-subtitle {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin: 24px auto 0;
+  padding: 9px 16px;
+  border: 1px solid rgba(242, 101, 34, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 242, 235, 0.8);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
 }
 
 /* Soft divider between intro text and the cards */

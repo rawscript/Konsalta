@@ -223,3 +223,119 @@
   color: rgba(255, 255, 255, 0.55);
   border-top-color: rgba(255, 255, 255, 0.14);
 }
+
+/* ---------- Client audiences and evidence-to-impact statement ---------- */
+.audience-section {
+  padding: clamp(48px, 7vw, 88px) var(--pad);
+  background: #f8f6f0;
+}
+
+.audience-content {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  gap: 24px 48px;
+  align-items: center;
+  width: min(100%, var(--max));
+  margin: 0 auto;
+}
+
+.audience-feature {
+  grid-row: span 2;
+  display: grid;
+  min-height: 220px;
+  place-items: center;
+  padding: 32px;
+  border: 1px solid rgba(11, 45, 83, 0.08);
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 16px 40px rgba(11, 45, 83, 0.08);
+  text-align: center;
+}
+
+.audience-feature p {
+  max-width: 440px;
+  color: var(--navy);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(24px, 3vw, 40px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.audience-eyebrow {
+  margin-bottom: 8px;
+  color: var(--orange-deep);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.audience-heading h2 {
+  max-width: 600px;
+  color: var(--navy);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(26px, 3vw, 38px);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.audience-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.audience-list li:last-child {
+  grid-column: 1 / -1;
+}
+
+.audience-list a {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  padding: 12px 14px;
+  border: 1px solid rgba(11, 45, 83, 0.12);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.audience-list a:hover {
+  transform: translateY(-2px);
+  border-color: var(--orange);
+  color: var(--navy);
+}
+
+@media (max-width: 700px) {
+  .audience-content {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .audience-feature {
+    grid-row: auto;
+    min-height: 160px;
+  }
+}
+
+@media (max-width: 420px) {
+  .audience-list {
+    grid-template-columns: 1fr;
+  }
+
+  .audience-list li:last-child {
+    grid-column: auto;
+  }
+}

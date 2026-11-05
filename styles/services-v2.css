@@ -112,6 +112,20 @@ body {
   font-family: "Manrope", system-ui, sans-serif;
 }
 
+.core-capabilities-title {
+  margin: 0 0 24px;
+  color: var(--navy);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.services-showcase .sv-title {
+  color: var(--orange-light, #ff7e42);
+}
+
 @media (min-width: 1101px) {
   .site-header {
     position: relative;
