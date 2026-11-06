@@ -8,6 +8,46 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // Dynamic back button based on referrer
+  const backLink = document.getElementById("backLink");
+  const backText = document.getElementById("backText");
+  
+  if (backLink && backText) {
+    const referrer = document.referrer;
+    let backUrl = "./";
+    let backLabel = "Back to Home";
+    
+    if (referrer) {
+      // Extract the page name from referrer
+      const referrerPath = new URL(referrer).pathname;
+      const referrerPage = referrerPath.split("/").pop() || "";
+      
+      // Map pages to their labels
+      const pageMap = {
+        "index.html": { url: "./", label: "Back to Home" },
+        "contactUs.html": { url: "./contactUs.html", label: "Back to Contact" },
+        "aboutUs.html": { url: "./aboutUs.html", label: "Back to About" },
+        "services.html": { url: "./services.html", label: "Back to Services" },
+        "whyUs.html": { url: "./whyUs.html", label: "Back to Why Us" },
+        "insights.html": { url: "./insights.html", label: "Back to Insights" }
+      };
+      
+      // Check if referrer is from same domain
+      if (referrer.includes(window.location.hostname) || referrer.includes("localhost")) {
+        if (pageMap[referrerPage]) {
+          backUrl = pageMap[referrerPage].url;
+          backLabel = pageMap[referrerPage].label;
+        } else if (referrerPage === "" || referrerPage === "/") {
+          backUrl = "./";
+          backLabel = "Back to Home";
+        }
+      }
+    }
+    
+    backLink.href = backUrl;
+    backText.textContent = backLabel;
+  }
+
   // Section toggle functionality
   const sectionHeaders = document.querySelectorAll(".section-header");
   sectionHeaders.forEach((header) => {
