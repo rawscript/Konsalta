@@ -2046,7 +2046,18 @@ section[id] {
     align-items: center;
   }
 }
-
+.v-indent {
+  padding-top: 3.3rem;
+  place-items: center;
+}
+.centered-text{
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  place-content: center;
+  justify-content: center;
+  text-align: justify;
+}
 /* Ultra-narrow foldables */
 @media (max-width: 280px) {
   .hero-stats-grid {
