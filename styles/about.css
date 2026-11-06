@@ -639,183 +639,218 @@ section[id] {
    ============================================================ */
 .who-we-serve-section {
   position: relative;
-  overflow: hidden;
   padding: var(--section-pad) 0;
-  background: linear-gradient(
-    180deg,
-    transparent 0%,
-    rgba(237, 244, 252, 0.45) 50%,
-    transparent 100%
-  );
+  background: #fff;
 }
 
-/* Stars sit BELOW the content; the content layer lets pointer events
-   fall through its empty areas so stars stay hoverable. */
-.serve-stars-field {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
+/* ---------- Header ---------- */
+.serve-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 16px clamp(32px, 6vw, 80px);
+  align-items: end;
+  margin-bottom: clamp(32px, 4vw, 56px);
+  text-align: left;
 }
 
-.serve-star {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  transform-origin: center;
-  transition: filter 0.3s ease;
-  will-change: transform, color;
-  user-select: none;
+.serve-head .section-title {
+  margin: 0;
+  max-width: 620px;
+  text-align: left;
 }
 
-.serve-star svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  pointer-events: visiblePainted;
-  cursor: pointer;
+.serve-eyebrow {
+  margin-bottom: 8px;
+  color: var(--orange-deep);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.serve-star.star-blue {
-  color: var(--navy);
-  filter: drop-shadow(0 2px 8px rgba(11, 45, 83, 0.25));
+.serve-intro {
+  max-width: 460px;
+  color: var(--ink-soft);
+  font-size: var(--fs-base, 16px);
+  line-height: 1.7;
 }
 
-.serve-star.star-orange {
-  color: var(--orange);
-  filter: drop-shadow(0 2px 8px rgba(242, 101, 34, 0.32));
-}
-
-.serve-star:hover {
-  filter: drop-shadow(0 0 16px currentColor);
-}
-
-.who-we-serve-section .section-container {
-  position: relative;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.who-we-serve-section .section-title,
-.who-we-serve-section .section-desc,
-.who-we-serve-section .serve-card {
-  pointer-events: auto;
-}
-
-/* Mobile-first grid: 1 col → 2 cols → 6-col track (3 + 2 centred layout) */
+/* ---------- Bento grid: 1 featured + 2×2 ---------- */
 .serve-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  grid-auto-rows: 1fr;
   gap: var(--gap);
   width: 100%;
 }
 
-@media (min-width: 640px) {
-  .serve-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .serve-grid .serve-card:nth-child(5) {
-    grid-column: span 2;
-  }
-}
-
-@media (min-width: 1081px) {
-  .serve-grid {
-    grid-template-columns: repeat(6, 1fr);
-  }
-  .serve-grid .serve-card {
-    grid-column: span 2;
-  }
-  .serve-grid .serve-card:nth-child(4) {
-    grid-column: 1 / span 3;
-  }
-  .serve-grid .serve-card:nth-child(5) {
-    grid-column: 4 / span 3;
-  }
-}
-
 .serve-card {
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: var(--r-lg);
-  padding: 32px 28px;
-  box-shadow: var(--shadow-sm);
+  position: relative;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
   transition:
-    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    translate 0.35s cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 0.35s ease,
     border-color 0.35s ease;
-  position: relative;
-  overflow: hidden;
 }
 
+/* orange accent line that draws in on hover */
+.serve-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: var(--orange);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* `translate` composes with GSAP's inline `transform`, so the lift still works after the reveal */
 .serve-card:hover {
-  transform: translateY(-6px);
+  translate: 0 -6px;
   box-shadow: var(--shadow-md);
   border-color: rgba(242, 101, 34, 0.3);
 }
 
-.serve-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
+.serve-card:hover::before {
+  transform: scaleX(1);
 }
 
 .serve-icon-wrap {
-  width: 52px;
-  height: 52px;
-  background: var(--navy-soft);
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 20px;
   border: 1px solid var(--navy-tint);
   border-radius: var(--r-md);
-  display: inline-grid;
-  place-items: center;
+  background: var(--navy-soft);
   color: var(--navy);
-  transition:
-    background 0.3s,
-    color 0.3s,
-    border-color 0.3s;
-}
-
-.serve-card:hover .serve-icon-wrap {
-  background: var(--orange-soft);
-  border-color: var(--orange-tint);
-  color: var(--orange);
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 
 .serve-icon-wrap svg {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 }
 
-.serve-num-badge {
-  font-size: var(--fs-xs);
-  font-weight: 700;
-  color: var(--orange);
+.serve-card:hover .serve-icon-wrap {
+  border-color: var(--orange-tint);
   background: var(--orange-soft);
-  padding: 4px 10px;
-  border-radius: var(--r-pill);
+  color: var(--orange);
 }
 
 .serve-title {
+  margin-bottom: 10px;
+  color: var(--navy);
   font-size: var(--fs-lg);
   font-weight: 700;
-  color: var(--navy);
   line-height: 1.3;
-  margin-bottom: 12px;
 }
 
 .serve-desc {
-  font-size: var(--fs-sm);
-  color: var(--ink-soft);
-  line-height: 1.65;
   flex-grow: 1;
+  color: var(--ink-soft);
+  font-size: var(--fs-sm);
+  line-height: 1.65;
 }
 
+/* ---------- Featured card ---------- */
+.serve-card:first-child {
+  grid-row: span 2;
+  justify-content: flex-end;
+  padding: clamp(28px, 3vw, 44px);
+  border-color: var(--navy);
+  background: var(--navy);
+}
+
+/* soft glow in the corner */
+.serve-card:first-child::after {
+  content: "";
+  position: absolute;
+  top: -30%;
+  right: -30%;
+  width: 80%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(242, 101, 34, 0.28), transparent 65%);
+  pointer-events: none;
+}
+
+.serve-card:first-child .serve-icon-wrap,
+.serve-card:first-child:hover .serve-icon-wrap {
+  width: 56px;
+  height: 56px;
+  margin-bottom: auto;
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--orange);
+}
+
+.serve-card:first-child .serve-icon-wrap svg {
+  width: 26px;
+  height: 26px;
+}
+
+.serve-card:first-child .serve-title {
+  margin-top: 48px;
+  color: #fff;
+  font-size: clamp(22px, 2.4vw, 32px);
+  letter-spacing: -0.02em;
+}
+
+.serve-card:first-child .serve-desc {
+  flex-grow: 0;
+  max-width: 340px;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: var(--fs-base, 16px);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1080px) {
+  .serve-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .serve-card:first-child {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .serve-card:first-child .serve-icon-wrap {
+    margin-bottom: 20px;
+  }
+  .serve-card:first-child .serve-title {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .serve-head {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .serve-grid {
+    grid-template-columns: 1fr;
+  }
+  .serve-card {
+    padding: 24px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .serve-card,
+  .serve-card::before {
+    transition: none;
+  }
+}
 /* ============================================================
    3. OUR APPROACH
    ============================================================ */

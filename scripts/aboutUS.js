@@ -289,7 +289,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ============ 5. INTERACTIVE WHO-WE-SERVE STARS ============
-  initServeStars();
+  // initServeStars();
 
   // ============ 6. CREATIVE TEAM SHOWCASE CAROUSEL CONTROLLER ============
   initTeamCarousel();
@@ -611,92 +611,92 @@ function initTeamCarousel() {
 //   so rectangular bounding-box overlap between nearby stars
 //   never blocks a neighbour's color inversion.
 // ============================================================
-function initServeStars() {
-  const stars = document.querySelectorAll(".serve-star");
-  if (!stars.length || typeof gsap === "undefined") return;
+// function initServeStars() {
+//   const stars = document.querySelectorAll(".serve-star");
+//   if (!stars.length || typeof gsap === "undefined") return;
 
-  const COLOR_NAVY   = "#0B2D53";
-  const COLOR_ORANGE = "#F26522";
+//   const COLOR_NAVY   = "#0B2D53";
+//   const COLOR_ORANGE = "#F26522";
 
-  // Reuse the same cursor blob that the main cursor handler drives
-  const cursor = document.querySelector(".cursor");
+//   // Reuse the same cursor blob that the main cursor handler drives
+//   const cursor = document.querySelector(".cursor");
 
-  stars.forEach((star, index) => {
-    const colorType   = star.dataset.starColor;
-    const baseTilt    = parseFloat(star.dataset.tilt || 0);
-    const baseColor   = colorType === "blue" ? COLOR_NAVY : COLOR_ORANGE;
-    const invertColor = colorType === "blue" ? COLOR_ORANGE : COLOR_NAVY;
+//   stars.forEach((star, index) => {
+//     const colorType   = star.dataset.starColor;
+//     const baseTilt    = parseFloat(star.dataset.tilt || 0);
+//     const baseColor   = colorType === "blue" ? COLOR_NAVY : COLOR_ORANGE;
+//     const invertColor = colorType === "blue" ? COLOR_ORANGE : COLOR_NAVY;
 
-    // The SVG is the pixel-accurate hit target; the div is the GSAP animation target
-    const svgEl = star.querySelector("svg");
+//     // The SVG is the pixel-accurate hit target; the div is the GSAP animation target
+//     const svgEl = star.querySelector("svg");
 
-    // Snap to the authored tilt before floating kicks in
-    gsap.set(star, { rotation: baseTilt, transformOrigin: "50% 50%" });
+//     // Snap to the authored tilt before floating kicks in
+//     gsap.set(star, { rotation: baseTilt, transformOrigin: "50% 50%" });
 
-    // Coordinated but independent float — each star has its own rhythm
-    const floatY     = index % 2 === 0 ? -10 : 8;
-    const floatRot   = baseTilt + (index % 2 === 0 ? 13 : -11);
-    const floatScale = 1 + (index % 3 === 0 ? 0.09 : 0.04);
-    const floatDur   = 2.1 + (index % 5) * 0.38;
-    const floatDelay = (index * 0.19) % 1.6;
+//     // Coordinated but independent float — each star has its own rhythm
+//     const floatY     = index % 2 === 0 ? -10 : 8;
+//     const floatRot   = baseTilt + (index % 2 === 0 ? 13 : -11);
+//     const floatScale = 1 + (index % 3 === 0 ? 0.09 : 0.04);
+//     const floatDur   = 2.1 + (index % 5) * 0.38;
+//     const floatDelay = (index * 0.19) % 1.6;
 
-    gsap.to(star, {
-      y        : floatY,
-      rotation : floatRot,
-      scale    : floatScale,
-      duration : floatDur,
-      repeat   : -1,
-      yoyo     : true,
-      ease     : "sine.inOut",
-      delay    : floatDelay,
-    });
+//     gsap.to(star, {
+//       y        : floatY,
+//       rotation : floatRot,
+//       scale    : floatScale,
+//       duration : floatDur,
+//       repeat   : -1,
+//       yoyo     : true,
+//       ease     : "sine.inOut",
+//       delay    : floatDelay,
+//     });
 
-    if (!svgEl) return;
+//     if (!svgEl) return;
 
-    // Hover → invert color, pop scale, spin — events on SVG pixels only
-    svgEl.addEventListener("mouseenter", () => {
-      gsap.to(star, {
-        color     : invertColor,
-        scale     : 1.5,
-        rotation  : baseTilt + 45,
-        duration  : 0.28,
-        ease      : "back.out(2.2)",
-        overwrite : "auto",
-      });
-      // Scale the custom cursor blob
-      if (cursor) {
-        gsap.to(cursor, { width: 32, height: 32, opacity: 0.85, duration: 0.25, ease: "power2.out" });
-      }
-    });
+//     // Hover → invert color, pop scale, spin — events on SVG pixels only
+//     svgEl.addEventListener("mouseenter", () => {
+//       gsap.to(star, {
+//         color     : invertColor,
+//         scale     : 1.5,
+//         rotation  : baseTilt + 45,
+//         duration  : 0.28,
+//         ease      : "back.out(2.2)",
+//         overwrite : "auto",
+//       });
+//       // Scale the custom cursor blob
+//       if (cursor) {
+//         gsap.to(cursor, { width: 32, height: 32, opacity: 0.85, duration: 0.25, ease: "power2.out" });
+//       }
+//     });
 
-    // Leave → restore original color, scale, and tilt; re-attach float
-    svgEl.addEventListener("mouseleave", () => {
-      gsap.to(star, {
-        color     : baseColor,
-        scale     : 1,
-        rotation  : baseTilt,
-        duration  : 0.42,
-        ease      : "power2.out",
-        overwrite : "auto",
-        onComplete: () => {
-          gsap.to(star, {
-            y        : floatY,
-            rotation : floatRot,
-            scale    : floatScale,
-            duration : floatDur,
-            repeat   : -1,
-            yoyo     : true,
-            ease     : "sine.inOut",
-          });
-        },
-      });
-      // Restore cursor
-      if (cursor) {
-        gsap.to(cursor, { width: 12, height: 12, opacity: 1, duration: 0.25, ease: "power2.out" });
-      }
-    });
-  });
-}
+//     // Leave → restore original color, scale, and tilt; re-attach float
+//     svgEl.addEventListener("mouseleave", () => {
+//       gsap.to(star, {
+//         color     : baseColor,
+//         scale     : 1,
+//         rotation  : baseTilt,
+//         duration  : 0.42,
+//         ease      : "power2.out",
+//         overwrite : "auto",
+//         onComplete: () => {
+//           gsap.to(star, {
+//             y        : floatY,
+//             rotation : floatRot,
+//             scale    : floatScale,
+//             duration : floatDur,
+//             repeat   : -1,
+//             yoyo     : true,
+//             ease     : "sine.inOut",
+//           });
+//         },
+//       });
+//       // Restore cursor
+//       if (cursor) {
+//         gsap.to(cursor, { width: 12, height: 12, opacity: 1, duration: 0.25, ease: "power2.out" });
+//       }
+//     });
+//   });
+// }
 
 
 
