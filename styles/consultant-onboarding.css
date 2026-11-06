@@ -195,7 +195,7 @@ body {
 
 .back-link {
     position: fixed;
-    left: 16px;
+    left: 32px;
     top: 162px;
     z-index: 999;
     display: inline-flex;
