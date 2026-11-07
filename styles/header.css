@@ -48,7 +48,8 @@
 }
 
 .site-header .header-menu-toggle,
-.site-header .mobile-nav-contact {
+.site-header .mobile-nav-contact,
+.site-header .header-nav a.mobile-nav-contact {
   display: none;
 }
 

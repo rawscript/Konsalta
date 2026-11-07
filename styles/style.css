@@ -161,6 +161,10 @@ body.has-custom-cursor .cursor {
   display: none;
 }
 
+.header-nav a.mobile-nav-contact {
+  display: none;
+}
+
 .header-nav a {
   color: var(--ink-soft);
   text-decoration: none;
