@@ -1050,7 +1050,7 @@ body.has-custom-cursor .cursor {
     padding: 12px;
   }
 
-  .header-nav .mobile-nav-contact {
+  .header-nav a.mobile-nav-contact {
     display: block;
     border-top: 1px solid var(--line);
     color: var(--orange-deep);

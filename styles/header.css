@@ -163,7 +163,7 @@
     bottom: 6px;
   }
 
-  .site-header .header-nav .mobile-nav-contact {
+  .site-header .header-nav a.mobile-nav-contact {
     display: block;
     border-top: 1px solid var(--line, #e2ddd3);
     color: var(--orange-deep, #d34e0d);
