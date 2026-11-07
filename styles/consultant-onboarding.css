@@ -188,45 +188,43 @@ body {
 .intro {
     max-width: 800px;
     margin: 0 auto;
-    padding: 150px 24px 48px;
+    padding: 72px 24px 48px;
     text-align: center;
     position: relative;
 }
 
 .back-link {
-    position: fixed;
-    left: 32px;
-    top: 162px;
-    z-index: 999;
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    color: white;
+    gap: 8px;
+    flex-shrink: 0;
+    color: var(--navy);
     text-decoration: none;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
-    padding: 12px 24px;
-    border-radius: 12px;
-    background: linear-gradient(135deg, var(--orange) 0%, var(--orange-light) 100%);
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(242, 101, 34, 0.3);
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1.5px solid var(--navy-tint);
+    background: var(--white);
+    transition: all 0.25s ease;
+    white-space: nowrap;
 }
 
 .back-link:hover {
-    background: linear-gradient(135deg, var(--orange-deep) 0%, var(--orange) 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(242, 101, 34, 0.4);
+    background: var(--navy-soft);
+    border-color: var(--navy);
+    color: var(--navy);
 }
 
 .back-link svg {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     stroke: currentColor;
     stroke-width: 2.5;
     stroke-linecap: round;
     stroke-linejoin: round;
     fill: none;
-    transition: transform 0.3s ease;
+    transition: transform 0.25s ease;
 }
 
 .back-link:hover svg {
@@ -817,18 +815,20 @@ body {
 
 .submit-section {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 20px;
+    justify-content: space-between;
+    gap: 24px;
     padding: 32px;
     background: var(--white);
     border-radius: 16px;
-    text-align: center;
+    text-align: left;
     margin-top: 16px;
+    border: 1px solid var(--line);
 }
 
 .submit-info {
-    max-width: 500px;
+    flex: 1;
+    max-width: 560px;
 }
 
 .submit-note {
@@ -851,10 +851,11 @@ body {
 .submit-btn {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     padding: 16px 32px;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     font-family: inherit;
     color: var(--white);
     background: var(--navy);
@@ -862,18 +863,27 @@ body {
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: 0 4px 0 var(--navy-deep);
 }
 
 .submit-btn:disabled {
     background: var(--line);
     color: var(--ink-soft);
     cursor: not-allowed;
+    box-shadow: none;
 }
 
 .submit-btn:not(:disabled):hover {
     background: var(--orange);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(242, 101, 34, 0.3);
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 var(--orange-deep);
+}
+
+.submit-btn:not(:disabled):active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 var(--orange-deep);
 }
 
 .submit-btn svg {
@@ -939,20 +949,7 @@ body {
 
 @media (max-width: 768px) {
     .intro {
-        padding: 150px 20px 40px;
-    }
-
-    .back-link {
-        left: 12px;
-        top: 162px;
-        padding: 10px 20px;
-        font-size: 13px;
-        gap: 8px;
-    }
-
-    .back-link svg {
-        width: 16px;
-        height: 16px;
+        padding: 64px 20px 40px;
     }
 
     .progress-container {
@@ -978,7 +975,7 @@ body {
     }
 
     .intro {
-        padding: 80px 16px 32px;
+        padding: 60px 16px 32px;
     }
 
     .form-container {
@@ -1039,7 +1036,15 @@ body {
     }
 
     .submit-section {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
         padding: 24px 16px;
+        gap: 20px;
+    }
+
+    .submit-info {
+        max-width: 100%;
     }
 
     .submit-btn {
@@ -1050,20 +1055,7 @@ body {
 
 @media (max-width: 480px) {
     .intro {
-        padding: 135px 16px 32px;
-    }
-
-    .back-link {
-        left: 8px;
-        top: 147px;
-        padding: 8px 16px;
-        font-size: 12px;
-        gap: 6px;
-    }
-
-    .back-link svg {
-        width: 14px;
-        height: 14px;
+        padding: 60px 16px 32px;
     }
 
     .progress-container {
@@ -1187,7 +1179,7 @@ body {
     }
 
     .intro {
-        padding: 60px 10px 24px;
+        padding: 56px 10px 24px;
     }
 
     .form-container {
@@ -1206,7 +1198,7 @@ body {
 /* Landscape foldables */
 @media (max-height: 500px) and (orientation: landscape) {
     .intro {
-        padding: 80px 24px 24px;
+        padding: 56px 24px 24px;
     }
 
     .progress-container {
