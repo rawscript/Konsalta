@@ -1,13 +1,11 @@
 /* ============================================================
-   LINKEDIN FEED — one featured post + two smaller ones
-   Scoped: .lf / .lf-*   (+ .why-cards-section layout fix)
-   Self-contained: literal brand values, no reliance on page tokens.
-   Load AFTER why-us.css and why-cards.css.
+   LINKEDIN FEED — styled as a genuine LinkedIn embed widget
+   Scoped: .lf / .lf-*
+   LinkedIn brand colour: #0A66C2 (official)
+   Background: white cards on a light grey panel, like li.com itself
    ============================================================ */
 
-/* ---------- Fix: give the Why Konsalta cards a container ----------
-   - same max-width as .wrapper
-   - sits above the fixed mesh canvas (z-index 1) so lines don't cross cards */
+/* ---------- Fix: give the Why Konsalta cards a container ---------- */
 .why-cards-section {
   position: relative;
   z-index: 3;
@@ -15,8 +13,6 @@
   margin: 0 auto;
   padding: 0 20px clamp(32px, 5vw, 64px);
 }
-
-/* Inside the unified section the wrapper already handles max-width/padding */
 .why-unified-section .why-cards-section {
   max-width: 100%;
   margin: 0;
@@ -24,76 +20,58 @@
   padding-right: 20px;
 }
 
-/* ---------- Section shell ---------- */
+/* ---------- LinkedIn brand tokens ---------- */
 .lf {
-  --lf-navy: #0b2d53;
-  --lf-navy-mid: #103866;
-  --lf-navy-light: #16487e;
-  --lf-navy-deep: #061a32;
-  --lf-orange: #f26522;
-  --lf-cream: #f6f3ee;
-  --lf-cut: 28px; /* clipped corner, same motif as the Why Konsalta cards */
+  --li-blue:        #0A66C2;
+  --li-blue-dark:   #004182;
+  --li-blue-hover:  #0073b1;
+  --li-bg:          #F3F2EF;   /* LinkedIn page background */
+  --li-surface:     #FFFFFF;
+  --li-border:      rgba(0, 0, 0, 0.12);
+  --li-text:        #000000E6; /* LinkedIn body text, 90% black */
+  --li-muted:       #00000099; /* LinkedIn secondary text, 60% */
+  --li-cut:         20px;
+
   position: relative;
   z-index: 3;
   max-width: 1300px;
   margin: 0 auto;
-  padding: clamp(8px, 2vw, 24px) 20px clamp(48px, 7vw, 96px);
-  font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+  padding: clamp(8px, 2vw, 24px) 20px clamp(40px, 6vw, 80px);
+  font-family: -apple-system, "system-ui", BlinkMacSystemFont, "Segoe UI",
+               Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
+/* ---------- Outer widget frame — mimics LinkedIn embed chrome ---------- */
 .lf-panel {
   position: relative;
-  overflow: hidden;
+  overflow: visible;           /* let badge overhang if needed */
   isolation: isolate;
-  border-radius: 28px;
-  padding: clamp(24px, 4vw, 56px);
-  color: var(--lf-cream);
-  background:
-    radial-gradient(
-      ellipse 620px 380px at 92% 0%,
-      rgba(242, 101, 34, 0.24),
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse 720px 520px at 0% 100%,
-      rgba(22, 72, 126, 0.6),
-      transparent 70%
-    ),
-    linear-gradient(
-      150deg,
-      var(--lf-navy-mid) 0%,
-      var(--lf-navy) 50%,
-      var(--lf-navy-deep) 100%
-    );
-  box-shadow: 0 28px 64px -20px rgba(6, 26, 50, 0.5);
+  border-radius: 10px;         /* LinkedIn uses 10px radius on cards */
+  padding: clamp(20px, 3vw, 36px) clamp(16px, 3vw, 32px);
+  background: var(--li-bg);
+  border: 1px solid var(--li-border);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.06),
+    0 4px 20px rgba(0, 0, 0, 0.07);
 }
-/* slanted band echoing the trapezoid language used across the site */
+
+/* LinkedIn watermark — top-right corner of the panel */
 .lf-panel::before {
   content: "";
   position: absolute;
-  z-index: -1;
-  top: 0;
-  right: -6%;
-  bottom: 0;
-  width: 40%;
-  background: rgba(246, 243, 238, 0.04);
-  clip-path: polygon(30% 0, 100% 0, 100% 100%, 0 100%);
+  top: 20px;
+  right: 24px;
+  width: 84px;
+  height: 22px;
+  opacity: 0.18;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 22' fill='%230A66C2'%3E%3Cpath d='M2.46 0A2.46 2.46 0 1 0 2.46 4.92 2.46 2.46 0 0 0 2.46 0zM.28 7.1H4.63V22H.28V7.1zM16.1 6.73c-2.3 0-3.86 1.27-4.5 2.47h-.07V7.1H7.28V22h4.35v-7.38c0-1.83.35-3.6 2.61-3.6 2.23 0 2.26 2.09 2.26 3.72V22h4.35v-8.1c0-3.76-.81-6.17-5.75-6.17zM28.5 0h-4.35v22h4.35V0zM41.9 7.1l-3.05 10.4h-.05L35.72 7.1H31.1L35.86 22h5.72l4.84-14.9H41.9zM55.52 6.73c-4.3 0-7.3 2.9-7.3 7.78 0 4.6 2.8 7.84 7.3 7.84 3.5 0 5.8-1.6 6.76-4.63h-3.9c-.38 1.03-1.4 1.7-2.86 1.7-2.03 0-3.1-1.2-3.26-3.33h10.2c.04-.38.07-.8.07-1.1 0-4.74-2.74-8.26-7.01-8.26zm-3.26 6.1c.26-1.84 1.3-3.07 3.26-3.07 1.84 0 2.9 1.14 3.07 3.07h-6.33zM72.3 6.73c-2.47 0-4.08 1.17-4.68 2.47h-.06V7.1h-4.25V22h4.35v-7.14c0-2.09.5-3.84 2.95-3.84 1.52 0 2.42.9 2.42 3.07V22h4.35v-9.1c0-3.6-1.76-6.17-5.08-6.17z'/%3E%3C/svg%3E")
+    left center / contain no-repeat;
   pointer-events: none;
 }
-/* fine dot grid, fading downwards */
+
+/* remove the old slanted band and dot-grid decorations */
 .lf-panel::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background-image: radial-gradient(
-    rgba(246, 243, 238, 0.1) 1px,
-    transparent 1px
-  );
-  background-size: 22px 22px;
-  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 65%);
-  mask-image: linear-gradient(to bottom, #000, transparent 65%);
-  pointer-events: none;
+  display: none;
 }
 
 /* ---------- Header ---------- */
@@ -102,94 +80,99 @@
   flex-wrap: wrap;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 20px 32px;
-  margin-bottom: clamp(24px, 3.2vw, 44px);
+  gap: 16px 24px;
+  margin-bottom: clamp(16px, 2.5vw, 28px);
+  padding-right: 100px; /* clear the watermark */
 }
+
 .lf-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
-  border: 1px solid rgba(246, 243, 238, 0.24);
+  gap: 6px;
+  padding: 4px 12px;
+  border: 1px solid rgba(10, 102, 194, 0.3);
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--li-blue);
+  background: rgba(10, 102, 194, 0.06);
 }
+
 .lf-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--lf-orange);
+  background: var(--li-blue);
 }
+
 .lf-title {
-  margin: 16px 0 12px;
-  max-width: 16ch;
-  font-family: "Manrope", sans-serif;
-  font-size: clamp(2rem, 4.4vw, 3.4rem);
-  font-weight: 800;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  color: var(--lf-cream);
+  margin: 10px 0 8px;
+  font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--li-text);
   text-wrap: balance;
+  font-family: inherit;
 }
+
 .lf-title .accent {
-  color: var(--lf-orange);
+  color: var(--li-blue);
 }
+
 .lf-lead {
   margin: 0;
   max-width: 52ch;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: rgba(246, 243, 238, 0.82);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--li-muted);
 }
 
+/* "Follow" button — LinkedIn blue pill */
 .lf-follow {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  min-height: 48px;
-  padding: 12px 24px;
-  border-radius: 14px;
-  background: var(--lf-orange);
-  color: var(--lf-navy-deep);
-  font-family: "Manrope", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 800;
+  gap: 8px;
+  min-height: 36px;
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1.5px solid var(--li-blue);
+  background: transparent;
+  color: var(--li-blue);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 4px 0 #d34e0d;
   transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
+    background 0.18s ease,
+    color 0.18s ease;
 }
+
 .lf-follow:hover {
-  background: var(--lf-cream);
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 rgba(246, 243, 238, 0.45);
+  background: var(--li-blue);
+  color: #ffffff;
 }
-.lf-follow:focus-visible,
-.lf-card:focus-visible {
-  outline: none;
-}
-.lf-follow:focus-visible {
-  box-shadow:
-    0 0 0 3px var(--lf-navy),
-    0 0 0 6px var(--lf-cream);
-}
+
 .lf-follow svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   flex-shrink: 0;
+}
+
+.lf-follow:focus-visible {
+  outline: 3px solid var(--li-blue);
+  outline-offset: 2px;
 }
 
 /* ---------- Grid ---------- */
 .lf-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: clamp(14px, 1.8vw, 22px);
+  gap: clamp(10px, 1.5vw, 14px);
 }
+
 @media (min-width: 700px) {
   .lf-grid {
     grid-template-columns: 1fr 1fr;
@@ -198,9 +181,10 @@
     grid-column: 1 / -1;
   }
 }
+
 @media (min-width: 1080px) {
   .lf-grid {
-    grid-template-columns: 1.4fr 1fr;
+    grid-template-columns: 1.5fr 1fr;
     grid-template-rows: 1fr 1fr;
   }
   .lf-card--featured {
@@ -209,73 +193,74 @@
   }
   .lf-card--small {
     grid-column: 2;
-    flex-direction: row;
   }
 }
 
-/* ---------- Card base ---------- */
+/* ---------- Card base — white LinkedIn post card ---------- */
 .lf-card {
   position: relative;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   isolation: isolate;
-  color: inherit;
+  color: var(--li-text);
   text-decoration: none;
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - var(--lf-cut)),
-    calc(100% - var(--lf-cut)) 100%,
-    0 100%
-  );
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.lf-card:hover {
-  transform: translateY(-5px);
-}
-.lf-card:focus-visible::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 6;
-  border: 3px solid var(--lf-orange);
-  pointer-events: none;
+  background: var(--li-surface);
+  border: 1px solid var(--li-border);
+  border-radius: 8px;              /* LinkedIn card radius */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* NO clip-path — LinkedIn cards are plain rectangles */
 }
 
-/* media: image sits on top of a designed fallback panel, so a missing
-   image (onerror removes it) still looks intentional */
+.lf-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(10, 102, 194, 0.18);
+}
+
+.lf-card:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px var(--li-blue),
+    0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* LinkedIn "in" icon badge — top-right corner of every card */
+.lf-card::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 18px;
+  height: 18px;
+  opacity: 0.22;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230A66C2'%3E%3Cpath d='M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z'/%3E%3C/svg%3E")
+    center / contain no-repeat;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ---------- Media area ---------- */
 .lf-media {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(
-    135deg,
-    var(--lf-navy-light) 0%,
-    var(--lf-navy) 60%,
-    var(--lf-navy-deep) 100%
-  );
+  background: #DDDFD4; /* neutral fallback when image is absent */
+  border-bottom: 1px solid var(--li-border);
 }
+
 .lf-media::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    115deg,
-    transparent 0 22px,
-    rgba(246, 243, 238, 0.045) 22px 23px
-  );
+  display: none; /* remove old diagonal stripe */
 }
+
 .lf-media::after {
-  content: "";
-  position: absolute;
-  top: 12%;
-  right: 8%;
-  width: 34%;
-  aspect-ratio: 1;
-  opacity: 0.12;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f6f3ee'%3E%3Cpath d='M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z'/%3E%3C/svg%3E")
-    center / contain no-repeat;
+  display: none; /* remove old LinkedIn logo watermark (we have card::after now) */
 }
+
 .lf-media img {
   position: absolute;
   z-index: 1;
@@ -283,63 +268,89 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.lf-card:hover .lf-media img {
-  transform: scale(1.05);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.lf-card:hover .lf-media img {
+  transform: scale(1.03);
+}
+
+/* ---------- Meta row: author avatar simulation + date ---------- */
 .lf-meta {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  gap: 10px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.lf-meta time::before {
-  content: "";
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  margin-right: 8px;
-  border-radius: 50%;
-  background: var(--lf-orange);
-}
-.lf-tag {
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: var(--lf-orange);
-  color: var(--lf-navy-deep);
+  gap: 8px;
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--li-muted);
+  letter-spacing: 0;
+  text-transform: none;
 }
 
+/* Simulated Konsalta company avatar dot */
+.lf-meta::before {
+  content: "K";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+  border-radius: 4px;
+  background: var(--li-blue);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.lf-meta time::before {
+  display: none; /* remove old orange dot */
+}
+
+.lf-tag {
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(10, 102, 194, 0.1);
+  color: var(--li-blue);
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- Body copy ---------- */
 .lf-text {
   margin: 0;
+  font-size: 0.925rem;
+  line-height: 1.55;
+  color: var(--li-text);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
+/* "Read on LinkedIn" link row */
 .lf-cta {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 4px;
-  font-family: "Manrope", sans-serif;
-  font-size: 0.82rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--li-blue);
+  margin-top: 2px;
 }
+
 .lf-cta svg {
-  width: 16px;
-  height: 16px;
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 14px;
+  height: 14px;
+  transition: transform 0.25s ease;
 }
+
 .lf-card:hover .lf-cta svg {
-  transform: translateX(5px);
+  transform: translateX(4px);
 }
 
 .lf-sr {
@@ -356,15 +367,18 @@
 
 /* ---------- Featured card ---------- */
 .lf-card--featured {
-  min-height: clamp(440px, 52vw, 600px);
+  min-height: clamp(380px, 44vw, 520px);
   justify-content: flex-end;
-  color: var(--lf-cream);
-  background: var(--lf-navy-deep);
+  color: #ffffff;
+  background: #1b2a38; /* dark fallback, like LinkedIn's dark card treatment */
 }
+
 .lf-card--featured .lf-media {
   position: absolute;
   inset: 0;
+  border-bottom: none;
 }
+
 .lf-card--featured::before {
   content: "";
   position: absolute;
@@ -372,91 +386,100 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(6, 26, 50, 0.96) 0%,
-    rgba(11, 45, 83, 0.72) 45%,
-    rgba(11, 45, 83, 0.08) 100%
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.55) 45%,
+    rgba(0, 0, 0, 0.08) 100%
   );
+  pointer-events: none;
 }
+
+/* override the generic ::after badge on the featured card — make it visible */
+.lf-card--featured::after {
+  opacity: 0.5;
+  filter: brightness(10); /* turn the blue icon white */
+}
+
 .lf-card--featured .lf-body {
   position: relative;
   z-index: 3;
   display: flex;
   flex-direction: column;
-  gap: 14px;
-  max-width: 640px;
-  padding: clamp(22px, 3vw, 40px);
-  padding-bottom: calc(clamp(22px, 3vw, 40px) + 8px);
-}
-.lf-card--featured .lf-text {
-  font-size: clamp(1.15rem, 1.9vw, 1.5rem);
-  font-weight: 600;
-  line-height: 1.5;
-  -webkit-line-clamp: 6;
-  line-clamp: 6;
-}
-.lf-card--featured .lf-cta {
-  color: var(--lf-cream);
-  padding-bottom: 4px;
-  border-bottom: 2px solid var(--lf-orange);
-  align-self: flex-start;
+  gap: 10px;
+  padding: clamp(18px, 2.5vw, 28px);
+  padding-bottom: calc(clamp(18px, 2.5vw, 28px) + 6px);
+  max-width: 600px;
 }
 
-/* ---------- Smaller cards ---------- */
+.lf-card--featured .lf-meta {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.lf-card--featured .lf-meta::before {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+}
+
+.lf-card--featured .lf-text {
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-weight: 500;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.92);
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+}
+
+.lf-card--featured .lf-cta {
+  color: #fff;
+  font-weight: 700;
+  align-self: flex-start;
+  padding-bottom: 2px;
+  border-bottom: 1.5px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ---------- Smaller post cards ---------- */
 .lf-card--small {
-  background: var(--lf-cream);
-  color: var(--lf-navy);
+  background: var(--li-surface);
+  color: var(--li-text);
 }
-.lf-card--small:hover {
-  background: #fff;
-}
+
 .lf-card--small .lf-media {
   flex: 0 0 auto;
   aspect-ratio: 16 / 9;
 }
-@media (min-width: 1080px) {
-  .lf-card--small .lf-media {
-    flex: 0 0 40%;
-    aspect-ratio: auto;
-    min-height: 100%;
-  }
-}
+
 .lf-card--small .lf-body {
   display: flex;
   flex: 1;
   flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  padding: 20px 22px 26px;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 16px 16px;
 }
-.lf-card--small .lf-meta {
-  color: var(--lf-navy-light);
-}
+
 .lf-card--small .lf-text {
-  font-size: 0.98rem;
-  font-weight: 500;
-  line-height: 1.6;
   -webkit-line-clamp: 4;
   line-clamp: 4;
 }
-.lf-card--small .lf-cta {
-  color: var(--lf-navy);
-}
-/* orange rule that draws across the bottom on hover */
+
+/* Thin blue left-border accent on hover — LinkedIn uses similar detail */
 .lf-card--small::before {
   content: "";
   position: absolute;
   z-index: 3;
+  top: 0;
   left: 0;
-  right: 0;
   bottom: 0;
-  height: 4px;
-  background: var(--lf-orange);
-  transform: scaleX(0.14);
-  transform-origin: left;
-  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 3px;
+  background: var(--li-blue);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 8px 0 0 8px;
 }
+
 .lf-card--small:hover::before {
-  transform: scaleX(1);
+  transform: scaleY(1);
 }
 
 /* ---------- Small screens ---------- */
@@ -465,25 +488,41 @@
     padding-left: 12px;
     padding-right: 12px;
   }
+
   .lf-panel {
-    border-radius: 20px;
+    border-radius: 8px;
+    padding: 16px 14px;
   }
-  .lf-card {
-    --lf-cut: 20px;
+
+  .lf-panel::before {
+    top: 14px;
+    right: 14px;
+    width: 64px;
   }
+
+  .lf-head {
+    padding-right: 72px;
+  }
+
   .lf-follow {
     width: 100%;
     justify-content: center;
   }
+
   .lf-card--featured {
-    min-height: 420px;
+    min-height: 340px;
   }
 }
+
 @media (hover: none) {
   .lf-card:hover {
     transform: none;
   }
+  .lf-card--small::before {
+    display: none;
+  }
 }
+
 @media (prefers-reduced-motion: reduce) {
   .lf-card,
   .lf-media img,

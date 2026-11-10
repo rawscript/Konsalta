@@ -1,0 +1,173 @@
+.theme-toggle {
+  display: inline-flex;
+  width: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  overflow: hidden;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--bg-card);
+  color: var(--ink);
+  font: 600 12px/1 var(--font);
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    width var(--duration) var(--ease-in-out),
+    background-color var(--duration) var(--ease-in-out),
+    border-color var(--duration) var(--ease-in-out),
+    color var(--duration) var(--ease-in-out);
+}
+
+.theme-toggle-label {
+  max-width: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-width var(--duration) var(--ease-in-out),
+    opacity var(--duration) var(--ease-in-out);
+}
+
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  width: 76px;
+  gap: 6px;
+  padding-inline: 10px;
+}
+
+.theme-toggle:hover .theme-toggle-label,
+.theme-toggle:focus-visible .theme-toggle-label {
+  max-width: 36px;
+  opacity: 1;
+}
+
+.site-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  border-color: var(--orange);
+}
+
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+
+.theme-toggle svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+.theme-toggle-sun,
+.theme-toggle.is-dark .theme-toggle-moon {
+  display: none;
+}
+
+.theme-toggle.is-dark .theme-toggle-sun {
+  display: block;
+}
+
+.theme-toggle-floating {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1200;
+  box-shadow: var(--shadow-md);
+}
+
+[data-theme="dark"] body {
+  background-color: var(--bg);
+  color: var(--ink);
+}
+
+[data-theme="dark"] :is(
+  .contact-card,
+  .contact-form,
+  .consultant-form,
+  .form-section,
+  .faq-item,
+  .faq-answer
+) {
+  border-color: var(--line);
+  background-color: var(--bg-card);
+  color: var(--ink);
+}
+
+[data-theme="dark"] :is(input, textarea, select) {
+  border-color: var(--line);
+  background-color: var(--bg-2);
+  color: var(--ink);
+  color-scheme: dark;
+}
+
+[data-theme="dark"] :is(input, textarea, select)::placeholder {
+  color: var(--mute);
+}
+
+[data-theme="dark"] .progress-container {
+  border-color: var(--line);
+  background: var(--bg-card);
+  color: var(--ink);
+}
+
+[data-theme="dark"] .progress-bar {
+  background: var(--bg-2);
+}
+
+[data-theme="dark"] .site-header .header-menu-toggle {
+  border-color: var(--line);
+  background: var(--bg-card);
+  color: var(--ink);
+}
+
+@media (max-width: 850px) {
+  [data-theme="dark"] .site-header .header-nav {
+    background-color: var(--bg-card);
+  }
+
+  .site-header .site-header-actions {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .site-header .header-menu-toggle {
+    order: 3;
+    margin-left: 12px;
+  }
+
+  .site-header .theme-toggle {
+    width: 40px;
+    min-height: 40px;
+  }
+
+  .site-header .theme-toggle:hover,
+  .site-header .theme-toggle:focus-visible {
+    width: 40px;
+    gap: 0;
+    padding: 8px;
+  }
+
+  .site-header .theme-toggle-label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle {
+    transition: none;
+  }
+}

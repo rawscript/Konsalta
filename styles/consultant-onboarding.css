@@ -1,32 +1,7 @@
 /* Consultant Onboarding Form Styles */
 /* Matches Konsalta brand colors and typography */
 
-:root {
-    /* Brand Core Colors */
-    --navy: #0b2d53;
-    --navy-deep: #061a32;
-    --navy-light: #16487e;
-    --navy-soft: #edf4fc;
-    --navy-tint: #d4e4f7;
-    --orange: #f26522;
-    --orange-deep: #d34e0d;
-    --orange-light: #ff7e42;
-    --orange-soft: #fff2eb;
-    --orange-tint: #fedbc9;
-    /* Neutrals */
-    --bg: #f8f6f0;
-    --bg-warm: #f0ece1;
-    --bg-card: #ffffff;
-    --ink: #0b2d53;
-    --ink-dark: #071526;
-    --ink-soft: #4e5e73;
-    --line: #e2ddd3;
-    --white: #ffffff;
-    /* Form specific */
-    --success: #10b981;
-    --error: #ef4444;
-    --warning: #f59e0b;
-}
+/* tokens moved to tokens.css — do not add :root here */
 
 * {
     box-sizing: border-box;

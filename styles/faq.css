@@ -1,10 +1,11 @@
+/* faq.css local aliases — values now inherit from tokens.css */
 :root {
-  --faq-ink: #0b2d53;
-  --faq-muted: #4e5e73;
-  --faq-orange: #f26522;
-  --faq-surface: #ffffff;
-  --faq-background: #f8f6f0;
-  --faq-line: #e2ddd3;
+  --faq-ink:        var(--navy);
+  --faq-muted:      var(--ink-soft);
+  --faq-orange:     var(--orange);
+  --faq-surface:    var(--bg-card);
+  --faq-background: var(--bg);
+  --faq-line:       var(--line);
 }
 
 body {

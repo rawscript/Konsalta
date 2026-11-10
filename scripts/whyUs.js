@@ -123,6 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
       scrollTrigger: { trigger: ".section-1", start: "top 78%", once: true },
     });
 
+    // intro bridge section
+    gsap.from(".why-intro-label, .why-intro-title, .why-intro-text", {
+      autoAlpha: 0, y: 28, duration: 0.7, stagger: 0.1,
+      scrollTrigger: { trigger: ".why-intro-section", start: "top 80%", once: true },
+    });
+
     // cinematic panels — batch so stagger is driven by one ST instance
     gsap.from(".cinematic-panel", {
       autoAlpha: 0, y: 40, duration: 0.75, stagger: 0.08,
@@ -130,9 +136,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // why-cards — use gsap.utils.toArray + batch for clean stagger
-    gsap.from(".section-head-why, .why-card-6", {
+    gsap.from(".wc-item", {
       autoAlpha: 0, y: 36, duration: 0.65, stagger: 0.08,
-      scrollTrigger: { trigger: ".why-konsalta-section", start: "top 86%", once: true },
+      scrollTrigger: { trigger: ".why-unified-section", start: "top 85%", once: true },
+    });
+
+    // CTA row
+    gsap.from(".why-cta-row", {
+      autoAlpha: 0, y: 24, duration: 0.7,
+      scrollTrigger: { trigger: ".why-cta-row", start: "top 88%", once: true },
     });
   }
 

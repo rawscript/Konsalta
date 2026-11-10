@@ -1,39 +1,9 @@
-:root {
-  /* Brand Core Colors */
-  --navy: #0b2d53;
-  --navy-deep: #061a32;
-  --navy-light: #16487e;
-  --navy-soft: #edf4fc;
-  --navy-tint: #d4e4f7;
-
-  --orange: #f26522;
-  --orange-deep: #d34e0d;
-  --orange-light: #ff7e42;
-  --orange-soft: #fff2eb;
-  --orange-tint: #fedbc9;
-  --white: #ffffff;
-  --bg-warm: #f0ece1;
-  --shadow-sm: 0 10px 24px rgba(6, 26, 50, 0.08);
-  --shadow-md: 0 18px 36px rgba(6, 26, 50, 0.14);
-
-  --bg-color: #f0ece1;
-  --card-surface: rgba(255, 255, 255, 0.04);
-  --border-color: rgba(255, 255, 255, 0.1);
-  --accent-gold: #e5b887;
-  --text-white: #f8fafc;
-  --text-muted: #94a3b8;
-  --bg: #efede8;
-  --bg-2: #e5e2da;
-  --ink: #0d0d10;
-  --ink-soft: #2a2a2d;
-  --mute: #8a8780;
-  /* --line: #dad6c9; */
-  --pill: #0d0d10;
-  --green: #bfd58f;
-  --green-dark: #5c7838;
-  --line: #e2ddd3;
-  --line-light: rgba(226, 221, 211, 0.6);
-}
+/* tokens moved to tokens.css — do not add :root here */
+/* NOTE: why-us.css previously used --bg: #efede8 (darker warm white) and
+   --ink: #0d0d10 (near-black). Both are now canonical in tokens.css.
+   The --bg-2, --mute, --pill, --accent-gold, --text-white, --text-muted,
+   --card-surface, --border-color, --bg-color, --green, --green-dark tokens
+   are all present in tokens.css. */
 
 * {
   box-sizing: border-box;
@@ -175,23 +145,115 @@ body.has-custom-cursor .cursor {
 
 /* ============ HERO ============ */
 .hero {
-  padding: 40px 40px 40px;
+  padding: clamp(56px, 7vw, 100px) clamp(16px, 5vw, 60px) clamp(60px, 8vw, 110px);
   text-align: center;
   position: relative;
   z-index: 3;
-  /* background removed — stage handles it */
 }
 
-.hero > h2 {
-  max-width: 850px;
-  margin: 28px auto 0;
+/* Eyebrow label above the headline */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto clamp(20px, 2.8vw, 36px);
+  padding: 7px 18px;
+  background: rgba(242, 101, 34, 0.08);
+  border: 1px solid rgba(242, 101, 34, 0.22);
+  border-radius: 999px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: clamp(11px, 1vw, 13px);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange-deep);
+}
+
+.eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--orange);
+  flex-shrink: 0;
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.7); }
+}
+
+/* Hero lead paragraph (replaces the old <h2>) */
+.hero-lead {
+  max-width: 760px;
+  margin: clamp(20px, 2.4vw, 32px) auto 0;
   color: var(--ink-soft);
   font-family: "Manrope", sans-serif;
-  font-size: clamp(17px, 1.8vw, 22px);
+  font-size: clamp(16px, 1.65vw, 20px);
   font-weight: 500;
-  line-height: 1.6;
-  letter-spacing: -0.02em;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
   text-wrap: pretty;
+}
+
+/* ── Stat strip ── */
+.hero-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: clamp(32px, 4vw, 56px) auto 0;
+  max-width: 680px;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 6px 24px rgba(11, 45, 83, 0.07);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  padding: clamp(14px, 2vw, 20px) clamp(20px, 3vw, 36px);
+}
+
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px clamp(16px, 2.5vw, 32px);
+  flex: 1 1 160px;
+}
+
+.stat-num {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(18px, 2vw, 26px);
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.stat-label {
+  font-size: clamp(11px, 1vw, 13px);
+  color: var(--mute);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  line-height: 1.3;
+}
+
+.hero-stat-divider {
+  width: 1px;
+  height: 36px;
+  background: var(--line);
+  flex-shrink: 0;
+}
+
+@media (max-width: 540px) {
+  .hero-stat-divider { display: none; }
+  .hero-stats { gap: 4px; }
+  .hero-stat { flex: 1 1 120px; padding: 8px 12px; }
 }
 
 .hero-orb {
@@ -780,12 +842,75 @@ body.has-custom-cursor .cursor {
 }
 
 /* ============================================================
+   INTRO BRIDGE SECTION
+   ============================================================ */
+.why-intro-section {
+  position: relative;
+  z-index: 2;
+  padding: clamp(28px, 3.5vw, 44px) clamp(20px, 5vw, 60px) clamp(24px, 3vw, 36px);
+  text-align: center;
+  /* background:
+    radial-gradient(ellipse 60% 60% at 20% 0%, rgba(242, 101, 34, 0.06), transparent 55%),
+    radial-gradient(ellipse 50% 50% at 80% 100%, rgba(11, 45, 83, 0.06), transparent 55%),
+    var(--bg); */
+}
+
+.why-intro-inner {
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+/* "Six reasons" label with flanking rules */
+.why-intro-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: clamp(10px, 0.9vw, 12px);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: clamp(16px, 2vw, 24px);
+}
+
+.label-rule {
+  display: block;
+  width: clamp(28px, 3vw, 48px);
+  height: 1.5px;
+  background: var(--orange);
+  border-radius: 2px;
+  opacity: 0.55;
+  flex-shrink: 0;
+}
+
+.why-intro-title {
+  margin: 0 0 clamp(16px, 2vw, 24px);
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(32px, 5vw, 60px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+  text-wrap: balance;
+}
+
+.why-intro-text {
+  max-width: 64ch;
+  margin: 0 auto;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+/* ============================================================
    UNIFIED PILLARS + WHY CARDS SECTION
    ============================================================ */
 .why-unified-section {
   position: relative;
   z-index: 2;
-  margin: 0 auto;
+  padding: clamp(48px, 6vw, 80px) clamp(20px, 5vw, 60px) clamp(56px, 7vw, 96px);
   /* shared glass surface */
   background:
     radial-gradient(
@@ -808,63 +933,76 @@ body.has-custom-cursor .cursor {
     0 8px 40px -8px rgba(11, 45, 83, 0.08);
 }
 
-/* Remove the standalone glass frame from pillars-frame since
-   the parent now provides the glass surface */
-.why-unified-section .pillars-frame {
-  background: transparent;
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
-  border: none;
-  box-shadow: none;
-  padding-top: clamp(24px, 4vw, 48px);
-  padding-bottom: clamp(36px, 5vw, 56px);
-  text-align: center;
+/* Cap the card grid width and center it */
+.why-unified-section .why-block {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.why-konsalta-section .section-content {
-  max-width: 820px;
+/* ── CTA row below the six cards ── */
+.why-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  margin-top: clamp(36px, 4vw, 56px);
+  padding: clamp(22px, 2.5vw, 32px) clamp(24px, 3vw, 40px);
+  background: var(--navy);
+  border-radius: 20px;
+  box-shadow: 0 12px 36px -8px rgba(6, 26, 50, 0.3);
 }
 
-.why-konsalta-section .section-title {
-  margin-bottom: 18px;
-  font-size: clamp(30px, 4vw, 48px);
-  line-height: 1.15;
+.why-cta-text {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(15px, 1.5vw, 18px);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.4;
+  flex: 1 1 240px;
 }
 
-.why-konsalta-section .section-text {
-  max-width: 68ch;
-  font-size: clamp(16px, 1.45vw, 18px);
-  line-height: 1.75;
-  text-align: center;
-  text-align-last: center;
-  hyphens: none;
-  -webkit-hyphens: none;
-}
-
-.why-konsalta-section .section-text::first-letter {
-  font-size: inherit;
-  font-weight: inherit;
-  color: inherit;
-}
-
-.why-konsalta-section .section-subtitle {
+.why-cta-btn {
   display: inline-flex;
   align-items: center;
-  width: fit-content;
-  margin: 24px auto 0;
-  padding: 9px 16px;
-  border: 1px solid rgba(242, 101, 34, 0.22);
-  border-radius: 999px;
-  background: rgba(255, 242, 235, 0.8);
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  line-height: 1.4;
+  gap: 10px;
+  padding: 12px 28px;
+  background: var(--orange);
+  color: #ffffff;
+  border-radius: 12px;
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 4px 0 var(--orange-deep);
 }
 
-/* Soft divider between intro text and the cards */
-.why-unified-section .why-cards-section {
-  border-top: 1px solid rgba(226, 221, 211, 0.45);
-  padding-top: clamp(24px, 3vw, 40px);
+.why-cta-btn:hover {
+  background: var(--orange-light);
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--orange-deep);
+}
+
+.why-cta-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--orange-deep);
+}
+
+@media (max-width: 600px) {
+  .why-cta-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .why-cta-btn {
+    align-self: stretch;
+    justify-content: center;
+  }
 }
 
 .why-konsalta-section {
@@ -989,9 +1127,10 @@ body.has-custom-cursor .cursor {
 }
 
 /* ============================================================
-   RESPONSIVE BREAKPOINTS (MUST come after base styles)
+   RESPONSIVE BREAKPOINTS
    ============================================================ */
 
+/* ── 900px: tablet landscape ── */
 @media (max-width: 900px) {
   .accordion-container {
     flex-direction: column;
@@ -1018,277 +1157,294 @@ body.has-custom-cursor .cursor {
   .panel-content h2 {
     font-size: 28px;
   }
-  /* Grid: 2 columns */
   .why-grid-6 {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
 }
 
-/* ============ TABLET (768px) ============ */
+/* ── 768px: tablet portrait ── */
 @media (max-width: 768px) {
+  /* Hero */
   .hero {
-    padding: 32px 20px 40px;
+    padding: 36px 20px 44px;
   }
-
+  .hero-lead {
+    font-size: 15px;
+  }
   .headline {
-    font-size: clamp(36px, 9vw, 52px);
+    font-size: clamp(34px, 8.5vw, 52px);
   }
-
   .headline .line {
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 10px;
     justify-content: center;
   }
-
   .inline-img {
-    width: clamp(80px, 20vw, 140px);
-    height: clamp(40px, 10vw, 70px);
+    width: clamp(72px, 18vw, 130px);
+    height: clamp(38px, 9.5vw, 66px);
   }
-
   .idea-pill {
-    padding: 6px 10px 6px 16px;
+    padding: 6px 10px 6px 14px;
+    gap: 8px;
   }
-
   .idea-pill .txt {
     font-size: clamp(10px, 2.5vw, 14px);
   }
+  .idea-pill .leaf {
+    width: clamp(32px, 4vw, 52px);
+    height: clamp(32px, 4vw, 52px);
+  }
 
-  /* Hide large ambient orbs on mobile to prevent overflow */
+  /* Hero stats: tighter */
+  .hero-stats {
+    max-width: 100%;
+    padding: 12px 16px;
+  }
+  .hero-stat {
+    padding: 6px 12px;
+    flex: 1 1 120px;
+  }
+  .stat-num {
+    font-size: clamp(15px, 3.5vw, 20px);
+  }
+
+  /* Ambient glows too large on mobile */
   .ambient-1,
   .ambient-2 {
     display: none;
   }
-
   .hero-orb-one,
   .hero-orb-two,
   .hero-orb-three {
-    width: clamp(100px, 20vw, 200px);
+    width: clamp(100px, 22vw, 200px);
   }
 
-  /* Accordion panels - proper sizing */
-  .accordion-container {
-    gap: 12px;
+  /* Intro */
+  .why-intro-section {
+    padding: 24px 20px 20px;
   }
 
-  .cinematic-panel.main-panel {
-    height: 280px;
+  /* Cards section */
+  .why-unified-section {
+    padding: 36px 16px 48px;
   }
 
-  .cinematic-panel.thumb-panel {
-    height: 90px;
-  }
-
-  /* Grid: 2 columns for tablets */
+  /* Legacy card grid */
   .why-grid-6 {
     grid-template-columns: repeat(2, 1fr);
-    gap: 18px;
+    gap: 16px;
   }
-
   .why-card-6 {
-    padding: 26px 20px;
+    padding: 24px 18px;
   }
-
   .why-card-title {
-    font-size: 18px;
+    font-size: 17px;
   }
-
   .why-card-desc {
     font-size: 14px;
   }
-
   .section-container-why {
-    padding: 0 18px;
+    padding: 0 16px;
   }
 }
 
-/* ============ MOBILE PORTRAIT (480px and below) ============ */
-@media (max-width: 480px) {
-  .hero {
-    padding: 24px 12px 32px;
-  }
-
+/* ── 600px: large phone ── */
+@media (max-width: 600px) {
+  /* Headline: break into cleaner single-phrase lines */
   .headline {
-    font-size: clamp(28px, 8vw, 40px);
+    font-size: clamp(32px, 9vw, 46px);
   }
-
   .headline .line {
-    flex-wrap: wrap;
     gap: 8px;
   }
 
-  .subtitle {
+  /* Stat strip: hide dividers, single-row wrap */
+  .hero-stat-divider {
+    display: none;
+  }
+  .hero-stats {
+    gap: 0;
+    padding: 10px 12px;
+    border-radius: 16px;
+  }
+  .hero-stat {
+    flex: 1 1 calc(33% - 8px);
+    padding: 8px 6px;
+    min-width: 90px;
+  }
+  .stat-num {
+    font-size: clamp(13px, 3.8vw, 17px);
+  }
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  /* Cards CTA row */
+  .why-cta-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .why-cta-btn {
+    align-self: stretch;
+    justify-content: center;
+  }
+
+  /* Section intro */
+  .section-container-why {
+    padding: 0 14px;
+  }
+}
+
+/* ── 480px: standard phone ── */
+@media (max-width: 480px) {
+  /* Hero */
+  .hero {
+    padding: 28px 16px 36px;
+  }
+  .headline {
+    font-size: clamp(28px, 8.5vw, 38px);
+    letter-spacing: -0.03em;
+  }
+  .headline .line {
+    gap: 6px;
+  }
+  .hero-lead {
     font-size: 14px;
-    padding: 0 4px;
+    line-height: 1.65;
+  }
+  .hero-stats {
+    margin-top: 24px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 4px 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+  .hero-stat {
+    flex: none;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(255,255,255,0.65);
+    border-radius: 0;
+  }
+  .hero-stat:first-child {
+    border-radius: 12px 12px 0 0;
+  }
+  .hero-stat:last-child {
+    border-bottom: none;
+    border-radius: 0 0 12px 12px;
+  }
+  .stat-num {
+    font-size: 15px;
+    font-weight: 800;
+  }
+  .stat-label {
+    font-size: 11px;
+    text-align: right;
   }
 
-  .section {
-    padding: 40px 10px;
+  /* Intro */
+  .why-intro-section {
+    padding: 20px 16px 16px;
+  }
+  .why-intro-title {
+    font-size: clamp(24px, 7vw, 34px);
+  }
+  .why-intro-text {
+    font-size: 14px;
+    line-height: 1.7;
   }
 
+  /* Cards section */
+  .why-unified-section {
+    padding: 32px 12px 44px;
+  }
+
+  /* Cards grid: single column */
+  .why-grid-6 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .why-card-6 {
+    padding: 20px 16px;
+  }
+  .why-card-title {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .why-card-desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .why-card-icon {
+    width: 42px;
+    height: 42px;
+    margin-bottom: 14px;
+  }
+  .section-container-why {
+    padding: 0 12px;
+  }
+  .section-head-why {
+    margin-bottom: 32px;
+  }
+  .section-title-why {
+    font-size: clamp(20px, 5.5vw, 30px);
+  }
+  .section-desc-why {
+    font-size: 14px;
+  }
+  .why-konsalta-section {
+    padding: 20px 0 48px;
+  }
+
+  /* Legacy pill/frame */
   .section-title {
     font-size: clamp(22px, 6vw, 32px);
   }
-
   .section-text {
     font-size: 14px;
+    text-align: left;
   }
-
   .pillars-frame {
     padding: 20px 14px;
     border-radius: 16px;
   }
+}
 
-  /* Accordion - proper mobile sizing */
-  .accordion-container {
-    gap: 10px;
+/* ── Final CTA ── stacks at 640px already, tighten further at 480 */
+@media (max-width: 480px) {
+  .final-cta {
+    padding: 20px 12px 28px;
   }
-
-  .cinematic-panel.main-panel {
-    height: 240px;
+  .final-cta-card {
+    padding: 22px 18px;
+    border-radius: 16px;
   }
-
-  .cinematic-panel.thumb-panel {
-    height: 100px;
-  }
-
-  .panel-content {
-    padding: 20px 16px;
-  }
-
-  .panel-content h2 {
-    font-size: 20px;
-  }
-
-  .panel-content p {
-    font-size: 13px;
-    line-height: 1.5;
-  }
-
-  .action-btn {
-    padding: 10px 20px;
-    font-size: 12px;
-    min-height: 44px;
-  }
-
-  /* Grid: single column on mobile */
-  .why-grid-6 {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .why-card-6 {
-    padding: 22px 16px;
-  }
-
-  .why-card-title {
-    font-size: 17px;
-    margin-bottom: 10px;
-  }
-
-  .why-card-desc {
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-  .why-card-icon {
-    width: 44px;
-    height: 44px;
-    margin-bottom: 16px;
-  }
-
-  .section-container-why {
-    padding: 0 14px;
-  }
-
-  .section-head-why {
-    margin-bottom: 40px;
-  }
-
-  .section-title-why {
-    font-size: clamp(22px, 5vw, 32px);
-  }
-
-  .section-desc-why {
-    font-size: 14px;
-  }
-
-  .why-konsalta-section {
-    padding: 20px 0 50px;
+  .final-cta-h2,
+  .final-cta h2 {
+    font-size: clamp(18px, 5.5vw, 22px);
   }
 }
 
-/* ============ SMALL MOBILE (320px and below) ============ */
+/* ── 320px: very small phones ── */
 @media (max-width: 320px) {
   .hero {
-    padding: 20px 10px 28px;
-  }
-
-  .headline {
-    font-size: clamp(24px, 7vw, 32px);
-  }
-
-  /* Accordion */
-  .accordion-container {
-    gap: 8px;
-  }
-
-  .cinematic-panel.main-panel {
-    height: 200px;
-  }
-
-  .cinematic-panel.thumb-panel {
-    height: 90px;
-  }
-
-  .panel-content {
-    padding: 16px 14px;
-  }
-
-  .panel-content h2 {
-    font-size: 18px;
-  }
-
-  /* Cards */
-  .why-card-6 {
-    padding: 18px 14px;
-  }
-
-  .why-card-title {
-    font-size: 16px;
-  }
-
-  .why-card-desc {
-    font-size: 13px;
-  }
-
-  .section-container-why {
-    padding: 0 12px;
-  }
-}
-
-/* Galaxy Fold / ultra-narrow foldables */
-@media (max-width: 280px) {
-  .hero {
-    padding: 16px 8px 24px;
+    padding: 20px 12px 28px;
   }
   .headline {
-    font-size: 22px;
+    font-size: clamp(22px, 7.5vw, 30px);
   }
-
-  .accordion-container {
-    gap: 6px;
-  }
-  .cinematic-panel.main-panel {
-    height: 180px;
-  }
-  .cinematic-panel.thumb-panel {
-    height: 80px;
-  }
-
-  .why-grid-6 {
-    grid-template-columns: 1fr;
-    gap: 10px;
+  .why-unified-section {
+    padding: 24px 10px 36px;
   }
   .why-card-6 {
     padding: 16px 12px;
@@ -1297,20 +1453,73 @@ body.has-custom-cursor .cursor {
     font-size: 15px;
   }
   .why-card-desc {
-    font-size: 12px;
+    font-size: 13px;
   }
-
   .section-container-why {
     padding: 0 10px;
   }
+  .final-cta {
+    padding: 16px 10px 22px;
+  }
+  .final-cta-card {
+    padding: 20px 14px;
+    border-radius: 14px;
+    gap: 14px;
+  }
+  .final-cta-h2,
+  .final-cta h2 {
+    font-size: 17px;
+  }
 }
 
-/* Landscape foldables */
+/* ── 280px: Galaxy Fold closed ── */
+@media (max-width: 280px) {
+  .hero {
+    padding: 16px 8px 20px;
+  }
+  .headline {
+    font-size: 20px;
+  }
+  .why-intro-section {
+    padding: 16px 10px 12px;
+  }
+  .why-unified-section {
+    padding: 20px 8px 28px;
+  }
+  .why-grid-6 {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .why-card-6 {
+    padding: 14px 10px;
+  }
+  .section-container-why {
+    padding: 0 8px;
+  }
+  .final-cta {
+    padding: 12px 8px 18px;
+  }
+  .final-cta-card {
+    padding: 16px 12px;
+    border-radius: 12px;
+    gap: 12px;
+  }
+}
+
+/* ── Landscape on a small phone ── */
 @media (max-height: 500px) and (orientation: landscape) {
   .hero {
-    padding: 12px 16px 16px;
+    padding: 10px 20px 14px;
   }
-
+  .hero-stats {
+    display: none; /* reclaim vertical space in landscape */
+  }
+  .why-grid-6 {
+    gap: 10px;
+  }
+  .why-card-6 {
+    padding: 14px 12px;
+  }
   .accordion-container {
     gap: 8px;
   }
@@ -1320,30 +1529,202 @@ body.has-custom-cursor .cursor {
   .cinematic-panel.thumb-panel {
     height: 70px;
   }
-
-  .why-grid-6 {
-    gap: 10px;
-  }
-  .why-card-6 {
-    padding: 14px 12px;
-  }
 }
 
-/* Dynamic viewport units */
+/* ── Dynamic viewport support ── */
 @supports (height: 100dvh) {
   .hero {
     min-height: auto;
   }
 }
 
-/* Reduced motion preference */
+/* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .why-card-6,
   .cinematic-panel {
     transition: none;
     transform: none !important;
   }
+  .eyebrow-dot {
+    animation: none;
+  }
   html {
     scroll-behavior: auto;
+  }
+}
+/* ============================================================
+   FINAL CTA — mobile-first, then horizontal at ≥640px
+   ============================================================ */
+.final-cta {
+  padding: clamp(24px, 4vw, 48px) clamp(16px, 5vw, 60px);
+  background: var(--bg);
+}
+
+.final-cta-card {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;         /* stack by default (mobile) */
+  align-items: flex-start;
+  gap: 20px;
+  padding: 28px 24px;
+  border-radius: 20px;
+  background: linear-gradient(150deg, #103866 0%, #0b2d53 55%, #061a32 100%);
+  color: var(--white);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 16px 48px rgba(11, 45, 83, 0.28);
+}
+
+/* ── Decorative orbs (kept subtle so they don't overwhelm small layouts) ── */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.final-cta-card .orb-1 {
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(242, 101, 34, 0.30) 0%, transparent 70%);
+  top: -48px;
+  left: -40px;
+  filter: blur(32px);
+}
+
+.final-cta-card .orb-2 {
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(22, 72, 126, 0.40) 0%, transparent 70%);
+  bottom: -56px;
+  right: -48px;
+  filter: blur(40px);
+}
+
+/* ── Text copy ── */
+.final-cta-copy {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 0;
+  min-width: 0;
+  width: 100%;
+}
+
+.final-cta-h2 {
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  font-size: clamp(20px, 5vw, 30px);   /* scales with viewport on mobile too */
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin: 0 0 8px;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+.final-cta-card > h2,
+.final-cta h2 {
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  font-size: clamp(20px, 5vw, 30px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin: 0 0 8px;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+.final-cta-h2 .accent,
+.final-cta h2 .accent {
+  color: var(--orange);
+}
+
+.final-cta p {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(13.5px, 3.5vw, 15px); /* vw scales on mobile, caps at 15px */
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.76);
+  margin: 0;
+  max-width: 52ch;
+}
+
+/* ── CTA button ── */
+.final-cta .cta-btn {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;                    /* full-width on mobile */
+  padding: 14px 24px;
+  min-height: 48px;               /* touch-friendly */
+  background: var(--orange);
+  color: var(--white);
+  border-radius: 12px;
+  font-family: "Manrope", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 4px 0 var(--orange-deep);
+  transition:
+    background 0.22s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.final-cta .cta-btn:hover {
+  background: var(--orange-light);
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 var(--orange-deep);
+}
+
+.final-cta .cta-btn:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 0 var(--orange-deep);
+}
+
+.final-cta .cta-btn .cta-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.final-cta .cta-btn:hover .cta-arrow {
+  transform: translateX(3px);
+}
+
+/* ── ≥640px: flip to horizontal row ── */
+@media (min-width: 640px) {
+  .final-cta-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(20px, 3vw, 48px);
+    padding: clamp(28px, 3vw, 40px) clamp(28px, 4vw, 52px);
+  }
+
+  .final-cta-copy {
+    width: auto;
+  }
+
+  .final-cta .cta-btn {
+    width: auto;               /* shrink to content on desktop */
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+
+  .final-cta p {
+    font-size: clamp(13.5px, 1.3vw, 15px);
   }
 }

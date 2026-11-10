@@ -11,14 +11,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&family=Manrope:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;800&family=Playfair+Display:ital,wght@0,600;1,400&family=Manrope:wght@400;600;700;800&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="styles/tokens.css" />
     <link rel="stylesheet" href="styles/why-us.css" />
     <link rel="stylesheet" href="styles/header.css" />
     <link rel="stylesheet" href="styles/footer.css" />
     <link rel="stylesheet" href="styles/why-cards.css" />
     <link rel="stylesheet" href="styles/linkedin-feed.css" />
+    <link rel="stylesheet" href="styles/theme.css" />
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
       defer
@@ -28,6 +30,7 @@
       defer
     ></script>
     <script src="scripts/header.js" defer></script>
+    <script src="scripts/theme.js" defer></script>
     <script src="scripts/whyUs.js" defer></script>
     <script src="scripts/why-cards.js" defer></script>
     <script src="scripts/linkedin-feed.js" defer></script>
@@ -49,7 +52,7 @@
       <a href="index.html" class="logo" aria-label="Konsalta Home">
         <span class="logo-dot">
           <picture>
-            <source media="(max-width: 767px)" srcset="public/Logo-5.png" />
+            <source media="(max-width: 850px)" srcset="public/Logo-5.png" />
             <img src="public/Logo-3.png" alt="Konsalta Logo" />
           </picture>
         </span>
@@ -72,10 +75,12 @@
           >Why Choose Us</a
         >
         <a href="contactUs.html">Contact Us</a>
-        <a href="consultant-onboarding.html" class="mobile-nav-contact">On Boarding</a>
+        <a href="consultant-onboarding.html" class="mobile-nav-contact"
+          >Engage with Us</a
+        >
       </nav>
       <a href="consultant-onboarding.html" class="header-btn"
-        >On boarding
+        >Engage with Us
         <svg
           width="14"
           height="14"
@@ -94,15 +99,17 @@
 
     <div class="grain"></div>
 
-    <!-- ============ HERO + PILLARS PARALLAX STAGE ============ -->
+    <!-- ============ HERO + PARALLAX STAGE ============ -->
     <div class="parallax-stage">
-      <!-- Shared animated orbs — bleed across hero AND pillars section -->
       <span class="hero-orb hero-orb-one" aria-hidden="true"></span>
       <span class="hero-orb hero-orb-two" aria-hidden="true"></span>
       <span class="hero-orb hero-orb-three" aria-hidden="true"></span>
 
-      <!-- ============ HERO ============ -->
       <section class="hero">
+        <!-- <div class="hero-eyebrow">
+          <span class="eyebrow-dot" aria-hidden="true"></span>
+          Why Choose Konsalta
+        </div> -->
         <h1 class="headline" id="headline">
           <span class="line line-1">
             <span class="word hero-accent"><span>Built to</span></span>
@@ -120,48 +127,60 @@
             <span class="word headline-navy"><span>consulting</span></span>
           </span>
         </h1>
-        <h2>
-          Organisations choose us because we operate as an agile,
-          network-driven collective, shaped around their exact needs and
-          mapping the strategic architecture required to deliver measurable,
-          sustained value.
-        </h2>
+        <p class="hero-lead">
+          Organisations choose us because we operate as an agile, network-driven
+          collective, shaped around their exact needs and mapping the strategic
+          architecture required to deliver measurable, sustained value.
+        </p>
+
+        <!-- Quick stat strip -->
+        <div class="hero-stats" aria-label="At a glance">
+          <div class="hero-stat">
+            <span class="stat-num">6+</span>
+            <span class="stat-label">African countries served</span>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div class="hero-stat">
+            <span class="stat-num">Multi-hub</span>
+            <span class="stat-label">Pan-African network</span>
+          </div>
+          <div class="hero-stat-divider" aria-hidden="true"></div>
+          <div class="hero-stat">
+            <span class="stat-num">6+</span>
+            <span class="stat-label">Reasons to choose us</span>
+          </div>
+        </div>
       </section>
     </div>
     <!-- end .parallax-stage -->
 
     <!-- ============================================================
-       PILLARS INTRO + WHY CARDS — unified glassmorphism section
+       INTRO BRIDGE — context before the six pillars
        ============================================================ -->
-    <div class="why-unified-section">
-
-      <div class="wrapper">
-        <section class="why-konsalta-section" id="why-konsalta-pillars">
-          <div class="section-container-why">
-
-            <!-- ============ WHY KONSALTA ============ -->
-            <section class="section section-1">
-              <div class="pillars-frame">
-                <div class="section-content">
-                  <h2 class="section-title">Why Konsalta</h2>
-                  <p class="section-text">
-                    At Konsalta, we partner with diverse institutions operating at
-                    the frontlines of African socioeconomic transformation,
-                    delivering tailored intelligence, institutional capacity, and
-                    actionable strategies. We have six clear reasons why Africa's
-                    foremost institutions trust our collective to deliver enduring
-                    outcomes.
-                  </p>
-                </div>
-                <span class="section-subtitle">Six reasons</span>
-              </div>
-            </section>
-          </div>
-        </section>
+    <section class="why-intro-section" aria-labelledby="why-intro-title">
+      <div class="why-intro-inner">
+        <div class="why-intro-label">
+          <span class="label-rule" aria-hidden="true"></span>
+          Six reasons
+          <span class="label-rule" aria-hidden="true"></span>
+        </div>
+        <h2 class="why-intro-title" id="why-intro-title">Why Konsalta?</h2>
+        <p class="why-intro-text">
+          We present, among others, six pillars that define our approach and
+          differentiate us from the rest:
+        </p>
       </div>
+    </section>
 
-      <section class="why-cards-section" aria-label="Why Konsalta">
-        <ul class="wc-grid">
+    <!-- ============================================================
+       SIX PILLARS — why-cards block
+       ============================================================ -->
+    <section
+      class="why-unified-section"
+      aria-label="Why Konsalta — six pillars"
+    >
+      <div class="why-block" role="list">
+        <ul class="wc-grid" aria-label="Six reasons to choose Konsalta">
           <li class="wc-item">
             <article class="wc-card">
               <div class="wc-top">
@@ -283,86 +302,195 @@
             </article>
           </li>
         </ul>
+
+        <!-- CTA row below the cards -->
       </div>
-     
     </section>
-    <!-- end .why-unified-section -->
-    </div>
+    <!-- end why-unified-section -->
 
-   <!-- ============================================================
-     LINKEDIN FEED — 
-     ============================================================ -->
-<section class="lf" id="linkedin-feed" aria-labelledby="lf-title">
-  <div class="lf-panel">
-    <div class="lf-head">
-      <div class="lf-head-text">
-        <span class="lf-badge"><span class="lf-dot"></span> Insights</span>
-        <h2 class="lf-title" id="lf-title">Latest on <span class="accent">LinkedIn</span></h2>
-        <p class="lf-lead">
-          Research updates, project highlights and perspectives from the Konsalta team, shared as we publish them.
-        </p>
-      </div>
-      <a class="lf-follow" href="https://www.linkedin.com/company/konsalta-hub-africa/" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
-        Follow on LinkedIn
-      </a>
-    </div>
-
-    <div class="lf-grid">
-      <!-- ============ FEATURED POST ============ -->
-      <a class="lf-card lf-card--featured" href="https://www.linkedin.com/company/konsalta-hub-africa/" target="_blank" rel="noopener noreferrer">
-        <div class="lf-media">
-          <img src="public/linkedin/post-1.jpeg" alt="" width="1600" height="1000" loading="lazy" decoding="async" onerror="this.remove()" />
-        </div>
-        <div class="lf-body">
-          <div class="lf-meta">
-            <span class="lf-tag">Featured</span>
-            <time datetime="2026-01-01">Recently</time>
+    <!-- ============================================================
+       LINKEDIN FEED
+       ============================================================ -->
+    <section class="lf" id="linkedin-feed" aria-labelledby="lf-title">
+      <div class="lf-panel">
+        <div class="lf-head">
+          <div class="lf-head-text">
+            <span class="lf-badge"><span class="lf-dot"></span> LinkedIn</span>
+            <h2 class="lf-title" id="lf-title">
+              Latest from <span class="accent">Konsalta</span>
+            </h2>
+            <p class="lf-lead">
+              Research updates, project highlights and perspectives from the
+              Konsalta team, shared from Linked In.
+            </p>
           </div>
-          <p class="lf-text"><span style="text-decoration: underline;">Our network model</span>
-          Consulting doesn't have to mean a fixed bench of generalists parachuted into every project.
-          Konsalta operates as a flexible, network-driven collective. For every...</p>
-          <span class="lf-cta">Read on LinkedIn
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </span>
-          <span class="lf-sr">(opens in a new tab)</span>
+          <a
+            class="lf-follow"
+            href="https://www.linkedin.com/company/konsalta-hub-africa/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path
+                d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"
+              />
+            </svg>
+            Follow on LinkedIn
+          </a>
         </div>
-      </a>
 
-      <!-- ============ SMALLER POST 1 ============ -->
-      <a class="lf-card lf-card--small" href="https://www.linkedin.com/company/konsalta-hub-africa/" target="_blank" rel="noopener noreferrer">
-        <!-- <div class="lf-media">
-          <img src="public/linkedin/post-2.jpeg" alt="" width="800" height="450" loading="lazy" decoding="async" onerror="this.remove()" />
-        </div> -->
-        <div class="lf-body">
-          <div class="lf-meta"><time datetime="2026-01-01">Recently</time></div>
-          <p class="lf-text"><span style="text-decoration: underline;">The evidence-to-impact cycle</span>
-            Most organizations don't have an evidence problem. They have an application problem.
-            Data gets collected. Reports get written. And then... </p>
-          <span class="lf-cta">Read on LinkedIn
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </span>
-          <span class="lf-sr">(opens in a new tab)</span>
-        </div>
-      </a>
+        <div class="lf-grid">
+          <!-- FEATURED POST -->
+          <a
+            class="lf-card lf-card--featured"
+            href="https://www.linkedin.com/company/konsalta-hub-africa/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="lf-media">
+              <img
+                src="public/linkedin/post-1.jpeg"
+                alt=""
+                width="1600"
+                height="1000"
+                loading="lazy"
+                decoding="async"
+                onerror="this.remove()"
+              />
+            </div>
+            <div class="lf-body">
+              <div class="lf-meta">
+                <span class="lf-tag">Featured</span>
+                <time datetime="2026-01-01">Konsalta · Recently</time>
+              </div>
+              <p class="lf-text">
+                <strong>Our network model.</strong>
+                Consulting doesn't have to mean a fixed bench of generalists
+                parachuted into every project. Konsalta operates as a flexible,
+                network-driven collective. For every engagement…
+              </p>
+              <span class="lf-cta">
+                Read on LinkedIn
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+              <span class="lf-sr">(opens in a new tab)</span>
+            </div>
+          </a>
 
-      <!-- ============ SMALLER POST 2 ============ -->
-      <a class="lf-card lf-card--small" href="https://www.linkedin.com/company/konsalta-hub-africa/" target="_blank" rel="noopener noreferrer">
-        <!-- <div class="lf-media">
-          <img src="public/linkedin/post-3.jpg" alt="" width="800" height="450" loading="lazy" decoding="async" onerror="this.remove()" />
-        </div> -->
-        <div class="lf-body">
-          <div class="lf-meta"><time datetime="2026-01-01">Recently</time></div>
-          <p class="lf-text">Good decisions need good evidence. But evidence alone doesn't change anything — impact comes from translating it into action.That's the gap Konsalta was built to close.</p>
-          <span class="lf-cta">Read on LinkedIn
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </span>
-          <span class="lf-sr">(opens in a new tab)</span>
+          <!-- SMALLER POST 1 -->
+          <a
+            class="lf-card lf-card--small"
+            href="https://www.linkedin.com/company/konsalta-hub-africa/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="lf-body">
+              <div class="lf-meta">
+                <time datetime="2026-01-01">Konsalta · Recently</time>
+              </div>
+              <p class="lf-text">
+                <strong>The evidence-to-impact cycle.</strong>
+                Most organizations don't have an evidence problem — they have an
+                application problem. Data gets collected. Reports get written.
+                And then…
+              </p>
+              <span class="lf-cta">
+                Read on LinkedIn
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+              <span class="lf-sr">(opens in a new tab)</span>
+            </div>
+          </a>
+
+          <!-- SMALLER POST 2 -->
+          <a
+            class="lf-card lf-card--small"
+            href="https://www.linkedin.com/company/konsalta-hub-africa/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="lf-body">
+              <div class="lf-meta">
+                <time datetime="2026-01-01">Konsalta · Recently</time>
+              </div>
+              <p class="lf-text">
+                Good decisions need good evidence. But evidence alone doesn't
+                change anything — impact comes from translating it into action.
+                That's the gap Konsalta was built to close.
+              </p>
+              <span class="lf-cta">
+                Read on LinkedIn
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </span>
+              <span class="lf-sr">(opens in a new tab)</span>
+            </div>
+          </a>
         </div>
-      </a>
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
+    <section class="final-cta" id="start">
+      <div class="final-cta-card">
+        <span class="orb orb-1" aria-hidden="true"></span>
+        <span class="orb orb-2" aria-hidden="true"></span>
+        <div class="final-cta-copy">
+          <h2 class="final-cta-h2">
+            Ready to turn evidence into
+            <span class="accent">lasting impact?</span>
+          </h2>
+          <p>
+            Partner with our Africa-focused research and advisory collective to
+            make confident, future-ready decisions for your institution.
+          </p>
+        </div>
+        <a href="contactUs.html" class="cta-btn">
+          Start a Conversation
+          <span class="cta-arrow" aria-hidden="true">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </section>
 
     <footer class="site-footer" id="contact">
       <div class="footer-top">
@@ -382,22 +510,26 @@
             <h4>Services</h4>
             <a href="services.html#research">Research &amp; Evaluation</a>
             <a href="services.html#strategy">Strategy &amp; Advisory</a>
-            <!-- <a href="services.html#insights">Market Intelligence</a> -->
             <a href="services.html#policy">Policy &amp; Systems</a>
           </div>
           <div class="footer-col">
             <h4>Company</h4>
             <a href="aboutUs.html">About Konsalta</a>
-            <a href="whyUs.html">Why Choose Us</a>
+            <a href="whyUs.html">Why Konsalta</a>
             <a href="contactUs.html">Contact Us</a>
             <a href="faq.html">FAQs</a>
           </div>
-          
+           <div class="footer-col">
+            <h4>Governance</h4>
+            <a href="governance.html#ethics">Ethics & Integrity</a>
+            <a href="governance.html#privacy">Privacy Policy</a>
+            <a href="governance.html#terms">Terms of Engagement</a>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
         <span>© 2026 Konsalta. All rights reserved.</span>
-        <span>Powered by Momentum Labs</span>
+        <span>Developed by Momentum Labs CLG.</span>
         <span>Better Decisions. Greater Impact.</span>
       </div>
     </footer>

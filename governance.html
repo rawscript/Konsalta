@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Governance | Konsalta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #0a1f44;
+        --orange: #ed4c04;
+        --bg: #f4f6fb;
+        --surface: #ffffff;
+        --ink: #0a1f44;
+        --muted: #46526f;
+        --soft: #e8ecf6;
+        --rule: #cdd5e8;
+        --head: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+        --body: "Source Serif 4", Georgia, "Times New Roman", serif;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #07142e;
+          --surface: #0c1d40;
+          --ink: #eaeffb;
+          --muted: #a8b3d1;
+          --soft: #12275a;
+          --rule: #243665;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #07142e;
+        --surface: #0c1d40;
+        --ink: #eaeffb;
+        --muted: #a8b3d1;
+        --soft: #12275a;
+        --rule: #243665;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--body);
+        font-size: 1.0625rem;
+        line-height: 1.7;
+      }
+      a {
+        color: var(--ink);
+        text-decoration-color: var(--orange);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+      }
+      a:hover {
+        text-decoration-thickness: 3px;
+      }
+      a:focus-visible {
+        outline: 3px solid var(--orange);
+        outline-offset: 3px;
+        border-radius: 2px;
+      }
+      .wrap {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      .masthead {
+        background: var(--navy);
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+      .masthead a {
+        color: #fff;
+      }
+      .bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        position: relative;
+        z-index: 1;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: var(--head);
+        font-weight: 700;
+        font-size: 1.5rem;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+      }
+      .brand img {
+        height: 34px;
+        width: auto;
+        display: block;
+      }
+      .bar .back {
+        font-family: var(--head);
+        font-weight: 500;
+        font-size: 0.95rem;
+      }
+
+      .hero {
+        padding: 64px 0 88px;
+        position: relative;
+        z-index: 1;
+      }
+      .hero h1 {
+        font-family: var(--head);
+        font-weight: 700;
+        font-size: clamp(3rem, 9vw, 6.5rem);
+        line-height: 0.95;
+        letter-spacing: -0.045em;
+        margin: 0 0 24px;
+      }
+      .hero p {
+        max-width: 32em;
+        font-size: 1.25rem;
+        color: #c9d3ee;
+        margin: 0 0 14px;
+      }
+      .hero small {
+        font-family: var(--head);
+        color: #c9d3ee;
+        font-size: 0.9rem;
+      }
+      .masthead::after {
+        content: "";
+        position: absolute;
+        right: -110px;
+        top: 50%;
+        width: 400px;
+        height: 400px;
+        margin-top: -170px;
+        background: var(--orange);
+        border-radius: 50%;
+      }
+      @media (max-width: 820px) {
+        .masthead::after {
+          width: 220px;
+          height: 220px;
+          right: -80px;
+          margin-top: -60px;
+        }
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 200px minmax(0, 1fr);
+        gap: 56px;
+        padding: 56px 24px 96px;
+      }
+      .toc {
+        position: sticky;
+        top: 24px;
+        align-self: start;
+        font-family: var(--head);
+        border-left: 2px solid var(--rule);
+      }
+      .toc a {
+        display: block;
+        padding: 8px 0 8px 16px;
+        margin-left: -2px;
+        border-left: 2px solid transparent;
+        color: var(--muted);
+        text-decoration: none;
+        font-weight: 500;
+      }
+      .toc a:hover {
+        color: var(--ink);
+        border-left-color: var(--orange);
+      }
+
+      section {
+        scroll-margin-top: 24px;
+        padding: 48px 0;
+        border-top: 1px solid var(--rule);
+        max-width: 68ch;
+      }
+      section:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+      section h2 {
+        font-family: var(--head);
+        font-weight: 700;
+        font-size: clamp(2rem, 4.5vw, 3rem);
+        line-height: 1.05;
+        letter-spacing: -0.03em;
+        margin: 0 0 24px;
+      }
+      section:target h2 {
+        text-decoration: underline;
+        text-decoration-color: var(--orange);
+        text-decoration-thickness: 5px;
+        text-underline-offset: 10px;
+      }
+      section h3 {
+        font-family: var(--head);
+        font-weight: 700;
+        font-size: 1.15rem;
+        letter-spacing: -0.01em;
+        margin: 32px 0 6px;
+      }
+      section p {
+        margin: 0 0 14px;
+      }
+      section ul {
+        margin: 0 0 14px;
+        padding-left: 1.2em;
+      }
+      section li {
+        margin-bottom: 6px;
+      }
+      .summary {
+        background: var(--soft);
+        border-left: 4px solid var(--orange);
+        padding: 16px 20px;
+        margin: 0 0 8px;
+        font-size: 1.1rem;
+      }
+      .summary strong {
+        font-family: var(--head);
+      }
+
+      footer {
+        background: var(--navy);
+        color: #fff;
+        padding: 48px 0;
+      }
+      footer a {
+        color: #fff;
+      }
+      footer .wrap {
+        display: grid;
+        grid-template-columns: 1.5fr 1fr;
+        gap: 32px;
+      }
+      footer p {
+        margin: 10px 0 0;
+        color: #c9d3ee;
+        max-width: 28em;
+      }
+      .footer-col h4 {
+        font-family: var(--head);
+        font-size: 1rem;
+        margin: 0 0 10px;
+      }
+      .footer-col a {
+        display: block;
+        padding: 3px 0;
+        font-family: var(--head);
+        font-weight: 500;
+      }
+
+      @media (max-width: 820px) {
+        .layout {
+          grid-template-columns: 1fr;
+          gap: 8px;
+          padding-top: 32px;
+        }
+        .toc {
+          position: static;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 4px 20px;
+          border-left: 0;
+          border-bottom: 1px solid var(--rule);
+          padding-bottom: 12px;
+        }
+        .toc a {
+          padding: 4px 0;
+          margin: 0;
+          border-left: 0;
+        }
+        footer .wrap {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="wrap bar">
+        <a class="brand" href="/"
+          ><img
+            src="public/Logo-2.png"
+            alt=""
+          /></a
+        >
+        <a class="back" href="/">Return to website</a>
+      </div>
+      <div class="wrap hero">
+        <h1>Governance</h1>
+        <p>
+          The standards that guide our conduct, the manner in which we handle
+          your information, and the terms that govern every engagement.
+        </p>
+        <small>Last updated: 10-Nov-2026</small>
+      </div>
+    </header>
+
+    <main class="wrap layout">
+      <nav class="toc" aria-label="On this page">
+        <a href="#ethics">Ethics &amp; Integrity</a>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Engagement</a>
+      </nav>
+
+      <div>
+        <section id="ethics">
+          <h2>Ethics &amp; Integrity</h2>
+          <!-- <p class="summary">
+            <strong>Summary:</strong> Konsalta provides honest and impartial
+            advice, safeguards the confidentiality of client information, and
+            declines work that it is not competent to perform.
+          </p> -->
+
+          <!-- <h3>Honest advice</h3>
+          <p>
+            We advise clients on the basis of the available evidence, including
+            where that evidence does not support the outcome a client had hoped
+            for. We do not overstate results or guarantee outcomes that are
+            beyond our control.
+          </p> -->
+
+          <h3>Confidentiality</h3>
+          <p>
+            Information provided to us in connection with an engagement is
+            available only to the personnel assigned to it. We do not disclose
+            such information to any third party unless the client authorizes it
+            or the law requires it.
+          </p>
+
+          <h3>Conflicts of interest</h3>
+          <p>
+            Before accepting an engagement, we assess whether it conflicts with
+            the interests of another client or of Konsalta. Where a conflict
+            exists, we disclose it promptly and either manage it transparently
+            or decline the engagement.
+          </p>
+
+          <h3>Independence</h3>
+          <p>
+            We do not accept commissions, referral payments, or gifts that could
+            influence our recommendations. Any financial interest we hold in a
+            matter on which we advise is disclosed to the client in advance.
+          </p>
+
+          <h3>Competence</h3>
+          <p>
+            We accept only those engagements that fall within our expertise.
+            Where a matter requires specialist knowledge that we do not hold, we
+            will say so and refer the client to an appropriate professional.
+          </p>
+
+          <h3>Reporting a concern</h3>
+          <p>
+            Any person who believes that Konsalta has failed to meet these
+            standards may write to
+            <a href="contactUs.html">us</a>. The concern
+            will be reviewed by a senior member of the firm who was not involved
+            in the engagement, and a response will be provided within [number]
+            working days.
+          </p>
+        </section>
+
+        <section id="privacy">
+          <h2>Privacy Policy</h2>
+          <!-- <p class="summary">
+            <strong>Summary:</strong> Konsalta collects only the personal
+            information necessary to respond to enquiries and to deliver
+            consultations, and does not sell that information.
+          </p> -->
+
+          <h3>Information we collect</h3>
+          <ul class="summary">
+            <li>
+              Contact details that you provide, including your name, email
+              address, telephone number, and organization.
+            </li>
+            <li>
+              Information that you share when requesting or attending a
+              consultation.
+            </li>
+            <li>
+              Basic technical data collected from this website, such as browser
+              type and the pages visited.
+            </li>
+          </ul>
+
+          <h3>Use of information</h3>
+          <p>
+            We use personal information to respond to enquiries, to arrange and
+            deliver consultations, to comply with legal obligations, and to
+            improve this website. We do not sell personal information.
+          </p>
+
+          <h3>Disclosure to third parties</h3>
+          <p>
+            We disclose personal information only to service providers who
+            support our operations, such as scheduling and communication
+            platforms, and only to the extent necessary for them to perform
+            those services. We may also disclose information where required by
+            law or by a competent authority.
+          </p>
+
+          <h3>Retention</h3>
+          <p>
+            Personal information is retained for as long as necessary to fulfil
+            the purpose for which it was collected and for any period required
+            by law. Thereafter, it is deleted or anonymized.
+          </p>
+
+          <h3>Security</h3>
+          <p>
+            We apply appropriate technical and organizational measures,
+            including access controls and encryption in transit, to protect
+            personal information. Where a security breach affects you, we will
+            notify you and the relevant authority in accordance with applicable
+            law.
+          </p>
+
+          <h3>Your rights</h3>
+          <p>
+            Subject to the data protection laws that apply in your country, you
+            may request access to the personal information we hold about you,
+            request its correction or deletion, and object to certain uses.
+            Requests may be sent to
+            <a href="contactUs.html">us</a>.
+          </p>
+
+          <h3>Cookies</h3>
+          <p>
+            This website does not currently use cookies. You may
+            disable cookies in your browser settings; however, if you prefer to.
+          </p>
+
+          <h3>Amendments</h3>
+          <p>
+            This policy may be amended from time to time. The date at the top of
+            this page indicates when it was last revised.
+          </p>
+        </section>
+
+        <section id="terms">
+          <h2>Terms of Engagement</h2>
+          <p class="summary">
+            <strong>Summary:</strong> Each engagement is agreed in writing
+            before work begins, so that both parties understand its scope and
+            their respective responsibilities.
+          </p>
+
+          <h3>Scope of services</h3>
+          <p>
+            Each engagement is defined in a written proposal or confirmation
+            that sets out the services to be provided, the expected
+            deliverables, and the timeline. Work outside that scope requires the
+            client’s written approval.
+          </p>
+<!-- 
+          <h3>No charge for consultations</h3>
+          <p>
+            Consultations are provided without charge. Should this arrangement
+            change for any service, the change will be agreed in writing before
+            that service is delivered.
+          </p> -->
+
+          <h3>Responsibilities of the client</h3>
+          <p>
+            The client undertakes to provide timely access to the information,
+            personnel, and decisions that Konsalta reasonably requires. Delays
+            on the part of the client may affect the timeline of the engagement.
+          </p>
+
+          <h3>Confidentiality and ownership</h3>
+          <p>
+            Each party shall keep the other’s confidential information private.
+            Unless the written proposal provides otherwise, the client owns the
+            final deliverables, and Konsalta retains ownership of its
+            pre-existing methods, tools, and know-how.
+          </p>
+
+          <!-- <h3>Advice and reliance</h3>
+          <p>
+            Our advice is based on the information available to us at the time
+            it is given. Decisions made on the basis of that advice remain the
+            responsibility of the client, and our work is intended solely for
+            the client’s use and not for reliance by third parties.
+          </p> -->
+
+          <!-- <h3>Limitation of liability</h3>
+          <p>
+            To the fullest extent permitted by law, Konsalta’s liability arising
+            from an engagement is limited to direct losses, and Konsalta is not
+            liable for indirect or consequential losses. Nothing in these terms
+            excludes or limits any liability that cannot lawfully be excluded or
+            limited.
+          </p> -->
+
+          <h3>Termination</h3>
+          <p>
+            Either party may end an engagement by giving written
+            notice within reasonable timelines. Obligations of confidentiality continue after termination.
+          </p>
+
+          <h3>Governing law</h3>
+          <p>
+            These terms are governed by legal laws, and any
+            dispute arising from them shall be submitted to the courts of
+            law.
+          </p>
+
+          <h3>Enquiries</h3>
+          <p>
+            Any question regarding these terms should be directed to
+            <a href="contactUs.html">us</a> before an
+            engagement is confirmed.
+          </p>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div>
+          <a class="brand" href="/"
+            ><img
+              src="public/Logo-2.png"
+              alt=""
+            /></a
+          >
+          <p>Professional consultation services.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Governance</h4>
+          <a href="#ethics">Ethics &amp; Integrity</a>
+          <a href="#privacy">Privacy Policy</a>
+          <a href="#terms">Terms of Engagement</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

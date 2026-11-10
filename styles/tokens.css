@@ -1,0 +1,367 @@
+/* ==========================================================================
+   KONSALTA — DESIGN TOKENS  (tokens.css)
+   Single source of truth for all CSS custom properties.
+
+   USAGE
+   -----
+   Add this as the FIRST stylesheet on every page, before any page-specific
+   CSS.  All other :root blocks should be removed once a page is migrated.
+
+     <link rel="stylesheet" href="styles/tokens.css" />
+
+   STRUCTURE
+   ---------
+   1. Brand primitives  — raw palette values, never used directly in components
+   2. Semantic tokens   — purpose-driven aliases that map primitives to roles
+   3. Glass / surface   — backdrop-filter helpers
+   4. Elevation         — box-shadow scales
+   5. Typography        — font stack + fluid type scale
+   6. Spacing & layout  — section padding, grid gap, border-radius, touch targets
+   7. Animation         — shared duration / easing values
+   8. Component slots   — per-component overrides scoped to :root so any page
+                          can override them without touching shared tokens
+
+   DIVERGENCES RESOLVED
+   --------------------
+   --ink        was #0B2D53 (navy) on most pages, #0D0D10 (near-black) on
+                why-us.css.  Navy body text fails WCAG AA on warm-white bg.
+                Canonical value: #0D0D10 (near-black).
+
+   --ink-soft   was #2A2A2D on why-us.css, #4E5E73 everywhere else.
+                #4E5E73 is used in 7/8 files and passes AA at 16px+.
+                Canonical value: #4E5E73.
+
+   --bg         was #EFEDE8 on why-us / why-cards, #F8F6F0 everywhere else.
+                #F8F6F0 is lighter, more versatile, used by 7/8 files.
+                Canonical value: #F8F6F0.
+                The darker warm tone (#EFEDE8) is preserved as --bg-warm.
+
+   --yellow-*   aliases in our-services.css duplicated --orange-*.
+                Removed; use --orange-* directly.
+   ========================================================================== */
+
+:root {
+
+  /* ─────────────────────────────────────────────────────────────
+     1. BRAND PRIMITIVES
+     Raw palette — referenced only by semantic tokens below.
+     ───────────────────────────────────────────────────────────── */
+
+  /* Navy family */
+  --color-navy-900: #061a32;   /* deepest navy — dark overlays, footer bg    */
+  --color-navy-800: #0b2d53;   /* primary brand navy                         */
+  --color-navy-700: #103866;   /* mid navy — card backgrounds, gradients     */
+  --color-navy-600: #16487e;   /* light navy — hover states, secondary links */
+  --color-navy-100: #edf4fc;   /* navy tint — light backgrounds, badges      */
+  --color-navy-50:  #d4e4f7;   /* softest navy — borders on light surfaces   */
+
+  /* Orange family */
+  --color-orange-700: #d34e0d; /* deep burnt orange — pressed state, shadows */
+  --color-orange-500: #f26522; /* primary brand orange                       */
+  --color-orange-400: #ff7e42; /* light orange — hover, gradients            */
+  --color-orange-100: #fff2eb; /* orange tint — badge / chip backgrounds     */
+  --color-orange-50:  #fedbc9; /* softest orange — borders on light surfaces */
+
+  /* Warm neutral family */
+  --color-warm-50:  #f8f6f0;   /* page background (default)                  */
+  --color-warm-100: #f0ece1;   /* warm section backgrounds                   */
+  --color-warm-200: #efede8;   /* slightly deeper warm bg (why-us page)      */
+  --color-warm-300: #e5e2da;   /* input / card surfaces on warm bg           */
+  --color-warm-400: #e2ddd3;   /* divider / border                           */
+  --color-warm-450: rgba(226, 221, 211, 0.6); /* translucent divider        */
+
+  /* Accent */
+  --color-gold:        #e5b887; /* accent gold — cinematic panels             */
+  --color-green:       #bfd58f; /* success tint                               */
+  --color-green-dark:  #5c7838; /* success emphasis                           */
+
+  /* Pure */
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Status */
+  --color-success: #10b981;
+  --color-error:   #ef4444;
+  --color-warning: #f59e0b;
+
+
+  /* ─────────────────────────────────────────────────────────────
+     2. SEMANTIC TOKENS
+     Map primitives to roles — these are what components use.
+     ───────────────────────────────────────────────────────────── */
+
+  /* Background */
+  --bg:        var(--color-warm-50);    /* default page background            */
+  --bg-warm:   var(--color-warm-100);   /* warm section / aside bg            */
+  --bg-2:      var(--color-warm-300);   /* secondary surface                  */
+  --bg-card:   var(--color-white);      /* card / panel background            */
+
+  /* Brand colours — use these in components, not the primitives */
+  --navy:       var(--color-navy-800);
+  --navy-deep:  var(--color-navy-900);
+  --navy-mid:   var(--color-navy-700);
+  --navy-light: var(--color-navy-600);
+  --navy-soft:  var(--color-navy-100);
+  --navy-tint:  var(--color-navy-50);
+
+  --orange:       var(--color-orange-500);
+  --orange-deep:  var(--color-orange-700);
+  --orange-light: var(--color-orange-400);
+  --orange-soft:  var(--color-orange-100);
+  --orange-tint:  var(--color-orange-50);
+
+  /* Text */
+  --ink:      #0d0d10;  /* primary body text — near-black, not navy            */
+  --ink-dark: #071526;  /* maximum contrast — headings on white                */
+  --ink-soft: #4e5e73;  /* secondary / muted text                              */
+  --mute:     #8a8780;  /* placeholder / disabled text                         */
+
+  /* Borders & lines */
+  --line:       var(--color-warm-400);  /* default divider                     */
+  --line-light: var(--color-warm-450);  /* translucent divider                 */
+
+  /* Pure aliases */
+  --white: var(--color-white);
+  --black: var(--color-black);
+
+  /* Accents */
+  --accent-gold: var(--color-gold);
+  --green:       var(--color-green);
+  --green-dark:  var(--color-green-dark);
+
+  /* Status */
+  --success: var(--color-success);
+  --error:   var(--color-error);
+  --warning: var(--color-warning);
+
+  /* Legacy aliases — kept for backward compat while pages migrate.
+     These map old names used in why-us.css to canonical tokens.    */
+  --bg-color:    var(--bg);
+  --text-white:  var(--white);
+  --text-muted:  var(--mute);
+  --pill:        var(--ink);
+  --cream:       var(--color-warm-50);  /* used in about.css / why-cards.css  */
+
+
+  /* ─────────────────────────────────────────────────────────────
+     3. GLASS / SURFACE TOKENS
+     ───────────────────────────────────────────────────────────── */
+
+  --glass:                rgba(255, 255, 255, 0.78);
+  --glass-card:           rgba(255, 255, 255, 0.76);
+  --glass-card-hover:     rgba(255, 255, 255, 0.92);
+  --glass-border:         rgba(255, 255, 255, 0.88);
+  --glass-border-subtle:  rgba(11, 45, 83, 0.08);
+  --glass-border-orange:  rgba(242, 101, 34, 0.28);
+  --glass-blur:           blur(14px) saturate(135%);
+
+  --glass-inset: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95);
+  --glass-inset-card:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px 0 rgba(11, 45, 83, 0.03);
+
+  /* Cinematic panel (used in services accordion) */
+  --card-surface:  rgba(255, 255, 255, 0.04);  /* dark card bg              */
+  --border-color:  rgba(255, 255, 255, 0.10);  /* dark card border          */
+
+
+  /* ─────────────────────────────────────────────────────────────
+     4. ELEVATION (box-shadow scale)
+     ───────────────────────────────────────────────────────────── */
+
+  --shadow-xs: 0 2px 8px rgba(11, 45, 83, 0.04);
+  --shadow-sm: 0 4px 16px rgba(11, 45, 83, 0.05);
+  --shadow-md: 0 12px 32px rgba(11, 45, 83, 0.08);
+  --shadow-lg: 0 20px 48px rgba(11, 45, 83, 0.12);
+  --shadow-xl: 0 32px 72px rgba(11, 45, 83, 0.16);
+
+  --glass-shadow:
+    0 12px 34px -10px rgba(11, 45, 83, 0.08),
+    0 2px 6px rgba(11, 45, 83, 0.02);
+  --glass-shadow-hover:
+    0 22px 46px -10px rgba(11, 45, 83, 0.14),
+    0 0 0 1px rgba(242, 101, 34, 0.25);
+
+
+  /* ─────────────────────────────────────────────────────────────
+     5. TYPOGRAPHY
+     ───────────────────────────────────────────────────────────── */
+
+  --font:        "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono:   "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  --font-serif:  "Playfair Display", Georgia, "Times New Roman", serif;
+
+  /* Fluid type scale */
+  --fs-xs:   0.75rem;                       /* 12px  labels, badges          */
+  --fs-sm:   0.875rem;                      /* 14px  secondary text          */
+  --fs-base: 1rem;                          /* 16px  body default            */
+  --fs-md:   1.125rem;                      /* 18px  lead paragraphs         */
+  --fs-lg:   1.25rem;                       /* 20px  card titles             */
+  --fs-xl:   clamp(1.375rem, 2.1vw, 1.75rem);   /* ~22–28px  pull quotes    */
+  --fs-2xl:  clamp(1.875rem, 3.8vw, 3rem);      /* ~30–48px  section titles */
+  --fs-3xl:  clamp(2.25rem,  5.5vw, 4.75rem);   /* ~36–76px  hero titles    */
+  --fs-stat: clamp(2rem,     3vw,   2.625rem);   /* big stat numbers         */
+
+
+  /* ─────────────────────────────────────────────────────────────
+     6. SPACING & LAYOUT
+     ───────────────────────────────────────────────────────────── */
+
+  /* Section vertical padding — used on major <section> elements */
+  --section-pad:     clamp(56px, 7vw, 104px);
+  --section-pad-sm:  clamp(32px, 4vw, 56px);  /* tighter bridging sections  */
+
+  /* Grid / flex gap */
+  --gap:    clamp(16px, 2vw, 28px);
+  --gap-sm: clamp(10px, 1.5vw, 16px);
+
+  /* Border radius scale */
+  --r-sm:   10px;
+  --r-md:   14px;
+  --r-lg:   20px;
+  --r-xl:   28px;
+  --r-2xl:  40px;
+  --r-pill: 999px;
+
+  /* Touch target minimum (WCAG 2.5.5) */
+  --touch-min: 44px;
+
+  /* Content max-widths */
+  --max-content:  1300px;
+  --max-prose:    780px;
+  --max-narrow:   640px;
+
+
+  /* ─────────────────────────────────────────────────────────────
+     7. ANIMATION
+     ───────────────────────────────────────────────────────────── */
+
+  --duration:        0.25s;
+  --duration-slow:   0.4s;
+  --duration-enter:  0.65s;
+
+  --ease:            cubic-bezier(0.16, 1, 0.3, 1);   /* spring-like out     */
+  --ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1);    /* material standard   */
+  --ease-bounce:     cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* About-page paper animation (kept here so the values travel with tokens) */
+  --paper-duration: 3.2s;
+  --paper-stagger:  0.65s;
+  --paper-easing:   cubic-bezier(0.36, 0.07, 0.25, 1);
+  --paper-offscreen: 130vmax;
+
+
+  /* ─────────────────────────────────────────────────────────────
+     8. COMPONENT SLOTS
+     Defaults that individual pages can override in their own :root
+     without changing the shared token values.
+     ───────────────────────────────────────────────────────────── */
+
+  /* Header */
+  --header-bg:            transparent;
+  --header-border:        transparent;
+  --header-link-color:    var(--ink-soft);
+  --header-link-active:   var(--navy);
+
+  /* Footer */
+  --footer-bg:            var(--navy-deep);
+  --footer-text:          rgba(255, 255, 255, 0.70);
+  --footer-heading:       rgba(255, 255, 255, 1);
+  --footer-link:          rgba(255, 255, 255, 0.75);
+  --footer-link-hover:    var(--orange-light);
+  --footer-border:        rgba(255, 255, 255, 0.14);
+
+  /* Cards */
+  --card-border:          var(--line);
+  --card-bg:              var(--bg-card);
+  --card-hover-border:    var(--orange);
+
+  /* Buttons — primary */
+  --btn-primary-bg:       var(--orange);
+  --btn-primary-text:     var(--white);
+  --btn-primary-shadow:   var(--orange-deep);
+  --btn-primary-hover-bg: var(--orange-light);
+
+  /* Buttons — secondary (outlined) */
+  --btn-secondary-bg:       var(--white);
+  --btn-secondary-text:     var(--navy);
+  --btn-secondary-border:   var(--navy);
+  --btn-secondary-shadow:   var(--navy);
+
+  /* Focus ring */
+  --focus-ring:  rgba(242, 101, 34, 0.6);
+
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-navy-900: #050b12;
+  --color-navy-800: #a9c8ea;
+  --color-navy-700: #294663;
+  --color-navy-600: #42709e;
+  --color-navy-100: #203448;
+  --color-navy-50: #354d63;
+
+  --color-warm-50: #111820;
+  --color-warm-100: #17212b;
+  --color-warm-200: #202b35;
+  --color-warm-300: #26333e;
+  --color-warm-400: #34424e;
+  --color-warm-450: rgba(91, 108, 122, 0.55);
+
+  --bg: #111820;
+  --bg-warm: #17212b;
+  --bg-2: #26333e;
+  --bg-card: #1c2731;
+
+  --navy: #a9c8ea;
+  --navy-deep: #080f17;
+  --navy-mid: #294663;
+  --navy-light: #78a8d7;
+  --navy-soft: #203448;
+  --navy-tint: #354d63;
+
+  --ink: #e8edf2;
+  --ink-dark: #f5f7fa;
+  --ink-soft: #b7c2ce;
+  --mute: #8d9aa7;
+
+  --line: #34424e;
+  --line-light: rgba(91, 108, 122, 0.55);
+
+  --glass: rgba(28, 39, 49, 0.82);
+  --glass-card: rgba(28, 39, 49, 0.82);
+  --glass-card-hover: rgba(38, 51, 62, 0.94);
+  --glass-border: rgba(183, 194, 206, 0.16);
+  --glass-border-subtle: rgba(183, 194, 206, 0.12);
+  --glass-inset: inset 0 1px 1px 0 rgba(255, 255, 255, 0.06);
+  --glass-inset-card:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.06),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.12);
+
+  --shadow-xs: 0 2px 8px rgba(0, 0, 0, 0.16);
+  --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.34);
+  --shadow-xl: 0 32px 72px rgba(0, 0, 0, 0.4);
+  --glass-shadow:
+    0 12px 34px -10px rgba(0, 0, 0, 0.26),
+    0 2px 6px rgba(0, 0, 0, 0.14);
+  --glass-shadow-hover:
+    0 22px 46px -10px rgba(0, 0, 0, 0.36),
+    0 0 0 1px rgba(242, 101, 34, 0.3);
+
+  --header-bg: rgba(17, 24, 32, 0.88);
+  --header-border: var(--line);
+  --header-link-color: var(--ink-soft);
+  --header-link-active: var(--navy);
+
+  --card-border: var(--line);
+  --card-bg: var(--bg-card);
+
+  --btn-secondary-bg: var(--bg-card);
+  --btn-secondary-text: var(--navy);
+  --btn-secondary-border: var(--navy);
+  --btn-secondary-shadow: var(--navy);
+}

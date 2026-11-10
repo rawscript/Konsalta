@@ -3,67 +3,7 @@
    Single font family · type scale · palette tokens · spacing tokens
    ============================================================ */
 
-:root {
-  /* ---------- Brand ---------- */
-  --navy: #0b2d53;
-  --navy-deep: #061a32;
-  --navy-mid: #103866;
-  --navy-light: #16487e;
-  --navy-soft: #edf4fc;
-  --navy-tint: #d4e4f7;
-
-  --orange: #f26522;
-  --orange-deep: #d34e0d;
-  --orange-light: #ff7e42;
-  --orange-soft: #fff2eb;
-  --orange-tint: #fedbc9;
-
-  /* ---------- Neutrals ---------- */
-  --bg: #f8f6f0;
-  --cream: #f6f3ee;
-  --bg-warm: #f0ece1;
-  --bg-card: #ffffff;
-  --ink-soft: #4e5e73;
-  --line: #e2ddd3;
-  --line-light: rgba(226, 221, 211, 0.6);
-  --white: #ffffff;
-
-  /* ---------- Shadows ---------- */
-  --shadow-sm: 0 4px 16px rgba(11, 45, 83, 0.05);
-  --shadow-md: 0 12px 32px rgba(11, 45, 83, 0.08);
-  --shadow-lg: 0 20px 48px rgba(11, 45, 83, 0.12);
- 
-  /* ---------- Typography ---------- */
-  --font: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-
-  --fs-xs: 0.75rem; /* 12px  labels, badges */
-  --fs-sm: 0.875rem; /* 14px  secondary text */
-  --fs-base: 1rem; /* 16px  body */
-  --fs-md: 1.125rem; /* 18px  lead text */
-  --fs-lg: 1.25rem; /* 20px  card titles */
-  --fs-xl: clamp(1.375rem, 2.1vw, 1.75rem); /* quotes */
-  --fs-2xl: clamp(1.875rem, 3.8vw, 3rem); /* section titles */
-  --fs-3xl: clamp(2.25rem, 5.5vw, 4.75rem); /* hero title */
-  --fs-stat: clamp(2rem, 3vw, 2.625rem); /* big numbers */
-
-  /* ---------- Spacing & shape ---------- */
-  --section-pad: clamp(56px, 7vw, 104px);
-  --gap: clamp(16px, 2vw, 28px);
-  --r-sm: 10px;
-  --r-md: 14px;
-  --r-lg: 20px;
-  --r-xl: 28px;
-  --r-pill: 999px;
-  --touch-min: 44px;
-
-  /* ---------- Paper animation ---------- */
-  --duration: 3.2s;
-  --stagger: 0.65s;
-  --easing: cubic-bezier(0.36, 0.07, 0.25, 1);
-  --offscreen: 130vmax;
-  --paper-body: var(--orange);
-  --paper-shadow: var(--navy-deep);
-}
+/* tokens moved to tokens.css — do not add :root here */
 
 /* ============================================================
    BASE
