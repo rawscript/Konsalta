@@ -1,0 +1,44 @@
+/* ============ TABLET NAVIGATION FIX ============ */
+/* This file MUST be loaded LAST to override all other styles */
+
+/* All tablet sizes between mobile and desktop */
+@media screen and (max-width: 1200px) and (min-width: 851px) {
+  /* Force vertical stacking on tablet */
+  .site-header nav.header-nav,
+  nav.header-nav {
+    display: flex !important;
+    gap: clamp(6px, 0.8vw, 14px) !important;
+    font-size: clamp(11px, 1.2vw, 13px) !important;
+  }
+  
+  .site-header nav.header-nav a,
+  nav.header-nav a {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0 !important;
+    line-height: 1.1 !important;
+    padding: 0 2px !important;
+  }
+  
+  .site-header nav.header-nav a span,
+  nav.header-nav a span {
+    display: block !important;
+    white-space: nowrap !important;
+  }
+  
+  .site-header nav.header-nav a.active::after,
+  nav.header-nav a.active::after {
+    display: none !important;
+  }
+}
+
+/* Extra small tablets */
+@media screen and (max-width: 950px) and (min-width: 851px) {
+  .site-header nav.header-nav,
+  nav.header-nav {
+    gap: 5px !important;
+    font-size: 11px !important;
+  }
+}
