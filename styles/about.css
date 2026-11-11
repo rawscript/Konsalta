@@ -205,21 +205,44 @@ section[id] {
   position: relative;
   overflow: hidden;
   background:
+    /* Primary arched glow - centered orange arc from top */
     radial-gradient(
-      ellipse 700px 500px at 85% 15%,
+      ellipse 200% 80% at 50% -30%,
+      rgba(242, 101, 34, 0.28) 0%,
+      rgba(242, 101, 34, 0.18) 20%,
+      rgba(242, 101, 34, 0.08) 45%,
+      rgba(242, 101, 34, 0.02) 70%,
+      transparent 100%
+    ),
+    /* Deep navy foundation - left side depth */
+    radial-gradient(
+      ellipse 120% 100% at 0% 80%,
+      rgba(16, 56, 102, 0.45) 0%,
+      rgba(16, 56, 102, 0.25) 30%,
+      rgba(16, 56, 102, 0.08) 60%,
+      transparent 90%
+    ),
+    /* Navy accent - right side balance */
+    radial-gradient(
+      ellipse 90% 85% at 100% 40%,
+      rgba(11, 45, 83, 0.4) 0%,
+      rgba(11, 45, 83, 0.2) 35%,
+      rgba(11, 45, 83, 0.05) 65%,
+      transparent 100%
+    ),
+    /* Warm ambient glow - bottom center */
+    radial-gradient(
+      circle at 50% 110%,
       rgba(242, 101, 34, 0.15) 0%,
-      transparent 65%
+      rgba(242, 101, 34, 0.05) 30%,
+      transparent 60%
     ),
+    /* Base gradient - vertical flow */
     radial-gradient(
-      ellipse 750px 520px at 15% 45%,
-      rgba(16, 56, 102, 0.4) 0%,
-      transparent 70%
-    ),
-    linear-gradient(
-      180deg,
+      ellipse 180% 120% at 50% 130%,
       var(--navy-deep) 0%,
-      var(--navy) 40%,
-      var(--navy-mid) 70%,
+      var(--navy) 25%,
+      var(--navy-mid) 50%,
       var(--bg-warm) 100%
     );
 }
