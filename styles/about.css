@@ -1793,7 +1793,10 @@ section[id] {
    ============================================================ */
 .about-who-title {
   margin: 0 0 14px;
-  color: var(--navy);
+  color: var(--orange);
+  /* -webkit-text-stroke:black  1px ; */
+  /* mix-blend-mode: difference; */
+  /* backdrop-filter: invert(1); */
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: clamp(22px, 2.5vw, 30px);
   font-weight: 800;
