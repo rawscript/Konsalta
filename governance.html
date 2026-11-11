@@ -1,563 +1,174 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Governance | Konsalta</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --navy: #0a1f44;
-        --orange: #ed4c04;
-        --bg: #f4f6fb;
-        --surface: #ffffff;
-        --ink: #0a1f44;
-        --muted: #46526f;
-        --soft: #e8ecf6;
-        --rule: #cdd5e8;
-        --head: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
-        --body: "Source Serif 4", Georgia, "Times New Roman", serif;
-      }
-      @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) {
-          --bg: #07142e;
-          --surface: #0c1d40;
-          --ink: #eaeffb;
-          --muted: #a8b3d1;
-          --soft: #12275a;
-          --rule: #243665;
-        }
-      }
-      :root[data-theme="dark"] {
-        --bg: #07142e;
-        --surface: #0c1d40;
-        --ink: #eaeffb;
-        --muted: #a8b3d1;
-        --soft: #12275a;
-        --rule: #243665;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-      }
-      body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--ink);
-        font-family: var(--body);
-        font-size: 1.0625rem;
-        line-height: 1.7;
-      }
-      a {
-        color: var(--ink);
-        text-decoration-color: var(--orange);
-        text-decoration-thickness: 2px;
-        text-underline-offset: 4px;
-      }
-      a:hover {
-        text-decoration-thickness: 3px;
-      }
-      a:focus-visible {
-        outline: 3px solid var(--orange);
-        outline-offset: 3px;
-        border-radius: 2px;
-      }
-      .wrap {
-        max-width: 1120px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Governance | Konsalta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1F44; --orange:#ED4C04;
+  --bg:#F4F6FB; --surface:#FFFFFF; --ink:#0A1F44; --soft:#E3E8F5;
+  --head:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;
+  --body:"Source Serif 4",Georgia,"Times New Roman",serif;
+  --pad:clamp(16px,3vw,40px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#07142E;--surface:#0E2252;--ink:#EAEFFB;--soft:#0B1B40}
+}
+:root[data-theme="dark"]{--bg:#07142E;--surface:#0E2252;--ink:#EAEFFB;--soft:#0B1B40}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.65}
+a{color:inherit;text-decoration-color:var(--orange);text-decoration-thickness:2px;text-underline-offset:4px}
+a:hover{text-decoration-thickness:4px}
+a:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
 
-      .masthead {
-        background: var(--navy);
-        color: #fff;
-        position: relative;
-        overflow: hidden;
-      }
-      .masthead a {
-        color: #fff;
-      }
-      .bar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        position: relative;
-        z-index: 1;
-      }
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-family: var(--head);
-        font-weight: 700;
-        font-size: 1.5rem;
-        letter-spacing: -0.02em;
-        text-decoration: none;
-      }
-      .brand img {
-        height: 34px;
-        width: auto;
-        display: block;
-      }
-      .bar .back {
-        font-family: var(--head);
-        font-weight: 500;
-        font-size: 0.95rem;
-      }
+/* Hero */
+.hero{min-height:100vh;min-height:100svh;background:var(--navy);color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad);position:relative;z-index:2}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--head);font-weight:700;font-size:1.5rem;letter-spacing:-.02em;text-decoration:none}
+.brand img{height:34px;width:auto;display:block}
+.back{font-family:var(--head);font-weight:500;border:2px solid var(--orange);padding:8px 16px;text-decoration:none}
+.back:hover{background:var(--orange)}
+.mark{position:absolute;right:3vw;top:76px;width:min(64vw,700px);aspect-ratio:568/351;z-index:0}
+.mark .dot{position:absolute;left:50.7%;top:0;width:49.3%;height:81.8%;background:var(--orange);border-radius:50%}
+.mark .slash{position:absolute;left:0;top:21.9%;width:53.2%;height:78.1%;background:var(--orange);clip-path:polygon(17.9% 0,0 21.2%,54.3% 84.3%,100% 100%)}
+.intro{position:relative;z-index:1;padding:0 var(--pad);margin-top:auto;max-width:34em}
+.intro p{font-size:clamp(1.1rem,2vw,1.4rem);color:#D3DBF1;margin:0 0 10px}
+.intro small{font-family:var(--head);font-weight:500;color:#fff;font-size:.95rem}
+.hero h1{position:relative;z-index:1;font-family:var(--head);font-weight:700;font-size:17.5vw;line-height:.82;letter-spacing:-.055em;margin:.12em 0 0;padding:0 var(--pad);white-space:nowrap}
 
-      .hero {
-        padding: 64px 0 88px;
-        position: relative;
-        z-index: 1;
-      }
-      .hero h1 {
-        font-family: var(--head);
-        font-weight: 700;
-        font-size: clamp(3rem, 9vw, 6.5rem);
-        line-height: 0.95;
-        letter-spacing: -0.045em;
-        margin: 0 0 24px;
-      }
-      .hero p {
-        max-width: 32em;
-        font-size: 1.25rem;
-        color: #c9d3ee;
-        margin: 0 0 14px;
-      }
-      .hero small {
-        font-family: var(--head);
-        color: #c9d3ee;
-        font-size: 0.9rem;
-      }
-      .masthead::after {
-        content: "";
-        position: absolute;
-        right: -110px;
-        top: 50%;
-        width: 400px;
-        height: 400px;
-        margin-top: -170px;
-        background: var(--orange);
-        border-radius: 50%;
-      }
-      @media (max-width: 820px) {
-        .masthead::after {
-          width: 220px;
-          height: 220px;
-          right: -80px;
-          margin-top: -60px;
-        }
-      }
+/* Navigation strip */
+.strip{position:sticky;top:0;z-index:10;display:grid;grid-template-columns:repeat(3,1fr);background:var(--orange);color:var(--navy);font-family:var(--head);font-weight:700;font-size:1.2rem;line-height:1.15}
+.strip a{padding:16px 12px;text-align:center;text-decoration:none;border-right:2px solid var(--navy)}
+.strip a:last-child{border-right:0}
+.strip a:hover{background:var(--navy);color:#fff}
+.strip a:focus-visible{outline-color:var(--navy);outline-offset:-5px}
 
-      .layout {
-        display: grid;
-        grid-template-columns: 200px minmax(0, 1fr);
-        gap: 56px;
-        padding: 56px 24px 96px;
-      }
-      .toc {
-        position: sticky;
-        top: 24px;
-        align-self: start;
-        font-family: var(--head);
-        border-left: 2px solid var(--rule);
-      }
-      .toc a {
-        display: block;
-        padding: 8px 0 8px 16px;
-        margin-left: -2px;
-        border-left: 2px solid transparent;
-        color: var(--muted);
-        text-decoration: none;
-        font-weight: 500;
-      }
-      .toc a:hover {
-        color: var(--ink);
-        border-left-color: var(--orange);
-      }
+/* Sections */
+.sec{display:grid;grid-template-columns:minmax(300px,34%) 1fr;scroll-margin-top:56px}
+.panel{position:relative;overflow:clip;padding:var(--pad);background:var(--navy);color:#fff}
+.panel.alt{background:var(--orange);color:var(--navy)}
+.panel .in{position:sticky;top:76px;position:-webkit-sticky;z-index:1}
+.panel::after{content:"";position:absolute;right:-12%;bottom:-6%;width:70%;aspect-ratio:1;background:var(--orange);clip-path:polygon(17.9% 0,0 21.2%,54.3% 84.3%,100% 100%,100% 100%);opacity:.9}
+.panel.alt::after{background:var(--navy)}
+h2{font-family:var(--head);font-weight:700;font-size:clamp(2.4rem,4.4vw,4.4rem);line-height:.98;letter-spacing:-.04em;margin:0 0 20px;overflow-wrap:break-word}
+.summary{font-family:var(--head);font-weight:700;font-size:1.2rem;line-height:1.3;margin:0}
+.body{padding:var(--pad);background:var(--bg)}
+.sec:nth-of-type(odd) .body{background:var(--soft)}
+.items{columns:260px 3;column-gap:22px}
+.item{break-inside:avoid;margin:0 0 22px;padding:18px 20px;background:var(--surface);border:3px solid var(--ink);box-shadow:7px 7px 0 var(--orange);transition:transform .15s,box-shadow .15s}
+.item:hover{transform:translate(-2px,-2px);box-shadow:10px 10px 0 var(--orange)}
+.item h3{font-family:var(--head);font-weight:700;font-size:1.25rem;line-height:1.15;letter-spacing:-.01em;margin:0 0 8px}
+.item p{margin:0}
+.item ul{margin:0;padding-left:1.1em}
+.item li{margin-bottom:6px}
+.item li:last-child{margin-bottom:0}
 
-      section {
-        scroll-margin-top: 24px;
-        padding: 48px 0;
-        border-top: 1px solid var(--rule);
-        max-width: 68ch;
-      }
-      section:first-child {
-        border-top: 0;
-        padding-top: 0;
-      }
-      section h2 {
-        font-family: var(--head);
-        font-weight: 700;
-        font-size: clamp(2rem, 4.5vw, 3rem);
-        line-height: 1.05;
-        letter-spacing: -0.03em;
-        margin: 0 0 24px;
-      }
-      section:target h2 {
-        text-decoration: underline;
-        text-decoration-color: var(--orange);
-        text-decoration-thickness: 5px;
-        text-underline-offset: 10px;
-      }
-      section h3 {
-        font-family: var(--head);
-        font-weight: 700;
-        font-size: 1.15rem;
-        letter-spacing: -0.01em;
-        margin: 32px 0 6px;
-      }
-      section p {
-        margin: 0 0 14px;
-      }
-      section ul {
-        margin: 0 0 14px;
-        padding-left: 1.2em;
-      }
-      section li {
-        margin-bottom: 6px;
-      }
-      .summary {
-        background: var(--soft);
-        border-left: 4px solid var(--orange);
-        padding: 16px 20px;
-        margin: 0 0 8px;
-        font-size: 1.1rem;
-      }
-      .summary strong {
-        font-family: var(--head);
-      }
+/* Footer */
+footer{background:var(--navy);color:#fff;padding:var(--pad);display:grid;grid-template-columns:1.4fr 1fr;gap:var(--pad);border-top:6px solid var(--orange)}
+footer p{margin:10px 0 0;color:#D3DBF1}
+.fcol h4{font-family:var(--head);font-size:1rem;margin:0 0 8px}
+.fcol a{display:block;padding:3px 0;font-family:var(--head);font-weight:500;font-size:1.1rem}
 
-      footer {
-        background: var(--navy);
-        color: #fff;
-        padding: 48px 0;
-      }
-      footer a {
-        color: #fff;
-      }
-      footer .wrap {
-        display: grid;
-        grid-template-columns: 1.5fr 1fr;
-        gap: 32px;
-      }
-      footer p {
-        margin: 10px 0 0;
-        color: #c9d3ee;
-        max-width: 28em;
-      }
-      .footer-col h4 {
-        font-family: var(--head);
-        font-size: 1rem;
-        margin: 0 0 10px;
-      }
-      .footer-col a {
-        display: block;
-        padding: 3px 0;
-        font-family: var(--head);
-        font-weight: 500;
-      }
+@media (max-width:900px){
+  .sec{grid-template-columns:1fr}
+  .panel .in{position:static}
+  .panel{padding-bottom:calc(var(--pad) + 40px)}
+  .panel::after{width:44%;right:-6%}
+  h2{font-size:clamp(2.6rem,11vw,5rem)}
+  .mark{width:92vw;top:70px;right:-6vw}
+  footer{grid-template-columns:1fr}
+}
+@media (max-width:560px){
+  .strip{font-size:1.15rem}.strip a{padding:14px 6px}
+  .items{columns:1}
+}
+</style>
+</head>
+<body>
 
-      @media (max-width: 820px) {
-        .layout {
-          grid-template-columns: 1fr;
-          gap: 8px;
-          padding-top: 32px;
-        }
-        .toc {
-          position: static;
-          display: flex;
-          flex-wrap: wrap;
-          gap: 4px 20px;
-          border-left: 0;
-          border-bottom: 1px solid var(--rule);
-          padding-bottom: 12px;
-        }
-        .toc a {
-          padding: 4px 0;
-          margin: 0;
-          border-left: 0;
-        }
-        footer .wrap {
-          grid-template-columns: 1fr;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header class="masthead">
-      <div class="wrap bar">
-        <a class="brand" href="/"
-          ><img
-            src="public/Logo-2.png"
-            alt=""
-          /></a
-        >
-        <a class="back" href="/">Return to website</a>
-      </div>
-      <div class="wrap hero">
-        <h1>Governance</h1>
-        <p>
-          The standards that guide our conduct, the manner in which we handle
-          your information, and the terms that govern every engagement.
-        </p>
-        <small>Last updated: 10-Nov-2026</small>
-      </div>
-    </header>
+<header class="hero">
+  <div class="bar">
+    <a class="brand" href="/"><img src="data:image/png;base64,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" alt="">Konsalta</a>
+    <a class="back" href="/">Return to website</a>
+  </div>
+  <div class="mark" aria-hidden="true"><span class="slash"></span><span class="dot"></span></div>
+  <div class="intro">
+    <p>The standards that guide our conduct, the manner in which we handle your information, and the terms that govern every engagement.</p>
+    <small>Last updated: 10-Nov-2026</small>
+  </div>
+  <h1>Governance</h1>
+</header>
 
-    <main class="wrap layout">
-      <nav class="toc" aria-label="On this page">
-        <a href="#ethics">Ethics &amp; Integrity</a>
-        <a href="#privacy">Privacy Policy</a>
-        <a href="#terms">Terms of Engagement</a>
-      </nav>
+<nav class="strip" aria-label="On this page">
+  <a href="#ethics">Ethics &amp; Integrity</a>
+  <a href="#privacy">Privacy Policy</a>
+  <a href="#terms">Terms of Engagement</a>
+</nav>
 
-      <div>
-        <section id="ethics">
-          <h2>Ethics &amp; Integrity</h2>
-          <!-- <p class="summary">
-            <strong>Summary:</strong> Konsalta provides honest and impartial
-            advice, safeguards the confidentiality of client information, and
-            declines work that it is not competent to perform.
-          </p> -->
+<main>
+  <section class="sec" id="ethics">
+    <div class="panel"><div class="in"><h2>Ethics &amp; Integrity</h2></div></div>
+    <div class="body"><div class="items">
+      <div class="item"><h3>Confidentiality</h3><p>Information provided to us in connection with an engagement is available only to the personnel assigned to it. We do not disclose such information to any third party unless the client authorizes it or the law requires it.</p></div>
+      <div class="item"><h3>Conflicts of interest</h3><p>Before accepting an engagement, we assess whether it conflicts with the interests of another client or of Konsalta. Where a conflict exists, we disclose it promptly and either manage it transparently or decline the engagement.</p></div>
+      <div class="item"><h3>Independence</h3><p>We do not accept commissions, referral payments, or gifts that could influence our recommendations. Any financial interest we hold in a matter on which we advise is disclosed to the client in advance.</p></div>
+      <div class="item"><h3>Competence</h3><p>We accept only those engagements that fall within our expertise. Where a matter requires specialist knowledge that we do not hold, we will say so and refer the client to an appropriate professional.</p></div>
+      <div class="item"><h3>Reporting a concern</h3><p>Any person who believes that Konsalta has failed to meet these standards may write to <a href="contactUs.html">us</a>. The concern will be reviewed by a senior member of the firm who was not involved in the engagement, and a response will be provided within [number] working days.</p></div>
+    </div></div>
+  </section>
 
-          <!-- <h3>Honest advice</h3>
-          <p>
-            We advise clients on the basis of the available evidence, including
-            where that evidence does not support the outcome a client had hoped
-            for. We do not overstate results or guarantee outcomes that are
-            beyond our control.
-          </p> -->
+  <section class="sec" id="privacy">
+    <div class="panel alt"><div class="in"><h2>Privacy Policy</h2></div></div>
+    <div class="body"><div class="items">
+      <div class="item"><h3>Information we collect</h3><ul>
+        <li>Contact details that you provide, including your name, email address, telephone number, and organization.</li>
+        <li>Information that you share when requesting or attending a consultation.</li>
+        <li>Basic technical data collected from this website, such as browser type and the pages visited.</li>
+      </ul></div>
+      <div class="item"><h3>Use of information</h3><p>We use personal information to respond to enquiries, to arrange and deliver consultations, to comply with legal obligations, and to improve this website. We do not sell personal information.</p></div>
+      <div class="item"><h3>Disclosure to third parties</h3><p>We disclose personal information only to service providers who support our operations, such as scheduling and communication platforms, and only to the extent necessary for them to perform those services. We may also disclose information where required by law or by a competent authority.</p></div>
+      <div class="item"><h3>Retention</h3><p>Personal information is retained for as long as necessary to fulfil the purpose for which it was collected and for any period required by law. Thereafter, it is deleted or anonymized.</p></div>
+      <div class="item"><h3>Security</h3><p>We apply appropriate technical and organizational measures, including access controls and encryption in transit, to protect personal information. Where a security breach affects you, we will notify you and the relevant authority in accordance with applicable law.</p></div>
+      <div class="item"><h3>Your rights</h3><p>Subject to the data protection laws that apply in your country, you may request access to the personal information we hold about you, request its correction or deletion, and object to certain uses. Requests may be sent to <a href="contactUs.html">us</a>.</p></div>
+      <div class="item"><h3>Cookies</h3><p>This website does not currently use cookies. You may disable cookies in your browser settings; however, if you prefer to.</p></div>
+      <div class="item"><h3>Amendments</h3><p>This policy may be amended from time to time. The date at the top of this page indicates when it was last revised.</p></div>
+    </div></div>
+  </section>
 
-          <h3>Confidentiality</h3>
-          <p>
-            Information provided to us in connection with an engagement is
-            available only to the personnel assigned to it. We do not disclose
-            such information to any third party unless the client authorizes it
-            or the law requires it.
-          </p>
+  <section class="sec" id="terms">
+    <div class="panel"><div class="in">
+      <h2>Terms of Engagement</h2>
+      <p class="summary">Each engagement is agreed in writing before work begins, so that both parties understand its scope and their respective responsibilities.</p>
+    </div></div>
+    <div class="body"><div class="items">
+      <div class="item"><h3>Scope of services</h3><p>Each engagement is defined in a written proposal or confirmation that sets out the services to be provided, the expected deliverables, and the timeline. Work outside that scope requires the client’s written approval.</p></div>
+      <div class="item"><h3>Responsibilities of the client</h3><p>The client undertakes to provide timely access to the information, personnel, and decisions that Konsalta reasonably requires. Delays on the part of the client may affect the timeline of the engagement.</p></div>
+      <div class="item"><h3>Confidentiality and ownership</h3><p>Each party shall keep the other’s confidential information private. Unless the written proposal provides otherwise, the client owns the final deliverables, and Konsalta retains ownership of its pre-existing methods, tools, and know-how.</p></div>
+      <div class="item"><h3>Termination</h3><p>Either party may end an engagement by giving written notice within reasonable timelines. Obligations of confidentiality continue after termination.</p></div>
+      <div class="item"><h3>Governing law</h3><p>These terms are governed by legal laws, and any dispute arising from them shall be submitted to the courts of law.</p></div>
+      <div class="item"><h3>Enquiries</h3><p>Any question regarding these terms should be directed to <a href="contactUs.html">us</a> before an engagement is confirmed.</p></div>
+    </div></div>
+  </section>
+</main>
 
-          <h3>Conflicts of interest</h3>
-          <p>
-            Before accepting an engagement, we assess whether it conflicts with
-            the interests of another client or of Konsalta. Where a conflict
-            exists, we disclose it promptly and either manage it transparently
-            or decline the engagement.
-          </p>
+<footer>
+  <div>
+    <a class="brand" href="/"><img src="data:image/png;base64,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" alt="">Konsalta</a>
+    <p>Professional consultation services.</p>
+  </div>
+  <div class="fcol">
+    <h4>Governance</h4>
+    <a href="#ethics">Ethics &amp; Integrity</a>
+    <a href="#privacy">Privacy Policy</a>
+    <a href="#terms">Terms of Engagement</a>
+  </div>
+</footer>
 
-          <h3>Independence</h3>
-          <p>
-            We do not accept commissions, referral payments, or gifts that could
-            influence our recommendations. Any financial interest we hold in a
-            matter on which we advise is disclosed to the client in advance.
-          </p>
-
-          <h3>Competence</h3>
-          <p>
-            We accept only those engagements that fall within our expertise.
-            Where a matter requires specialist knowledge that we do not hold, we
-            will say so and refer the client to an appropriate professional.
-          </p>
-
-          <h3>Reporting a concern</h3>
-          <p>
-            Any person who believes that Konsalta has failed to meet these
-            standards may write to
-            <a href="contactUs.html">us</a>. The concern
-            will be reviewed by a senior member of the firm who was not involved
-            in the engagement, and a response will be provided within [number]
-            working days.
-          </p>
-        </section>
-
-        <section id="privacy">
-          <h2>Privacy Policy</h2>
-          <!-- <p class="summary">
-            <strong>Summary:</strong> Konsalta collects only the personal
-            information necessary to respond to enquiries and to deliver
-            consultations, and does not sell that information.
-          </p> -->
-
-          <h3>Information we collect</h3>
-          <ul class="summary">
-            <li>
-              Contact details that you provide, including your name, email
-              address, telephone number, and organization.
-            </li>
-            <li>
-              Information that you share when requesting or attending a
-              consultation.
-            </li>
-            <li>
-              Basic technical data collected from this website, such as browser
-              type and the pages visited.
-            </li>
-          </ul>
-
-          <h3>Use of information</h3>
-          <p>
-            We use personal information to respond to enquiries, to arrange and
-            deliver consultations, to comply with legal obligations, and to
-            improve this website. We do not sell personal information.
-          </p>
-
-          <h3>Disclosure to third parties</h3>
-          <p>
-            We disclose personal information only to service providers who
-            support our operations, such as scheduling and communication
-            platforms, and only to the extent necessary for them to perform
-            those services. We may also disclose information where required by
-            law or by a competent authority.
-          </p>
-
-          <h3>Retention</h3>
-          <p>
-            Personal information is retained for as long as necessary to fulfil
-            the purpose for which it was collected and for any period required
-            by law. Thereafter, it is deleted or anonymized.
-          </p>
-
-          <h3>Security</h3>
-          <p>
-            We apply appropriate technical and organizational measures,
-            including access controls and encryption in transit, to protect
-            personal information. Where a security breach affects you, we will
-            notify you and the relevant authority in accordance with applicable
-            law.
-          </p>
-
-          <h3>Your rights</h3>
-          <p>
-            Subject to the data protection laws that apply in your country, you
-            may request access to the personal information we hold about you,
-            request its correction or deletion, and object to certain uses.
-            Requests may be sent to
-            <a href="contactUs.html">us</a>.
-          </p>
-
-          <h3>Cookies</h3>
-          <p>
-            This website does not currently use cookies. You may
-            disable cookies in your browser settings; however, if you prefer to.
-          </p>
-
-          <h3>Amendments</h3>
-          <p>
-            This policy may be amended from time to time. The date at the top of
-            this page indicates when it was last revised.
-          </p>
-        </section>
-
-        <section id="terms">
-          <h2>Terms of Engagement</h2>
-          <p class="summary">
-            <strong>Summary:</strong> Each engagement is agreed in writing
-            before work begins, so that both parties understand its scope and
-            their respective responsibilities.
-          </p>
-
-          <h3>Scope of services</h3>
-          <p>
-            Each engagement is defined in a written proposal or confirmation
-            that sets out the services to be provided, the expected
-            deliverables, and the timeline. Work outside that scope requires the
-            client’s written approval.
-          </p>
-<!-- 
-          <h3>No charge for consultations</h3>
-          <p>
-            Consultations are provided without charge. Should this arrangement
-            change for any service, the change will be agreed in writing before
-            that service is delivered.
-          </p> -->
-
-          <h3>Responsibilities of the client</h3>
-          <p>
-            The client undertakes to provide timely access to the information,
-            personnel, and decisions that Konsalta reasonably requires. Delays
-            on the part of the client may affect the timeline of the engagement.
-          </p>
-
-          <h3>Confidentiality and ownership</h3>
-          <p>
-            Each party shall keep the other’s confidential information private.
-            Unless the written proposal provides otherwise, the client owns the
-            final deliverables, and Konsalta retains ownership of its
-            pre-existing methods, tools, and know-how.
-          </p>
-
-          <!-- <h3>Advice and reliance</h3>
-          <p>
-            Our advice is based on the information available to us at the time
-            it is given. Decisions made on the basis of that advice remain the
-            responsibility of the client, and our work is intended solely for
-            the client’s use and not for reliance by third parties.
-          </p> -->
-
-          <!-- <h3>Limitation of liability</h3>
-          <p>
-            To the fullest extent permitted by law, Konsalta’s liability arising
-            from an engagement is limited to direct losses, and Konsalta is not
-            liable for indirect or consequential losses. Nothing in these terms
-            excludes or limits any liability that cannot lawfully be excluded or
-            limited.
-          </p> -->
-
-          <h3>Termination</h3>
-          <p>
-            Either party may end an engagement by giving written
-            notice within reasonable timelines. Obligations of confidentiality continue after termination.
-          </p>
-
-          <h3>Governing law</h3>
-          <p>
-            These terms are governed by legal laws, and any
-            dispute arising from them shall be submitted to the courts of
-            law.
-          </p>
-
-          <h3>Enquiries</h3>
-          <p>
-            Any question regarding these terms should be directed to
-            <a href="contactUs.html">us</a> before an
-            engagement is confirmed.
-          </p>
-        </section>
-      </div>
-    </main>
-
-    <footer>
-      <div class="wrap">
-        <div>
-          <a class="brand" href="/"
-            ><img
-              src="public/Logo-4.png"
-              alt=""
-            /></a
-          >
-          <p>Turning Knowledge into Impact.</p>
-        </div>
-        <div class="footer-col">
-          <h4>Governance</h4>
-          <a href="#ethics">Ethics &amp; Integrity</a>
-          <a href="#privacy">Privacy Policy</a>
-          <a href="#terms">Terms of Engagement</a>
-        </div>
-      </div>
-    </footer>
-  </body>
+</body>
 </html>
