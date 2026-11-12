@@ -1,181 +1,683 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Governance | Konsalta</title>
-<link rel="icon" href="./public/favicon.ico" type="image/x-icon">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
-<style>
-:root{
-  --navy:#0A1F44; --orange:#ED4C04;
-  --bg:#F4F6FB; --surface:#FFFFFF; --ink:#0A1F44; --soft:#E3E8F5;
-  --head:"Plus Jakarta Sans","Manrope",Arial,sans-serif;
-  --body:"Work Sans",Inter,"Manrope",serif;
-  --pad:clamp(16px,3vw,40px);
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){--bg:#07142E;--surface:#0E2252;--ink:#EAEFFB;--soft:#0B1B40}
-}
-:root[data-theme="dark"]{--bg:#07142E;--surface:#0E2252;--ink:#EAEFFB;--soft:#0B1B40}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:1.0625rem;line-height:1.65}
-a{color:inherit;text-decoration-color:var(--orange);text-decoration-thickness:2px;text-underline-offset:4px}
-a:hover{text-decoration-thickness:4px}
-a:focus-visible{outline:3px solid var(--orange);outline-offset:3px}
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Governance | Konsalta</title>
+    <link rel="icon" href="./public/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --navy: #0a1f44;
+        --orange: #ed4c04;
+        --bg: #f4f6fb;
+        --surface: #ffffff;
+        --ink: #0a1f44;
+        --soft: #e3e8f5;
+        --head: "Plus Jakarta Sans", "Manrope", Arial, sans-serif;
+        --body: "Work Sans", Inter, "Manrope", serif;
+        --pad: clamp(16px, 3vw, 40px);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --bg: #07142e;
+          --surface: #0e2252;
+          --ink: #eaeffb;
+          --soft: #0b1b40;
+        }
+      }
+      :root[data-theme="dark"] {
+        --bg: #07142e;
+        --surface: #0e2252;
+        --ink: #eaeffb;
+        --soft: #0b1b40;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        * {
+          transition: none !important;
+        }
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--body);
+        font-size: 1.0625rem;
+        line-height: 1.65;
+      }
+      a {
+        color: inherit;
+        text-decoration-color: var(--orange);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+      }
+      a:hover {
+        text-decoration-thickness: 4px;
+      }
+      a:focus-visible {
+        outline: 3px solid var(--orange);
+        outline-offset: 3px;
+      }
 
-/* Hero */
-.hero{min-height:100vh;min-height:100svh;background:var(--navy);color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column}
-.bar{display:flex;justify-content:space-between;align-items:center;padding:20px var(--pad);position:relative;z-index:2}
-.brand{display:flex;align-items:center;gap:12px;font-family:var(--head);font-weight:700;font-size:1.5rem;letter-spacing:-.02em;text-decoration:none}
-.brand img{height:34px;width:auto;display:block}
-.back{font-family:var(--head);font-weight:500;border:2px solid var(--orange);padding:8px 16px;text-decoration:none}
-.back:hover{background:var(--orange)}
-.mark{position:absolute;right:3vw;top:76px;width:min(64vw,700px);aspect-ratio:568/351;z-index:0}
-.mark .dot{position:absolute;left:50.7%;top:0;width:49.3%;height:81.8%;background:var(--orange);border-radius:50%}
-.mark .slash{position:absolute;left:0;top:21.9%;width:53.2%;height:78.1%;background:var(--orange);clip-path:polygon(17.9% 0,0 21.2%,54.3% 84.3%,100% 100%)}
-.intro{position:relative;z-index:1;padding:0 var(--pad);margin-top:auto;max-width:34em}
-.intro p{font-size:clamp(1.1rem,2vw,1.4rem);color:#D3DBF1;margin:0 0 10px}
-.intro small{font-family:var(--head);font-weight:500;color:#fff;font-size:.95rem}
-.hero h1{position:relative;z-index:1;font-family:var(--head);font-weight:700;font-size:17.5vw;line-height:.82;letter-spacing:-.055em;margin:.12em 0 0;padding:0 var(--pad);white-space:nowrap}
+      /* Hero */
+      .hero {
+        min-height: 100vh;
+        min-height: 100svh;
+        background: var(--navy);
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px var(--pad);
+        position: relative;
+        z-index: 2;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-family: var(--head);
+        font-weight: 700;
+        font-size: 1.5rem;
+        letter-spacing: -0.02em;
+        text-decoration: none;
+      }
+      .brand img {
+        height: 34px;
+        width: auto;
+        display: block;
+      }
+      .back {
+        font-family: var(--head);
+        font-weight: 500;
+        border: 2px solid var(--orange);
+        padding: 8px 16px;
+        text-decoration: none;
+      }
+      .back:hover {
+        background: var(--orange);
+      }
+      .mark {
+        position: absolute;
+        right: 3vw;
+        top: 76px;
+        width: min(64vw, 700px);
+        aspect-ratio: 568/351;
+        z-index: 0;
+      }
+      .mark .dot {
+        position: absolute;
+        left: 50.7%;
+        top: 0;
+        width: 49.3%;
+        height: 81.8%;
+        background: var(--orange);
+        border-radius: 50%;
+      }
+      .mark .slash {
+        position: absolute;
+        left: 0;
+        top: 21.9%;
+        width: 53.2%;
+        height: 78.1%;
+        background: var(--orange);
+        clip-path: polygon(17.9% 0, 0 21.2%, 54.3% 84.3%, 100% 100%);
+      }
+      .intro {
+        position: relative;
+        z-index: 1;
+        padding: 0 var(--pad);
+        margin-top: auto;
+        max-width: 34em;
+      }
+      .intro p {
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        color: #d3dbf1;
+        margin: 0 0 10px;
+      }
+      .intro small {
+        font-family: var(--head);
+        font-weight: 500;
+        color: #fff;
+        font-size: 0.95rem;
+      }
+      .hero h1 {
+        position: relative;
+        z-index: 1;
+        font-family: var(--head);
+        font-weight: 700;
+        font-size: 17.5vw;
+        line-height: 0.82;
+        letter-spacing: -0.055em;
+        margin: 0.12em 0 0;
+        padding: 0 var(--pad);
+        white-space: nowrap;
+      }
 
-/* Navigation strip */
-.strip{position:sticky;top:0;z-index:10;display:grid;grid-template-columns:repeat(3,1fr);background:var(--orange);color:var(--navy);font-family:var(--head);font-weight:700;font-size:1.2rem;line-height:1.15}
-.strip a{padding:16px 12px;text-align:center;text-decoration:none;border-right:2px solid var(--navy)}
-.strip a:last-child{border-right:0}
-.strip a:hover{background:var(--navy);color:#fff}
-.strip a:focus-visible{outline-color:var(--navy);outline-offset:-5px}
+      /* Navigation strip */
+      .strip {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        background: var(--orange);
+        color: var(--navy);
+        font-family: var(--head);
+        font-weight: 700;
+        font-size: 1.2rem;
+        line-height: 1.15;
+      }
+      .strip a {
+        padding: 16px 12px;
+        text-align: center;
+        text-decoration: none;
+        border-right: 2px solid var(--navy);
+      }
+      .strip a:last-child {
+        border-right: 0;
+      }
+      .strip a:hover {
+        background: var(--navy);
+        color: #fff;
+      }
+      .strip a:focus-visible {
+        outline-color: var(--navy);
+        outline-offset: -5px;
+      }
 
-/* Sections */
-.sec{display:grid;grid-template-columns:minmax(300px,34%) 1fr;scroll-margin-top:56px}
-.panel{position:relative;overflow:clip;padding:var(--pad);background:var(--navy);color:#fff}
-.panel.alt{background:var(--orange);color:var(--navy)}
-.panel .in{position:sticky;top:76px;position:-webkit-sticky;z-index:1}
-.panel::after{content:"";position:absolute;right:-12%;bottom:-6%;width:70%;aspect-ratio:1;background:var(--orange);clip-path:polygon(17.9% 0,0 21.2%,54.3% 84.3%,100% 100%,100% 100%);opacity:.9}
-.panel.alt::after{background:var(--navy)}
-h2{font-family:var(--head);font-weight:700;font-size:clamp(2.4rem,4.4vw,4.4rem);line-height:.98;letter-spacing:-.04em;margin:0 0 20px;overflow-wrap:break-word}
-.summary{font-family:var(--head);font-weight:700;font-size:1.2rem;line-height:1.3;margin:0}
-.body{padding:var(--pad);background:var(--bg)}
-.sec:nth-of-type(odd) .body{background:var(--soft)}
-.items{columns:260px 3;column-gap:22px}
-.item{break-inside:avoid;margin:0 0 22px;padding:18px 20px;background:var(--surface);border:3px solid var(--ink);box-shadow:7px 7px 0 var(--orange);transition:transform .15s,box-shadow .15s}
-.item:hover{transform:translate(-2px,-2px);box-shadow:10px 10px 0 var(--orange)}
-.item h3{font-family:var(--head);font-weight:700;font-size:1.25rem;line-height:1.15;letter-spacing:-.01em;margin:0 0 8px}
-.item p{margin:0}
-.item ul{margin:0;padding-left:1.1em}
-.item li{margin-bottom:6px}
-.item li:last-child{margin-bottom:0}
+      /* Sections */
+      .sec {
+        display: grid;
+        grid-template-columns: minmax(300px, 34%) 1fr;
+        scroll-margin-top: 56px;
+      }
+      .panel {
+        position: relative;
+        overflow: clip;
+        padding: var(--pad);
+        background: var(--navy);
+        color: #fff;
+      }
+      .panel.alt {
+        background: var(--orange);
+        color: var(--navy);
+      }
+      .panel .in {
+        position: sticky;
+        top: 76px;
+        position: -webkit-sticky;
+        z-index: 1;
+      }
+      .panel::after {
+        content: "";
+        position: absolute;
+        right: -12%;
+        bottom: -6%;
+        width: 70%;
+        aspect-ratio: 1;
+        background: var(--orange);
+        clip-path: polygon(17.9% 0, 0 21.2%, 54.3% 84.3%, 100% 100%, 100% 100%);
+        opacity: 0.9;
+      }
+      .panel.alt::after {
+        background: var(--navy);
+      }
+      h2 {
+        font-family: var(--head);
+        font-weight: 700;
+        font-size: clamp(2.4rem, 4.4vw, 4.4rem);
+        line-height: 0.98;
+        letter-spacing: -0.04em;
+        margin: 0 0 20px;
+        overflow-wrap: break-word;
+      }
+      .summary {
+        font-family: var(--head);
+        font-weight: 700;
+        font-size: 1.2rem;
+        line-height: 1.3;
+        margin: 0;
+      }
+      .body {
+        padding: var(--pad);
+        background: var(--bg);
+      }
+      .sec:nth-of-type(odd) .body {
+        background: var(--soft);
+      }
+      .items {
+        columns: 260px 3;
+        column-gap: 22px;
+      }
+      .item {
+        break-inside: avoid;
+        margin: 0 0 22px;
+        padding: 18px 20px;
+        background: var(--surface);
+        border: 3px solid var(--ink);
+        box-shadow: 7px 7px 0 var(--orange);
+        transition:
+          transform 0.15s,
+          box-shadow 0.15s;
+      }
+      .item:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 10px 10px 0 var(--orange);
+      }
+      .item h3 {
+        font-family: var(--head);
+        font-weight: 700;
+        font-size: 1.25rem;
+        line-height: 1.15;
+        letter-spacing: -0.01em;
+        margin: 0 0 8px;
+      }
+      .item p {
+        margin: 0;
+      }
+      .item ul {
+        margin: 0;
+        padding-left: 1.1em;
+      }
+      .item li {
+        margin-bottom: 6px;
+      }
+      .item li:last-child {
+        margin-bottom: 0;
+      }
 
-/* Footer */
-footer{background:var(--navy);color:#fff;padding:var(--pad);display:grid;grid-template-columns:1.4fr 1fr;gap:var(--pad);border-top:6px solid var(--orange)}
-footer p{margin:10px 0 0;color:#D3DBF1}
-.fcol h4{font-family:var(--head);font-size:1rem;margin:0 0 8px}
-.fcol a{display:block;padding:3px 0;font-family:var(--head);font-weight:500;font-size:1.1rem}
+      .site-footer {
+        background: var(--navy);
+        color: #fff;
+        padding: var(--pad);
+        border-top: 6px solid var(--orange);
+      }
+      .site-footer .footer-top {
+        display: grid;
+        grid-template-columns: minmax(220px, 1.4fr) repeat(3, minmax(0, 1fr));
+        gap: clamp(20px, 3vw, 40px);
+        margin-bottom: 36px;
+      }
+      .site-footer .footer-logo img {
+        display: block;
+        width: auto;
+        height: 38px;
+      }
+      .site-footer .footer-brand p {
+        max-width: 34em;
+        margin: 14px 0 0;
+        color: #d3dbf1;
+        font-size: 0.95rem;
+      }
+      .site-footer .footer-cols {
+        display: grid;
+        grid-column: span 3;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 24px;
+      }
+      .site-footer .footer-col h4 {
+        margin: 0 0 12px;
+        color: var(--orange);
+        font-family: var(--head);
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+      .site-footer .footer-col a {
+        display: block;
+        width: fit-content;
+        padding: 3px 0;
+        color: #d3dbf1;
+        font-family: var(--head);
+        font-size: 0.95rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+      .site-footer .footer-col a:hover {
+        color: #fff;
+        text-decoration: underline;
+        text-decoration-color: var(--orange);
+      }
+      .site-footer .footer-col a:focus-visible {
+        outline-color: var(--orange);
+        outline-offset: 3px;
+      }
+      .site-footer .footer-bottom {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 8px 24px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(211, 219, 241, 0.3);
+        color: #d3dbf1;
+        font-size: 0.85rem;
+      }
+      @media (max-width: 900px) {
+        .site-footer .footer-top {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 24px;
+        }
+        .site-footer .footer-brand {
+          grid-column: 1 / -1;
+        }
+        .site-footer .footer-cols {
+          grid-column: 1 / -1;
+        }
+      }
+      @media (max-width: 560px) {
+        .site-footer .footer-top {
+          grid-template-columns: 1fr;
+          gap: 24px;
+          margin-bottom: 28px;
+        }
+        .site-footer .footer-cols {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .site-footer .footer-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .site-footer .footer-col a {
+          transition: none;
+        }
+      }
 
-@media (max-width:900px){
-  .sec{grid-template-columns:1fr}
-  .panel .in{position:static}
-  .panel{padding-bottom:calc(var(--pad) + 40px)}
-  .panel::after{width:44%;right:-6%}
-  h2{font-size:clamp(2.6rem,11vw,5rem)}
-  .mark{width:92vw;top:70px;right:-6vw}
-  footer{grid-template-columns:1fr}
-}
-@media (max-width:560px){
-  .strip{font-size:1.15rem}.strip a{padding:14px 6px}
-  .items{columns:1}
-}
-</style>
-</head>
-<body>
-
-<header class="hero">
-  <div class="bar">
-    <a class="brand" href="/"><img src="public/Logo-4.png" alt=""></a>
-    <a class="back" href="/">Return to website</a>
-  </div>
-  <div class="mark" aria-hidden="true"><span class="slash"></span><span class="dot"></span></div>
-  <div class="intro">
-    <p>The standards that guide our conduct, the manner in which we handle your information, and the terms that govern every engagement.</p>
-    <small>Last updated: 10-Nov-2026</small>
-  </div>
-  <h1>Governance</h1>
-</header>
-
-<nav class="strip" aria-label="On this page">
-  <a href="#ethics">Ethics &amp; Integrity</a>
-  <a href="#privacy">Privacy Policy</a>
-  <a href="#terms">Terms of Engagement</a>
-</nav>
-
-<main>
-  <section class="sec" id="ethics">
-    <div class="panel"><div class="in"><h2>Ethics &amp; Integrity</h2></div></div>
-    <div class="body"><div class="items">
-      <div class="item"><h3>Confidentiality</h3><p>Information provided to us in connection with an engagement is available only to the personnel assigned to it. We do not disclose such information to any third party unless the client authorizes it or the law requires it.</p></div>
-      <div class="item"><h3>Conflicts of interest</h3><p>Before accepting an engagement, we assess whether it conflicts with the interests of another client or of Konsalta. Where a conflict exists, we disclose it promptly and either manage it transparently or decline the engagement.</p></div>
-      <div class="item"><h3>Independence</h3><p>We do not accept commissions, referral payments, or gifts that could influence our recommendations. Any financial interest we hold in a matter on which we advise is disclosed to the client in advance.</p></div>
-      <div class="item"><h3>Competence</h3><p>We accept only those engagements that fall within our expertise. Where a matter requires specialist knowledge that we do not hold, we will say so and refer the client to an appropriate professional.</p></div>
-      <div class="item"><h3>Reporting a concern</h3><p>Any person who believes that Konsalta has failed to meet these standards may write to <a href="contactUs.html">us</a>. The concern will be reviewed by a senior member of the firm who was not involved in the engagement, and a response will be provided within [number] working days.</p></div>
-    </div></div>
-  </section>
-
-  <section class="sec" id="privacy">
-    <div class="panel alt"><div class="in"><h2>Privacy Policy</h2></div></div>
-    <div class="body"><div class="items">
-      <div class="item"><h3>Information we collect</h3><ul>
-        <li>Contact details that you provide, including your name, email address, telephone number, and organization.</li>
-        <li>Information that you share when requesting or attending a consultation.</li>
-        <li>Basic technical data collected from this website, such as browser type and the pages visited.</li>
-      </ul></div>
-      <div class="item"><h3>Use of information</h3><p>We use personal information to respond to enquiries, to arrange and deliver consultations, to comply with legal obligations, and to improve this website. We do not sell personal information.</p></div>
-      <div class="item"><h3>Disclosure to third parties</h3><p>We disclose personal information only to service providers who support our operations, such as scheduling and communication platforms, and only to the extent necessary for them to perform those services. We may also disclose information where required by law or by a competent authority.</p></div>
-      <div class="item"><h3>Retention</h3><p>Personal information is retained for as long as necessary to fulfil the purpose for which it was collected and for any period required by law. Thereafter, it is deleted or anonymized.</p></div>
-      <div class="item"><h3>Security</h3><p>We apply appropriate technical and organizational measures, including access controls and encryption in transit, to protect personal information. Where a security breach affects you, we will notify you and the relevant authority in accordance with applicable law.</p></div>
-      <div class="item"><h3>Your rights</h3><p>Subject to the data protection laws that apply in your country, you may request access to the personal information we hold about you, request its correction or deletion, and object to certain uses. Requests may be sent to <a href="contactUs.html">us</a>.</p></div>
-      <div class="item"><h3>Cookies</h3><p>This website does not currently use cookies. You may disable cookies in your browser settings; however, if you prefer to.</p></div>
-      <div class="item"><h3>Amendments</h3><p>This policy may be amended from time to time. The date at the top of this page indicates when it was last revised.</p></div>
-    </div></div>
-  </section>
-
-  <section class="sec" id="terms">
-    <div class="panel"><div class="in">
-      <h2>Terms of Engagement</h2>
-      <p class="summary">Each engagement is agreed in writing before work begins, so that both parties understand its scope and their respective responsibilities.</p>
-    </div></div>
-    <div class="body"><div class="items">
-      <div class="item"><h3>Scope of services</h3><p>Each engagement is defined in a written proposal or confirmation that sets out the services to be provided, the expected deliverables, and the timeline. Work outside that scope requires the client’s written approval.</p></div>
-      <div class="item"><h3>Responsibilities of the client</h3><p>The client undertakes to provide timely access to the information, personnel, and decisions that Konsalta reasonably requires. Delays on the part of the client may affect the timeline of the engagement.</p></div>
-      <div class="item"><h3>Confidentiality and ownership</h3><p>Each party shall keep the other’s confidential information private. Unless the written proposal provides otherwise, the client owns the final deliverables, and Konsalta retains ownership of its pre-existing methods, tools, and know-how.</p></div>
-      <div class="item"><h3>Termination</h3><p>Either party may end an engagement by giving written notice within reasonable timelines. Obligations of confidentiality continue after termination.</p></div>
-      <div class="item"><h3>Governing law</h3><p>These terms are governed by legal laws, and any dispute arising from them shall be submitted to the courts of law.</p></div>
-      <div class="item"><h3>Enquiries</h3><p>Any question regarding these terms should be directed to <a href="contactUs.html">us</a> before an engagement is confirmed.</p></div>
-    </div></div>
-  </section>
-</main>
-<!-- will fix this to match the other footers -->
-<footer>
-  <div>
-    <a class="brand" href="/"><img src="public/Logo-4.png" alt=""></a>
-    <!-- <p>Turning Knowledge into Impact.</p> -->
-  </div>
-  <div class="fcol">
-    <h4>Governance</h4>
-    <a href="#ethics">Ethics &amp; Integrity</a>
-    <a href="#privacy">Privacy Policy</a>
-    <a href="#terms">Terms of Engagement</a>
-  </div>
-  <div class="fcol">
-        <span>© 2026 Konsalta | All rights reserved | </span>
-        <span>Developed by Momentum Labs CLG </span>
-        <!-- <span>Turning knowledge into impact.</span> -->
+      @media (max-width: 900px) {
+        .sec {
+          grid-template-columns: 1fr;
+        }
+        .panel .in {
+          position: static;
+        }
+        .panel {
+          padding-bottom: calc(var(--pad) + 40px);
+        }
+        .panel::after {
+          width: 44%;
+          right: -6%;
+        }
+        h2 {
+          font-size: clamp(2.6rem, 11vw, 5rem);
+        }
+        .mark {
+          width: 92vw;
+          top: 70px;
+          right: -6vw;
+        }
+      }
+      @media (max-width: 560px) {
+        .strip {
+          font-size: 1.15rem;
+        }
+        .strip a {
+          padding: 14px 6px;
+        }
+        .items {
+          columns: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="bar">
+        <a class="brand" href="/"><img src="public/Logo-4.png" alt="" /></a>
+        <a class="back" href="/">Return to website</a>
       </div>
-</footer>
- <!-- <footer class="site-footer" id="contact">
+      <div class="mark" aria-hidden="true">
+        <span class="slash"></span><span class="dot"></span>
+      </div>
+      <div class="intro">
+        <p>
+          The standards that guide our conduct, the manner in which we handle
+          your information, and the terms that govern every engagement.
+        </p>
+        <small>Last updated: 10-Nov-2026</small>
+      </div>
+      <h1>Governance</h1>
+    </header>
+
+    <nav class="strip" aria-label="On this page">
+      <a href="#ethics">Ethics &amp; Integrity</a>
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#terms">Terms of Engagement</a>
+    </nav>
+
+    <main>
+      <section class="sec" id="ethics">
+        <div class="panel">
+          <div class="in"><h2>Ethics &amp; Integrity</h2></div>
+        </div>
+        <div class="body">
+          <div class="items">
+            <div class="item">
+              <h3>Confidentiality</h3>
+              <p>
+                Information provided to us in connection with an engagement is
+                available only to the personnel assigned to it. We do not
+                disclose such information to any third party unless the client
+                authorizes it or the law requires it.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Conflicts of interest</h3>
+              <p>
+                Before accepting an engagement, we assess whether it conflicts
+                with the interests of another client or of Konsalta. Where a
+                conflict exists, we disclose it promptly and either manage it
+                transparently or decline the engagement.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Independence</h3>
+              <p>
+                We do not accept commissions, referral payments, or gifts that
+                could influence our recommendations. Any financial interest we
+                hold in a matter on which we advise is disclosed to the client
+                in advance.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Competence</h3>
+              <p>
+                We accept only those engagements that fall within our expertise.
+                Where a matter requires specialist knowledge that we do not
+                hold, we will say so and refer the client to an appropriate
+                professional.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Reporting a concern</h3>
+              <p>
+                Any person who believes that Konsalta has failed to meet these
+                standards may write to <a href="contactUs.html">us</a>. The
+                concern will be reviewed by a senior member of the firm who was
+                not involved in the engagement, and a response will be provided
+                within [number] working days.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="privacy">
+        <div class="panel alt">
+          <div class="in"><h2>Privacy Policy</h2></div>
+        </div>
+        <div class="body">
+          <div class="items">
+            <div class="item">
+              <h3>Data Collection</h3>
+              <ul>
+                <li>
+                  Contact details that you provide, including your name, email
+                  address, telephone number, and organization.
+                </li>
+                <li>
+                  Information that you share when requesting or attending a
+                  consultation.
+                </li>
+                <li>
+                  Basic technical data collected from this website, such as
+                  browser type and the pages visited.
+                </li>
+              </ul>
+            </div>
+            <div class="item">
+              <h3>Data Usage</h3>
+              <p>
+                We use personal information to respond to enquiries, to arrange
+                and deliver consultations, to comply with legal obligations, and
+                to improve this website. We do not sell personal information.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Disclosure to third parties</h3>
+              <p>
+                We disclose personal information only to service providers who
+                support our operations, such as scheduling and communication
+                platforms, and only to the extent necessary for them to perform
+                those services. We may also disclose information where required
+                by law or by a competent authority.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Retention</h3>
+              <p>
+                Personal information is retained for as long as necessary to
+                fulfil the purpose for which it was collected and for any period
+                required by law. Thereafter, it is deleted or anonymized.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Security</h3>
+              <p>
+                We apply appropriate technical and organizational measures,
+                including access controls and encryption in transit, to protect
+                personal information. Where a security breach affects you, we
+                will notify you and the relevant authority in accordance with
+                applicable law.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Your rights</h3>
+              <p>
+                Subject to the data protection laws that apply in your country,
+                you may request access to the personal information we hold about
+                you, request its correction or deletion, and object to certain
+                uses. Requests may be sent to <a href="contactUs.html">us</a>.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Cookies</h3>
+              <p>
+                This website does not currently use cookies. You may disable
+                cookies in your browser settings; however, if you prefer to.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Amendments</h3>
+              <p>
+                This policy may be amended from time to time. The date at the
+                top of this page indicates when it was last revised.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec" id="terms">
+        <div class="panel">
+          <div class="in">
+            <h2>Terms of Engagement</h2>
+            <p class="summary">
+              Each engagement is agreed in writing before work begins, so that
+              both parties understand its scope and their respective
+              responsibilities.
+            </p>
+          </div>
+        </div>
+        <div class="body">
+          <div class="items">
+            <div class="item">
+              <h3>Scope of services</h3>
+              <p>
+                Each engagement is defined in a written proposal or confirmation
+                that sets out the services to be provided, the expected
+                deliverables, and the timeline. Work outside that scope requires
+                the client’s written approval.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Responsibilities of the client</h3>
+              <p>
+                The client undertakes to provide timely access to the
+                information, personnel, and decisions that Konsalta reasonably
+                requires. Delays on the part of the client may affect the
+                timeline of the engagement.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Confidentiality and ownership</h3>
+              <p>
+                Each party shall keep the other’s confidential information
+                private. Unless the written proposal provides otherwise, the
+                client owns the final deliverables, and Konsalta retains
+                ownership of its pre-existing methods, tools, and know-how.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Termination</h3>
+              <p>
+                Either party may end an engagement by giving written notice
+                within reasonable timelines. Obligations of confidentiality
+                continue after termination.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Governing law</h3>
+              <p>
+                These terms are governed by legal laws, and any dispute arising
+                from them shall be submitted to the courts of law.
+              </p>
+            </div>
+            <div class="item">
+              <h3>Enquiries</h3>
+              <p>
+                Any question regarding these terms should be directed to
+                <a href="contactUs.html">us</a> before an engagement is
+                confirmed.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer" id="contact">
       <div class="footer-top">
         <div class="footer-brand">
           <div class="footer-logo">
@@ -213,7 +715,6 @@ footer p{margin:10px 0 0;color:#D3DBF1}
         <span>Developed by Momentum Labs CLG.</span>
         <span>Better Decisions. Better Impact.</span>
       </div>
-    </footer> -->
-
-</body>
+    </footer>
+  </body>
 </html>
