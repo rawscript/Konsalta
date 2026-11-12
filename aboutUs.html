@@ -112,50 +112,34 @@
          1. HERO: WHO WE ARE
          ============================================================ -->
       <section class="who-we-are-hero" id="who-we-are">
-        <!-- Geometric Network Background -->
+        <!-- Architectural Element Background -->
         <section class="hero-bg-app" aria-hidden="true">
-          <svg class="geometric-network" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice">
-            <!-- Animated connection lines -->
-            <defs>
-              <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" stop-color="rgba(242, 101, 34, 0)" />
-                <stop offset="50%" stop-color="rgba(242, 101, 34, 0.3)" />
-                <stop offset="100%" stop-color="rgba(242, 101, 34, 0)" />
-              </linearGradient>
-              <filter id="glow">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-                <feMerge>
-                  <feMergeNode in="coloredBlur"/>
-                  <feMergeNode in="SourceGraphic"/>
-                </feMerge>
-              </filter>
-            </defs>
-            
-            <!-- Network lines -->
-            <g class="network-lines" opacity="0.15">
-              <line x1="100" y1="150" x2="350" y2="280" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-              <line x1="350" y1="280" x2="600" y2="180" stroke="rgba(255,255,255,0.25)" stroke-width="1"/>
-              <line x1="600" y1="180" x2="850" y2="320" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-              <line x1="250" y1="400" x2="500" y2="250" stroke="rgba(242, 101, 34, 0.3)" stroke-width="1"/>
-              <line x1="500" y1="250" x2="750" y2="380" stroke="rgba(242, 101, 34, 0.25)" stroke-width="1"/>
-              <line x1="150" y1="300" x2="400" y2="450" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
-              <line x1="400" y1="450" x2="700" y2="350" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
-            </g>
-            
-            <!-- Animated nodes -->
-            <g class="network-nodes" filter="url(#glow)">
-              <circle cx="100" cy="150" r="4" fill="rgba(242, 101, 34, 0.6)"/>
-              <circle cx="350" cy="280" r="5" fill="rgba(242, 101, 34, 0.7)"/>
-              <circle cx="600" cy="180" r="4" fill="rgba(255,255,255,0.5)"/>
-              <circle cx="850" cy="320" r="3" fill="rgba(242, 101, 34, 0.5)"/>
-              <circle cx="250" cy="400" r="3" fill="rgba(255,255,255,0.4)"/>
-              <circle cx="500" cy="250" r="6" fill="rgba(242, 101, 34, 0.8)"/>
-              <circle cx="750" cy="380" r="4" fill="rgba(255,255,255,0.5)"/>
-              <circle cx="150" cy="300" r="3" fill="rgba(242, 101, 34, 0.5)"/>
-              <circle cx="400" cy="450" r="5" fill="rgba(255,255,255,0.6)"/>
-              <circle cx="700" cy="350" r="3" fill="rgba(242, 101, 34, 0.6)"/>
-            </g>
-          </svg>
+          <div class="arch-element">
+            <svg viewBox="0 0 200 200" class="arch-graphic">
+              <!-- Single clean arch/tangent curve -->
+              <path 
+                d="M 20 180 Q 100 20 180 180" 
+                stroke="rgba(242, 101, 34, 0.15)" 
+                stroke-width="2" 
+                fill="none"
+                stroke-linecap="round"
+              />
+              <path 
+                d="M 30 180 Q 100 40 170 180" 
+                stroke="rgba(255, 255, 255, 0.1)" 
+                stroke-width="1.5" 
+                fill="none"
+                stroke-linecap="round"
+              />
+              <path 
+                d="M 40 180 Q 100 60 160 180" 
+                stroke="rgba(11, 45, 83, 0.12)" 
+                stroke-width="1" 
+                fill="none"
+                stroke-linecap="round"
+              />
+            </svg>
+          </div>
         </section>
 
         <div class="section-container">
