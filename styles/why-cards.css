@@ -1,5 +1,5 @@
 /* ============================================================
-   WHY KONSALTA — six cards (drop-in block)
+   Why Choose Us — six cards (drop-in block)
    Scoped: .why-block / .wc-*
    Uses site tokens: --navy --orange --cream --white --ink-soft
    --r-lg --fs-* --section-pad
@@ -114,13 +114,8 @@
   overflow: hidden;
   background: var(--wc-bg);
   color: var(--wc-ink);
-  clip-path: polygon(
-    0 0,
-    100% 0,
-    100% calc(100% - var(--wc-cut)),
-    calc(100% - var(--wc-cut)) 100%,
-    0 100%
-  );
+  /* Replaced geometric clip-path polygon with smooth rounded corners */
+  border-radius: 20px;
   transition:
     background 0.4s ease,
     color 0.4s ease;
@@ -153,21 +148,66 @@
   margin-inline: clamp(0px, 8vw, 80px);
 }
 
-/* orange rule that draws across the bottom on hover */
+/*
+  Kente-strip accent — replaces the plain orange bar.
+  Kente cloth (Ghana/Côte d'Ivoire) uses woven strips of repeating
+  geometric colour bands. Here we simulate that with a CSS repeating
+  linear-gradient that alternates orange, gold, navy, cream stripes —
+  the same palette already used by Konsalta.
+  The strip grows from the left on hover, just like the old bar.
+*/
 .wc-card::after {
   content: "";
   position: absolute;
   left: 0;
   right: 0;
   bottom: 0;
-  height: 5px;
-  background: var(--orange);
-  transform: scaleX(0.18);
+  height: 7px; /* slightly taller to let the stripe pattern breathe */
+  background: repeating-linear-gradient(
+    90deg,
+    var(--orange)         0px,
+    var(--orange)         14px,
+    #c89a2a               14px,  /* Kente gold */
+    #c89a2a               22px,
+    #0b2d53               22px,  /* navy */
+    #0b2d53               30px,
+    #f6f3ee               30px,  /* cream */
+    #f6f3ee               36px,
+    var(--orange)         36px,
+    var(--orange)         50px,
+    #c89a2a               50px,
+    #c89a2a               58px,
+    #0b2d53               58px,
+    #0b2d53               72px
+  );
+  transform: scaleX(0.08);
   transform-origin: left;
-  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: 0 0 20px 20px;
 }
 .wc-item:hover .wc-card::after {
   transform: scaleX(1);
+}
+
+/*
+  Adinkra corner mark — a subtle knot/diamond motif (inspired by
+  "Dwennimmen" – ram's horns, symbolising strength and humility)
+  drawn as an inline SVG data URI in the bottom-right corner.
+  It fades in gently on hover. Purely decorative; aria-hidden in HTML.
+*/
+.wc-card .wc-adinkra {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease 0.1s;
+  color: var(--orange);
+}
+.wc-item:hover .wc-card .wc-adinkra {
+  opacity: 0.55;
 }
 
 .wc-top {
@@ -250,18 +290,9 @@
 
 /* Reduce clip-path cut on small screens so cards don't look cropped */
 @media (max-width: 480px) {
-  .why-block {
-    --wc-cut: 18px;
-  }
   .why-unified-section {
     border-radius: 16px;
     margin-inline: 0;
-  }
-}
-
-@media (max-width: 320px) {
-  .why-block {
-    --wc-cut: 14px;
   }
 }
 
@@ -269,7 +300,8 @@
   .wc-item,
   .wc-card,
   .wc-card::after,
-  .wc-icon {
+  .wc-icon,
+  .wc-adinkra {
     transition: none;
   }
 }

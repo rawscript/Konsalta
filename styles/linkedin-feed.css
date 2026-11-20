@@ -5,7 +5,7 @@
    Background: white cards on a light grey panel, like li.com itself
    ============================================================ */
 
-/* ---------- Fix: give the Why Konsalta cards a container ---------- */
+/* ---------- Fix: give the Why Choose Us cards a container ---------- */
 .why-cards-section {
   position: relative;
   z-index: 3;

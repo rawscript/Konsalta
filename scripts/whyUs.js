@@ -180,10 +180,11 @@ window.addEventListener("load", function () {
 }, { once: true });
 
 // ============================================================
-//   MULTI-HUB CONNECTION MESH (Negative Space Network)
-//   Visualizes Konsalta's multi-hub African research & advisory
-//   network with ambient floating, animated signal pulses,
-//   and high-visibility negative space presence.
+//   PAN-AFRICAN TOTEM & ADINKRA WISDOM CANVASES
+//   Replaces the mathematical flight-path / polygon mesh
+//   with Concept 2: Adinkra wisdom symbols (Mate Masie, Dwennimmen,
+//   Nyame Nti), vertical architectural Kente woven guidelines,
+//   and African advisory hub nodes.
 // ============================================================
 function initMultiHubMesh() {
   const canvas = document.getElementById("hubMeshCanvas");
@@ -193,6 +194,7 @@ function initMultiHubMesh() {
 
   const COLOR_NAVY = "#0B2D53";
   const COLOR_ORANGE = "#F26522";
+  const COLOR_GOLD = "#C89A2A";
 
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
   let width = window.innerWidth;
@@ -209,69 +211,28 @@ function initMultiHubMesh() {
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
 
-  // Strategic hub placement in negative space (left & right gutters)
+  // Strategic hub placement in vertical margin totem columns
+  // Keeping real African regional hubs, anchored alongside elegant vertical Kente axes
   const hubsData = [
-    // ── Hero & Top Flanks (Visible immediately on load) ──
-    { xP: 0.055, yP: 0.045, code: "HRE", city: "Harare", color: COLOR_ORANGE, primary: true, phase: 0 },
-    { xP: 0.125, yP: 0.085, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 1.2 },
-    { xP: 0.045, yP: 0.135, code: "LUN", city: "Lusaka", color: COLOR_NAVY, primary: true, phase: 2.1 },
-    { xP: 0.115, yP: 0.185, code: "", city: "", color: COLOR_ORANGE, primary: false, phase: 3.0 },
+    // ── Left Column Hubs (Zimbabwe / Southern / Western Africa) ──
+    { xP: 0.052, yP: 0.055, code: "HRE", city: "Harare", color: COLOR_ORANGE, symbol: "dwennimmen", phase: 0 },
+    { xP: 0.052, yP: 0.165, code: "LUN", city: "Lusaka", color: COLOR_NAVY, symbol: "matemasie", phase: 1.8 },
+    { xP: 0.052, yP: 0.285, code: "GBE", city: "Gaborone", color: COLOR_NAVY, symbol: "kente-knot", phase: 3.1 },
+    { xP: 0.052, yP: 0.415, code: "WDH", city: "Windhoek", color: COLOR_ORANGE, symbol: "nyamenti", phase: 0.9 },
+    { xP: 0.052, yP: 0.545, code: "MPM", city: "Maputo", color: COLOR_NAVY, symbol: "dwennimmen", phase: 2.2 },
+    { xP: 0.052, yP: 0.675, code: "ACC", city: "Accra", color: COLOR_ORANGE, symbol: "matemasie", phase: 1.4 },
+    { xP: 0.052, yP: 0.805, code: "ABJ", city: "Abidjan", color: COLOR_NAVY, symbol: "kente-knot", phase: 2.9 },
+    { xP: 0.052, yP: 0.925, code: "DKR", city: "Dakar", color: COLOR_ORANGE, symbol: "nyamenti", phase: 0.5 },
 
-    { xP: 0.935, yP: 0.050, code: "NBO", city: "Nairobi", color: COLOR_ORANGE, primary: true, phase: 0.8 },
-    { xP: 0.865, yP: 0.095, code: "KGL", city: "Kigali", color: COLOR_NAVY, primary: true, phase: 2.5 },
-    { xP: 0.945, yP: 0.150, code: "ADD", city: "Addis Ababa", color: COLOR_NAVY, primary: true, phase: 1.7 },
-    { xP: 0.875, yP: 0.200, code: "", city: "", color: COLOR_ORANGE, primary: false, phase: 3.3 },
-
-    // ── Pillars Section Flanks ──
-    { xP: 0.055, yP: 0.260, code: "GBE", city: "Gaborone", color: COLOR_NAVY, primary: true, phase: 1.5 },
-    { xP: 0.125, yP: 0.325, code: "WDH", city: "Windhoek", color: COLOR_ORANGE, primary: true, phase: 2.7 },
-    { xP: 0.045, yP: 0.390, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 3.9 },
-
-    { xP: 0.935, yP: 0.275, code: "DAR", city: "Dar es Salaam", color: COLOR_NAVY, primary: true, phase: 0.4 },
-    { xP: 0.865, yP: 0.340, code: "EBB", city: "Kampala", color: COLOR_ORANGE, primary: true, phase: 1.8 },
-    { xP: 0.945, yP: 0.405, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 2.9 },
-
-    // ── Accordion / Mid Section Flanks ──
-    { xP: 0.050, yP: 0.475, code: "MPM", city: "Maputo", color: COLOR_ORANGE, primary: true, phase: 1.1 },
-    { xP: 0.120, yP: 0.540, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 2.3 },
-    { xP: 0.060, yP: 0.605, code: "LLW", city: "Lilongwe", color: COLOR_NAVY, primary: true, phase: 3.4 },
-
-    { xP: 0.940, yP: 0.485, code: "CAI", city: "Cairo", color: COLOR_NAVY, primary: true, phase: 0.6 },
-    { xP: 0.870, yP: 0.550, code: "", city: "", color: COLOR_ORANGE, primary: false, phase: 1.9 },
-    { xP: 0.935, yP: 0.615, code: "LOS", city: "Lagos", color: COLOR_ORANGE, primary: true, phase: 2.8 },
-
-    // ── 6 Strategic Pillars Flanks ──
-    { xP: 0.055, yP: 0.690, code: "ACC", city: "Accra", color: COLOR_NAVY, primary: true, phase: 0.9 },
-    { xP: 0.130, yP: 0.755, code: "ABJ", city: "Abidjan", color: COLOR_ORANGE, primary: true, phase: 2.0 },
-    { xP: 0.048, yP: 0.825, code: "DKR", city: "Dakar", color: COLOR_NAVY, primary: true, phase: 3.2 },
-    { xP: 0.115, yP: 0.890, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 4.1 },
-
-    { xP: 0.930, yP: 0.700, code: "JNB", city: "Johannesburg", color: COLOR_ORANGE, primary: true, phase: 1.3 },
-    { xP: 0.865, yP: 0.765, code: "", city: "", color: COLOR_NAVY, primary: false, phase: 2.4 },
-    { xP: 0.940, yP: 0.835, code: "CPT", city: "Cape Town", color: COLOR_NAVY, primary: true, phase: 3.5 },
-    { xP: 0.875, yP: 0.900, code: "MRU", city: "Mauritius", color: COLOR_ORANGE, primary: true, phase: 0.5 },
-  ];
-
-  // Guaranteed constellation links forming continuous geometric network
-  const constellationLinks = [
-    // Left flank chains
-    [0, 1], [1, 2], [2, 3], [3, 8], [8, 9], [9, 10], [10, 14], [14, 15], [15, 16], [16, 20], [20, 21], [21, 22], [22, 23],
-    [0, 2], [1, 3], [8, 10], [14, 16], [20, 22],
-    // Right flank chains
-    [4, 5], [5, 6], [6, 7], [7, 11], [11, 12], [12, 13], [13, 17], [17, 18], [18, 19], [19, 24], [24, 25], [25, 26], [26, 27],
-    [4, 6], [5, 7], [11, 13], [17, 19], [24, 26], [25, 27],
-    // Subtle cross-arch connectors at transition spaces
-    [3, 7], [10, 13], [21, 25]
-  ];
-
-  // Travelling data pulses along links
-  const pulses = [
-    { linkIdx: 0, progress: 0.2, speed: 0.0035 },
-    { linkIdx: 2, progress: 0.7, speed: 0.0040 },
-    { linkIdx: 7, progress: 0.4, speed: 0.0038 },
-    { linkIdx: 12, progress: 0.1, speed: 0.0042 },
-    { linkIdx: 17, progress: 0.5, speed: 0.0036 },
-    { linkIdx: 22, progress: 0.8, speed: 0.0045 }
+    // ── Right Column Hubs (East, North & Southern Hubs) ──
+    { xP: 0.948, yP: 0.055, code: "NBO", city: "Nairobi", color: COLOR_ORANGE, symbol: "matemasie", phase: 0.7 },
+    { xP: 0.948, yP: 0.165, code: "KGL", city: "Kigali", color: COLOR_NAVY, symbol: "dwennimmen", phase: 2.4 },
+    { xP: 0.948, yP: 0.285, code: "ADD", city: "Addis Ababa", color: COLOR_NAVY, symbol: "nyamenti", phase: 1.2 },
+    { xP: 0.948, yP: 0.415, code: "DAR", city: "Dar es Salaam", color: COLOR_ORANGE, symbol: "kente-knot", phase: 3.3 },
+    { xP: 0.948, yP: 0.545, code: "EBB", city: "Kampala", color: COLOR_NAVY, symbol: "matemasie", phase: 1.9 },
+    { xP: 0.948, yP: 0.675, code: "LOS", city: "Lagos", color: COLOR_ORANGE, symbol: "dwennimmen", phase: 0.3 },
+    { xP: 0.948, yP: 0.805, code: "JNB", city: "Johannesburg", color: COLOR_ORANGE, symbol: "kente-knot", phase: 2.6 },
+    { xP: 0.948, yP: 0.925, code: "CPT", city: "Cape Town", color: COLOR_NAVY, symbol: "nyamenti", phase: 1.6 },
   ];
 
   const mouse = {
@@ -300,6 +261,107 @@ function initMultiHubMesh() {
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const startTime = performance.now();
 
+  // Helper functions to draw authentic Adinkra symbols cleanly in Canvas
+  function drawMateMasie(ctx, x, y, size, color, alpha) {
+    // "What I hear, I keep" — symbol of wisdom, knowledge and learning
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = 1.3;
+
+    const r = size * 0.48;
+    const s = size * 0.28;
+    // Four interlocking diamond squares forming the emblem of 4 eyes/ears of wisdom
+    [-s, s].forEach(dx => {
+      [-s, s].forEach(dy => {
+        ctx.strokeRect(dx - r * 0.35, dy - r * 0.35, r * 0.7, r * 0.7);
+      });
+    });
+    ctx.beginPath();
+    ctx.arc(0, 0, 2.2, 0, Math.PI * 2);
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.restore();
+  }
+
+  function drawDwennimmen(ctx, x, y, size, color, alpha) {
+    // Ram's horns — symbol of strength and humility
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = 1.3;
+
+    const r = size * 0.42;
+    // Central core
+    ctx.beginPath();
+    ctx.arc(0, 0, r * 0.35, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Four outward horn curves
+    [0, Math.PI / 2, Math.PI, (Math.PI * 3) / 2].forEach(rot => {
+      ctx.save();
+      ctx.rotate(rot);
+      ctx.beginPath();
+      ctx.arc(r * 0.5, 0, r * 0.45, Math.PI, 0, false);
+      ctx.stroke();
+      ctx.restore();
+    });
+    ctx.restore();
+  }
+
+  function drawNyameNti(ctx, x, y, size, color, alpha) {
+    // "By God's grace" / Plant stalk — symbol of organic growth & life
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = 1.3;
+
+    const h = size * 0.55;
+    ctx.beginPath();
+    ctx.moveTo(0, -h);
+    ctx.lineTo(0, h);
+    ctx.stroke();
+
+    // Symmetrical chevron leaves
+    [-h * 0.4, 0, h * 0.4].forEach(ly => {
+      ctx.beginPath();
+      ctx.moveTo(-h * 0.45, ly - 3);
+      ctx.quadraticCurveTo(0, ly, h * 0.45, ly - 3);
+      ctx.stroke();
+    });
+    ctx.restore();
+  }
+
+  function drawKenteKnot(ctx, x, y, size, color, alpha) {
+    // Interlocking woven chevron knot
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.strokeStyle = color;
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = 1.3;
+
+    const s = size * 0.45;
+    ctx.beginPath();
+    ctx.moveTo(0, -s);
+    ctx.lineTo(s, 0);
+    ctx.lineTo(0, s);
+    ctx.lineTo(-s, 0);
+    ctx.closePath();
+    ctx.stroke();
+
+    // Inner cross knot
+    ctx.beginPath();
+    ctx.moveTo(-s * 0.5, 0);
+    ctx.lineTo(s * 0.5, 0);
+    ctx.moveTo(0, -s * 0.5);
+    ctx.lineTo(0, s * 0.5);
+    ctx.stroke();
+    ctx.restore();
+  }
+
   function render() {
     ctx.clearRect(0, 0, width, height);
 
@@ -312,209 +374,141 @@ function initMultiHubMesh() {
     mouse.x += (mouse.targetX - mouse.x) * 0.18;
     mouse.y += (mouse.targetY - mouse.y) * 0.18;
 
-    // Compute screen coordinates for all nodes
-    const screenNodes = [];
+    const leftColX = width * 0.052;
+    const rightColX = width * 0.948;
+
+    // 1. Draw Architectural Vertical Kente Guide Stripes (Subtle, elegant vertical totems)
+    // Avoids all harsh diagonal polygon lines across the page!
+    [leftColX, rightColX].forEach((colX, colIdx) => {
+      ctx.save();
+      const isLeft = colIdx === 0;
+
+      // Soft vertical guide axis
+      ctx.beginPath();
+      ctx.setLineDash([8, 8]);
+      ctx.moveTo(colX, 0);
+      ctx.lineTo(colX, height);
+      ctx.strokeStyle = "rgba(11, 45, 83, 0.10)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Parallel secondary accent line (woven Kente spacing)
+      const offset = isLeft ? 14 : -14;
+      ctx.beginPath();
+      ctx.setLineDash([]);
+      ctx.moveTo(colX + offset, 0);
+      ctx.lineTo(colX + offset, height);
+      ctx.strokeStyle = "rgba(242, 101, 34, 0.07)";
+      ctx.lineWidth = 1;
+      ctx.stroke();
+
+      // Repeating subtle horizontal weft ticks down the margin
+      const tickStep = 60;
+      for (let ty = 30; ty < height; ty += tickStep) {
+        ctx.beginPath();
+        ctx.moveTo(colX - 6, ty);
+        ctx.lineTo(colX + 6, ty);
+        ctx.strokeStyle = "rgba(11, 45, 83, 0.08)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      ctx.restore();
+    });
+
+    // 2. Compute screen coordinates & render Hubs + Adinkra Motifs
     for (let i = 0; i < hubsData.length; i++) {
       const h = hubsData[i];
       const pageX = h.xP * width;
       const pageY = h.yP * docHeight;
 
-      // Gentle floating oscillation
-      const floatX = reduceMotion ? 0 : Math.sin(elapsed * 1.1 + h.phase) * 3.5;
-      const floatY = reduceMotion ? 0 : Math.cos(elapsed * 0.9 + h.phase) * 3.5;
-
-      const vx = pageX + floatX;
+      // Subtle breath oscillation along vertical totem
+      const floatY = reduceMotion ? 0 : Math.sin(elapsed * 1.2 + h.phase) * 3;
+      const vx = pageX;
       const vy = pageY - scrollY + floatY;
 
-      // Proximity to mouse
+      // Visibility clipping
+      if (vy < -90 || vy > height + 90) continue;
+
+      // Mouse proximity interaction (lights up organically when user hovers nearby)
       let prox = 0;
       if (mouse.active > 0) {
         const dx = mouse.x - vx;
         const dy = mouse.y - vy;
         const dist = Math.hypot(dx, dy);
-        if (dist < 240) {
-          prox = (1 - dist / 240) * mouse.active;
+        if (dist < 220) {
+          prox = (1 - dist / 220) * mouse.active;
         }
       }
 
-      screenNodes.push({
-        ...h,
-        vx,
-        vy,
-        prox,
-        visible: vy >= -120 && vy <= height + 120,
-      });
-    }
+      const isLeft = vx < width / 2;
+      const isOrange = h.color === COLOR_ORANGE;
+      const primaryColor = isOrange ? COLOR_ORANGE : COLOR_NAVY;
+      const baseAlpha = 0.28 + prox * 0.65;
 
-    // 1. Draw Guaranteed Constellation Links
-    for (let i = 0; i < constellationLinks.length; i++) {
-      const link = constellationLinks[i];
-      const a = screenNodes[link[0]];
-      const b = screenNodes[link[1]];
-      if (!a || !b) continue;
-      if (!a.visible && !b.visible) continue;
+      // ── Draw Chosen Adinkra Symbol behind/beside the hub ──
+      const symbolSize = 26 + prox * 4;
+      if (h.symbol === "matemasie") {
+        drawMateMasie(ctx, vx, vy, symbolSize, primaryColor, baseAlpha);
+      } else if (h.symbol === "dwennimmen") {
+        drawDwennimmen(ctx, vx, vy, symbolSize, primaryColor, baseAlpha);
+      } else if (h.symbol === "nyamenti") {
+        drawNyameNti(ctx, vx, vy, symbolSize, primaryColor, baseAlpha);
+      } else {
+        drawKenteKnot(ctx, vx, vy, symbolSize, primaryColor, baseAlpha);
+      }
 
-      const maxProx = Math.max(a.prox, b.prox);
-      const isCrossArch = Math.abs(a.vx - b.vx) > width * 0.4;
-      const baseAlpha = isCrossArch ? 0.10 : 0.28;
-      const activeAlpha = baseAlpha + maxProx * 0.55;
-
+      // ── Central African Hub Core & Ring ──
       ctx.save();
       ctx.beginPath();
-      if (isCrossArch) {
-        ctx.setLineDash([4, 8]);
-      } else {
-        ctx.setLineDash([]);
-      }
-      ctx.moveTo(a.vx, a.vy);
-      ctx.lineTo(b.vx, b.vy);
+      ctx.arc(vx, vy, 4.2 + prox * 1.5, 0, Math.PI * 2);
+      ctx.fillStyle = primaryColor;
+      ctx.globalAlpha = 0.85 + prox * 0.15;
+      ctx.fill();
 
-      if (maxProx > 0.05) {
-        const grad = ctx.createLinearGradient(a.vx, a.vy, b.vx, b.vy);
-        grad.addColorStop(0, a.color === COLOR_ORANGE ? `rgba(242, 101, 34, ${activeAlpha})` : `rgba(11, 45, 83, ${activeAlpha})`);
-        grad.addColorStop(1, b.color === COLOR_ORANGE ? `rgba(242, 101, 34, ${activeAlpha})` : `rgba(11, 45, 83, ${activeAlpha})`);
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.4 + maxProx * 1.0;
-      } else {
-        ctx.strokeStyle = `rgba(11, 45, 83, ${baseAlpha})`;
-        ctx.lineWidth = isCrossArch ? 1 : 1.2;
+      // Subtle warm outer orbit ring on hover
+      if (prox > 0.05) {
+        ctx.beginPath();
+        ctx.arc(vx, vy, 16 * (1 + prox * 0.2), 0, Math.PI * 2);
+        ctx.strokeStyle = isOrange ? "rgba(242, 101, 34, 0.45)" : "rgba(11, 45, 83, 0.4)";
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
       }
-      ctx.stroke();
       ctx.restore();
-    }
 
-    // 2. Animate Data Signal Pulses Along Links
-    if (!reduceMotion) {
-      for (let p = 0; p < pulses.length; p++) {
-        const pulse = pulses[p];
-        pulse.progress = (pulse.progress + pulse.speed) % 1;
-        const link = constellationLinks[pulse.linkIdx];
-        if (!link) continue;
-        const a = screenNodes[link[0]];
-        const b = screenNodes[link[1]];
-        if (!a || !b || (!a.visible && !b.visible)) continue;
+      // ── African Hub Code Badge & Label (e.g., "HRE / Harare", "NBO / Nairobi") ──
+      const labelX = isLeft ? vx + 22 : vx - 22;
+      const labelY = vy + 4;
 
-        const px = a.vx + (b.vx - a.vx) * pulse.progress;
-        const py = a.vy + (b.vy - a.vy) * pulse.progress;
+      ctx.save();
+      ctx.font = "700 11px 'JetBrains Mono', monospace";
+      ctx.textAlign = isLeft ? "left" : "right";
 
-        ctx.beginPath();
-        ctx.arc(px, py, 2.2, 0, Math.PI * 2);
-        ctx.fillStyle = pulse.linkIdx % 2 === 0 ? "rgba(242, 101, 34, 0.85)" : "rgba(11, 45, 83, 0.75)";
-        ctx.fill();
+      const textAlpha = 0.82 + prox * 0.18;
+      ctx.fillStyle = isOrange
+        ? `rgba(242, 101, 34, ${textAlpha})`
+        : `rgba(11, 45, 83, ${textAlpha})`;
+      ctx.fillText(h.code, labelX, labelY);
+
+      // Subtitle / City name
+      if (h.city) {
+        ctx.font = "600 9.5px 'Manrope', sans-serif";
+        const cityAlpha = 0.52 + prox * 0.48;
+        ctx.fillStyle = `rgba(11, 45, 83, ${cityAlpha})`;
+        ctx.fillText(h.city, labelX, labelY + 13);
       }
-    }
 
-    // 3. Draw Dynamic Cursor Connector Rays
-    if (mouse.active > 0) {
-      for (let i = 0; i < screenNodes.length; i++) {
-        const node = screenNodes[i];
-        if (!node.visible || node.prox <= 0.02) continue;
+      // Refined fine connector tick mark from motif to city name
+      ctx.beginPath();
+      ctx.moveTo(vx + (isLeft ? 9 : -9), vy);
+      ctx.lineTo(vx + (isLeft ? 17 : -17), vy);
+      ctx.strokeStyle = isOrange
+        ? `rgba(242, 101, 34, ${0.45 + prox * 0.4})`
+        : `rgba(11, 45, 83, ${0.35 + prox * 0.4})`;
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
 
-        const grad = ctx.createLinearGradient(mouse.x, mouse.y, node.vx, node.vy);
-        grad.addColorStop(0, `rgba(242, 101, 34, ${0.55 * node.prox})`);
-        grad.addColorStop(0.7, `rgba(11, 45, 83, ${0.30 * node.prox})`);
-        grad.addColorStop(1, `rgba(11, 45, 83, ${0.12 * node.prox})`);
-
-        ctx.strokeStyle = grad;
-        ctx.lineWidth = 1.2 + node.prox * 1.2;
-        ctx.beginPath();
-        ctx.moveTo(mouse.x, mouse.y);
-        ctx.lineTo(node.vx, node.vy);
-        ctx.stroke();
-      }
-    }
-
-    // 4. Render Hub Nodes & Badges
-    for (let i = 0; i < screenNodes.length; i++) {
-      const node = screenNodes[i];
-      if (!node.visible) continue;
-
-      const p = node.prox;
-      const isOrange = node.color === COLOR_ORANGE;
-      const baseRadius = node.primary ? 5.0 : 3.2;
-      const radius = baseRadius * (1 + p * 0.35);
-
-      if (node.primary) {
-        // Outer pulsing orbit ring
-        const pulse = Math.sin(elapsed * 2.2 + node.phase) * 2.2;
-        const ringR = (15 + pulse) * (1 + p * 0.32);
-
-        ctx.beginPath();
-        ctx.arc(node.vx, node.vy, ringR, 0, Math.PI * 2);
-        ctx.strokeStyle = isOrange
-          ? `rgba(242, 101, 34, ${0.40 + p * 0.45})`
-          : `rgba(11, 45, 83, ${0.35 + p * 0.45})`;
-        ctx.lineWidth = 1.4;
-        ctx.stroke();
-
-        // Inner orbit ring
-        ctx.beginPath();
-        ctx.arc(node.vx, node.vy, 9 * (1 + p * 0.2), 0, Math.PI * 2);
-        ctx.strokeStyle = isOrange
-          ? `rgba(242, 101, 34, ${0.25 + p * 0.35})`
-          : `rgba(11, 45, 83, ${0.22 + p * 0.35})`;
-        ctx.lineWidth = 1;
-        ctx.stroke();
-
-        // Solid Hub Core with subtle glow
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(node.vx, node.vy, radius, 0, Math.PI * 2);
-        ctx.fillStyle = node.color;
-        ctx.shadowColor = node.color;
-        ctx.shadowBlur = 8;
-        ctx.fill();
-        ctx.restore();
-
-        // Hub Code Badge (e.g. "HRE", "NBO", "JNB")
-        if (node.code) {
-          const isLeft = node.vx < width / 2;
-          const labelX = isLeft ? node.vx + 18 : node.vx - 18;
-          const labelY = node.vy + 4;
-
-          ctx.save();
-          ctx.font = "700 11px 'JetBrains Mono', monospace";
-          ctx.textAlign = isLeft ? "left" : "right";
-
-          // Text opacity: clearly visible at rest (0.80), brighter on proximity
-          const textAlpha = 0.80 + p * 0.20;
-          ctx.fillStyle = isOrange
-            ? `rgba(242, 101, 34, ${textAlpha})`
-            : `rgba(11, 45, 83, ${textAlpha})`;
-
-          ctx.fillText(node.code, labelX, labelY);
-
-          // Subtitle / City name
-          if (node.city) {
-            ctx.font = "600 9.5px 'Manrope', sans-serif";
-            const cityAlpha = 0.50 + p * 0.50;
-            ctx.fillStyle = `rgba(11, 45, 83, ${cityAlpha})`;
-            ctx.fillText(node.city, labelX, labelY + 13);
-          }
-
-          // Small connector tick mark
-          ctx.beginPath();
-          ctx.moveTo(node.vx + (isLeft ? 7 : -7), node.vy);
-          ctx.lineTo(node.vx + (isLeft ? 14 : -14), node.vy);
-          ctx.strokeStyle = isOrange
-            ? `rgba(242, 101, 34, ${0.55 + p * 0.4})`
-            : `rgba(11, 45, 83, ${0.45 + p * 0.4})`;
-          ctx.lineWidth = 1.2;
-          ctx.stroke();
-
-          ctx.restore();
-        }
-      } else {
-        // Secondary vertex: geometric diamond waypoint
-        ctx.save();
-        ctx.translate(node.vx, node.vy);
-        ctx.rotate(Math.PI / 4);
-        ctx.fillStyle = isOrange
-          ? `rgba(242, 101, 34, ${0.50 + p * 0.45})`
-          : `rgba(11, 45, 83, ${0.45 + p * 0.45})`;
-        ctx.fillRect(-radius, -radius, radius * 2, radius * 2);
-        ctx.restore();
-      }
+      ctx.restore();
     }
 
     requestAnimationFrame(render);

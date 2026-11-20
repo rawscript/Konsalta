@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         once: true,
       });
 
-      // 4. Why Konsalta 6 Cards (batched)
+      // 4. Why Choose Us 6 Cards (batched)
       ScrollTrigger.batch(".why-card-6", {
         start: "top 88%",
         onEnter: (batch) => {
@@ -205,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
         once: true,
       });
 
-      // 6. Why Konsalta 5 Bullets (batched)
+      // 6. Why Choose Us 5 Bullets (batched)
       ScrollTrigger.batch(".bullet-item-card", {
         start: "top 88%",
         onEnter: (batch) => {
