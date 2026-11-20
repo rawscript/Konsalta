@@ -39,7 +39,7 @@
   <body>
     <div class="ambient-1" aria-hidden="true"></div>
     <div class="ambient-2" aria-hidden="true"></div>
-    <div class="cursor" aria-hidden="true"></div>
+    <!-- <div class="cursor" aria-hidden="true"></div> -->
 
     <header class="site-header">
       <a href="index.html" class="logo" aria-label="Konsalta Home">
@@ -63,10 +63,14 @@
       </button>
       <nav class="header-nav" id="primary-navigation">
         <a href="aboutUs.html"><span>About</span> <span>Konsalta</span></a>
-        <a href="services.html"><span>Explore Our</span> <span>Services</span></a>
+        <a href="services.html"
+          ><span>Explore Our</span> <span>Services</span></a
+        >
         <a href="whyUs.html"><span>Why</span> <span>Konsalta</span></a>
         <a href="contactUs.html"><span>Contact</span> <span>Us</span></a>
-        <a href="consultant-onboarding.html" class="mobile-nav-contact"><span>Engage</span> <span>with Us</span></a>
+        <a href="consultant-onboarding.html" class="mobile-nav-contact"
+          ><span>Engage</span> <span>with Us</span></a
+        >
       </nav>
       <a href="consultant-onboarding.html" class="header-btn"
         >Engage with Us
@@ -104,7 +108,11 @@
           >
         </h1>
         <p class="hero-desc">
-          Konsalta is a women-led, Africa-focused research, consulting and advisory firm. We were built to move past the slow, overhead-heavy structures of traditional consulting — operating instead as an agile, network-driven collective, shaped around each client's needs to deliver measurable, sustained value.
+          Konsalta is a women-led, Africa-focused research, consulting and
+          advisory firm. We move past the slow, overhead-heavy structures of
+          traditional consulting — operating instead as an agile, network-driven
+          collective, shaped around each client's needs to deliver measurable,
+          sustained value.
         </p>
 
         <div class="hero-actions">
@@ -125,7 +133,7 @@
               </svg>
             </span>
           </a>
-          <a href="#features" class="secondary-btn">Explore The Cycle</a>
+          <a href="services.html" class="cta-btn secondary-btn">Our Services</a>
         </div>
       </div>
 
@@ -264,7 +272,7 @@
     </main>
 
     <section class="features" id="features">
-      <div class="features-head">
+      <!-- <div class="features-head">
         <div>
           <div class="section-eyebrow">/ Why We Exist</div>
           <h2 class="features-title">The Evidence to Impact Cycle</h2>
@@ -274,15 +282,16 @@
           Evidence On Its Own Rarely Changes Outcomes<br />
           — Real Impact Comes From Translating Insight Into Action
         </div>
-      </div>
+      </div> -->
 
-      <div class="cycle-track" aria-hidden="true">
+      <!-- <div class="cycle-track" aria-hidden="true">
         <span class="cycle-fill"></span>
         <i style="left: 16.67%"></i><i style="left: 50%"></i
         ><i style="left: 83.33%"></i>
-      </div>
+      </div> -->
 
-      <div class="feature-cards">
+      <!-- <div class="feature-cards">
+
         <div class="feature-card fc-accent">
           <div class="fc-num">01 — Generate</div>
           <h3>Research. Surveys. Data Collection & Evaluation</h3>
@@ -358,51 +367,387 @@
             </svg>
           </div>
         </div>
-      </div>
+      </div> -->
+
+      <section class="quote-section">
+        <div class="quote-mark" aria-hidden="true">“</div>
+        <blockquote class="quote-text">
+          We are an agile, network-driven collective bridging local insight with
+          global perspective to help institutions across Africa make confident,
+          clear, and future-focused decisions.
+        </blockquote>
+        <div class="quote-author">— Konsalta Hub</div>
+      </section>
     </section>
 
-    <section class="quote-section">
-      <div class="quote-mark" aria-hidden="true">“</div>
-      <blockquote class="quote-text">
-        We are an agile, network-driven collective bridging local insight with
-        global perspective to help institutions across Africa make confident,
-        clear, and future-focused decisions.
-      </blockquote>
-      <div class="quote-author">— Konsalta Advisory Collective</div>
-    </section>
+    <!-- ===================================================================================================
+     SERVICES PREVIEW  | As stated in that doc. Not even sure what these guys want tbh, but lets just do it
+     ==================================================================================================== -->
+    <section
+      class="svc-preview"
+      id="services-preview"
+      aria-labelledby="svc-preview-title"
+    >
+      <div class="svc-preview__inner">
+        <header class="svc-preview__head">
+          <div class="svc-preview__titleblock">
+            <!-- <p class="svc-preview__eyebrow" data-reveal style="--i: 0">
+              <span aria-hidden="true"></span>What we offer
+            </p> -->
+            <h2
+              class="svc-preview__title"
+              id="svc-preview-title"
+              data-reveal
+              style="--i: 1"
+            >
+              <span class="svc-mark">Our services</span>
+            </h2>
+          </div>
+          <!-- <p class="svc-preview__lede" data-reveal style="--i: 2">
+            Four practice areas, one evidence-led approach. Select an area to
+            preview what it covers.
+          </p> -->
+        </header>
 
-    <section class="final-cta" id="start">
-      <div class="final-cta-card">
-        <span class="orb orb-1" aria-hidden="true"></span>
-        <span class="orb orb-2" aria-hidden="true"></span>
-        <h2 class="final-cta-h2">
-          Ready to turn evidence into
-          <span class="accent">lasting impact?</span>
-        </h2>
-        <p>
-          Partner with our Africa-focused research and advisory collective to
-          make confident, future-ready decisions for your institution.
-        </p>
-        <a href="contactUs.html" class="cta-btn"
-          >Start a Conversation
-          <span class="cta-arrow" aria-hidden="true">
+        <div class="svc-list">
+          <!-- 01 -->
+          <div class="svc-item is-active" style="--row: 1">
+            <h3 class="svc-item__heading" data-reveal style="--i: 3">
+              <button
+                class="svc-trigger"
+                id="svc-t-1"
+                type="button"
+                aria-expanded="true"
+                aria-controls="svc-p-1"
+              >
+                <span class="svc-trigger__num" aria-hidden="true">01</span>
+                <span class="svc-trigger__text">
+                  <span class="svc-trigger__title"
+                    >Research &amp; Insights</span
+                  >
+                  <!-- <span class="svc-trigger__tag"
+                    >Understanding people and markets</span
+                  > -->
+                </span>
+                <svg
+                  class="svc-trigger__icon"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </button>
+            </h3>
+            <div
+              class="svc-panel"
+              id="svc-p-1"
+              role="region"
+              aria-labelledby="svc-t-1"
+            >
+              <div class="svc-panel__clip">
+                <article class="svc-card">
+                  <span class="svc-card__ghost" aria-hidden="true">01</span>
+                  <p class="svc-card__title">Research &amp; Insights</p>
+                  <p class="svc-card__text">
+                    We deliver research, data analysis, market research and
+                    consumer insights that help organizations understand people,
+                    markets and complex operating environments and make
+                    evidence-based decisions.
+                  </p>
+                  <ul class="svc-chips">
+                    <li>Research</li>
+                    <li>Data analysis</li>
+                    <li>Market research</li>
+                    <li>Consumer insights</li>
+                  </ul>
+                  <a
+                    class="svc-card__link"
+                    href="services.html#research-insights"
+                    >Explore Research &amp; Insights
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <!-- 02 -->
+          <div class="svc-item" style="--row: 2">
+            <h3 class="svc-item__heading" data-reveal style="--i: 4">
+              <button
+                class="svc-trigger"
+                id="svc-t-2"
+                type="button"
+                aria-expanded="false"
+                aria-controls="svc-p-2"
+              >
+                <span class="svc-trigger__num" aria-hidden="true">02</span>
+                <span class="svc-trigger__text">
+                  <span class="svc-trigger__title">Policy &amp; Impact</span>
+                  <!-- <span class="svc-trigger__tag"
+                    >Designing policy, measuring results</span
+                  > -->
+                </span>
+                <svg
+                  class="svc-trigger__icon"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </button>
+            </h3>
+            <div
+              class="svc-panel"
+              id="svc-p-2"
+              role="region"
+              aria-labelledby="svc-t-2"
+            >
+              <div class="svc-panel__clip">
+                <article class="svc-card">
+                  <span class="svc-card__ghost" aria-hidden="true">02</span>
+                  <p class="svc-card__title">Policy &amp; Impact</p>
+                  <p class="svc-card__text">
+                    We provide policy research, monitoring and evaluation,
+                    impact assessment and programme evaluation to help
+                    governments and organizations design effective policies,
+                    measure results and strengthen impact.
+                  </p>
+                  <ul class="svc-chips">
+                    <li>Policy research</li>
+                    <li>Monitoring &amp; evaluation</li>
+                    <li>Impact assessment</li>
+                    <li>Programme evaluation</li>
+                  </ul>
+                  <a class="svc-card__link" href="services.html#policy-impact"
+                    >Explore Policy &amp; Impact
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <!-- 03 -->
+          <div class="svc-item" style="--row: 3">
+            <h3 class="svc-item__heading" data-reveal style="--i: 5">
+              <button
+                class="svc-trigger"
+                id="svc-t-3"
+                type="button"
+                aria-expanded="false"
+                aria-controls="svc-p-3"
+              >
+                <span class="svc-trigger__num" aria-hidden="true">03</span>
+                <span class="svc-trigger__text">
+                  <span class="svc-trigger__title"
+                    >Strategy &amp; Advisory</span
+                  >
+                  <!-- <span class="svc-trigger__tag"
+                    >Turning evidence into strategy</span
+                  > -->
+                </span>
+                <svg
+                  class="svc-trigger__icon"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </button>
+            </h3>
+            <div
+              class="svc-panel"
+              id="svc-p-3"
+              role="region"
+              aria-labelledby="svc-t-3"
+            >
+              <div class="svc-panel__clip">
+                <article class="svc-card">
+                  <span class="svc-card__ghost" aria-hidden="true">03</span>
+                  <p class="svc-card__title">Strategy &amp; Advisory</p>
+                  <p class="svc-card__text">
+                    We provide strategy consulting, market intelligence and
+                    business advisory services that help organizations identify
+                    opportunities, navigate change and turn evidence into
+                    practical strategies for growth and impact.
+                  </p>
+                  <ul class="svc-chips">
+                    <li>Strategy consulting</li>
+                    <li>Market intelligence</li>
+                    <li>Business advisory</li>
+                  </ul>
+                  <a
+                    class="svc-card__link"
+                    href="services.html#strategy-advisory"
+                    >Explore Strategy &amp; Advisory
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </article>
+              </div>
+            </div>
+          </div>
+
+          <!-- 04 -->
+          <div class="svc-item" style="--row: 4">
+            <h3 class="svc-item__heading" data-reveal style="--i: 6">
+              <button
+                class="svc-trigger"
+                id="svc-t-4"
+                type="button"
+                aria-expanded="false"
+                aria-controls="svc-p-4"
+              >
+                <span class="svc-trigger__num" aria-hidden="true">04</span>
+                <span class="svc-trigger__text">
+                  <span class="svc-trigger__title"
+                    >Communication &amp; Capacity</span
+                  >
+                  <!-- <span class="svc-trigger__tag"
+                    >Sharing evidence, building institutions</span
+                  > -->
+                </span>
+                <svg
+                  class="svc-trigger__icon"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M5 12h14M13 6l6 6-6 6" />
+                </svg>
+              </button>
+            </h3>
+            <div
+              class="svc-panel"
+              id="svc-p-4"
+              role="region"
+              aria-labelledby="svc-t-4"
+            >
+              <div class="svc-panel__clip">
+                <article class="svc-card">
+                  <span class="svc-card__ghost" aria-hidden="true">04</span>
+                  <p class="svc-card__title">Communication &amp; Capacity</p>
+                  <p class="svc-card__text">
+                    We provide knowledge translation, strategic communication,
+                    public relations and capacity-building services that help
+                    organizations communicate evidence, engage stakeholders and
+                    strengthen institutional capabilities.
+                  </p>
+                  <ul class="svc-chips">
+                    <li>Knowledge translation</li>
+                    <li>Strategic communication</li>
+                    <li>Public relations</li>
+                    <li>Capacity building</li>
+                  </ul>
+                  <a
+                    class="svc-card__link"
+                    href="services.html#communication-capacity"
+                    >Explore Communication &amp; Capacity
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 6l6 6-6 6" />
+                    </svg>
+                  </a>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="svc-preview__foot" data-reveal style="--i: 7">
+          <!-- <p>Each practice area is set out in full on our services page.</p> -->
+          <a class="svc-btn" href="services.html">
+            View all services
             <svg
-              width="14"
-              height="14"
+              width="20"
+              height="20"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
-              stroke-width="2.5"
+              stroke-width="2.2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              aria-hidden="true"
             >
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
-          </span>
-        </a>
+          </a>
+        </div>
       </div>
     </section>
-<!-- 
+    <!-- 
     <section class="audience-section" aria-labelledby="audience-title">
       <div class="audience-content">
         <div class="audience-feature">
@@ -422,6 +767,37 @@
       </div>
     </section> -->
 
+    <section class="final-cta" id="start">
+      <div class="final-cta-card">
+        <span class="orb orb-1" aria-hidden="true"></span>
+        <span class="orb orb-2" aria-hidden="true"></span>
+        <h2 class="final-cta-h2">
+          Ready to turn evidence into
+          <span class="accent">lasting impact?</span>
+        </h2>
+        <!-- <p>
+          Partner with our Africa-focused research and advisory collective to
+          make confident, future-ready decisions for your institution.
+        </p> -->
+        <a href="contactUs.html" class="cta-btn"
+          >Partner with Us
+          <span class="cta-arrow" aria-hidden="true">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </span>
+        </a>
+      </div>
+    </section>
     <footer class="site-footer" id="contact">
       <div class="footer-top">
         <div class="footer-brand">
@@ -430,19 +806,15 @@
               <img src="public/Logo-4.png" alt="Konsalta" />
             </span>
           </div>
-          <p>
-            A women-led, Africa-focused research, consulting and advisory firm
-            delivering actionable insights and systemic impact.
-          </p>
+          <p>Turning Knowledge, Into Impact.</p>
         </div>
         <div class="footer-cols">
-          <div class="footer-col">
+          <!-- <div class="footer-col">
             <h4>Services</h4>
             <a href="services.html#research">Research & Evaluation</a>
             <a href="services.html#strategy">Strategy & Advisory</a>
-            <!-- <a href="services.html#insights">Market Intelligence</a> -->
             <a href="services.html#policy">Policy & Systems</a>
-          </div>
+          </div> -->
           <div class="footer-col">
             <h4>Company</h4>
             <a href="aboutUs.html">About Konsalta</a>
@@ -456,7 +828,6 @@
             <a href="governance.html#privacy">Privacy Policy</a>
             <a href="governance.html#terms">Terms of Engagement</a>
           </div>
-        
         </div>
       </div>
       <div class="footer-bottom">

@@ -103,17 +103,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const constellation = document.getElementById("constellation");
   const constellationInner = document.getElementById("constellationInner");
   if (constellation && constellationInner && isFinePointer) {
+    gsap.set(constellationInner, { transformPerspective: 1500 });
+    const rotateY = gsap.quickTo(constellationInner, "rotationY", {
+      duration: 0.8,
+      ease: "power2.out",
+    });
+    const rotateX = gsap.quickTo(constellationInner, "rotationX", {
+      duration: 0.8,
+      ease: "power2.out",
+    });
+
     constellation.addEventListener("mousemove", (e) => {
       const rect = constellation.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-      gsap.to(constellationInner, {
-        rotationY: x * 12,
-        rotationX: -y * 8,
-        duration: 0.8,
-        transformPerspective: 1500,
-        ease: "power2.out",
-      });
+      rotateY(x * 12);
+      rotateX(-y * 8);
     });
     constellation.addEventListener("mouseleave", () => {
       gsap.to(constellationInner, {
@@ -259,3 +264,116 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
+/* ==========================================================================
+   SERVICES PREVIEW  ·  append to main.js
+   - Desktop (>=900px): hover / focus / click switches the preview panel.
+   - Mobile: accordion (one open at a time, tap the open one to close it).
+   - Arrow keys / Home / End move between triggers.
+   - Staggered scroll reveal and a pointer-follow glow on the panel.
+   Safe to append: wrapped in an IIFE and exits if the section is absent.
+   ========================================================================== */
+(() => {
+  const root = document.getElementById("services-preview");
+  if (!root) return;
+
+  const items = Array.from(root.querySelectorAll(".svc-item"));
+  const triggers = items.map((item) => item.querySelector(".svc-trigger"));
+  const desktop = window.matchMedia("(min-width: 900px)");
+  const canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  /* ---------- Active item ---------- */
+  function setActive(index, allowClose = false) {
+    const isOpen = items[index].classList.contains("is-active");
+    const close = allowClose && isOpen;
+
+    items.forEach((item, i) => {
+      const on = !close && i === index;
+      item.classList.toggle("is-active", on);
+      triggers[i].setAttribute("aria-expanded", String(on));
+    });
+  }
+
+  triggers.forEach((trigger, i) => {
+    trigger.addEventListener("click", () => {
+      const wasOpen = items[i].classList.contains("is-active");
+      setActive(i, !desktop.matches);
+
+      // On mobile, keep the newly opened header in view after the layout shifts.
+      if (!desktop.matches && !wasOpen) {
+        setTimeout(() => {
+          const top = trigger.getBoundingClientRect().top;
+          if (top < 0 || top > window.innerHeight * 0.6) {
+            trigger.scrollIntoView({
+              block: "start",
+              behavior: reduceMotion.matches ? "auto" : "smooth",
+            });
+          }
+        }, 450);
+      }
+    });
+
+    trigger.addEventListener("mouseenter", () => {
+      if (desktop.matches && canHover.matches) setActive(i);
+    });
+
+    trigger.addEventListener("focus", () => {
+      if (desktop.matches) setActive(i);
+    });
+
+    trigger.addEventListener("keydown", (e) => {
+      const last = triggers.length - 1;
+      let next = null;
+      if (e.key === "ArrowDown" || e.key === "ArrowRight") next = i === last ? 0 : i + 1;
+      else if (e.key === "ArrowUp" || e.key === "ArrowLeft") next = i === 0 ? last : i - 1;
+      else if (e.key === "Home") next = 0;
+      else if (e.key === "End") next = last;
+      if (next !== null) {
+        e.preventDefault();
+        triggers[next].focus();
+      }
+    });
+  });
+
+  // Desktop always needs exactly one active panel.
+  function ensureOneActive() {
+    if (desktop.matches && !items.some((it) => it.classList.contains("is-active"))) {
+      setActive(0);
+    }
+  }
+  desktop.addEventListener
+    ? desktop.addEventListener("change", ensureOneActive)
+    : desktop.addListener(ensureOneActive);
+  ensureOneActive();
+
+  /* ---------- Pointer-follow glow on the preview card ---------- */
+  if (!reduceMotion.matches && canHover.matches) {
+    root.querySelectorAll(".svc-card").forEach((card) => {
+      card.addEventListener("pointermove", (e) => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--mx", `${e.clientX - r.left}px`);
+        card.style.setProperty("--my", `${e.clientY - r.top}px`);
+      });
+    });
+  }
+
+  /* ---------- Scroll reveal ---------- */
+  const revealEls = Array.from(root.querySelectorAll("[data-reveal]"));
+  if (reduceMotion.matches || !("IntersectionObserver" in window)) return;
+
+  root.classList.add("is-ready");
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-in");
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+  );
+  revealEls.forEach((el) => io.observe(el));
+})();
