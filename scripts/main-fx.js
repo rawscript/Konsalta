@@ -31,7 +31,8 @@
     section.prepend(canvas);
     const ctx = canvas.getContext("2d");
     const LINK = 130, REACH = 180;
-    let w = 0, h = 0, nodes = [], raf = 0;
+    const linkLimit = LINK * LINK, reachLimit = REACH * REACH;
+    let w = 0, h = 0, nodes = [], raf = 0, isIntersecting = false;
     const mouse = { x: -999, y: -999 };
 
     const frame = (move) => {
@@ -51,28 +52,46 @@
         ctx.fill();
         for (let j = i + 1; j < nodes.length; j++) {
           const b = nodes[j];
-          const d = Math.hypot(a.x - b.x, a.y - b.y);
-          if (d < LINK) {
-            ctx.strokeStyle = `rgba(156,192,234,${(1 - d / LINK) * 0.22})`;
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const distanceSquared = dx * dx + dy * dy;
+          if (distanceSquared < linkLimit) {
+            const distance = Math.sqrt(distanceSquared);
+            ctx.strokeStyle = `rgba(156,192,234,${(1 - distance / LINK) * 0.22})`;
             ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
           }
         }
-        const dm = Math.hypot(a.x - mouse.x, a.y - mouse.y);
-        if (dm < REACH) {
-          ctx.strokeStyle = `rgba(242,101,34,${(1 - dm / REACH) * 0.6})`;
+        const dx = a.x - mouse.x, dy = a.y - mouse.y;
+        const mouseDistanceSquared = dx * dx + dy * dy;
+        if (mouseDistanceSquared < reachLimit) {
+          const mouseDistance = Math.sqrt(mouseDistanceSquared);
+          ctx.strokeStyle = `rgba(242,101,34,${(1 - mouseDistance / REACH) * 0.6})`;
           ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(mouse.x, mouse.y); ctx.stroke();
         }
       }
     };
 
-    const loop = () => { frame(true); raf = requestAnimationFrame(loop); };
+    const loop = () => {
+      raf = 0;
+      if (!isIntersecting || document.hidden) return;
+      frame(true);
+      raf = requestAnimationFrame(loop);
+    };
+
+    const updateAnimation = () => {
+      if (isIntersecting && !document.hidden) {
+        if (!raf) raf = requestAnimationFrame(loop);
+      } else {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    };
 
     const resize = () => {
-      const dpr = Math.min(devicePixelRatio || 1, 2);
+      const dpr = Math.min(devicePixelRatio || 1, 1.5);
       w = section.clientWidth; h = section.clientHeight;
       canvas.width = w * dpr; canvas.height = h * dpr;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.min(90, Math.round((w * h) / 16000));
+      const n = Math.min(60, Math.round((w * h) / 20000));
       nodes = Array.from({ length: n }, () => ({
         x: Math.random() * w, y: Math.random() * h,
         vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25,
@@ -81,18 +100,20 @@
     };
     new ResizeObserver(resize).observe(section);
 
-    section.addEventListener("pointermove", (e) => {
-      const r = section.getBoundingClientRect();
-      mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
-    });
-    section.addEventListener("pointerleave", () => { mouse.x = mouse.y = -999; });
+    if (fine) {
+      section.addEventListener("pointermove", (e) => {
+        const r = section.getBoundingClientRect();
+        mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+      });
+      section.addEventListener("pointerleave", () => { mouse.x = mouse.y = -999; });
+    }
 
     if (!reduce) {
-      // Only animate while the section is on screen
-      new IntersectionObserver(([en]) => {
-        cancelAnimationFrame(raf);
-        if (en.isIntersecting) loop();
+      new IntersectionObserver(([entry]) => {
+        isIntersecting = entry.isIntersecting;
+        updateAnimation();
       }).observe(section);
+      document.addEventListener("visibilitychange", updateAnimation);
     }
   }
 
