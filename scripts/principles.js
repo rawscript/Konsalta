@@ -1,5 +1,19 @@
 /* Seven principles — behaviour only (markup lives in the HTML).
-   Requires GSAP (already loaded on the page). Self-contained: no globals. */
+   Requires GSAP (already loaded on the page). Self-contained: no globals.
+
+   Changes from the previous version (fast-cursor fix):
+   - Hover no longer fires per-card on `pointerenter`. One stage-level handler
+     decides which card is under the cursor, using hover-intent:
+       * slow / deliberate movement opens the card straight away;
+       * a fast sweep waits until the cursor settles, then opens the card it
+         rests on, so cards crossed in passing never start their animations.
+   - Synthetic pointer events the browser fires when layout shifts under a
+     still cursor are ignored (movement < MIN_MOVE), which breaks the
+     open → layout shift → neighbour opens → layout shift … flicker loop.
+   - The cursor glow is written once per animation frame with a plain
+     setProperty instead of creating a new GSAP tween on every pointermove.
+   - Leaving the stage reverts to the pinned card after a short delay.
+   - Focus only opens a card for keyboard focus (:focus-visible). */
 (function () {
   "use strict";
   const stage = document.getElementById("prStage");
@@ -95,16 +109,15 @@
   mqV.addEventListener("change", relayout);
   mqT.addEventListener("change", () => shape(active, false));
 
-  /* interactions */
+  /* ---------- click / keyboard ---------- */
   cards.forEach((c, i) => {
-    c.addEventListener("pointerenter", () => {
-      if (mqHover.matches) open(i);
-    });
     c.addEventListener("click", () => {
       pinned = i;
       open(i);
     });
-    c.addEventListener("focus", () => open(i));
+    c.addEventListener("focus", () => {
+      if (c.matches(":focus-visible")) open(i);
+    });
     c.addEventListener("keydown", (e) => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
@@ -117,13 +130,73 @@
         cards[(i + k + N) % N].focus();
       }
     });
-    c.addEventListener("pointermove", (e) => {
-      const r = c.getBoundingClientRect();
-      gsap.to(c, { "--mx": e.clientX - r.left + "px", "--my": e.clientY - r.top + "px", duration: D(0.35), overwrite: "auto" });
-    });
   });
-  stage.addEventListener("pointerleave", () => {
-    if (mqHover.matches) open(pinned);
+
+  /* ---------- hover intent + cursor glow (one handler for the whole stage) ---------- */
+  const MIN_MOVE = 3; // px: ignore synthetic moves caused by layout shifting under a still cursor
+  const CALM_SPEED = 0.45; // px/ms: slower than this counts as deliberate, open immediately
+  const SETTLE = 90; // ms: after a fast sweep, open the card the cursor comes to rest on
+  const LEAVE_DELAY = 160; // ms: grace period before reverting to the pinned card
+
+  let px = 0;
+  let py = 0;
+  let pt = 0;
+  let hoverTimer = 0;
+  let leaveTimer = 0;
+  let glowRaf = 0;
+  let glowCard = null;
+  let gx = 0;
+  let gy = 0;
+
+  const cardAt = (x, y) => {
+    const el = document.elementFromPoint(x, y);
+    const c = el && el.closest(".pr-card");
+    return c ? cards.indexOf(c) : -1;
+  };
+  const hoverAt = (x, y) => {
+    const i = cardAt(x, y);
+    if (i > -1) open(i); // seams between cards return -1: keep the current card
+  };
+  const paintGlow = () => {
+    glowRaf = 0;
+    if (!glowCard) return;
+    const r = glowCard.getBoundingClientRect();
+    glowCard.style.setProperty("--mx", gx - r.left + "px");
+    glowCard.style.setProperty("--my", gy - r.top + "px");
+  };
+
+  stage.addEventListener("pointermove", (e) => {
+    if (e.pointerType === "touch") return;
+
+    /* cursor glow: at most one write per frame */
+    const gc = e.target.closest && e.target.closest(".pr-card");
+    if (gc) {
+      glowCard = gc;
+      gx = e.clientX;
+      gy = e.clientY;
+      if (!glowRaf) glowRaf = requestAnimationFrame(paintGlow);
+    }
+
+    /* hover intent */
+    if (!mqHover.matches) return;
+    clearTimeout(leaveTimer);
+    const now = performance.now();
+    const dist = Math.hypot(e.clientX - px, e.clientY - py);
+    if (dist < MIN_MOVE) return;
+    const speed = dist / Math.max(now - pt, 1);
+    px = e.clientX;
+    py = e.clientY;
+    pt = now;
+    clearTimeout(hoverTimer);
+    if (speed < CALM_SPEED) hoverAt(px, py);
+    else hoverTimer = setTimeout(() => hoverAt(px, py), SETTLE);
+  });
+
+  stage.addEventListener("pointerleave", (e) => {
+    if (e.pointerType === "touch" || !mqHover.matches) return;
+    clearTimeout(hoverTimer);
+    clearTimeout(leaveTimer);
+    leaveTimer = setTimeout(() => open(pinned), LEAVE_DELAY);
   });
 
   /* one-time entrance when the section scrolls into view */

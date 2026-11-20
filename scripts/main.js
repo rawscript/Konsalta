@@ -377,3 +377,46 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   revealEls.forEach((el) => io.observe(el));
 })();
+
+/* ==========================================================================
+   SEVEN PRINCIPLES PREVIEW  ·  append to main.js
+   - Staggered scroll reveal (rules draw in, rows rise in sequence).
+   - On touch devices (no hover), the row at the middle of the screen lights up
+     as you scroll; on desktop the CSS :hover state does this instead.
+   Safe to append: IIFE, exits if the section is absent, no GSAP required.
+   ========================================================================== */
+(() => {
+  const root = document.getElementById("principles-preview");
+  if (!root || !("IntersectionObserver" in window)) return;
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fineHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  /* ---------- Reveal ---------- */
+  if (!reduceMotion) {
+    root.classList.add("is-ready");
+    const reveal = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-in");
+            reveal.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
+    );
+    root.querySelectorAll("[data-reveal]").forEach((el) => reveal.observe(el));
+  }
+
+  /* ---------- Scroll-spy highlight (touch devices only) ---------- */
+  if (!fineHover) {
+    const spy = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => entry.target.classList.toggle("is-current", entry.isIntersecting));
+      },
+      { rootMargin: "-42% 0px -42% 0px" } // a thin band across the middle of the viewport
+    );
+    root.querySelectorAll(".prv-row").forEach((row) => spy.observe(row));
+  }
+})();
