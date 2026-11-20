@@ -140,9 +140,9 @@
     }
   }
 
-  // 5. Magnetic CTA buttons
+  // 5. Magnetic CTA buttons (excluding hero actions so there is no hover offset)
   if (fine && !reduce && window.gsap) {
-    document.querySelectorAll(".cta-btn").forEach((btn) => {
+    document.querySelectorAll(".cta-btn:not(.hero-actions .cta-btn)").forEach((btn) => {
       const x = gsap.quickTo(btn, "x", { duration: 0.4, ease: "power3" });
       const y = gsap.quickTo(btn, "y", { duration: 0.4, ease: "power3" });
       btn.addEventListener("pointermove", (e) => {

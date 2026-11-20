@@ -368,10 +368,20 @@ body.has-custom-cursor .cursor {
   transition: all 0.3s;
 }
 
-.secondary-btn:hover {
-  background: var(--white);
-  border-color: var(--navy);
-  transform: translateY(-2px);
+.hero-actions .cta-btn,
+.hero-actions .secondary-btn {
+  transition: background 0.3s, border-color 0.3s, color 0.3s, box-shadow 0.35s;
+}
+
+.hero-actions .cta-btn:hover,
+.hero-actions .cta-btn:active,
+.hero-actions .secondary-btn:hover,
+.hero-actions .secondary-btn:active {
+  transform: none !important;
+}
+
+.hero-actions .cta-btn:hover .cta-arrow {
+  transform: none !important;
 }
 
 /* ============ CONSTELLATION ============ */
