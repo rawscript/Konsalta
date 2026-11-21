@@ -170,4 +170,70 @@ document.addEventListener("DOMContentLoaded", () => {
       submitBtn.textContent = originalBtnText;
     }
   });
+
+  // ============================================================
+  // TAB SWITCHING (Contact Form <-> Consultant Onboarding Form)
+  // ============================================================
+  const tabBtnContact = document.getElementById("tabBtnContact");
+  const tabBtnOnboarding = document.getElementById("tabBtnOnboarding");
+  const panelContact = document.getElementById("panelContact");
+  const panelOnboarding = document.getElementById("panelOnboarding");
+  const introTitle = document.querySelector(".intro h1");
+  const introDesc = document.querySelector(".intro > p:last-of-type");
+  const onboardingLink = document.querySelector(".onboarding-link");
+
+  function switchTab(target) {
+    if (target === "onboarding") {
+      tabBtnContact?.classList.remove("active");
+      tabBtnContact?.setAttribute("aria-selected", "false");
+      tabBtnOnboarding?.classList.add("active");
+      tabBtnOnboarding?.setAttribute("aria-selected", "true");
+
+      if (panelContact) panelContact.style.display = "none";
+      if (panelOnboarding) {
+        panelOnboarding.style.display = "block";
+        panelOnboarding.classList.add("active");
+      }
+
+      if (introTitle) introTitle.textContent = "Consultant Onboarding";
+      if (introDesc) {
+        introDesc.textContent =
+          "Help us deliver evidence, insights and impact. Complete the form below to join our expert network.";
+      }
+    } else {
+      tabBtnOnboarding?.classList.remove("active");
+      tabBtnOnboarding?.setAttribute("aria-selected", "false");
+      tabBtnContact?.classList.add("active");
+      tabBtnContact?.setAttribute("aria-selected", "true");
+
+      if (panelOnboarding) {
+        panelOnboarding.style.display = "none";
+        panelOnboarding.classList.remove("active");
+      }
+      if (panelContact) panelContact.style.display = "block";
+
+      if (introTitle) introTitle.textContent = "Contact Us";
+      if (introDesc) {
+        introDesc.textContent =
+          "Tell us about your needs and we’ll help you move from insight to action.";
+      }
+    }
+  }
+
+  tabBtnContact?.addEventListener("click", () => switchTab("contact"));
+  tabBtnOnboarding?.addEventListener("click", () => switchTab("onboarding"));
+
+  // If user clicks the in-form helper link "Interested in joining as a consultant?"
+  if (onboardingLink) {
+    onboardingLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      switchTab("onboarding");
+      panelOnboarding?.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+
+  // Check URL hash if user landed with #onboarding
+  if (window.location.hash === "#onboarding") {
+    switchTab("onboarding");
+  }
 });

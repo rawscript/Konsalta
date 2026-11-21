@@ -28,10 +28,27 @@ img {
   object-fit: contain;
 }
 
+.contact-nav-strip {
+  width: 100%;
+  background: rgba(247, 244, 239, 0.95);
+  border-bottom: 1px solid rgba(11, 45, 83, 0.06);
+  padding: 14px 0;
+  position: relative;
+  z-index: 20;
+}
+
+.contact-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+}
+
 .intro {
   position: relative;
   overflow: hidden;
-  padding: 104px 24px 38px;
+  padding: 48px 24px 38px;
   text-align: center;
   background:
     radial-gradient(ellipse at 50% -20%, rgba(242, 101, 34, 0.17), transparent 54%),
@@ -39,17 +56,18 @@ img {
 }
 
 .back-link {
-  position: absolute;
-  top: 30px;
-  left: clamp(24px, 5vw, 64px);
   display: inline-flex;
   align-items: center;
   gap: 9px;
   color: var(--navy);
   font-size: 0.9rem;
   font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(11, 45, 83, 0.1);
   text-decoration: none;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
 .back-link svg {
@@ -640,4 +658,112 @@ font-family: "JetBrains Mono", monospace;
   .contact-wrap {
     padding: 16px 20px 40px;
   }
+}
+
+/* ============================================================
+   POST-MODERN AFRICAN TAB SWITCHER (Contact & Onboarding)
+   ============================================================ */
+.contact-toggle-bar {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 28px;
+  max-width: 620px;
+  position: relative;
+  z-index: 10;
+}
+
+.contact-toggle-wrap {
+  display: inline-flex;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 6px;
+  border-radius: 100px;
+  border: 1.5px solid rgba(11, 45, 83, 0.12);
+  box-shadow: 
+    0 8px 30px rgba(11, 45, 83, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  gap: 6px;
+  position: relative;
+}
+
+/* Kente woven micro-pattern accent line underneath the switch */
+.contact-toggle-wrap::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    #f26522 0px,
+    #f26522 8px,
+    #c89a2a 8px,
+    #c89a2a 14px,
+    #0b2d53 14px,
+    #0b2d53 20px,
+    #f6f3ee 20px,
+    #f6f3ee 24px
+  );
+  opacity: 0.7;
+}
+
+.contact-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 26px;
+  border-radius: 100px;
+  border: none;
+  background: transparent;
+  color: var(--navy);
+  font-family: "DM Sans", "Manrope", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  user-select: none;
+}
+
+.contact-tab-btn:hover {
+  color: var(--orange-deep);
+  background: rgba(242, 101, 34, 0.06);
+}
+
+.contact-tab-btn.active {
+  background: linear-gradient(135deg, var(--navy) 0%, #113c6d 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(11, 45, 83, 0.25);
+}
+
+.tab-kente-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--orange);
+  box-shadow: 0 0 6px rgba(242, 101, 34, 0.6);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.contact-tab-btn.active .tab-kente-dot {
+  background: #ff8f5f;
+  transform: scale(1.15);
+}
+
+.form-tab-panel {
+  width: 100%;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.form-tab-panel:not(.active) {
+  display: none !important;
+}
+
+/* Ensure Onboarding Form fits seamlessly inside contactUs layout */
+#panelOnboarding .form-container {
+  padding-top: 10px;
+  margin-bottom: 60px;
 }
