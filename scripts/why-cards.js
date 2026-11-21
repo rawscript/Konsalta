@@ -1,4 +1,4 @@
-/* Why Konsalta cards — optional polish (entrance + cursor highlight).
+/* Why Choose Us cards — optional polish (entrance + cursor highlight).
    The cards work without this file. Requires GSAP (already on the page). */
 (function () {
   "use strict";
