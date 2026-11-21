@@ -451,31 +451,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Stat half hover triggers counter replay
-  document.getElementById("statTop").addEventListener("click", () => {
+  // Stat half click triggers counter replay with correct service metrics
+  document.getElementById("statTop")?.addEventListener("click", () => {
     if (typeof gsap === "undefined") return;
     const el = document.getElementById("stat1Num");
+    if (!el) return;
     const obj = { val: 0 };
     gsap.to(obj, {
-      val: 1.2,
+      val: 9,
       duration: 1.2,
       ease: "power2.out",
       onUpdate: () => {
-        el.textContent = obj.val.toFixed(1) + "M+";
+        el.textContent = Math.round(obj.val) + " Services";
       },
     });
   });
 
-  document.getElementById("statBottom").addEventListener("click", () => {
+  document.getElementById("statBottom")?.addEventListener("click", () => {
     if (typeof gsap === "undefined") return;
     const el = document.getElementById("stat2Num");
+    if (!el) return;
     const obj = { val: 0 };
     gsap.to(obj, {
-      val: 3,
+      val: 100,
       duration: 1.2,
       ease: "power2.out",
       onUpdate: () => {
-        el.textContent = "$" + obj.val.toFixed(0) + "M";
+        el.textContent = Math.round(obj.val) + "%";
       },
     });
   });
