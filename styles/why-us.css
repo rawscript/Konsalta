@@ -18,6 +18,15 @@ body {
   overflow-x: hidden;
 }
 
+.city-network-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
 /* Custom Cursor */
 .cursor {
   display: none;
@@ -1535,6 +1544,239 @@ body.has-custom-cursor .cursor {
 @supports (height: 100dvh) {
   .hero {
     min-height: auto;
+  }
+}
+
+/* Why Konsalta page redesign */
+.parallax-stage {
+  overflow: hidden;
+  background:
+    radial-gradient(
+      ellipse at 82% 35%,
+      rgba(242, 101, 34, 0.1),
+      transparent 38%
+    ),
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.74) 0%,
+      rgba(248, 246, 240, 0.72) 72%
+    );
+}
+
+.hero {
+  padding: clamp(110px, 13vw, 168px) clamp(20px, 6vw, 80px)
+    clamp(72px, 9vw, 112px);
+  text-align: left;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr);
+  align-items: center;
+  gap: clamp(40px, 8vw, 112px);
+  width: min(100%, 1200px);
+  margin: 0 auto;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  margin: 0 0 28px;
+}
+
+.headline {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(3.2rem, 7.4vw, 6.6rem);
+  line-height: 0.99;
+  letter-spacing: -0.065em;
+  text-align: left;
+}
+
+.headline .hero-accent {
+  display: block;
+  color: var(--orange);
+}
+
+.hero-lead {
+  max-width: 610px;
+  margin: 28px 0 0;
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  line-height: 1.75;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 30px;
+  padding: 14px 20px;
+  border-radius: 6px;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.hero-cta:hover {
+  background: var(--orange-deep);
+  transform: translateY(-2px);
+}
+
+.hero-cta:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.hero-cta svg {
+  width: 18px;
+  height: 18px;
+}
+
+.hero-note {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 330px;
+  padding: clamp(28px, 4vw, 48px);
+  overflow: hidden;
+  border-radius: 24px 24px 24px 4px;
+  background: var(--navy);
+  color: var(--white);
+  box-shadow: 0 24px 60px rgba(11, 45, 83, 0.18);
+}
+
+.hero-note::after {
+  position: absolute;
+  right: -78px;
+  bottom: -96px;
+  width: 240px;
+  height: 240px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 22px rgba(255, 255, 255, 0.035),
+    0 0 0 48px rgba(255, 255, 255, 0.025);
+  content: "";
+  pointer-events: none;
+}
+
+.hero-note-label,
+.hero-note-caption {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-note-label {
+  color: #ffc09e;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-note p {
+  position: relative;
+  z-index: 1;
+  margin: 28px 0 22px;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2rem, 3.4vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.hero-note-rule {
+  position: relative;
+  z-index: 1;
+  width: 48px;
+  height: 3px;
+  background: var(--orange-light);
+}
+
+.hero-note-caption {
+  max-width: 26ch;
+  margin-top: 22px;
+  color: rgba(255, 255, 255, 0.76);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.why-intro-section {
+  padding: clamp(64px, 8vw, 100px) 20px clamp(28px, 4vw, 48px);
+}
+
+.why-intro-label {
+  margin-bottom: 16px;
+  color: var(--orange-deep);
+}
+
+.why-intro-title {
+  margin: 0;
+  font-size: clamp(2.4rem, 5vw, 4.25rem);
+  letter-spacing: -0.055em;
+}
+
+.why-unified-section.why-redesign {
+  padding: clamp(24px, 3vw, 40px) clamp(16px, 5vw, 64px)
+    clamp(72px, 9vw, 112px);
+  background: rgba(240, 236, 225, 0.78);
+  border: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+@media (max-width: 800px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .hero-note {
+    min-height: 260px;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 104px 20px 56px;
+  }
+
+  .headline {
+    font-size: clamp(2.75rem, 12vw, 4.2rem);
+  }
+
+  .hero-lead {
+    margin-top: 22px;
+  }
+
+  .hero-note {
+    min-height: 240px;
+    padding: 28px;
+  }
+
+  .why-intro-section {
+    padding: 56px 20px 24px;
+  }
+
+  .why-unified-section.why-redesign {
+    padding: 20px 16px 64px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-cta {
+    transition: none;
   }
 }
 

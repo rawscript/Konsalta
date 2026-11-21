@@ -305,3 +305,66 @@
     transition: none;
   }
 }
+
+/* Restrained card treatment for the redesigned Why Konsalta page */
+.why-unified-section.why-redesign .why-block {
+  max-width: 1160px;
+}
+
+.why-unified-section.why-redesign .wc-grid {
+  gap: clamp(14px, 2vw, 22px);
+}
+
+.why-unified-section.why-redesign .wc-item {
+  filter: none;
+}
+
+.why-unified-section.why-redesign .wc-item:hover {
+  filter: drop-shadow(0 12px 20px rgba(11, 45, 83, 0.1));
+}
+
+.why-unified-section.why-redesign .wc-card {
+  min-height: 260px;
+  padding: clamp(22px, 2.5vw, 32px);
+  border: 1px solid rgba(11, 45, 83, 0.09);
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: 0 8px 24px rgba(11, 45, 83, 0.045);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.why-unified-section.why-redesign .wc-item:hover .wc-card {
+  border-color: var(--navy);
+  background: var(--navy);
+}
+
+.why-unified-section.why-redesign .wc-top {
+  margin-bottom: 30px;
+}
+
+.why-unified-section.why-redesign .wc-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--orange-soft);
+  color: var(--orange-deep);
+}
+
+.why-unified-section.why-redesign .wc-item:hover .wc-icon {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.why-unified-section.why-redesign .wc-title {
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+}
+
+.why-unified-section.why-redesign .wc-card::after {
+  height: 4px;
+  background: var(--orange);
+}
+
+.why-unified-section.why-redesign .wc-card .wc-adinkra {
+  display: none;
+}
