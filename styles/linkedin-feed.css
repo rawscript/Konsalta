@@ -532,3 +532,128 @@
     transition: none;
   }
 }
+
+/* Konsalta palette for the insights feed */
+.lf--brand {
+  --li-blue: var(--navy);
+  --li-blue-dark: var(--navy-deep);
+  --li-blue-hover: var(--orange-deep);
+  --li-bg: var(--bg-warm);
+  --li-surface: var(--white);
+  --li-border: rgba(11, 45, 83, 0.12);
+  --li-text: var(--ink);
+  --li-muted: var(--ink-soft);
+  padding-top: clamp(56px, 8vw, 96px);
+}
+
+.lf--brand .lf-panel {
+  padding: clamp(24px, 4vw, 48px);
+  border: 1px solid rgba(11, 45, 83, 0.1);
+  border-radius: 20px;
+  background:
+    radial-gradient(
+      ellipse at 100% 0%,
+      rgba(242, 101, 34, 0.08),
+      transparent 42%
+    ),
+    rgba(240, 236, 225, 0.84);
+  box-shadow: 0 16px 48px rgba(11, 45, 83, 0.08);
+}
+
+.lf--brand .lf-panel::before {
+  display: none;
+}
+
+.lf--brand .lf-head {
+  padding-right: 0;
+}
+
+.lf--brand .lf-badge {
+  border-color: rgba(11, 45, 83, 0.16);
+  color: var(--navy);
+  background: rgba(11, 45, 83, 0.06);
+}
+
+.lf--brand .lf-dot {
+  background: var(--orange);
+}
+
+.lf--brand .lf-title .accent {
+  color: var(--orange-deep);
+}
+
+.lf--brand .lf-follow {
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
+.lf--brand .lf-follow:hover {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: var(--white);
+}
+
+.lf--brand .lf-follow:focus-visible {
+  outline-color: var(--orange);
+}
+
+.lf--brand .lf-card {
+  border-color: rgba(11, 45, 83, 0.11);
+  border-radius: 14px;
+  box-shadow: 0 4px 16px rgba(11, 45, 83, 0.06);
+}
+
+.lf--brand .lf-card:hover {
+  box-shadow:
+    0 10px 24px rgba(11, 45, 83, 0.11),
+    0 0 0 1px rgba(242, 101, 34, 0.22);
+}
+
+.lf--brand .lf-card::after {
+  display: none;
+}
+
+.lf--brand .lf-card--featured {
+  background: var(--navy-deep);
+}
+
+.lf--brand .lf-card--featured::before {
+  background: linear-gradient(
+    to top,
+    rgba(6, 26, 50, 0.94) 0%,
+    rgba(6, 26, 50, 0.58) 48%,
+    rgba(6, 26, 50, 0.08) 100%
+  );
+}
+
+.lf--brand .lf-meta::before {
+  background: var(--orange);
+}
+
+.lf--brand .lf-tag {
+  background: rgba(242, 101, 34, 0.14);
+  color: var(--orange-deep);
+}
+
+.lf--brand .lf-card--featured .lf-tag {
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--white);
+}
+
+.lf--brand .lf-cta {
+  color: var(--orange-deep);
+}
+
+.lf--brand .lf-card--featured .lf-cta {
+  color: var(--white);
+}
+
+.lf--brand .lf-card--small::before {
+  background: var(--orange);
+}
+
+@media (max-width: 540px) {
+  .lf--brand .lf-panel {
+    padding: 20px 16px;
+  }
+}
