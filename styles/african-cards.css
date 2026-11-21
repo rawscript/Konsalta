@@ -1,0 +1,130 @@
+/* ============================================================
+   KONSALTA AFRICAN PATTERN HOVER CARDS
+   Authentic Pan-African Kente Geometric Stripe & Adinkra Accents
+   Loaded across all pages EXCEPT index.html
+   ============================================================ */
+
+/* Target card containers across non-index pages */
+.serve-card,
+.pr-card,
+.team-profile-card,
+.team-support-card,
+.about-cta-card,
+.hero-stat-card,
+.card-base,
+.services-card,
+.testimonial-card,
+.focus-item,
+.stats-card,
+.final-cta-card,
+.editorial-card,
+.stream-card,
+.lf-card,
+.contact-card,
+.faq-item {
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s ease !important;
+}
+
+/* Kente Strip Accent along the bottom border */
+.serve-card::after,
+.pr-card::after,
+.team-profile-card::after,
+.team-support-card::after,
+.about-cta-card::after,
+.hero-stat-card::after,
+.card-base::after,
+.services-card::after,
+.testimonial-card::after,
+.focus-item::after,
+.stats-card::after,
+.final-cta-card::after,
+.editorial-card::after,
+.stream-card::after,
+.lf-card::after,
+.contact-card::after,
+.faq-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--orange, #f26522) 0px,
+    var(--orange, #f26522) 14px,
+    #c89a2a 14px,  /* Kente Gold */
+    #c89a2a 22px,
+    var(--navy, #0b2d53) 22px,  /* Deep Navy */
+    var(--navy, #0b2d53) 30px,
+    #f6f3ee 30px,  /* Cream Warmth */
+    #f6f3ee 36px,
+    var(--orange, #f26522) 36px,
+    var(--orange, #f26522) 50px,
+    #c89a2a 50px,
+    #c89a2a 58px,
+    var(--navy, #0b2d53) 58px,
+    var(--navy, #0b2d53) 72px
+  );
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  opacity: 0.88;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* On hover / focus-visible, the Kente rhythm expands smoothly across full card width */
+.serve-card:hover::after,
+.serve-card:focus-visible::after,
+.pr-card:hover::after,
+.pr-card:focus-visible::after,
+.team-profile-card:hover::after,
+.team-profile-card:focus-visible::after,
+.team-support-card:hover::after,
+.team-support-card:focus-visible::after,
+.about-cta-card:hover::after,
+.about-cta-card:focus-visible::after,
+.hero-stat-card:hover::after,
+.hero-stat-card:focus-visible::after,
+.card-base:hover::after,
+.card-base:focus-visible::after,
+.services-card:hover::after,
+.services-card:focus-visible::after,
+.testimonial-card:hover::after,
+.testimonial-card:focus-visible::after,
+.focus-item:hover::after,
+.focus-item:focus-visible::after,
+.stats-card:hover::after,
+.stats-card:focus-visible::after,
+.final-cta-card:hover::after,
+.final-cta-card:focus-visible::after,
+.editorial-card:hover::after,
+.editorial-card:focus-visible::after,
+.stream-card:hover::after,
+.stream-card:focus-visible::after,
+.lf-card:hover::after,
+.lf-card:focus-visible::after,
+.contact-card:hover::after,
+.contact-card:focus-visible::after,
+.faq-item:hover::after,
+.faq-item[open]::after {
+  transform: scaleX(1);
+  opacity: 1;
+}
+
+/* Subtle warm ambient elevation on hover */
+.serve-card:hover,
+.team-profile-card:hover,
+.card-base:hover,
+.focus-item:hover,
+.editorial-card:hover,
+.stream-card:hover,
+.contact-card:hover {
+  border-color: rgba(242, 101, 34, 0.28) !important;
+  box-shadow: 0 12px 30px rgba(11, 45, 83, 0.08), 0 2px 8px rgba(242, 101, 34, 0.06);
+}
