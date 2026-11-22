@@ -1,0 +1,423 @@
+/* Shared visual shell for Contact, Governance, Consultant Onboarding and FAQ.
+   Page copy and form behavior remain unchanged. */
+
+body {
+  background: var(--bg);
+  font-family: "Manrope", "Plus Jakarta Sans", sans-serif;
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.section-title {
+  font-family: "Plus Jakarta Sans", "Manrope", sans-serif;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  background: rgba(248, 246, 240, 0.92);
+  border-bottom: 1px solid transparent;
+  backdrop-filter: blur(14px) saturate(135%);
+  -webkit-backdrop-filter: blur(14px) saturate(135%);
+}
+
+.site-header.is-stuck {
+  border-bottom-color: var(--line);
+  box-shadow: 0 8px 24px rgba(11, 45, 83, 0.06);
+}
+
+.site-header .logo img {
+  height: 40px;
+  width: auto;
+}
+
+.site-header .header-nav a.active {
+  color: var(--navy);
+}
+
+.site-header .header-nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--orange);
+}
+
+.site-header .header-btn {
+  border: 0;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--navy-deep);
+  box-shadow: 0 4px 0 var(--orange-deep);
+  font-weight: 800;
+}
+
+.site-header .header-btn:hover {
+  border-color: transparent;
+  background: var(--orange-light);
+  color: var(--navy-deep);
+  box-shadow: 0 6px 0 var(--orange-deep);
+  transform: translateY(-2px);
+}
+
+.site-footer {
+  background:
+    radial-gradient(circle at 92% 18%, rgba(242, 101, 34, 0.16), transparent 18%),
+    linear-gradient(145deg, #061a32, #0b2d53);
+  color: #fff;
+}
+
+.site-footer .social {
+  display: flex;
+  gap: 10px;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer .social a {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  transition: background 0.25s, border-color 0.25s, color 0.25s, transform 0.25s;
+}
+
+.site-footer .social a:hover {
+  border-color: var(--orange);
+  background: var(--orange);
+  color: var(--navy-deep);
+  transform: translateY(-3px);
+}
+
+.site-footer .social svg {
+  width: 19px;
+  height: 19px;
+}
+
+/* Contact */
+.intro {
+  min-height: 420px;
+  display: grid;
+  place-content: center;
+  background:
+    linear-gradient(rgba(11, 45, 83, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 45, 83, 0.025) 1px, transparent 1px),
+    var(--bg);
+  background-size: 48px 48px;
+}
+
+.intro .eyebrow {
+  color: var(--orange-deep);
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.intro h1,
+.faq-hero h1,
+.governance-hero h1 {
+  color: var(--navy);
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.055em;
+}
+
+.contact-card {
+  border-radius: 24px;
+  box-shadow: 0 24px 70px rgba(11, 45, 83, 0.10);
+}
+
+.intro .eyebrow,
+.intro h1,
+.intro > p:last-child,
+.contact-card,
+.contact-copy > *,
+.contact-form > * {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+.contact-copy {
+  background:
+    radial-gradient(circle at 100% 100%, rgba(242, 101, 34, 0.22), transparent 32%),
+    var(--navy-deep);
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  border-radius: 12px;
+}
+
+.form-footer button,
+.submit-btn {
+  border: 0;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--navy-deep);
+  box-shadow: 0 4px 0 var(--orange-deep);
+  font-weight: 800;
+}
+
+/* FAQ */
+.faq-page {
+  width: min(100% - 40px, 1120px);
+  padding-top: 72px;
+  background: transparent;
+}
+
+.faq-hero {
+  position: relative;
+  max-width: 980px;
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.faq-hero::before {
+  content: "";
+  display: block;
+  width: 90px;
+  height: 2px;
+  margin: 0 auto 22px;
+  background: var(--orange);
+  box-shadow: 114px 0 0 var(--orange), -114px 0 0 var(--orange);
+}
+
+.faq-eyebrow {
+  color: var(--orange-deep);
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.faq-hero h1 {
+  font-size: clamp(44px, 7vw, 76px);
+  line-height: 1;
+}
+
+.faq-list {
+  max-width: 920px;
+  margin-inline: auto;
+}
+
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 8px 24px rgba(11, 45, 83, 0.05);
+}
+
+.faq-item[open] {
+  border-color: rgba(242, 101, 34, 0.38);
+  box-shadow: 0 14px 34px rgba(11, 45, 83, 0.08);
+}
+
+/* Consultant onboarding */
+.consultant-onboarding-page body,
+body:has(.consultant-form) {
+  background: var(--bg);
+}
+
+.progress-container {
+  position: sticky;
+  top: 72px;
+  z-index: 90;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(11, 45, 83, 0.05);
+}
+
+.consultant-onboarding .intro,
+.intro:has(+ .form-container) {
+  max-width: none;
+  width: 100%;
+  min-height: 390px;
+  background:
+    linear-gradient(rgba(11, 45, 83, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 45, 83, 0.025) 1px, transparent 1px),
+    var(--bg);
+  background-size: 48px 48px;
+}
+
+.intro:has(+ .form-container) h1 {
+  font-size: clamp(44px, 7vw, 76px);
+  line-height: 1;
+}
+
+.form-container {
+  max-width: 1080px;
+}
+
+.form-section {
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 30px rgba(11, 45, 83, 0.05);
+}
+
+.form-section.expanded,
+.form-section:has(.section-header[aria-expanded="true"]) {
+  border-color: rgba(242, 101, 34, 0.30);
+}
+
+.section-header {
+  border-radius: 18px;
+}
+
+.section-number {
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  border-radius: 12px;
+}
+
+/* Governance */
+.governance-hero {
+  min-height: 430px;
+  display: grid;
+  align-items: center;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    var(--navy-deep);
+  background-size: 48px 48px;
+  color: #fff;
+}
+
+.governance-hero-inner {
+  width: min(100% - 40px, 1240px);
+  margin-inline: auto;
+  padding-block: 72px;
+}
+
+.governance-hero h1 {
+  max-width: 12em;
+  margin: 18px 0 22px;
+  color: #fff;
+  font-size: clamp(58px, 9vw, 112px);
+  line-height: 0.92;
+  white-space: normal;
+}
+
+.governance-hero-copy {
+  max-width: 680px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.governance-hero-copy p {
+  color: inherit;
+  font-size: clamp(17px, 2vw, 21px);
+  margin: 0 0 12px;
+}
+
+.governance-hero-copy small {
+  color: var(--orange-light);
+  font-weight: 800;
+}
+
+.strip {
+  position: sticky;
+  top: 72px;
+  background: var(--orange);
+  border-bottom: 1px solid rgba(11, 45, 83, 0.12);
+}
+
+.sec {
+  scroll-margin-top: 126px;
+}
+
+.panel,
+.panel.alt {
+  background: var(--navy);
+  color: #fff;
+}
+
+.panel.alt {
+  background: var(--orange);
+  color: var(--navy-deep);
+}
+
+.panel::after,
+.panel.alt::after {
+  opacity: 0.35;
+}
+
+.body {
+  background: var(--bg);
+}
+
+.item {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(11, 45, 83, 0.06);
+}
+
+.item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px rgba(11, 45, 83, 0.10);
+}
+
+@media (max-width: 850px) {
+  .site-header .header-btn {
+    display: none;
+  }
+
+  .strip {
+    top: 68px;
+  }
+
+  .progress-container {
+    top: 68px;
+  }
+}
+
+@media (max-width: 600px) {
+  .intro {
+    min-height: 350px;
+  }
+
+  .intro h1,
+  .faq-hero h1,
+  .intro:has(+ .form-container) h1 {
+    font-size: clamp(38px, 13vw, 52px);
+  }
+
+  .faq-page {
+    width: min(100% - 32px, 1120px);
+  }
+
+  .faq-hero::before {
+    width: 42px;
+    box-shadow: 54px 0 0 var(--orange), -54px 0 0 var(--orange);
+  }
+
+  .governance-hero {
+    min-height: 390px;
+  }
+
+  .governance-hero h1 {
+    font-size: clamp(48px, 16vw, 72px);
+  }
+
+  .progress-container {
+    padding-inline: 12px;
+  }
+}

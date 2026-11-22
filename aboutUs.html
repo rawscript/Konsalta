@@ -8,7 +8,6 @@
       name="description"
       content="Konsalta is a women-led, Africa-focused research, consulting and advisory firm bridging local insight with global perspective."
     />
-
     <link rel="icon" href="./public/favicon.ico" type="image/x-icon" />
     <link
       rel="apple-touch-icon"
@@ -16,58 +15,40 @@
       href="./public/apple-touch-icon.png"
     />
     <link rel="manifest" href="./public/site.webmanifest" />
-
-    <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="styles/tokens.css" />
-    <link rel="stylesheet" href="styles/header.css" />
-    <link rel="stylesheet" href="styles/about.css?v=20261120b" />
+    <link rel="stylesheet" href="styles/site.css" />
+    <link rel="stylesheet" href="styles/about.css" />
     <link rel="stylesheet" href="styles/principles.css" />
-    <link rel="stylesheet" href="styles/tablet-nav.css" />
-    <link rel="stylesheet" href="styles/why-cards.css" />
-    <link rel="stylesheet" href="styles/footer.css" />
     <link rel="stylesheet" href="styles/theme.css" />
-
-    <!-- GSAP & Motion Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
+      defer
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
+      defer
+    ></script>
     <script src="scripts/header.js" defer></script>
     <script src="scripts/theme.js" defer></script>
-    <script src="scripts/aboutUS.js" defer></script>
+    <script src="scripts/site.js" defer></script>
     <script src="scripts/principles.js" defer></script>
-    <script>
-      if (
-        window.gsap &&
-        window.ScrollTrigger &&
-        !matchMedia("(prefers-reduced-motion: reduce)").matches
-      ) {
-        document.documentElement.classList.add("js-ready");
-      }
-    </script>
   </head>
-
   <body>
-    <!-- Ambient Background Glows -->
-    <div class="ambient-1" aria-hidden="true"></div>
-    <div class="ambient-2" aria-hidden="true"></div>
-    <!-- <div class="cursor" aria-hidden="true"></div> -->
-
-    <!-- ============ GLOBAL SITE HEADER ============ -->
     <header class="site-header">
       <a href="index.html" class="logo" aria-label="Konsalta Home">
-        <span class="logo-dot">
-          <picture>
-            <source media="(max-width: 850px)" srcset="public/Logo-5.png" />
-            <img src="public/Logo-3.png" alt="Konsalta Logo" />
-          </picture>
-        </span>
+        <picture>
+          <source media="(max-width: 850px)" srcset="public/Logo-5.png" />
+          <img src="public/Logo-3.png" alt="Konsalta Logo" />
+        </picture>
       </a>
       <button
         class="header-menu-toggle"
@@ -81,312 +62,213 @@
         </svg>
       </button>
       <nav class="header-nav" id="primary-navigation">
-        <a href="aboutUs.html" class="active"
+        <a href="aboutUs.html" class="active" aria-current="page"
           ><span>About</span> <span>Konsalta</span></a
         >
-        <a href="services.html"
-          ><span>Our</span> <span>Services</span></a
-        >
+        <a href="services.html"><span>Our</span> <span>Services</span></a>
         <a href="whyUs.html"><span>Why</span> <span>Konsalta</span></a>
         <a href="contactUs.html"><span>Contact</span> <span>Us</span></a>
-        <a href="consultant-onboarding.html" class="mobile-nav-contact"
-          ><span>Engage</span> <span>with Us</span></a
-        >
+        <!-- <a href="consultant-onboarding.html" class="mobile-nav-contact"><span>Engage</span> <span>with Us</span></a> -->
       </nav>
-      <a href="consultant-onboarding.html" class="header-btn"
-        >Engage with Us
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M5 12h14M13 6l6 6-6 6" />
-        </svg>
-      </a>
+      <a href="consultant-onboarding.html" class="btn header-btn"
+        >Engage with Us</a
+      >
     </header>
 
-    <main class="about-page">
-      <!-- ============================================================
-         1. HERO: WHO WE ARE
-         ============================================================ -->
-      <section class="who-we-are-hero" id="who-we-are">
-        <!-- Architectural Element Background -->
-        <section class="hero-bg-app" aria-hidden="true">
-          <div class="arch-element">
-            <svg viewBox="0 0 200 200" class="arch-graphic">
-              <!-- Single clean arch/tangent curve -->
-              <path
-                d="M 20 180 Q 100 20 180 180"
-                stroke="rgba(242, 101, 34, 0.15)"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-              />
-              <path
-                d="M 30 180 Q 100 40 170 180"
-                stroke="rgba(255, 255, 255, 0.1)"
-                stroke-width="1.5"
-                fill="none"
-                stroke-linecap="round"
-              />
-              <path
-                d="M 40 180 Q 100 60 160 180"
-                stroke="rgba(11, 45, 83, 0.12)"
-                stroke-width="1"
-                fill="none"
-                stroke-linecap="round"
-              />
-            </svg>
-          </div>
-        </section>
-
-        <div class="section-container">
-          <div class="hero-content">
-            <h1 class="hero-main-title">
-              From Casual Conversations to Global Impact
-            </h1>
-
-            <h2 class="about-who-title">Who we are</h2>
-            <p class="hero-lead-text">
-              Since its inception in 2024, Konsalta has built a
-              multidisciplinary network of experts who bring deep, hands-on
-              experience to help organisations across Africa and beyond turn
-              knowledge into impact. We partner with clients to solve complex
-              challenges, translate evidence into action, strengthen
-              institutional capability and deliver lasting real-world impact.
-            </p>
-
-            <div class="hero-actions">
-              <a href="#who-we-serve" class="btn-primary">
-                Who We Serve
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </a>
-              <a href="#our-approach" class="btn-secondary"
-                >Explore Our Approach</a
-              >
+    <main>
+      <!-- WHO WE ARE -->
+      <section class="about-hero ph veil art5" id="who-we-are">
+        <img
+          src="public/images/about-hero.jpg"
+          alt=""
+          onerror="this.remove()"
+        />
+        <span class="shape shape--bar" aria-hidden="true"></span
+        ><span class="shape shape--dot" aria-hidden="true"></span>
+        <div class="wrap">
+          <div class="hero-top">
+            <div class="hero-copy">
+              <h1 data-reveal>From Casual Conversations to Global Impact</h1>
+              <h2 data-reveal>Who we are</h2>
+              <p class="lead" data-reveal>
+                Since its inception in 2024, Konsalta has built a
+                multidisciplinary network of experts who bring deep, hands-on
+                experience to help organisations across Africa and beyond turn
+                knowledge into impact. We partner with clients to solve complex
+                challenges, translate evidence into action, strengthen
+                institutional capability and deliver lasting real-world impact.
+              </p>
             </div>
-
-            <!-- Highlight Metrics Strip -->
-            <div class="hero-stats-grid">
-              <div class="hero-stat-card">
-                <div class="hero-stat-number">2024</div>
-                <div class="hero-stat-title">Year Founded</div>
-                <div class="hero-stat-desc">
-                  Established to pioneer an agile, high-impact consulting model.
-                </div>
-              </div>
-
-              <div class="hero-stat-card">
-                <div class="hero-stat-number">5<span class="plus">+</span></div>
-                <div class="hero-stat-title">Client Sectors</div>
-                <div class="hero-stat-desc">
-                  Public, multilateral, corporate, philanthropic & civil society
-                  partners.
-                </div>
-              </div>
-
-              <div class="hero-stat-card">
-                <div class="hero-stat-number">7</div>
-                <div class="hero-stat-title">Guiding Principles</div>
-                <div class="hero-stat-desc">
-                  Rigorous methodology tailored one assignment at a time.
-                </div>
-              </div>
-
-              <div class="hero-stat-card">
-                <div class="hero-stat-number">
-                  100<span class="plus">%</span>
-                </div>
-                <div class="hero-stat-title">Evidence-Led</div>
-                <div class="hero-stat-desc">
-                  Every recommendation is anchored in credible, field-tested
-                  research.
-                </div>
-              </div>
+            <div class="hero-art" aria-hidden="true">
+              <figure class="hero-panel ph art3">
+                <img
+                  src="public/images/about-hero-2.jpg"
+                  alt=""
+                  loading="lazy"
+                  onerror="this.remove()"
+                />
+              </figure>
+            </div>
+          </div>
+          <nav class="portals" aria-label="Jump to a section">
+            <a class="portal ph veil art2" href="#meet-the-team" data-reveal
+              ><img
+                src="public/images/portal-team.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.remove()"
+              /><span class="portal__n" aria-hidden="true">01</span
+              ><span class="portal__t">Our Team</span
+              ><span class="portal__go" aria-hidden="true">↓</span></a
+            >
+            <a class="portal ph veil art4" href="#who-we-serve" data-reveal
+              ><img
+                src="public/images/portal-serve.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.remove()"
+              /><span class="portal__n" aria-hidden="true">02</span
+              ><span class="portal__t">Who we serve</span
+              ><span class="portal__go" aria-hidden="true">↓</span></a
+            >
+            <a class="portal ph veil art1" href="#our-approach" data-reveal
+              ><img
+                src="public/images/portal-approach.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.remove()"
+              /><span class="portal__n" aria-hidden="true">03</span
+              ><span class="portal__t">Our approach</span
+              ><span class="portal__go" aria-hidden="true">↓</span></a
+            >
+          </nav>
+          <div class="stats">
+            <div class="stat" data-reveal>
+              <b>2024<i></i></b>
+              <h3>Year Founded</h3>
+              <p>
+                Established to pioneer an agile, high-impact consulting model.
+              </p>
+            </div>
+            <div class="stat" data-reveal>
+              <b>5<i>+</i></b>
+              <h3>Client Sectors</h3>
+              <p>
+                Public, multilateral, corporate, philanthropic &amp; civil
+                society partners.
+              </p>
+            </div>
+            <div class="stat" data-reveal>
+              <b>7<i></i></b>
+              <h3>Guiding Principles</h3>
+              <p>Rigorous methodology tailored one assignment at a time.</p>
+            </div>
+            <div class="stat" data-reveal>
+              <b>100<i>%</i></b>
+              <h3>Evidence-Led</h3>
+              <p>
+                Every recommendation is anchored in credible, field-tested
+                research.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- ============================================================
-         2. WHO WE SERVE
-         ============================================================ -->
-      <section class="who-we-serve-section" id="who-we-serve">
-        <div class="section-container">
-          <div class="section-head serve-head">
-            <div>
-              <p class="serve-eyebrow">Who we serve</p>
-              <h2 class="section-title">
+      <!-- WHO WE SERVE -->
+      <section class="serve" id="who-we-serve">
+        <div class="wrap">
+          <div class="serve-head">
+            <div data-reveal>
+              <p class="badge">Who we serve</p>
+              <h2>
                 Services tailored to <span class="accent">your needs</span>
               </h2>
             </div>
-            <p class="serve-intro">
+            <p class="serve-intro" data-reveal>
               Whatever your mandate, we bring rigorous evidence, local context
               and practical delivery to the decisions that matter.
             </p>
           </div>
-
           <div class="serve-grid">
-            <!-- Featured -->
-            <article class="serve-card">
-              <!-- <div class="serve-icon-wrap" aria-hidden="true">
-             <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path
-                    d="M3 21h18M3 10h18M5 10v11M9 10v11M15 10v11M19 10v11M12 2l10 8H2l10-8z"
-                  />
-                </svg>
-              </div> -->
-
-              <div class="hero-image">
-                <div class="hero-glow"></div>
-                <img src="public/government.jpg" alt="Governments" />
-              </div>
-              <div class="text-align">
-                <h3 class="serve-title">
-                  Governments &amp; Public Institutions
-                </h3>
-                <p class="serve-desc">
-                  Evidence-informed policymaking and effective public service
-                  delivery.
-                </p>
-              </div>
+            <article class="serve-card ph veil art1" data-reveal>
+              <img
+                src="public/government.jpg"
+                alt="Governments"
+                loading="lazy"
+                onerror="this.remove()"
+              />
+              <h3>Governments &amp; Public Institutions</h3>
+              <p>
+                Evidence-informed policymaking and effective public service
+                delivery.
+              </p>
             </article>
-
-            <article class="serve-card">
-              <div class="serve-icon-wrap" aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <circle cx="12" cy="12" r="10" />
-                  <path
-                    d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-                  />
-                </svg>
-              </div>
-              <h3 class="serve-title">
-                Development Partners &amp; International Organisations
-              </h3>
-              <p class="serve-desc">
+            <article class="serve-card ph veil art2" data-reveal>
+              <img
+                src="public/images/serve-2.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.remove()"
+              />
+              <h3>Development Partners &amp; International Organisations</h3>
+              <p>
                 Generating evidence and strengthening learning to inform
                 programmes.
               </p>
             </article>
-
-            <article class="serve-card">
-              <div class="serve-icon-wrap" aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-                </svg>
-              </div>
-              <h3 class="serve-title">Private Sector</h3>
-              <p class="serve-desc">
+            <article class="serve-card ph veil art3" data-reveal>
+              <img
+                src="public/images/serve-3.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.remove()"
+              />
+              <h3>Private Sector</h3>
+              <p>
                 Data-driven insights, strategic advisory, market entry and ESG
                 support.
               </p>
             </article>
-
-            <article class="serve-card">
-              <div class="serve-icon-wrap" aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                </svg>
-              </div>
-              <h3 class="serve-title">Academic &amp; Research Institutions</h3>
-              <p class="serve-desc">
+            <article class="serve-card ph veil art4" data-reveal>
+              <img
+                src="public/images/serve-4.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.remove()"
+              />
+              <h3>Academic &amp; Research Institutions</h3>
+              <p>
                 Research, evaluation, data analysis and capacity development.
               </p>
             </article>
-
-            <article class="serve-card">
-              <div class="serve-icon-wrap" aria-hidden="true">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                </svg>
-              </div>
-              <h3 class="serve-title">Civil Society</h3>
-              <p class="serve-desc">
-                Demonstrating impact and mobilising resources for change.
-              </p>
+            <article class="serve-card ph veil art1" data-reveal>
+              <img
+                src="public/images/serve-5.jpg"
+                alt=""
+                loading="lazy"
+                onerror="this.remove()"
+              />
+              <h3>Civil Society</h3>
+              <p>Demonstrating impact and mobilising resources for change.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <!-- ============================================================
-         3. OUR APPROACH: SEVEN PRINCIPLES, ONE ASSIGNMENT AT A TIME
-         ============================================================ -->
-      <!-- ============================================================
-     3. OUR APPROACH: SEVEN PRINCIPLES, ONE ASSIGNMENT AT A TIME
-     (replaces the old <section class="section"> stub)
-     ============================================================ -->
+      <!-- OUR APPROACH (styled by principles.css, driven by principles.js) -->
       <section
         class="principles"
         id="our-approach"
         aria-labelledby="principles-title"
       >
-        <div class="section-container">
+        <div class="wrap">
           <div class="section-head">
             <h2 class="section-title" id="principles-title">
               Seven principles,
               <span class="accent">one assignment at a time</span>
             </h2>
           </div>
-
           <div class="pr-stage" id="prStage">
             <div
               class="pr-card"
@@ -411,7 +293,6 @@
                 </p>
               </div>
             </div>
-
             <div
               class="pr-card"
               role="button"
@@ -435,7 +316,6 @@
                 </p>
               </div>
             </div>
-
             <div
               class="pr-card"
               role="button"
@@ -459,7 +339,6 @@
                 </p>
               </div>
             </div>
-
             <div
               class="pr-card"
               role="button"
@@ -485,7 +364,6 @@
                 </p>
               </div>
             </div>
-
             <div
               class="pr-card"
               role="button"
@@ -511,7 +389,6 @@
                 </p>
               </div>
             </div>
-
             <div
               class="pr-card"
               role="button"
@@ -538,7 +415,6 @@
                 </p>
               </div>
             </div>
-
             <div
               class="pr-card"
               role="button"
@@ -567,19 +443,18 @@
           </div>
         </div>
       </section>
-      <!-- ============================================================
-         5. MEET THE TEAM: FIVE CONNECTED AREAS OF EXPERTISE
-         ============================================================ -->
-      <section class="team-section" id="meet-the-team">
-        <div class="section-container">
-          
 
+      <!-- MEET THE TEAM -->
+      <section class="team" id="meet-the-team">
+        <div class="wrap">
           <div class="team-roster">
-            <header class="team-network-heading">
-              <p class="team-network-label">Our Team</p>
+            <header class="team-head">
+              <p class="team-label">Our Team</p>
               <h3>Meet <span>the Team</span></h3>
-              <p class="team-network-copy">
-                Konsalta is built around a select, experienced core team managing day-to-day delivery and strategy, supported by an Advisory Board and a wider network of trusted specialists.
+              <p class="team-copy">
+                Konsalta is built around a select, experienced core team
+                managing day-to-day delivery and strategy, supported by an
+                Advisory Board and a wider network of trusted specialists.
               </p>
             </header>
             <div class="team-profile-grid">
@@ -619,7 +494,6 @@
                   >
                 </div>
               </article>
-
               <article
                 class="team-profile-card"
                 tabindex="0"
@@ -641,15 +515,15 @@
                     Quantitative Economics &amp; Data Science
                   </h4>
                   <p class="team-profile-bio">
-                    Serving as Konsalta’s principal quantitative authority,
-                    Afaf designs end-to-end research cycles, complex sampling
-                    models, and large-scale household surveys. She deploys
-                    advanced data analytics using Stata, Python, and GIS to
-                    analyze livelihoods, food security, and displacement
-                    dynamics within fragile and displacement-affected contexts.
-                    Converting complex empirical datasets into high-quality
-                    technical reports and policy-relevant strategic insights
-                    for our clients.
+                    Serving as Konsalta’s principal quantitative authority, Afaf
+                    designs end-to-end research cycles, complex sampling models,
+                    and large-scale household surveys. She deploys advanced data
+                    analytics using Stata, Python, and GIS to analyze
+                    livelihoods, food security, and displacement dynamics within
+                    fragile and displacement-affected contexts. Converting
+                    complex empirical datasets into high-quality technical
+                    reports and policy-relevant strategic insights for our
+                    clients.
                   </p>
                   <a
                     class="team-profile-contact"
@@ -658,7 +532,6 @@
                   >
                 </div>
               </article>
-
               <article
                 class="team-profile-card"
                 tabindex="0"
@@ -671,7 +544,9 @@
                   loading="lazy"
                 />
                 <div class="team-profile-content">
-                  <p class="team-profile-kicker">03 <span>Impact &amp; MEL</span></p>
+                  <p class="team-profile-kicker">
+                    03 <span>Impact &amp; MEL</span>
+                  </p>
                   <h3 class="team-profile-name">Dr Thulisile Zikhali</h3>
                   <p class="team-profile-role">
                     Senior Consultant – Impact &amp; MEL
@@ -686,9 +561,9 @@
                     interdisciplinary research projects from coordination to
                     quality control, bringing deep thematic expertise in
                     community development, gender dynamics, and migration.
-                    Thulisile synthesizes complex data into clear,
-                    human-centric narratives that help clients measure systemic
-                    social impact and make data-driven decisions.
+                    Thulisile synthesizes complex data into clear, human-centric
+                    narratives that help clients measure systemic social impact
+                    and make data-driven decisions.
                   </p>
                   <a
                     class="team-profile-contact"
@@ -698,7 +573,6 @@
                   >
                 </div>
               </article>
-
               <article
                 class="team-profile-card"
                 tabindex="0"
@@ -722,12 +596,12 @@
                   <p class="team-profile-bio">
                     Provides vital analytical, research, and project management
                     support across Konsalta’s project portfolio. He executes
-                    mixed-methods secondary research, field data collection,
-                    and extensive literature reviews across diverse sectors.
-                    Tristan ensures smooth operational delivery by managing
-                    day-to-day project milestones, tracking timelines, and
-                    supporting senior team members in drafting high-quality
-                    client reports and presentations.
+                    mixed-methods secondary research, field data collection, and
+                    extensive literature reviews across diverse sectors. Tristan
+                    ensures smooth operational delivery by managing day-to-day
+                    project milestones, tracking timelines, and supporting
+                    senior team members in drafting high-quality client reports
+                    and presentations.
                   </p>
                   <a
                     class="team-profile-contact"
@@ -736,7 +610,6 @@
                   >
                 </div>
               </article>
-
               <article
                 class="team-profile-card"
                 tabindex="0"
@@ -751,7 +624,9 @@
                 <div class="team-profile-content">
                   <p class="team-profile-kicker">05 <span>Operations</span></p>
                   <h3 class="team-profile-name">Samantha Ncube</h3>
-                  <p class="team-profile-role">Project Administrator &amp; Intern</p>
+                  <p class="team-profile-role">
+                    Project Administrator &amp; Intern
+                  </p>
                   <h4 class="team-profile-title">
                     Operations &amp; Early-Career Pathway
                   </h4>
@@ -764,189 +639,113 @@
                     experience by assisting with real-world research, strategy,
                     and project administration. Working alongside the core team
                     and specialist network, Samantha actively builds practical,
-                    consulting-ready skills while ensuring seamless
-                    operational execution.
+                    consulting-ready skills while ensuring seamless operational
+                    execution.
                   </p>
                   <a
                     class="team-profile-contact"
                     href="mailto:engage@konsaltahub.org"
-                    >Connect with Samantha
-                    <span aria-hidden="true">→</span></a
+                    >Connect with Samantha <span aria-hidden="true">→</span></a
                   >
                 </div>
               </article>
             </div>
           </div>
-
         </div>
       </section>
 
-      <!-- <section class="team-support-section" aria-label="Our wider team">
-        <div class="section-container">
-          <div class="team-support-grid">
-            <article class="team-support-card">
-              <h2>Advisory Board</h2>
-              <p class="centered-text v-indent">
-                Provides guidance, perspective and strategic counsel, drawing
-                on experience across different sectors, markets and areas of
-                expertise, and governance.
-              </p>
-            </article>
-            <article class="team-support-card">
-              <h2>Specialist Network</h2>
-              <p class="centered-text v-indent">
-                A curated ecosystem of subject-matter experts, regional
-                practitioners, and technical specialists with extensive years
-                of combined experience across multi-disciplines to deliver
-                practical solutions and lasting impact.
-              </p>
-            </article>
-            <article class="team-support-card">
-              <h2>Internship &amp; Early Career Opportunities</h2>
-              <p class=" centered-text">
-                We are committed to developing the next generation of leaders.
-                Through structured internships and project-based placements,
-                emerging professionals gain hands-on, practical experience.
-                Working directly alongside the Konsalta team and our
-                specialist network, interns gain valuable exposure to
-                real-world strategy, research, and project coordination.
-              </p>
-            </article>
-          </div>
-        </div>
-      </section> -->
-
-      <!-- <section class="why-block about-why-block" aria-labelledby="about-why-title">
-        <div class="section-container">
-          <div class="section-head">
-            <h2 class="section-title" id="about-why-title">Why Choose Us</h2>
+      <!-- FINAL CTA -->
+      <section class="cta wrap">
+        <div class="cta-card ph veil art1" data-reveal>
+          <img
+            src="public/images/cta.jpg"
+            alt=""
+            loading="lazy"
+            onerror="this.remove()"
+          />
+          <div>
+            <h2>Ready to turn evidence into <span>lasting impact?</span></h2>
             <p>
-              Built to move past slow, overhead-heavy consulting. Organisations
-              choose us because we operate as an agile, network-driven
-              collective, shaped around their exact needs and mapping the
-              strategic architecture required to deliver measurable, sustained
-              value.
+              Partner with our Africa-focused research and advisory collective
+              to make confident, future-ready decisions for your institution.
             </p>
           </div>
-          <ul class="wc-grid">
-            <li class="wc-item">
-              <article class="wc-card">
-                <h3 class="wc-title">African-led, globally informed</h3>
-                <p class="wc-text">Rooted in Africa and connected to the world, combining deep contextual knowledge with international experience.</p>
-              </article>
-            </li>
-            <li class="wc-item">
-              <article class="wc-card">
-                <h3 class="wc-title">A multi-hub African network</h3>
-                <p class="wc-text">Head Office in Zimbabwe, bringing together local insight, regional Africa expertise and global experience.</p>
-              </article>
-            </li>
-            <li class="wc-item">
-              <article class="wc-card">
-                <h3 class="wc-title">Multidisciplinary expertise</h3>
-                <p class="wc-text">Hands-on technically experienced leaders from government, development, academia, consulting and the private sector.</p>
-              </article>
-            </li>
-            <li class="wc-item">
-              <article class="wc-card">
-                <h3 class="wc-title">Bespoke, fit-for-purpose teams</h3>
-                <p class="wc-text">Every project is unique — we assemble tailored teams with the exact technical skills and context you need.</p>
-              </article>
-            </li>
-            <li class="wc-item">
-              <article class="wc-card">
-                <h3 class="wc-title">Rigour with a practical edge</h3>
-                <p class="wc-text">Bridging the gap between evidence and action — credible, actionable, and focused on impact.</p>
-              </article>
-            </li>
-            <li class="wc-item">
-              <article class="wc-card">
-                <h3 class="wc-title">From evidence to impact</h3>
-                <p class="wc-text">Helping clients transform data, research and learning into better decisions and lasting results.</p>
-              </article>
-            </li>
-          </ul>
-        </div>
-      </section> -->
-
-      <!-- ============================================================
-         7. CALL TO ACTION BANNER
-         ============================================================ -->
-      <section class="about-cta-section">
-        <div class="section-container">
-          <div class="about-cta-card">
-            <div class="cta-text-content">
-              <h2 class="about-cta-title">
-                Ready to turn evidence into
-                <span class="highlight">lasting impact?</span>
-              </h2>
-              <p class="about-cta-subtitle">
-                Partner with our Africa-focused research and advisory collective
-                to make confident, future-ready decisions for your institution.
-              </p>
-            </div>
-
-            <a href="contactUs.html" class="cta-btn-glow">
-              Start a Conversation
-              <svg
-                width="16"
-                height="16"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </a>
-          </div>
+          <a href="contactUs.html" class="btn">Start a Conversation</a>
         </div>
       </section>
     </main>
 
     <footer class="site-footer" id="contact">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <div class="footer-logo">
-            <span class="logo-dot">
-              <img src="public/Logo-4.png" alt="Konsalta" />
-            </span>
-          </div>
-          <p>
-            Turning Knowledge, Into Impact
-          </p>
+      <div class="wrap foot-top">
+        <div class="foot-brand">
+          <img src="public/Logo-4.png" alt="Konsalta" />
+          <p>Turning Knowledge, Into Impact.</p>
+          
+          <ul class="social">
+            <li>
+              <a href="https://www.linkedin.com/company/konsalta-hub-africa/" aria-label="LinkedIn"
+                ><svg viewBox="0 0 24 24" fill="currentColor">
+                  <path
+                    d="M4 9h4v11H4zM6 3.500a2.200 2.200 0 1 1 0 4.400 2.200 2.200 0 0 1 0-4.400zM10 9h3.800v1.600c.600-1.100 2-1.900 3.700-1.900 3.400 0 4.500 2.200 4.500 5.400V20h-4v-5.200c0-1.400-.4-2.300-1.700-2.300-1.400 0-2.300 1-2.300 2.500V20h-4z"
+                  /></svg
+              ></a>
+            </li>
+            <li>
+              <a href="https://wa.me/" aria-label="WhatsApp"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 21l1.700-4.900A9 9 0 1 1 8 19.400z" />
+                  <path
+                    d="M9 9.500c.400 2.200 2.300 4.100 5.500 5.500l1.500-1.500-2.100-1.100-.9.900c-.900-.4-1.700-1.200-2.100-2.100l.9-.9-1.100-2.100z"
+                  /></svg
+              ></a>
+            </li>
+            <li>
+              <a href="mailto:engage@konsaltahub.org" aria-label="Email"
+                ><svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3 7 9 6 9-6" /></svg
+              ></a>
+            </li>
+          </ul>
         </div>
-        <div class="footer-cols">
-          <div class="footer-col">
-            <h4>Services</h4>
-            <a href="services.html#research">Research &amp; Evaluation</a>
-            <a href="services.html#strategy">Strategy &amp; Advisory</a>
-            <!-- <a href="services.html#insights">Market Intelligence</a> -->
-            <a href="services.html#policy">Policy &amp; Systems</a>
-          </div>
-          <div class="footer-col">
-            <h4>Company</h4>
-            <a href="aboutUs.html">About Konsalta</a>
-            <a href="whyUs.html">Why Choose Us</a>
-            <!-- <a href="services.html">Services</a> -->
-            <a href="contactUs.html">Contact Us</a>
-            <a href="faq.html">FAQs</a>
-          </div>
-          <div class="footer-col">
-            <h4>Governance</h4>
-            <a href="governance.html#ethics">Ethics & Integrity</a>
-            <a href="governance.html#privacy">Privacy Policy</a>
-            <a href="governance.html#terms">Terms of Engagement</a>
-          </div>
-        </div>
+        <nav class="foot-col" aria-label="Company">
+          <h4>Company</h4>
+          <a href="aboutUs.html">About Konsalta</a>
+          <a href="whyUs.html">Why Choose us</a>
+          <a href="contactUs.html">Contact Us</a>
+          <a href="faq.html">FAQs</a>
+        </nav>
+        <nav class="foot-col" aria-label="Governance">
+          <h4>Governance</h4>
+          <a href="governance.html#ethics">Ethics &amp; Integrity</a>
+          <a href="governance.html#privacy">Privacy Policy</a>
+          <a href="governance.html#terms">Terms of Engagement</a>
+        </nav>
       </div>
-      <div class="footer-bottom">
+      <p class="foot-word" aria-hidden="true">Konsalta</p>
+      <div class="wrap foot-bottom">
         <span>© 2026 Konsalta. All rights reserved.</span>
         <span>Developed by Momentum Labs CLG.</span>
-        <span>Better Decisions. Greater Impact.</span>
+        <span>Better Decisions. Better Impact.</span>
+        <button class="to-top" type="button" aria-label="Back to top">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 19V5M6 11l6-6 6 6" />
+          </svg>
+        </button>
       </div>
     </footer>
   </body>

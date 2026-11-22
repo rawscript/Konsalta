@@ -1,0 +1,486 @@
+/* Page-specific refinements for the Why Choose Us page.
+   Shared structure and tokens come from styles/site.css. */
+
+.why-hero {
+  position: relative;
+  isolation: isolate;
+}
+
+.why-hero::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 38vw;
+  height: 38vw;
+  max-width: 520px;
+  max-height: 520px;
+  right: -8%;
+  top: 8%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(242, 101, 34, 0.11), transparent 68%);
+  pointer-events: none;
+}
+
+.why-mosaic {
+  position: relative;
+  height: clamp(390px, 42vw, 560px);
+  min-height: 390px;
+}
+
+.why-photo {
+  position: absolute;
+  overflow: hidden;
+  margin: 0;
+  border-radius: 24px;
+  background: var(--navy-deep);
+  box-shadow: var(--shadow-lg);
+}
+
+.why-photo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(145deg, rgba(11, 45, 83, 0.08), rgba(6, 26, 50, 0.28));
+}
+
+.why-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.78) contrast(1.02);
+}
+
+.why-photo--a {
+  width: 58%;
+  height: 68%;
+  left: 0;
+  top: 4%;
+}
+
+.why-photo--b {
+  width: 48%;
+  height: 42%;
+  right: 0;
+  top: 0;
+}
+
+.why-photo--c {
+  width: 42%;
+  height: 43%;
+  right: 5%;
+  bottom: 0;
+}
+
+.why-photo--d {
+  width: 38%;
+  height: 29%;
+  left: 8%;
+  bottom: 2%;
+  border: 8px solid var(--bg);
+}
+
+.why-quote {
+  min-height: 390px;
+  display: grid;
+  align-items: center;
+  margin: 0;
+  background:
+    radial-gradient(60% 80% at 100% 0%, var(--navy-light), transparent),
+    linear-gradient(160deg, var(--navy-deep), var(--navy-mid));
+}
+
+.why-quote .wrap {
+  padding-block: clamp(48px, 8vw, 96px);
+}
+
+.why-quote blockquote {
+  max-width: 20em;
+  color: #fff;
+  font: 800 clamp(1.8rem, 4.2vw, 3.9rem)/1.12 var(--font-head);
+  letter-spacing: -0.04em;
+}
+
+.why-quote .quote-by {
+  margin-top: 24px;
+  color: var(--orange-light);
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.why-values {
+  padding-block: var(--section-pad);
+  background:
+    linear-gradient(rgba(11, 45, 83, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(11, 45, 83, 0.025) 1px, transparent 1px),
+    var(--bg);
+  background-size: 48px 48px;
+}
+
+.why-section-head {
+  max-width: 980px;
+  margin-bottom: clamp(32px, 5vw, 56px);
+  text-align: center;
+  margin-inline: auto;
+}
+
+.why-section-kicker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  color: #d34e0d;
+  font: 800 0.875rem var(--font);
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.why-section-kicker span {
+  width: clamp(44px, 7vw, 90px);
+  height: 2px;
+  background: var(--orange);
+}
+
+.why-section-head h2 {
+  margin: 24px 0 0;
+  font-size: clamp(2.8rem, 7vw, 7rem);
+  line-height: 0.98;
+}
+
+.why-section-head > p:last-child {
+  max-width: 60ch;
+  color: var(--ink-soft);
+  font-size: 1.0625rem;
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 24px);
+}
+
+.why-card {
+  position: relative;
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(24px, 3vw, 38px);
+  border: 1px solid var(--line);
+  border-radius: var(--r-2xl);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.35s;
+}
+
+.why-card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 7px;
+  background: repeating-linear-gradient(90deg, var(--orange) 0 14px, #c89a2a 14px 22px, var(--navy) 22px 30px, #f6f3ee 30px 36px);
+  transform: scaleX(0.08);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease);
+}
+
+.why-card:hover {
+  transform: translateY(-8px);
+  background: var(--navy);
+  box-shadow: var(--shadow-lg);
+}
+
+.why-card:hover::after {
+  transform: scaleX(1);
+}
+
+.why-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 44px;
+}
+
+.why-number {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font: 800 0.75rem var(--font);
+  letter-spacing: 0.08em;
+  transition: background 0.35s, color 0.35s;
+}
+
+.why-kicker {
+  color: var(--orange-deep);
+  font: 800 0.75rem var(--font);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.why-card h3 {
+  max-width: 12em;
+  margin-bottom: 14px;
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+}
+
+.why-card p {
+  margin-top: auto;
+  color: var(--ink-soft);
+  line-height: 1.65;
+}
+
+.why-card:hover h3,
+.why-card:hover p {
+  color: #fff;
+}
+
+.why-card:hover .why-number {
+  background: var(--orange);
+  color: var(--navy-deep);
+}
+
+.why-card:hover .why-kicker {
+  color: var(--orange-light);
+}
+
+.why-insights {
+  padding-block: var(--section-pad);
+  background: var(--navy-deep);
+  color: #fff;
+}
+
+.why-insights-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.why-insights-head h2 {
+  margin: 16px 0 0;
+  color: #fff;
+  font-size: clamp(2.2rem, 4.8vw, 4.2rem);
+}
+
+.why-insights-head .badge {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.linkedin-follow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 999px;
+  color: #fff;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.linkedin-follow svg {
+  width: 18px;
+  height: 18px;
+}
+
+.linkedin-follow:hover {
+  background: #fff;
+  color: var(--navy-deep);
+}
+
+.linkedin-feed {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.linkedin-post {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 16px;
+  background: #fff;
+  color: #1d2226;
+}
+
+.linkedin-post-head {
+  display: grid;
+  grid-template-columns: 52px 1fr auto;
+  align-items: start;
+  gap: 10px;
+  padding: 16px;
+}
+
+.linkedin-avatar {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  border: 1px solid #dfe4e8;
+  border-radius: 6px;
+  background: #fff;
+}
+
+.linkedin-post-head strong,
+.linkedin-post-head span {
+  display: block;
+}
+
+.linkedin-post-head strong {
+  color: #1d2226;
+  font-size: 0.9375rem;
+}
+
+.linkedin-post-head span {
+  color: #666c70;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.linkedin-post-head > a {
+  color: #666c70;
+  font-size: 1.35rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.linkedin-post-copy {
+  min-height: 112px;
+  padding: 0 16px 14px;
+  color: #1d2226;
+  line-height: 1.55;
+  font-size: 0.9375rem;
+}
+
+.linkedin-post-media {
+  display: block;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #edf3f8;
+}
+
+.linkedin-post-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.linkedin-post-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid #e6eaed;
+}
+
+.linkedin-post-actions a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 52px;
+  color: #666c70;
+  font-size: 0.875rem;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.linkedin-post-actions a:hover {
+  background: #eef3f8;
+  color: #0a66c2;
+}
+
+.why-cta {
+  background: var(--navy-deep);
+}
+
+.why-cta h2 {
+  color: #fff;
+}
+
+.why-cta h2 span {
+  color: var(--orange-light);
+}
+
+@media (max-width: 899px) {
+  .why-mosaic {
+    height: clamp(340px, 78vw, 480px);
+  }
+
+  .why-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .why-insights-head {
+    align-items: flex-start;
+  }
+
+  .linkedin-feed {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .why-mosaic {
+    height: 360px;
+  }
+
+  .why-section-kicker {
+    gap: 12px;
+    font-size: 0.75rem;
+  }
+
+  .why-section-kicker span {
+    width: 28px;
+  }
+
+  .why-section-head h2 {
+    font-size: clamp(2.6rem, 14vw, 4.2rem);
+  }
+
+  .why-photo--a {
+    width: 62%;
+  }
+
+  .why-photo--b {
+    width: 44%;
+  }
+
+  .why-photo--c {
+    width: 48%;
+  }
+
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .why-card {
+    min-height: 240px;
+  }
+
+  .why-card-top {
+    margin-bottom: 28px;
+  }
+
+  .why-insights-head {
+    flex-direction: column;
+  }
+
+  .linkedin-follow {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .linkedin-post-copy {
+    min-height: 0;
+  }
+
+  .linkedin-post-actions a {
+    min-height: 48px;
+  }
+}

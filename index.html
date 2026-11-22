@@ -1,877 +1,293 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Konsalta — Better Decisions. Greater Impact</title>
-    <meta
-      name="description"
-      content="Konsalta is a women-led, Africa-focused research, consulting and advisory firm bridging local insight with global perspective."
-    />
-    <link rel="icon" href="./public/favicon.ico" type="image/x-icon" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="styles/tokens.css" />
-    <link rel="stylesheet" href="styles/style.css" />
-    <link rel="stylesheet" href="styles/style-v2.css" />
-    <link rel="stylesheet" href="styles/footer.css" />
-    <link rel="stylesheet" href="styles/theme.css" />
-    <link rel="stylesheet" href="styles/tablet-nav.css" />
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-      defer
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"
-      defer
-    ></script>
-    <script src="scripts/header.js" defer></script>
-    <script src="scripts/theme.js" defer></script>
-    <script src="scripts/main.js" defer></script>
-    <script src="scripts/main-fx.js" defer></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Konsalta — Better Decisions. Greater Impact</title>
+  <meta name="description"
+    content="Konsalta is a women-led, Africa-focused research, consulting and advisory firm bridging local insight with global perspective." />
+  <link rel="icon" href="./public/favicon.ico" type="image/x-icon" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="styles/tokens.css" />
+  <link rel="stylesheet" href="styles/site.css" />
+  <link rel="stylesheet" href="styles/theme.css" />
+  <script>document.documentElement.classList.add("js");</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script src="scripts/header.js" defer></script>
+  <script src="scripts/theme.js" defer></script>
+  <script src="scripts/site.js" defer></script>
+</head>
 
-  <body>
-    <div class="ambient-1" aria-hidden="true"></div>
-    <div class="ambient-2" aria-hidden="true"></div>
-    <!-- <div class="cursor" aria-hidden="true"></div> -->
+<body>
+  <header class="site-header">
+    <a href="index.html" class="logo" aria-label="Konsalta Home">
+      <picture>
+        <source media="(max-width: 850px)" srcset="public/Logo-5.png" />
+        <img src="public/Logo-3.png" alt="Konsalta Logo" />
+      </picture>
+    </a>
+    <button class="header-menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation"
+      aria-label="Open navigation menu">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 7h16M4 12h16M4 17h16" />
+      </svg>
+    </button>
+    <nav class="header-nav" id="primary-navigation">
+      <a href="aboutUs.html"><span>About</span> <span>Konsalta</span></a>
+      <a href="services.html"><span>Our</span> <span>Services</span></a>
+      <a href="whyUs.html"><span>Why</span> <span>Konsalta</span></a>
+      <a href="contactUs.html"><span>Contact</span> <span>Us</span></a>
+      <!-- <a href="consultant-onboarding.html" class="mobile-nav-contact"><span>Engage</span> <span>with Us</span></a> -->
+    </nav>
+    <a href="consultant-onboarding.html" class="btn header-btn">Engage with Us</a>
+  </header>
 
-    <header class="site-header">
-      <a href="index.html" class="logo" aria-label="Konsalta Home">
-        <span class="logo-dot">
-          <picture>
-            <source media="(max-width: 850px)" srcset="public/Logo-5.png" />
-            <img src="public/Logo-3.png" alt="Konsalta Logo" />
-          </picture>
-        </span>
-      </a>
-      <button
-        class="header-menu-toggle"
-        type="button"
-        aria-expanded="false"
-        aria-controls="primary-navigation"
-        aria-label="Open navigation menu"
-      >
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M4 7h16M4 12h16M4 17h16" />
-        </svg>
-      </button>
-      <nav class="header-nav" id="primary-navigation">
-        <a href="services.html"><span>Our</span> <span>Services</span></a>
-        <a href="services.html"><span>Our</span> <span>Services</span></a>
-        <a href="whyUs.html"><span>Why</span> <span>Konsalta</span></a>
-        <a href="contactUs.html"><span>Contact</span> <span>Us</span></a>
-        <a href="consultant-onboarding.html" class="mobile-nav-contact"
-          ><span>Engage</span> <span>with Us</span></a
-        >
-      </nav>
-      <a href="consultant-onboarding.html" class="header-btn"
-        >Engage with Us
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          aria-hidden="true"
-        >
-          <path d="M5 12h14M13 6l6 6-6 6" />
-        </svg>
-      </a>
-    </header>
-
-    <main class="hero">
-      <div class="hero-left">
-        <div class="hero-badge">
-          <span class="hero-badge-dot"></span>
-          <span>Turning Knowledge Into Impact</span>
-        </div>
-        <h1 class="hero-title">
-          <span class="title-line title-navy"
-            ><span class="title-inner">Better Evidence.</span></span
-          >
-          <span class="title-line title-orange"
-            ><span class="title-inner">Better Decisions.</span></span
-          >
-          <span class="title-line title-navy"
-            ><span class="title-inner">Better Impact.</span></span
-          >
+  <main>
+    <!-- HERO -->
+    <section class="hero wrap">
+      <div class="hero-text">
+        <p class="badge">Turning Knowledge Into Impact</p>
+        <h1>
+          <span class="tl t-navy"><span class="in">Better Evidence.</span></span>
+          <span class="tl t-orange"><span class="in">Better Decisions.</span></span>
+          <span class="tl t-navy"><span class="in">Better Impact.</span></span>
         </h1>
-        <p class="hero-desc">
-          Konsalta is a women-led, Africa-focused research, consulting and
-          advisory firm. We move past the slow, overhead-heavy structures of
-          traditional consulting — operating instead as an agile, network-driven
-          collective, shaped around each client's needs to deliver measurable,
-          sustained value.
-        </p>
-
-        <div class="hero-actions">
-          <a href="contactUs.html" class="cta-btn hero-cta"
-            >Work With Us
-            <span class="cta-arrow" aria-hidden="true">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M5 12h14M13 6l6 6-6 6" />
-              </svg>
-            </span>
-          </a>
-          <a href="services.html" class="cta-btn secondary-btn">Our Services</a>
+        <p class="hero-desc">Konsalta is a women-led, Africa-focused research, consulting and advisory firm. We move
+          past the slow, overhead-heavy structures of traditional consulting — operating instead as an agile,
+          network-driven collective, shaped around each client's needs to deliver measurable, sustained value.</p>
+        <div class="actions">
+          <a href="contactUs.html" class="btn">Work With Us</a>
+          <a href="services.html" class="btn btn--ghost">Our Services</a>
         </div>
       </div>
 
-      <div class="hero-right">
-        <div class="constellation" id="constellation">
-          <svg
-            class="constellation-lines"
-            viewBox="0 0 600 660"
-            preserveAspectRatio="xMidYMid meet"
-            aria-hidden="true"
-          >
-            <path d="M 360 180 C 392 205, 418 238, 440 280" />
-            <path d="M 440 380 C 418 422, 392 450, 360 478" />
-            <path d="M 240 478 C 208 450, 182 422, 160 380" />
-            <path d="M 160 280 C 182 238, 208 205, 240 180" />
+      <!-- Drop real photos into public/images/ (hero-1..4, quote, service-1..4, principles, cta .jpg). Generated art shows behind each until the file exists. -->
+      <div class="mosaic" aria-hidden="true">
+        <figure class="ph pic pic--a art1" data-speed="-30"><img src="public/images/hero-1.jpg" alt="" loading="lazy"
+            onerror="this.remove()" />
+          <svg viewBox="0 0 24 24">
+            <circle cx="9" cy="12" r="5" />
+            <circle cx="15" cy="12" r="5" />
           </svg>
-
-          <div class="constellation-inner" id="constellationInner">
-            <!-- PARTNERSHIP (handshake) -->
-            <div class="tile size-main orange tile-hands">
-              <div class="tile-inner">
-                <div class="tile-icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.7"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="m11 17 2 2a1 1 0 1 0 3-3" />
-                    <path
-                      d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"
-                    />
-                    <path d="m21 3 1 11h-2" />
-                    <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" />
-                    <path d="M3 4h8" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <!-- HISTOGRAM -->
-            <div class="tile size-main soft-blue tile-histogram">
-              <div class="tile-inner">
-                <div class="tile-icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 56 56"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <line x1="6" y1="46" x2="50" y2="46" />
-                    <rect x="9" y="36" width="7" height="10" rx="1" />
-                    <rect x="18" y="30" width="7" height="16" rx="1" />
-                    <rect x="27" y="24" width="7" height="22" rx="1" />
-                    <rect x="36" y="18" width="7" height="28" rx="1" />
-                    <path d="M10 28 L20 22 L28 24 L43 10 M35 10 H43 V18" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <!-- CENTER (head with question mark) -->
-            <div class="tile size-big deep-navy tile-db">
-              <div class="tile-inner">
-                <div class="tile-icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 56 56"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path
-                      d="M21 47 C15 43 12 36 12 27 C12 16 19 9 29 9 C38 9 45 16 45 26 L49 31 L45 34 L45 39 C45 43 42 45 38 45 L34 45 L34 51 L22 51 L22 45"
-                    />
-                    <path
-                      d="M23 23 C23 19 26 17 30 17 C34 17 37 19 37 23 C37 26 35 27 32 29 C30 30 29 32 29 34"
-                    />
-                    <circle
-                      cx="29"
-                      cy="39"
-                      r="1"
-                      fill="currentColor"
-                      stroke="none"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-
-            <!-- MAGNIFYING GLASS + INSIGHT SPARK -->
-            <div class="tile size-main navy tile-search">
-              <div class="tile-inner">
-                <div class="tile-icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 56 56"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <circle cx="24" cy="24" r="14" />
-                    <line
-                      x1="34.5"
-                      y1="34.5"
-                      x2="47"
-                      y2="47"
-                      stroke-width="3.2"
-                    />
-                    <path
-                      d="M24 17 L25.4 22.6 L31 24 L25.4 25.4 L24 31 L22.6 25.4 L17 24 L22.6 22.6 Z"
-                      fill="currentColor"
-                      stroke="none"
-                    />
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="sparkle" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 2 L13.5 10.5 L22 12 L13.5 13.5 L12 22 L10.5 13.5 L2 12 L10.5 10.5 Z"
-              />
-            </svg>
-          </div>
-        </div>
+        </figure>
+        <figure class="ph pic pic--b art2" data-speed="40"><img src="public/images/hero-2.jpg" alt="" loading="lazy"
+            onerror="this.remove()" />
+          <svg viewBox="0 0 24 24">
+            <path d="M5 20V10M12 20V4M19 20v-7" />
+          </svg>
+        </figure>
+        <figure class="ph pic pic--c art3" data-speed="-50"><img src="public/images/hero-3.jpg" alt="" loading="lazy"
+            onerror="this.remove()" />
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M9 18h6M10 21h4M12 3a6 6 0 0 0-4 10.500c.700.700 1 1.500 1 2.500h6c0-1 .300-1.800 1-2.500A6 6 0 0 0 12 3z" />
+          </svg>
+        </figure>
+        <figure class="ph pic pic--d art4" data-speed="30"><img src="public/images/hero-4.jpg" alt="" loading="lazy"
+            onerror="this.remove()" />
+          <svg viewBox="0 0 24 24">
+            <circle cx="10" cy="10" r="6" />
+            <path d="m15 15 6 6" />
+          </svg>
+        </figure>
       </div>
-    </main>
-
-    <section class="features" id="features">
-      <!-- <div class="features-head">
-        <div>
-          <div class="section-eyebrow">/ Why We Exist</div>
-          <h2 class="features-title">The Evidence to Impact Cycle</h2>
-        </div>
-        <div class="features-meta">
-          Good Decisions Require Good Evidence<br />
-          Evidence On Its Own Rarely Changes Outcomes<br />
-          — Real Impact Comes From Translating Insight Into Action
-        </div>
-      </div> -->
-
-      <!-- <div class="cycle-track" aria-hidden="true">
-        <span class="cycle-fill"></span>
-        <i style="left: 16.67%"></i><i style="left: 50%"></i
-        ><i style="left: 83.33%"></i>
-      </div> -->
-
-      <!-- <div class="feature-cards">
-
-        <div class="feature-card fc-accent">
-          <div class="fc-num">01 — Generate</div>
-          <h3>Research. Surveys. Data Collection & Evaluation</h3>
-          <p>
-            At Konsalta, we capture meaningful local signals and rigorously
-            gather quantitative and qualitative field evidence tailored to
-            African markets.
-          </p>
-          <div class="fc-icon" aria-hidden="true">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12" cy="12" r="3" />
-              <path
-                d="M3 12a9 9 0 0 1 9-9M12 21a9 9 0 0 1-9-9M21 12a9 9 0 0 1-9 9M21 12a9 9 0 0 0-9-9"
-              />
-            </svg>
-          </div>
-        </div>
-
-        <div class="feature-card fc-orange">
-          <div class="fc-num">02 — Interpret</div>
-          <h3>Analysis Grounded in African Policy & Market Context</h3>
-          <p>
-            We synthesize complex data into strategic intelligence, grounded in
-            regional nuances, socio-economic dynamics, and institutional
-            frameworks.
-          </p>
-          <div class="fc-icon" aria-hidden="true">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M3 3v18h18" />
-              <path d="M7 14l4-4 4 4 6-6" />
-            </svg>
-          </div>
-        </div>
-
-        <div class="feature-card fc-soft">
-          <div class="fc-num">03 — Communicate</div>
-          <h3>Knowledge Products that Make Evidence Usable</h3>
-          <p>
-            Skip any stage and evidence remains static. We craft accessible
-            briefs, interactive roadmaps, and actionable toolkits that drive
-            decisive change.
-          </p>
-          <div class="fc-icon" aria-hidden="true">
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
-            </svg>
-          </div>
-        </div>
-      </div> -->
-
-      <section class="quote-section">
-        <div class="quote-mark" aria-hidden="true">“</div>
-        <blockquote class="quote-text">
-          We are an agile, network-driven collective bridging local insight with
-          global perspective to help institutions across Africa make confident,
-          clear, and future-focused decisions.
-        </blockquote>
-        <div class="quote-author">— Konsalta Hub</div>
-      </section>
     </section>
 
-    <!-- ===================================================================================================
-     SERVICES PREVIEW  | As stated in that doc. Not even sure what these guys want tbh, but lets just do it
-     ==================================================================================================== -->
-    <section
-      class="svc-preview"
-      id="services-preview"
-      aria-labelledby="svc-preview-title"
-    >
-      <div class="svc-preview__inner">
-        <header class="svc-preview__head">
-          <div class="svc-preview__titleblock">
-            <!-- <p class="svc-preview__eyebrow" data-reveal style="--i: 0">
-              <span aria-hidden="true"></span>What we offer
-            </p> -->
-            <h2
-              class="svc-preview__title"
-              id="svc-preview-title"
-              data-reveal
-              style="--i: 1"
-            >
-              <span class="svc-mark">Our services</span>
-            </h2>
-          </div>
-          <!-- <p class="svc-preview__lede" data-reveal style="--i: 2">
-            Four practice areas, one evidence-led approach. Select an area to
-            preview what it covers.
-          </p> -->
-        </header>
+    <!-- QUOTE -->
+    <section class="quote ph veil art5" id="features"><img src="public/images/quote.jpg" alt="" loading="lazy"
+        onerror="this.remove()" />
+      <div class="wrap" data-reveal>
+        <div class="quote-mark" aria-hidden="true">“</div>
+        <blockquote>We are an agile, network-driven collective bridging local insight with global perspective to help
+          institutions across Africa make confident, clear, and future-focused decisions.</blockquote>
+        <p class="quote-by">— Konsalta Hub</p>
+      </div>
+    </section>
 
+    <!-- SERVICES -->
+    <section class="svc" id="services-preview" aria-labelledby="svc-title">
+      <div class="wrap">
+        <h2 id="svc-title" data-reveal>Our services</h2>
         <div class="svc-list">
-          <!-- 01 -->
-          <div class="svc-item is-active" style="--row: 1">
-            <h3 class="svc-item__heading" data-reveal style="--i: 3">
-              <button
-                class="svc-trigger"
-                id="svc-t-1"
-                type="button"
-                aria-expanded="true"
-                aria-controls="svc-p-1"
-              >
-                <span class="svc-trigger__num" aria-hidden="true">01</span>
-                <span class="svc-trigger__text">
-                  <span class="svc-trigger__title"
-                    >Research &amp; Insights</span
-                  >
-                  <!-- <span class="svc-trigger__tag"
-                    >Understanding people and markets</span
-                  > -->
-                </span>
-                <svg
-                  class="svc-trigger__icon"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </button>
-            </h3>
-            <div
-              class="svc-panel"
-              id="svc-p-1"
-              role="region"
-              aria-labelledby="svc-t-1"
-            >
-              <div class="svc-panel__clip">
-                <article class="svc-card">
-                  <span class="svc-card__ghost" aria-hidden="true">01</span>
-                  <p class="svc-card__title">Research &amp; Insights</p>
-                  <p class="svc-card__text">
-                    We deliver research, data analysis, market research and
-                    consumer insights that help organizations understand people,
-                    markets and complex operating environments and make
-                    evidence-based decisions.
-                  </p>
-                  <ul class="svc-chips">
+          <div class="svc-item is-active" style="--row:1">
+            <h3 data-reveal><button class="svc-trigger" id="svc-t-1" type="button" aria-expanded="true"
+                aria-controls="svc-p-1"><b>01</b><span>Research &amp; Insights</span></button></h3>
+            <div class="svc-panel" id="svc-p-1" role="region" aria-labelledby="svc-t-1">
+              <div>
+                <article class="svc-card ph veil art1"><img src="public/images/service-1.jpg" alt="" loading="lazy"
+                    onerror="this.remove()" />
+                  <p class="svc-title">Research &amp; Insights</p>
+                  <p>We deliver research, data analysis, market research and consumer insights that help organizations
+                    understand people, markets and complex operating environments and make evidence-based decisions.</p>
+                  <ul class="chips">
                     <li>Research</li>
                     <li>Data analysis</li>
                     <li>Market research</li>
                     <li>Consumer insights</li>
                   </ul>
-                  <a
-                    class="svc-card__link"
-                    href="services.html#research-insights"
-                    >Explore Research &amp; Insights
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                  </a>
+                  <a class="more" href="services.html#research-insights">Explore Research &amp; Insights</a>
                 </article>
               </div>
             </div>
           </div>
-
-          <!-- 02 -->
-          <div class="svc-item" style="--row: 2">
-            <h3 class="svc-item__heading" data-reveal style="--i: 4">
-              <button
-                class="svc-trigger"
-                id="svc-t-2"
-                type="button"
-                aria-expanded="false"
-                aria-controls="svc-p-2"
-              >
-                <span class="svc-trigger__num" aria-hidden="true">02</span>
-                <span class="svc-trigger__text">
-                  <span class="svc-trigger__title">Policy &amp; Impact</span>
-                  <!-- <span class="svc-trigger__tag"
-                    >Designing policy, measuring results</span
-                  > -->
-                </span>
-                <svg
-                  class="svc-trigger__icon"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </button>
-            </h3>
-            <div
-              class="svc-panel"
-              id="svc-p-2"
-              role="region"
-              aria-labelledby="svc-t-2"
-            >
-              <div class="svc-panel__clip">
-                <article class="svc-card">
-                  <span class="svc-card__ghost" aria-hidden="true">02</span>
-                  <p class="svc-card__title">Policy &amp; Impact</p>
-                  <p class="svc-card__text">
-                    We provide policy research, monitoring and evaluation,
-                    impact assessment and programme evaluation to help
-                    governments and organizations design effective policies,
-                    measure results and strengthen impact.
-                  </p>
-                  <ul class="svc-chips">
+          <div class="svc-item" style="--row:2">
+            <h3 data-reveal><button class="svc-trigger" id="svc-t-2" type="button" aria-expanded="false"
+                aria-controls="svc-p-2"><b>02</b><span>Policy &amp; Impact</span></button></h3>
+            <div class="svc-panel" id="svc-p-2" role="region" aria-labelledby="svc-t-2">
+              <div>
+                <article class="svc-card ph veil art2"><img src="public/images/service-2.jpg" alt="" loading="lazy"
+                    onerror="this.remove()" />
+                  <p class="svc-title">Policy &amp; Impact</p>
+                  <p>We provide policy research, monitoring and evaluation, impact assessment and programme evaluation
+                    to help governments and organizations design effective policies, measure results and strengthen
+                    impact.</p>
+                  <ul class="chips">
                     <li>Policy research</li>
                     <li>Monitoring &amp; evaluation</li>
                     <li>Impact assessment</li>
                     <li>Programme evaluation</li>
                   </ul>
-                  <a class="svc-card__link" href="services.html#policy-impact"
-                    >Explore Policy &amp; Impact
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                  </a>
+                  <a class="more" href="services.html#policy-impact">Explore Policy &amp; Impact</a>
                 </article>
               </div>
             </div>
           </div>
-
-          <!-- 03 -->
-          <div class="svc-item" style="--row: 3">
-            <h3 class="svc-item__heading" data-reveal style="--i: 5">
-              <button
-                class="svc-trigger"
-                id="svc-t-3"
-                type="button"
-                aria-expanded="false"
-                aria-controls="svc-p-3"
-              >
-                <span class="svc-trigger__num" aria-hidden="true">03</span>
-                <span class="svc-trigger__text">
-                  <span class="svc-trigger__title"
-                    >Strategy &amp; Advisory</span
-                  >
-                  <!-- <span class="svc-trigger__tag"
-                    >Turning evidence into strategy</span
-                  > -->
-                </span>
-                <svg
-                  class="svc-trigger__icon"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </button>
-            </h3>
-            <div
-              class="svc-panel"
-              id="svc-p-3"
-              role="region"
-              aria-labelledby="svc-t-3"
-            >
-              <div class="svc-panel__clip">
-                <article class="svc-card">
-                  <span class="svc-card__ghost" aria-hidden="true">03</span>
-                  <p class="svc-card__title">Strategy &amp; Advisory</p>
-                  <p class="svc-card__text">
-                    We provide strategy consulting, market intelligence and
-                    business advisory services that help organizations identify
-                    opportunities, navigate change and turn evidence into
-                    practical strategies for growth and impact.
-                  </p>
-                  <ul class="svc-chips">
+          <div class="svc-item" style="--row:3">
+            <h3 data-reveal><button class="svc-trigger" id="svc-t-3" type="button" aria-expanded="false"
+                aria-controls="svc-p-3"><b>03</b><span>Strategy &amp; Advisory</span></button></h3>
+            <div class="svc-panel" id="svc-p-3" role="region" aria-labelledby="svc-t-3">
+              <div>
+                <article class="svc-card ph veil art3"><img src="public/images/service-3.jpg" alt="" loading="lazy"
+                    onerror="this.remove()" />
+                  <p class="svc-title">Strategy &amp; Advisory</p>
+                  <p>We provide strategy consulting, market intelligence and business advisory services that help
+                    organizations identify opportunities, navigate change and turn evidence into practical strategies
+                    for growth and impact.</p>
+                  <ul class="chips">
                     <li>Strategy consulting</li>
                     <li>Market intelligence</li>
                     <li>Business advisory</li>
                   </ul>
-                  <a
-                    class="svc-card__link"
-                    href="services.html#strategy-advisory"
-                    >Explore Strategy &amp; Advisory
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                  </a>
+                  <a class="more" href="services.html#strategy-advisory">Explore Strategy &amp; Advisory</a>
                 </article>
               </div>
             </div>
           </div>
-
-          <!-- 04 -->
-          <div class="svc-item" style="--row: 4">
-            <h3 class="svc-item__heading" data-reveal style="--i: 6">
-              <button
-                class="svc-trigger"
-                id="svc-t-4"
-                type="button"
-                aria-expanded="false"
-                aria-controls="svc-p-4"
-              >
-                <span class="svc-trigger__num" aria-hidden="true">04</span>
-                <span class="svc-trigger__text">
-                  <span class="svc-trigger__title"
-                    >Communication &amp; Capacity</span
-                  >
-                  <!-- <span class="svc-trigger__tag"
-                    >Sharing evidence, building institutions</span
-                  > -->
-                </span>
-                <svg
-                  class="svc-trigger__icon"
-                  width="22"
-                  height="22"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </button>
-            </h3>
-            <div
-              class="svc-panel"
-              id="svc-p-4"
-              role="region"
-              aria-labelledby="svc-t-4"
-            >
-              <div class="svc-panel__clip">
-                <article class="svc-card">
-                  <span class="svc-card__ghost" aria-hidden="true">04</span>
-                  <p class="svc-card__title">Communication &amp; Capacity</p>
-                  <p class="svc-card__text">
-                    We provide knowledge translation, strategic communication,
-                    public relations and capacity-building services that help
-                    organizations communicate evidence, engage stakeholders and
-                    strengthen institutional capabilities.
-                  </p>
-                  <ul class="svc-chips">
+          <div class="svc-item" style="--row:4">
+            <h3 data-reveal><button class="svc-trigger" id="svc-t-4" type="button" aria-expanded="false"
+                aria-controls="svc-p-4"><b>04</b><span>Communication &amp; Capacity</span></button></h3>
+            <div class="svc-panel" id="svc-p-4" role="region" aria-labelledby="svc-t-4">
+              <div>
+                <article class="svc-card ph veil art4"><img src="public/images/service-4.jpg" alt="" loading="lazy"
+                    onerror="this.remove()" />
+                  <p class="svc-title">Communication &amp; Capacity</p>
+                  <p>We provide knowledge translation, strategic communication, public relations and capacity-building
+                    services that help organizations communicate evidence, engage stakeholders and strengthen
+                    institutional capabilities.</p>
+                  <ul class="chips">
                     <li>Knowledge translation</li>
                     <li>Strategic communication</li>
                     <li>Public relations</li>
                     <li>Capacity building</li>
                   </ul>
-                  <a
-                    class="svc-card__link"
-                    href="services.html#communication-capacity"
-                    >Explore Communication &amp; Capacity
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2.2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path d="M5 12h14M13 6l6 6-6 6" />
-                    </svg>
-                  </a>
+                  <a class="more" href="services.html#communication-capacity">Explore Communication &amp; Capacity</a>
                 </article>
               </div>
             </div>
           </div>
         </div>
-
-        <div class="svc-preview__foot" data-reveal style="--i: 7">
-          <!-- <p>Each practice area is set out in full on our services page.</p> -->
-          <a class="svc-btn" href="services.html">
-            View all services
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              aria-hidden="true"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </a>
-        </div>
+        <a class="btn svc-all" href="services.html" data-reveal>View all services</a>
       </div>
     </section>
-    <!-- 
-    <section class="audience-section" aria-labelledby="audience-title">
-      <div class="audience-content">
-        <div class="audience-feature">
-          <p>Evidence. Impact. Action. Impact.</p>
+
+    <!-- PRINCIPLES -->
+    <section class="prv" id="principles-preview" aria-labelledby="prv-title">
+      <div class="wrap prv-grid">
+        <div class="prv-card ph veil art2" data-reveal><img src="public/images/principles.jpg" alt="" loading="lazy"
+            onerror="this.remove()" />
+          <p class="badge">Our approach</p>
+          <h2 id="prv-title">Seven principles, <span>one assignment at a time</span></h2>
+          <p>Every engagement follows the same seven commitments, from the first conversation to the final deliverable.
+          </p>
+          <a class="btn" href="aboutUs.html#our-approach">Explore our approach</a>
         </div>
-        <div class="audience-heading">
-          <p class="audience-eyebrow">Who we work with</p>
-          <h2 id="audience-title">Insight for institutions shaping Africa’s future</h2>
-        </div>
-        <ul class="audience-list">
-          <li><a href="aboutUs.html#who-we-serve">Governments &amp; Public Institutions</a></li>
-          <li><a href="aboutUs.html#who-we-serve">Development Partners &amp; International Organisations</a></li>
-          <li><a href="aboutUs.html#who-we-serve">Private Sector Organisations</a></li>
-          <li><a href="aboutUs.html#who-we-serve">Academic &amp; Research Institutions</a></li>
-          <li><a href="aboutUs.html#who-we-serve">Civil Society</a></li>
+        <ol class="prv-list">
+          <li class="prv-row" data-reveal><i aria-hidden="true">1</i><span>Start with the problem</span></li>
+          <li class="prv-row" data-reveal><i aria-hidden="true">2</i><span>Build the right team</span></li>
+          <li class="prv-row" data-reveal><i aria-hidden="true">3</i><span>Generate credible evidence</span></li>
+          <li class="prv-row" data-reveal><i aria-hidden="true">4</i><span>Bring context to the evidence</span></li>
+          <li class="prv-row" data-reveal><i aria-hidden="true">5</i><span>Translate evidence into action</span></li>
+          <li class="prv-row" data-reveal><i aria-hidden="true">6</i><span>Strengthen capacity as we deliver</span></li>
+          <li class="prv-row" data-reveal><i aria-hidden="true">7</i><span>Engage throughout the process</span></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta wrap" id="start">
+      <div class="cta-card ph veil art1" data-reveal><img src="public/images/cta.jpg" alt="" loading="lazy"
+          onerror="this.remove()" />
+        <h2>Ready to turn evidence into <span>lasting impact?</span></h2>
+        <a href="contactUs.html" class="btn">Partner with Us</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" id="contact">
+    <div class="wrap foot-top">
+      <div class="foot-brand">
+        <img src="public/Logo-4.png" alt="Konsalta" />
+        <p>Turning Knowledge, Into Impact.</p>
+        <ul class="social">
+          <li><a href="https://www.linkedin.com/company/konsalta-hub-africa/" target="_blank" rel="noopener noreferrer"
+              aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M4 9h4v11H4zM6 3.500a2.200 2.200 0 1 1 0 4.400 2.200 2.200 0 0 1 0-4.400zM10 9h3.800v1.600c.600-1.100 2-1.900 3.700-1.900 3.400 0 4.500 2.200 4.500 5.400V20h-4v-5.200c0-1.400-.4-2.300-1.700-2.300-1.400 0-2.300 1-2.300 2.500V20h-4z" />
+              </svg></a></li>
+          <li><a href="https://wa.me/?text=Hello%20Konsalta%2C%20I%20would%20like%20to%20start%20a%20conversation."
+              target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24"
+                fill="currentColor">
+                <path
+                  d="M12.04 2a9.9 9.9 0 0 0-8.45 15.08L2 22l5.07-1.33A9.99 9.99 0 1 0 12.04 2Zm0 18.1a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.01.79.8-2.93-.19-.3A8.11 8.11 0 1 1 12.04 20.1Zm4.45-6.08c-.24-.12-1.44-.71-1.66-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.01-.37.11-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.47-.39-.41-.54-.42h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.09 3.62.57.25 1.02.4 1.37.51.58.18 1.1.16 1.51.1.46-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28Z" />
+              </svg></a></li>
+          <li><a href="mailto:engage@konsaltahub.org" aria-label="Email"><svg viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="m4 7 8 6 8-6" />
+              </svg></a></li>
         </ul>
       </div>
-    </section> -->
-    <!-- ==========================================================================
-     SEVEN PRINCIPLES PREVIEW  ·  paste into index.html (e.g. after the services preview)
-     The button lands visitors on the full section: aboutUs.html#our-approach
-     ========================================================================== -->
-<section class="prv" id="principles-preview" aria-labelledby="prv-title">
-  <div class="prv__inner">
-
-    <div class="prv__side">
-      <header class="prv__head">
-        <p class="prv__eyebrow" data-reveal style="--i:0"><span aria-hidden="true"></span>Our approach</p>
-        <h2 class="prv__title" id="prv-title" data-reveal style="--i:1">
-          Seven principles,
-          <span class="prv__accent">one assignment at a time</span>
-        </h2>
-        <p class="prv__lede" data-reveal style="--i:2">
-          Every engagement follows the same seven commitments, from the first conversation to the final deliverable.
-        </p>
-      </header>
-
-      <div class="prv__cta" data-reveal style="--i:3">
-        <a class="prv-btn" href="aboutUs.html#our-approach">
-          Explore our approach
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </a>
-      </div>
+      <nav class="foot-col" aria-label="Company">
+        <h4>Company</h4>
+        <a href="aboutUs.html">About Konsalta</a>
+        <a href="whyUs.html">Why Choose us</a>
+        <a href="contactUs.html">Contact Us</a>
+        <a href="faq.html">FAQs</a>
+      </nav>
+      <nav class="foot-col" aria-label="Governance">
+        <h4>Governance</h4>
+        <a href="governance.html#ethics">Ethics &amp; Integrity</a>
+        <a href="governance.html#privacy">Privacy Policy</a>
+        <a href="governance.html#terms">Terms of Engagement</a>
+      </nav>
     </div>
+    <p class="foot-word" aria-hidden="true">Konsalta</p>
+    <div class="wrap foot-bottom">
+      <span>© 2026 Konsalta. All rights reserved.</span>
+      <span>Developed by Momentum Labs CLG.</span>
+      <span>Better Decisions. Better Impact.</span>
+      <button class="to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 19V5M6 11l6-6 6 6" />
+        </svg></button>
+    </div>
+  </footer>
+</body>
 
-    <ol class="prv__list" role="list">
-      <li class="prv-row" data-reveal style="--i:2"><span class="prv-row__num" aria-hidden="true">1</span><span class="prv-row__title">Start with the problem</span></li>
-      <li class="prv-row" data-reveal style="--i:3"><span class="prv-row__num" aria-hidden="true">2</span><span class="prv-row__title">Build the right team</span></li>
-      <li class="prv-row" data-reveal style="--i:4"><span class="prv-row__num" aria-hidden="true">3</span><span class="prv-row__title">Generate credible evidence</span></li>
-      <li class="prv-row" data-reveal style="--i:5"><span class="prv-row__num" aria-hidden="true">4</span><span class="prv-row__title">Bring context to the evidence</span></li>
-      <li class="prv-row" data-reveal style="--i:6"><span class="prv-row__num" aria-hidden="true">5</span><span class="prv-row__title">Translate evidence into action</span></li>
-      <li class="prv-row" data-reveal style="--i:7"><span class="prv-row__num" aria-hidden="true">6</span><span class="prv-row__title">Strengthen capacity as we deliver</span></li>
-      <li class="prv-row" data-reveal style="--i:8"><span class="prv-row__num" aria-hidden="true">7</span><span class="prv-row__title">Engage throughout the process</span></li>
-    </ol>
-
-  </div>
-</section>
-
-    <section class="final-cta" id="start">
-      <div class="final-cta-card">
-        <span class="orb orb-1" aria-hidden="true"></span>
-        <span class="orb orb-2" aria-hidden="true"></span>
-        <h2 class="final-cta-h2">
-          Ready to turn evidence into
-          <span class="accent">lasting impact?</span>
-        </h2>
-        <!-- <p>
-          Partner with our Africa-focused research and advisory collective to
-          make confident, future-ready decisions for your institution.
-        </p> -->
-        <a href="contactUs.html" class="cta-btn"
-          >Partner with Us
-          <span class="cta-arrow" aria-hidden="true">
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14M13 6l6 6-6 6" />
-            </svg>
-          </span>
-        </a>
-      </div>
-    </section>
-    <footer class="site-footer" id="contact">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <div class="footer-logo">
-            <span class="logo-dot">
-              <img src="public/Logo-4.png" alt="Konsalta" />
-            </span>
-          </div>
-          <p>Turning Knowledge, Into Impact.</p>
-        </div>
-        <div class="footer-cols">
-          <!-- <div class="footer-col">
-            <h4>Services</h4>
-            <a href="services.html#research">Research & Evaluation</a>
-            <a href="services.html#strategy">Strategy & Advisory</a>
-            <a href="services.html#policy">Policy & Systems</a>
-          </div> -->
-          <div class="footer-col">
-            <h4>Company</h4>
-            <a href="aboutUs.html">About Konsalta</a>
-            <a href="whyUs.html">Why Choose us</a>
-            <a href="contactUs.html">Contact Us</a>
-            <a href="faq.html">FAQs</a>
-          </div>
-          <div class="footer-col">
-            <h4>Governance</h4>
-            <a href="governance.html#ethics">Ethics & Integrity</a>
-            <a href="governance.html#privacy">Privacy Policy</a>
-            <a href="governance.html#terms">Terms of Engagement</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2026 Konsalta. All rights reserved.</span>
-        <span>Developed by Momentum Labs CLG.</span>
-        <span>Better Decisions. Better Impact.</span>
-      </div>
-    </footer>
-  </body>
 </html>
