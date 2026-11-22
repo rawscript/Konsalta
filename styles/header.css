@@ -149,9 +149,6 @@
     white-space: nowrap !important;
   }
   
-  nav.header-nav a.active::after {
-    display: none !important;
-  }
 }
 
 /* Smaller tablets - even tighter spacing */

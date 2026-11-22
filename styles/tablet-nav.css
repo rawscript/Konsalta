@@ -27,11 +27,6 @@
     display: block !important;
     white-space: nowrap !important;
   }
-  
-  .site-header nav.header-nav a.active::after,
-  nav.header-nav a.active::after {
-    display: none !important;
-  }
 }
 
 /* Extra small tablets */
