@@ -670,3 +670,45 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.14);
   }
 }
+
+/* Mobile responsive styles for service cards */
+@media (max-width: 760px) {
+  .services-hero-card {
+    border-radius: var(--r-lg);
+  }
+
+  .services-hero-media {
+    height: 200px;
+  }
+
+  .services-hero-media img {
+    object-position: center top;
+  }
+
+  .services-hero-stats {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px 14px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .services-hero-body {
+    padding: 16px;
+  }
+
+  .services-hero-body .card-title {
+    font-size: 1.125rem;
+    margin-bottom: 12px;
+  }
+
+  .tags-cluster {
+    gap: 8px;
+  }
+
+  .tag-pill {
+    padding: 6px 12px;
+    font-size: 0.75rem;
+  }
+}

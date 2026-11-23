@@ -1,0 +1,37 @@
+{
+  "name": "crema-vibes",
+  "version": "1.0.0",
+  "description": "A custom icon font for Konsalta - 14 clean, modern icons for web, desktop, and mobile applications",
+  "main": "crema-vibes.css",
+  "style": "crema-vibes.css",
+  "files": [
+    "crema-vibes.css",
+    "crema-vibes.svg",
+    "crema-vibes.ttf",
+    "crema-vibes.otf",
+    "crema-vibes.woff",
+    "crema-vibes.woff2",
+    "LICENSE.md",
+    "README.md",
+    "TERMS-OF-USE.md"
+  ],
+  "keywords": [
+    "icon-font",
+    "icons",
+    "font",
+    "crema-vibes",
+    "konsalta",
+    "web-font",
+    "svg-icons"
+  ],
+  "author": "Konsalta Hub",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/konsalta/crema-vibes.git"
+  },
+  "bugs": {
+    "email": "engage@konsaltahub.org"
+  },
+  "homepage": "https://konsaltahub.org"
+}

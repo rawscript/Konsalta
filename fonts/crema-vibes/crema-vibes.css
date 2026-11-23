@@ -1,0 +1,90 @@
+/**
+ * Crema Vibes Icon Font
+ * Version 1.0
+ * Copyright (c) 2026 Konsalta Hub
+ * License: Included with purchase - see LICENSE.md
+ */
+
+/* Font Face Declaration */
+@font-face {
+  font-family: 'Crema Vibes';
+  src: url('crema-vibes.woff2') format('woff2'),
+       url('crema-vibes.woff') format('woff'),
+       url('crema-vibes.ttf') format('truetype'),
+       url('crema-vibes.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+/* Base Icon Styles */
+.crema-icon {
+  font-family: 'Crema Vibes' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Icon Classes */
+.cr-arrow-up::before { content: '\e001'; }
+.cr-menu::before { content: '\e002'; }
+.cr-search::before { content: '\e003'; }
+.cr-trending-up::before { content: '\e004'; }
+.cr-chip::before { content: '\e005'; }
+.cr-document::before { content: '\e006'; }
+.cr-target::before { content: '\e007'; }
+.cr-bar-chart::before { content: '\e008'; }
+.cr-layers::before { content: '\e009'; }
+.cr-chat-bubble::before { content: '\e010'; }
+.cr-megaphone::before { content: '\e011'; }
+.cr-linkedin::before { content: '\e012'; }
+.cr-whatsapp::before { content: '\e013'; }
+.cr-email::before { content: '\e014'; }
+
+/* Sizing Utilities */
+.cr-xs { font-size: 0.75em; }    /* 12px at 16px base */
+.cr-sm { font-size: 0.875em; }   /* 14px at 16px base */
+.cr-md { font-size: 1em; }       /* 16px at 16px base */
+.cr-lg { font-size: 1.25em; }    /* 20px at 16px base */
+.cr-xl { font-size: 1.5em; }     /* 24px at 16px base */
+.cr-2xl { font-size: 2em; }      /* 32px at 16px base */
+.cr-3xl { font-size: 3em; }      /* 48px at 16px base */
+
+/* Animation Utilities */
+.cr-spin {
+  animation: cr-spin 1s linear infinite;
+}
+
+.cr-pulse {
+  animation: cr-pulse 1s ease-in-out infinite;
+}
+
+@keyframes cr-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes cr-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Screen Reader Only (for accessibility) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
