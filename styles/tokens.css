@@ -354,7 +354,7 @@
 
   --header-bg: rgba(17, 24, 32, 0.88);
   --header-border: var(--line);
-  --header-link-color: var(--ink-soft)
+  --header-link-color: var(--ink-soft);
   --header-link-active: var(--navy);
 
   --card-border: var(--line);

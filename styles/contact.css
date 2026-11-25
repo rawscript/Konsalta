@@ -422,94 +422,6 @@ img {
   filter: drop-shadow(0 2px 4px rgba(242, 101, 34, 0.2));
 }
 
-/* ============ FOOTER ============ */
-.site-footer {
-  background: var(--bg);
-  padding: 60px 56px 40px;
-  border-top: 1px solid var(--line);
-}
-
-.footer-top {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 60px;
-  gap: 60px;
-}
-
-.footer-brand .footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-
-.footer-brand p {
-  color: var(--ink-soft);
-  font-size: 14px;
-  line-height: 1.6;
-  max-width: 320px;
-}
-
-.footer-cols {
-  display: flex;
-  gap: 60px;
-}
-
-.footer-col h4 {
-font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  margin-bottom: 18px;
-  color: var(--navy);
-  font-weight: 700;
-}
-
-.footer-col a {
-  display: block;
-  font-size: 14px;
-  color: var(--ink-soft);
-  text-decoration: none;
-  margin-bottom: 12px;
-  transition: color 0.2s;
-}
-
-.footer-col a:hover {
-  color: var(--orange);
-}
-
-.footer-consultant-link {
-  font-weight: 600 !important;
-  color: var(--orange) !important;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 4px;
-  padding: 8px 0;
-  transition: all 0.2s ease;
-}
-
-.footer-consultant-link:hover {
-  color: var(--orange-deep) !important;
-  transform: translateX(4px);
-}
-
-.footer-consultant-link .footer-icon {
-  color: var(--orange);
-}
-
-.footer-bottom {
-  padding-top: 32px;
-  border-top: 1px solid var(--line);
-  display: flex;
-  justify-content: space-between;
-font-family: "JetBrains Mono", monospace;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--ink-soft);
-}
-
 @media (max-width: 860px) {
   .contact-card {
     grid-template-columns: 1fr;
@@ -517,18 +429,6 @@ font-family: "JetBrains Mono", monospace;
 
   .field-row {
     grid-template-columns: 1fr;
-  }
-
-  .site-footer {
-    padding-left: 22px;
-    padding-right: 22px;
-  }
-
-  .footer-top,
-  .footer-bottom,
-  .footer-cols {
-    flex-direction: column;
-    gap: 24px;
   }
 }
 
@@ -567,12 +467,6 @@ font-family: "JetBrains Mono", monospace;
     min-height: var(--touch-min, 44px);
     padding: 14px 24px;
     font-size: 15px;
-  }
-
-  .footer-col a {
-    min-height: var(--touch-min, 44px);
-    display: flex;
-    align-items: center;
   }
 }
 

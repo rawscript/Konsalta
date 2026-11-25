@@ -31,16 +31,29 @@
       defer
     ></script>
     <script src="scripts/header.js" defer></script>
+    <script src="scripts/footer.js" defer></script>
     <script src="scripts/theme.js" defer></script>
     <script src="scripts/site.js" defer></script>
   </head>
-  <body>
+  <body class="why-page">
     <header class="site-header">
-      <a href="index.html" class="logo" aria-label="Konsalta Home">
+      <a
+        href="index.html"
+        class="logo"
+        aria-label="Konsalta — Go to Home"
+        title="Go to Home"
+      >
         <picture>
-          <source media="(max-width: 850px)" srcset="public/Logo-5.png" />
+          <source media="(max-width: 1080px)" srcset="public/Logo-5.png" />
           <img src="public/Logo-3.png" alt="Konsalta Logo" />
         </picture>
+        <span class="logo-home-cue" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 10.5 12 3l9 7.5" />
+            <path d="M5 9.5V20h5v-6h4v6h5V9.5" />
+          </svg>
+          <span class="logo-home-text">Home</span>
+        </span>
       </a>
       <button
         class="header-menu-toggle"
@@ -53,58 +66,62 @@
           <path d="M4 7h16M4 12h16M4 17h16" />
         </svg>
       </button>
-      <nav class="header-nav" id="primary-navigation">
+      <nav class="header-nav" id="primary-navigation" aria-label="Primary">
+        <a href="index.html" class="mobile-nav-home"><span>Home</span></a>
         <a href="aboutUs.html"><span>About</span> <span>Konsalta</span></a>
         <a href="services.html"><span>Our</span> <span>Services</span></a>
         <a href="whyUs.html" class="active" aria-current="page"
           ><span>Why</span> <span>Konsalta</span></a
         >
+        <a href="insights.html"><span>Our</span> <span>Insights</span></a>
         <a href="contactUs.html"><span>Contact</span> <span>Us</span></a>
-        <!-- <a href="consultant-onboarding.html" class="mobile-nav-contact"
-          ><span>Engage</span> <span>with Us</span></a
-        > -->
+        <a href="consultant-onboarding.html" class="mobile-nav-contact"
+          ><span>Apply to join</span> <span>Our Network</span></a
+        >
       </nav>
       <a href="consultant-onboarding.html" class="btn header-btn"
-        >Engage with Us</a
+        >Apply to join Our Network</a
       >
     </header>
 
     <main>
-      <section class="hero why-hero wrap">
-        <span class="why-shape" aria-hidden="true"></span>
-        <div class="hero-text">
-          <p class="badge">The Konsalta Difference</p>
-          <h1>
-            <span class="tl t-navy"><span class="in">Why</span></span>
-            <span class="tl t-navy"><span class="in">Choose</span></span>
-            <span class="tl t-orange"><span class="in">Konsalta.</span></span>
-          </h1>
-          <p class="hero-desc">
-            Organisations choose us because we operate as an agile,
-            network-driven collective, shaped around their exact needs and
-            mapping the strategic architecture required to deliver measurable,
-            sustained value.
-          </p>
-          <div class="actions">
-            <a href="#what-sets-us-apart" class="btn">What Sets Us Apart</a>
-            <a href="contactUs.html" class="btn btn--ghost">Work With Us</a>
+      <div class="why-top">
+        <section class="hero why-hero wrap">
+          <span class="why-shape" aria-hidden="true"></span>
+          <div class="hero-text">
+            <p class="badge">The Konsalta Difference</p>
+            <h1>
+              <span class="tl t-navy"><span class="in">Why</span></span>
+              <span class="tl t-navy"><span class="in">Choose</span></span>
+              <span class="tl t-orange"><span class="in">Konsalta.</span></span>
+            </h1>
+            <p class="hero-desc">
+              Organisations choose us because we operate as an agile,
+              network-driven collective, shaped around their exact needs and
+              mapping the strategic architecture required to deliver measurable,
+              sustained value.
+            </p>
+            <div class="actions">
+              <a href="#what-sets-us-apart" class="btn">What Sets Us Apart</a>
+              <a href="contactUs.html" class="btn btn--ghost">Work With Us</a>
+            </div>
           </div>
-        </div>
-        <div class="why-mosaic" aria-hidden="true">
-          <figure class="why-photo why-photo--a" data-speed="-30">
-            <img src="public/africa-tech.jpeg" alt="" loading="eager" />
-          </figure>
-          <figure class="why-photo why-photo--b" data-speed="40">
-            <img src="public/office-meeting.jpeg" alt="" loading="lazy" />
-          </figure>
-          <figure class="why-photo why-photo--c" data-speed="-50">
-            <img src="public/africa-tech2.jpeg" alt="" loading="lazy" />
-          </figure>
-          <figure class="why-photo why-photo--d" data-speed="30">
-            <img src="public/sunset-waterfall.jpeg" alt="" loading="lazy" />
-          </figure>
-        </div>
-      </section>
+          <div class="why-mosaic" aria-hidden="true">
+            <figure class="why-photo why-photo--a" data-speed="-30">
+              <img src="public/africa-tech.jpeg" alt="" loading="eager" />
+            </figure>
+            <figure class="why-photo why-photo--b" data-speed="40">
+              <img src="public/office-meeting.jpeg" alt="" loading="lazy" />
+            </figure>
+            <figure class="why-photo why-photo--c" data-speed="-50">
+              <img src="public/africa-tech2.jpeg" alt="" loading="lazy" />
+            </figure>
+            <figure class="why-photo why-photo--d" data-speed="30">
+              <img src="public/sunset-waterfall.jpeg" alt="" loading="lazy" />
+            </figure>
+          </div>
+        </section>
+      </div>
 
       <div class="why-marquee" aria-hidden="true">
         <div class="why-marquee__track">
@@ -224,156 +241,8 @@
         </div>
       </section>
 
-      <!-- <div class="why-band ph veil art5" aria-hidden="true">
-        <img
-          src="public/images/why-band.jpg"
-          alt=""
-          loading="lazy"
-          onerror="this.remove()"
-        />
-        <span class="why-band__dot"></span><span class="why-band__bar"></span>
-      </div> -->
-
-      <section class="why-insights" aria-labelledby="why-insights-title">
-        <div class="wrap">
-          <header class="why-insights-head" data-reveal>
-            <div>
-              <p class="badge">Our Insights</p>
-              <h2 id="why-insights-title">Latest from Konsalta</h2>
-            </div>
-            <a
-              class="linkedin-follow"
-              href="https://www.linkedin.com/company/konsalta-hub-africa/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                <path
-                  d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"
-                />
-              </svg>
-              Follow on LinkedIn
-            </a>
-          </header>
-          <div class="linkedin-feed" data-reveal>
-            <article class="linkedin-post linkedin-post--featured">
-              <header class="linkedin-post-head">
-                <img class="linkedin-avatar" src="public/Logo-5.png" alt="" />
-                <div>
-                  <strong>Konsalta</strong><span>4,812 followers</span
-                  ><span>Recently · <span aria-label="Public">🌐</span></span>
-                </div>
-                <a
-                  href="https://www.linkedin.com/company/konsalta-hub-africa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open Konsalta on LinkedIn"
-                  >···</a
-                >
-              </header>
-              <p class="linkedin-post-copy">
-                <strong>Our network model.</strong> Consulting does not have to
-                mean a fixed bench of generalists parachuted into every project.
-                For every engagement, we assemble the right mix of senior
-                expertise, local context and specialist insight.
-              </p>
-              <a
-                class="linkedin-post-media"
-                href="https://www.linkedin.com/company/konsalta-hub-africa/"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><img
-                  src="public/linkedin/post-1.jpeg"
-                  alt="Konsalta network model article"
-                  loading="lazy"
-                  onerror="this.remove()"
-              /></a>
-              <footer class="linkedin-post-actions">
-                <a
-                  href="https://www.linkedin.com/company/konsalta-hub-africa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >👍 <span>Like</span></a
-                >
-                <a
-                  href="https://www.linkedin.com/company/konsalta-hub-africa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >💬 <span>Comment</span></a
-                >
-                <a
-                  href="https://www.linkedin.com/company/konsalta-hub-africa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >↗ <span>Repost</span></a
-                >
-              </footer>
-            </article>
-            <article class="linkedin-post">
-              <header class="linkedin-post-head">
-                <img class="linkedin-avatar" src="public/Logo-5.png" alt="" />
-                <div>
-                  <strong>Konsalta</strong><span>4,812 followers</span
-                  ><span>Recently · <span aria-label="Public">🌐</span></span>
-                </div>
-                <a
-                  href="https://www.linkedin.com/company/konsalta-hub-africa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Open Konsalta on LinkedIn"
-                  >···</a
-                >
-              </header>
-              <p class="linkedin-post-copy">
-                <strong>The evidence-to-impact cycle.</strong> Most
-                organisations do not have an evidence problem — they have an
-                application problem. Evidence creates value when it is
-                translated into decisions, programmes and practical action.
-              </p>
-              <a
-                class="linkedin-post-media"
-                href="https://www.linkedin.com/company/konsalta-hub-africa/"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><img
-                  src="public/linkedin/post-2.jpeg"
-                  alt="Konsalta evidence-to-impact article"
-                  loading="lazy"
-                  onerror="this.remove()"
-              /></a>
-              <footer class="linkedin-post-actions">
-                <a
-                  href="https://www.linkedin.com/company/konsalta-hub-africa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >👍 <span>Like</span></a
-                >
-                <a
-                  href="https://www.linkedin.com/company/konsalta-hub-africa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >💬 <span>Comment</span></a
-                >
-                <a
-                  href="https://www.linkedin.com/company/konsalta-hub-africa/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >↗ <span>Repost</span></a
-                >
-              </footer>
-            </article>
-          </div>
-        </div>
-      </section>
-
       <section class="cta wrap" id="start">
-        <div class="cta-card ph veil art1" data-reveal>
-          <img
-            src="public/images/cta.jpg"
-            alt=""
-            loading="lazy"
-            onerror="this.remove()"
-          />
+        <div class="cta-card why-cta" data-reveal>
           <h2>Ready to turn evidence into <span>lasting impact?</span></h2>
           <a href="contactUs.html" class="btn">Partner with Us</a>
         </div>
@@ -441,8 +310,7 @@
       <p class="foot-word" aria-hidden="true">Konsalta</p>
       <div class="wrap foot-bottom">
         <span>© 2026 Konsalta. All rights reserved.</span>
-        <span>Developed by Momentum Labs CLG.</span>
-        <span>Better Decisions. Better Impact.</span>
+        <span class="foot-credit">Developed by Momentum Labs CLG.</span>
         <button class="to-top" type="button" aria-label="Back to top">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M12 19V5M6 11l6-6 6 6" />

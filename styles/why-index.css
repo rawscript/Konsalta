@@ -4,25 +4,6 @@
 .why-hero {
   position: relative;
   isolation: isolate;
-  background:
-    radial-gradient(
-      ellipse at 82% 24%,
-      rgba(22, 72, 126, 0.13),
-      transparent 46%
-    ),
-    radial-gradient(
-      ellipse at 14% 82%,
-      rgba(11, 45, 83, 0.06),
-      transparent 42%
-    );
-}
-.why-hero .badge {
-  border-color: var(--navy-tint);
-  background: var(--navy-soft);
-  color: var(--navy);
-}
-.why-hero .badge::before {
-  background: var(--navy-light);
 }
 .why-shape {
   position: absolute;
@@ -31,7 +12,7 @@
   top: 2%;
   width: min(34vw, 420px);
   aspect-ratio: 1;
-  background: rgba(22, 72, 126, 0.12);
+  background: rgba(242, 101, 34, 0.12);
   clip-path: polygon(17.9% 0, 0 21.2%, 54.3% 84.3%, 100% 100%);
   animation: why-drift 16s ease-in-out infinite alternate;
 }
@@ -49,7 +30,7 @@
   width: 34%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: var(--navy-light);
+  background: var(--orange);
   animation: why-drift 9s ease-in-out infinite alternate;
 }
 .why-photo {
@@ -268,160 +249,6 @@
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* ---- photo band ---- */
-.why-band {
-  min-height: clamp(220px, 30vw, 380px);
-}
-.why-band__dot,
-.why-band__bar {
-  position: absolute;
-  pointer-events: none;
-}
-.why-band__dot {
-  right: 8%;
-  top: -20%;
-  width: min(34vw, 420px);
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background: var(--orange);
-  opacity: 0.85;
-}
-.why-band__bar {
-  left: 6%;
-  bottom: -30%;
-  width: min(30vw, 360px);
-  aspect-ratio: 1;
-  background: rgba(255, 255, 255, 0.1);
-  clip-path: polygon(17.9% 0, 0 21.2%, 54.3% 84.3%, 100% 100%);
-}
-
-/* ---- insights (LinkedIn feed) ---- */
-.why-insights {
-  padding-block: var(--section-pad);
-  background: var(--navy-deep);
-  color: #fff;
-}
-.why-insights-head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 32px;
-}
-.why-insights-head h2 {
-  margin-top: 16px;
-  font-size: clamp(2.2rem, 4.8vw, 4.2rem);
-  color: #fff;
-}
-.why-insights-head .badge {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.22);
-}
-.linkedin-follow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 10px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.38);
-  border-radius: 999px;
-  color: #fff;
-  font-weight: 800;
-  text-decoration: none;
-}
-.linkedin-follow svg {
-  width: 18px;
-  height: 18px;
-}
-.linkedin-follow:hover {
-  background: #fff;
-  color: var(--navy-deep);
-}
-.linkedin-feed {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-.linkedin-post {
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 16px;
-  background: #fff;
-  color: #1d2226;
-}
-.linkedin-post-head {
-  display: grid;
-  grid-template-columns: 52px 1fr auto;
-  align-items: start;
-  gap: 10px;
-  padding: 16px;
-}
-.linkedin-avatar {
-  width: 52px;
-  height: 52px;
-  object-fit: contain;
-  border: 1px solid #dfe4e8;
-  border-radius: 6px;
-  background: #fff;
-}
-.linkedin-post-head strong,
-.linkedin-post-head span {
-  display: block;
-}
-.linkedin-post-head strong {
-  font-size: 0.9375rem;
-  color: #1d2226;
-}
-.linkedin-post-head span {
-  font-size: 0.75rem;
-  line-height: 1.4;
-  color: #666c70;
-}
-.linkedin-post-head > a {
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: #666c70;
-  text-decoration: none;
-}
-.linkedin-post-copy {
-  min-height: 112px;
-  padding: 0 16px 14px;
-  font-size: 0.9375rem;
-  line-height: 1.55;
-}
-.linkedin-post-media {
-  display: block;
-  aspect-ratio: 16/9;
-  overflow: hidden;
-  background: #edf3f8;
-}
-.linkedin-post-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.linkedin-post-actions {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid #e6eaed;
-}
-.linkedin-post-actions a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  min-height: 52px;
-  font-size: 0.875rem;
-  font-weight: 800;
-  color: #666c70;
-  text-decoration: none;
-}
-.linkedin-post-actions a:hover {
-  background: #eef3f8;
-  color: #0a66c2;
-}
-
 /* ---- responsive ---- */
 @media (max-width: 899px) {
   .why-mosaic {
@@ -439,12 +266,6 @@
   .why-card:nth-child(1),
   .why-card:nth-child(6) {
     grid-column: span 2;
-  }
-  .linkedin-feed {
-    grid-template-columns: 1fr;
-  }
-  .why-insights-head {
-    align-items: flex-start;
   }
 }
 @media (max-width: 600px) {
@@ -467,14 +288,86 @@
   .why-section-head h2 {
     font-size: clamp(2.6rem, 14vw, 4.2rem);
   }
-  .why-insights-head {
-    flex-direction: column;
-  }
-  .linkedin-follow {
-    width: 100%;
-    justify-content: center;
-  }
-  .linkedin-post-copy {
-    min-height: 0;
-  }
+}
+
+/* ---- navy theme: hero, values and CTA surround follow the About page ---- */
+.why-page {
+  background: var(--navy-deep);
+}
+.why-top {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  background:
+    radial-gradient(
+      60% 90% at 90% 0%,
+      rgba(242, 101, 34, 0.28),
+      transparent 60%
+    ),
+    radial-gradient(70% 80% at 0% 100%, var(--navy-light), transparent 60%),
+    linear-gradient(160deg, var(--navy-deep), var(--navy-mid));
+}
+.why-top .t-navy {
+  color: #fff;
+}
+.why-top .hero-desc {
+  color: rgba(255, 255, 255, 0.86);
+}
+.why-top .badge {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+.why-top .btn--ghost {
+  color: #fff;
+  border-color: #fff;
+}
+.why-top .btn--ghost:hover {
+  background: #fff;
+  color: var(--navy-deep);
+}
+.why-shape {
+  background: rgba(255, 255, 255, 0.07);
+}
+.why-photo--d {
+  border-color: var(--navy-mid);
+}
+.why-values {
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(180deg, var(--navy-mid), var(--navy-deep));
+  background-size:
+    48px 48px,
+    48px 48px,
+    auto;
+}
+.why-section-kicker {
+  color: var(--orange-light);
+}
+.why-section-head h2 {
+  color: #fff;
+}
+.why-card {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.why-cta {
+  color: var(--navy-deep);
+  background: linear-gradient(135deg, var(--orange), var(--orange-light));
+  box-shadow: var(--shadow-xl);
+}
+.why-cta h2 {
+  color: var(--navy-deep);
+}
+.why-cta h2 span {
+  color: var(--navy-deep);
+  background: linear-gradient(#fff, #fff) 0 94%/100% 0.14em no-repeat;
+}
+.why-cta .btn {
+  background: var(--navy-deep);
+  color: #fff;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.4);
+}
+.why-cta .btn:hover {
+  background: var(--navy-mid);
 }

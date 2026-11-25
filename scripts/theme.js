@@ -14,7 +14,7 @@
   document.documentElement.dataset.theme = theme;
 
   const initializeThemeToggle = () => {
-    const isMobile = window.matchMedia("(max-width: 850px)");
+    const isMobile = window.matchMedia("(max-width: 1080px)");
     const updateLogo = () => {
       const picture = document.querySelector(".site-header .logo picture");
       const image = picture?.querySelector("img");

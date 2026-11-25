@@ -91,31 +91,37 @@
 .site-header .header-btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 22px;
+  gap: 6px;
+  min-height: 36px;
+  padding: 7px 12px;
   font-family: "Manrope", sans-serif;
-  font-size: 13px;
+  font-size: 11px;
+  line-height: 1.2;
   font-weight: 700;
   color: var(--navy, #0b2d53);
   background: var(--white, #ffffff);
   border: 1.5px solid var(--navy, #0b2d53);
-  border-radius: 12px;
+  border-radius: 9px;
   text-decoration: none;
   transition: all 0.25s ease;
-  box-shadow: 0 3px 0 var(--navy, #0b2d53);
+  box-shadow: 0 2px 0 var(--navy, #0b2d53);
   cursor: pointer;
   white-space: nowrap;
 }
 
+.site-header .header-btn::after {
+  content: none;
+}
+
 .site-header .header-btn:hover {
-  transform: translateY(2px);
+  transform: translateY(1px);
   box-shadow: 0 1px 0 var(--navy, #0b2d53);
   color: var(--orange, #f26522);
   border-color: var(--orange, #f26522);
 }
 
 .site-header .header-btn:active {
-  transform: translateY(3px);
+  transform: translateY(2px);
   box-shadow: 0 0 0 var(--navy, #0b2d53);
 }
 
