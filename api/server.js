@@ -1,5 +1,7 @@
 "use strict";
 
+const crypto = require("node:crypto");
+const fs = require("node:fs");
 const path = require("node:path");
 const express = require("express");
 const cors = require("cors");
@@ -12,6 +14,25 @@ require("dotenv").config({ path: path.join(__dirname, ".env") });
 const SITE_ROOT = path.resolve(__dirname, "..");
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const MAX_EMAIL_LENGTH = 254;
+const DEFAULT_INSIGHTS_CONTENT = {
+  followUrl: "https://www.linkedin.com/company/konsalta-hub-africa/",
+  posts: [
+    {
+      title: "Our network model.",
+      body: "Consulting does not have to mean a fixed bench of generalists parachuted into every project. For every engagement, we assemble the right mix of senior expertise, local context and specialist insight.",
+      imageUrl: "public/linkedin/post-1.jpeg",
+      imageAlt: "Konsalta network model article",
+      linkUrl: "https://www.linkedin.com/company/konsalta-hub-africa/",
+    },
+    {
+      title: "The evidence-to-impact cycle.",
+      body: "Most organisations do not have an evidence problem — they have an application problem. Evidence creates value when it is translated into decisions, programmes and practical action.",
+      imageUrl: "public/linkedin/post-2.jpeg",
+      imageAlt: "Konsalta evidence-to-impact article",
+      linkUrl: "https://www.linkedin.com/company/konsalta-hub-africa/",
+    },
+  ],
+};
 const allowedDocuments = new Set([".pdf", ".doc", ".docx"]);
 const documentMimeTypes = {
   ".pdf": "application/pdf",
@@ -334,9 +355,530 @@ function createSmtpConfig(environment) {
   };
 }
 
+class NewsletterStore {
+  constructor(filename) {
+    this.filename = path.resolve(filename);
+    fs.mkdirSync(path.dirname(this.filename), { recursive: true, mode: 0o700 });
+    this.data = fs.existsSync(this.filename)
+      ? JSON.parse(fs.readFileSync(this.filename, "utf8"))
+      : {
+          subscribers: [],
+          campaigns: [],
+          deliveries: [],
+          unsubscribeTokens: [],
+        };
+    for (const key of ["subscribers", "campaigns", "deliveries", "unsubscribeTokens"]) {
+      if (!Array.isArray(this.data[key])) {
+        throw new Error(`Newsletter storage is invalid: ${key} must be an array.`);
+      }
+    }
+    for (const campaign of this.data.campaigns) {
+      if (campaign.status === "sending") campaign.status = "partial";
+    }
+    for (const delivery of this.data.deliveries) {
+      if (delivery.status === "sending") delivery.status = "failed";
+    }
+    this.nextSubscriberId = this.data.subscribers.reduce(
+      (next, item) => Math.max(next, item.id + 1),
+      1,
+    );
+    this.nextCampaignId = this.data.campaigns.reduce(
+      (next, item) => Math.max(next, item.id + 1),
+      1,
+    );
+  }
+
+  save() {
+    const temporaryFile = `${this.filename}.${process.pid}.tmp`;
+    fs.writeFileSync(temporaryFile, JSON.stringify(this.data), {
+      encoding: "utf8",
+      mode: 0o600,
+    });
+    fs.renameSync(temporaryFile, this.filename);
+    fs.chmodSync(this.filename, 0o600);
+  }
+
+  findSubscriberByEmail(email) {
+    return this.data.subscribers.find((subscriber) => subscriber.email === email);
+  }
+
+  findSubscriberByConfirmationHash(tokenHash) {
+    return this.data.subscribers.find(
+      (subscriber) => subscriber.confirmationTokenHash === tokenHash,
+    );
+  }
+
+  addPendingSubscriber(email, tokenHash, expiresAt, now) {
+    let subscriber = this.findSubscriberByEmail(email);
+    if (subscriber) {
+      subscriber.status = "pending";
+      subscriber.consentAt = now;
+      subscriber.confirmationTokenHash = tokenHash;
+      subscriber.confirmationExpiresAt = expiresAt;
+      subscriber.unsubscribedAt = null;
+    } else {
+      subscriber = {
+        id: this.nextSubscriberId++,
+        email,
+        status: "pending",
+        consentAt: now,
+        confirmationTokenHash: tokenHash,
+        confirmationExpiresAt: expiresAt,
+        createdAt: now,
+        confirmedAt: null,
+        unsubscribedAt: null,
+      };
+      this.data.subscribers.push(subscriber);
+    }
+    this.save();
+  }
+
+  confirmSubscriber(tokenHash, now) {
+    const subscriber = this.findSubscriberByConfirmationHash(tokenHash);
+    if (!subscriber || subscriber.status !== "pending") return null;
+    if (Date.parse(subscriber.confirmationExpiresAt) < Date.now()) return "expired";
+    subscriber.status = "subscribed";
+    subscriber.confirmedAt = now;
+    subscriber.confirmationTokenHash = null;
+    subscriber.confirmationExpiresAt = null;
+    this.save();
+    return subscriber;
+  }
+
+  findSubscribedByUnsubscribeHash(tokenHash) {
+    const token = this.data.unsubscribeTokens.find(
+      (item) => item.tokenHash === tokenHash && !item.revokedAt,
+    );
+    if (!token) return null;
+    const subscriber = this.data.subscribers.find(
+      (item) => item.id === token.subscriberId && item.status === "subscribed",
+    );
+    return subscriber ? { subscriber, token } : null;
+  }
+
+  unsubscribe(tokenHash, now) {
+    const result = this.findSubscribedByUnsubscribeHash(tokenHash);
+    if (!result) return false;
+    result.subscriber.status = "unsubscribed";
+    result.subscriber.unsubscribedAt = now;
+    for (const token of this.data.unsubscribeTokens) {
+      if (token.subscriberId === result.subscriber.id) token.revokedAt = now;
+    }
+    this.save();
+    return true;
+  }
+
+  addUnsubscribeToken(subscriberId, tokenHash, now) {
+    this.data.unsubscribeTokens.push({
+      subscriberId,
+      tokenHash,
+      createdAt: now,
+      revokedAt: null,
+    });
+    this.save();
+  }
+
+  listCampaigns() {
+    return this.data.campaigns
+      .slice()
+      .sort((left, right) => right.id - left.id)
+      .slice(0, 50)
+      .map((campaign) => {
+        const deliveries = this.data.deliveries.filter(
+          (delivery) => delivery.campaignId === campaign.id,
+        );
+        return {
+          ...campaign,
+          sentCount: deliveries.filter((delivery) => delivery.status === "sent").length,
+          failedCount: deliveries.filter((delivery) => delivery.status === "failed").length,
+        };
+      });
+  }
+
+  countSubscribers() {
+    return this.data.subscribers.filter(
+      (subscriber) => subscriber.status === "subscribed",
+    ).length;
+  }
+
+  createCampaign(campaign, now) {
+    const saved = {
+      id: this.nextCampaignId++,
+      ...campaign,
+      status: "draft",
+      createdAt: now,
+      sentAt: null,
+    };
+    this.data.campaigns.push(saved);
+    this.save();
+    return saved;
+  }
+
+  getCampaign(id) {
+    return this.data.campaigns.find((campaign) => campaign.id === id);
+  }
+
+  updateDraft(id, campaign) {
+    const saved = this.data.campaigns.find(
+      (item) => item.id === id && item.status === "draft",
+    );
+    if (!saved) return false;
+    Object.assign(saved, campaign);
+    this.save();
+    return true;
+  }
+
+  activeSubscribers() {
+    return this.data.subscribers.filter(
+      (subscriber) => subscriber.status === "subscribed",
+    );
+  }
+
+  isSubscribed(id) {
+    return this.data.subscribers.some(
+      (subscriber) => subscriber.id === id && subscriber.status === "subscribed",
+    );
+  }
+
+  getDelivery(campaignId, email) {
+    return this.data.deliveries.find(
+      (delivery) =>
+        delivery.campaignId === campaignId && delivery.email === email,
+    );
+  }
+
+  saveDelivery(campaignId, email, status, sentAt = null) {
+    let delivery = this.getDelivery(campaignId, email);
+    if (delivery) {
+      delivery.status = status;
+      delivery.sentAt = sentAt;
+    } else {
+      delivery = { campaignId, email, status, sentAt };
+      this.data.deliveries.push(delivery);
+    }
+    this.save();
+  }
+
+  setCampaignStatus(id, status, sentAt = null) {
+    const campaign = this.getCampaign(id);
+    if (!campaign) return;
+    campaign.status = status;
+    campaign.sentAt = sentAt;
+    this.save();
+  }
+}
+
+class InsightsContentStore {
+  constructor(filename) {
+    this.filename = path.resolve(filename);
+    this.content = fs.existsSync(this.filename)
+      ? validateInsightsContent(JSON.parse(fs.readFileSync(this.filename, "utf8")))
+      : JSON.parse(JSON.stringify(DEFAULT_INSIGHTS_CONTENT));
+  }
+
+  get() {
+    const content = this.content.posts.length
+      ? this.content
+      : DEFAULT_INSIGHTS_CONTENT;
+    return JSON.parse(JSON.stringify(content));
+  }
+
+  update(content) {
+    fs.mkdirSync(path.dirname(this.filename), { recursive: true, mode: 0o700 });
+    const temporaryFile = `${this.filename}.${process.pid}.tmp`;
+    fs.writeFileSync(temporaryFile, JSON.stringify(content), {
+      encoding: "utf8",
+      mode: 0o600,
+    });
+    fs.renameSync(temporaryFile, this.filename);
+    fs.chmodSync(this.filename, 0o600);
+    this.content = content;
+  }
+}
+
+function hashNewsletterToken(token) {
+  return crypto.createHash("sha256").update(token).digest("hex");
+}
+
+function createNewsletterToken() {
+  return crypto.randomBytes(32).toString("base64url");
+}
+
+function getPublicSiteUrl(environment) {
+  const value = environment.PUBLIC_SITE_URL;
+  if (!value) {
+    throw new SmtpConfigurationError(
+      "PUBLIC_SITE_URL is not configured for newsletter links.",
+    );
+  }
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new SmtpConfigurationError("PUBLIC_SITE_URL must be a valid URL.");
+  }
+  if (
+    !["http:", "https:"].includes(url.protocol) ||
+    (environment.NODE_ENV === "production" && url.protocol !== "https:") ||
+    url.username ||
+    url.password
+  ) {
+    throw new SmtpConfigurationError(
+      "PUBLIC_SITE_URL must be an HTTP or HTTPS origin.",
+    );
+  }
+  return url.origin;
+}
+
+function createNewsletterUrl(siteUrl, pathName, token) {
+  const url = new URL(pathName, siteUrl);
+  url.searchParams.set("token", token);
+  return url.toString();
+}
+
+function escapeHtml(value) {
+  return value.replace(/[&<>"']/g, (character) => {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    };
+    return entities[character];
+  });
+}
+
+function validateNewsletterCampaign(body) {
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    throw new HttpError(400, "A newsletter campaign is required.");
+  }
+
+  const campaign = {
+    subject: getString(body, "subject", { maxLength: 180, required: true }),
+    title: getString(body, "title", { maxLength: 160, required: true }),
+    body: getString(body, "body", { maxLength: 20000, required: true }),
+    ctaLabel: getString(body, "ctaLabel", { maxLength: 80 }),
+    ctaUrl: getString(body, "ctaUrl", { maxLength: 2048 }),
+    sections: validateNewsletterSections(body.sections),
+  };
+  if (/[\r\n]/.test(campaign.subject)) {
+    throw new HttpError(400, "The email subject must fit on one line.");
+  }
+  if (campaign.body.length < 20) {
+    throw new HttpError(400, "Newsletter content must be at least 20 characters.");
+  }
+  if (Boolean(campaign.ctaLabel) !== Boolean(campaign.ctaUrl)) {
+    throw new HttpError(400, "Provide both the call-to-action label and URL.");
+  }
+  validateUrl(campaign.ctaUrl, "Call-to-action URL");
+  return campaign;
+}
+
+function validateInsightsUrl(value, fieldName, allowRelative = false) {
+  if (!value) return;
+  if (allowRelative && !/^[a-z][a-z\d+.-]*:/i.test(value)) {
+    if (
+      value.startsWith("//") ||
+      value.includes("\\") ||
+      value.split("/").includes("..")
+    ) {
+      throw new HttpError(400, `${fieldName} must be a safe site path or HTTPS URL.`);
+    }
+    return;
+  }
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new HttpError(400, `${fieldName} must be a valid HTTPS URL.`);
+  }
+  if (url.protocol !== "https:" || url.username || url.password) {
+    throw new HttpError(400, `${fieldName} must use a public HTTPS URL.`);
+  }
+}
+
+function validateInsightsContent(body) {
+  if (!body || typeof body !== "object" || Array.isArray(body)) {
+    throw new HttpError(400, "Insights content is required.");
+  }
+  const followUrl = getString(body, "followUrl", { maxLength: 2048 });
+  validateInsightsUrl(followUrl, "Follow link");
+  if (!Array.isArray(body.posts) || body.posts.length > 8) {
+    throw new HttpError(400, "Insights can contain up to 8 posts.");
+  }
+  const posts = body.posts.map((post, index) => {
+    if (!post || typeof post !== "object" || Array.isArray(post)) {
+      throw new HttpError(400, `Post ${index + 1} is invalid.`);
+    }
+    const result = {
+      title: getString(post, "title", { maxLength: 160, required: true }),
+      body: getString(post, "body", { maxLength: 3000, required: true }),
+      imageUrl: getString(post, "imageUrl", { maxLength: 2048 }),
+      imageAlt: getString(post, "imageAlt", { maxLength: 250 }),
+      linkUrl: getString(post, "linkUrl", { maxLength: 2048 }),
+    };
+    validateInsightsUrl(result.imageUrl, `Post ${index + 1} image`, true);
+    validateInsightsUrl(result.linkUrl, `Post ${index + 1} link`);
+    if (result.imageUrl && !result.imageAlt) {
+      throw new HttpError(400, `Post ${index + 1} image needs descriptive alt text.`);
+    }
+    return result;
+  });
+  return { followUrl, posts };
+}
+
+function validateNewsletterSections(rawSections) {
+  if (rawSections === undefined) return [];
+  if (!Array.isArray(rawSections) || rawSections.length > 8) {
+    throw new HttpError(400, "A newsletter can contain up to 8 content sections.");
+  }
+  return rawSections.map((rawSection, index) => {
+    if (!rawSection || typeof rawSection !== "object" || Array.isArray(rawSection)) {
+      throw new HttpError(400, `Newsletter section ${index + 1} is invalid.`);
+    }
+    const section = {
+      heading: getString(rawSection, "heading", { maxLength: 160, required: true }),
+      body: getString(rawSection, "body", { maxLength: 5000, required: true }),
+      imageUrl: getString(rawSection, "imageUrl", { maxLength: 2048 }),
+      imageAlt: getString(rawSection, "imageAlt", { maxLength: 250 }),
+    };
+    if (Boolean(section.imageUrl) !== Boolean(section.imageAlt)) {
+      throw new HttpError(
+        400,
+        `Provide both an image URL and alternative text for section ${index + 1}.`,
+      );
+    }
+    if (section.imageUrl) {
+      validateUrl(section.imageUrl, `Section ${index + 1} image URL`);
+      if (!section.imageUrl.startsWith("https://")) {
+        throw new HttpError(400, "Newsletter images must use HTTPS URLs.");
+      }
+    }
+    return section;
+  });
+}
+
+function newsletterHtml(campaign, unsubscribeUrl) {
+  const paragraphs = campaign.body
+    .split(/\n{2,}/)
+    .map(
+      (paragraph) =>
+        `<p style="margin:0 0 16px">${escapeHtml(paragraph).replace(/\n/g, "<br>")}</p>`,
+    )
+    .join("");
+  const sections = (campaign.sections || [])
+    .map((section) => {
+      const image = section.imageUrl
+        ? `<img src="${escapeHtml(section.imageUrl)}" alt="${escapeHtml(section.imageAlt)}" width="576" style="display:block;width:100%;max-width:576px;height:auto;border-radius:8px;margin:0 0 16px">`
+        : "";
+      const heading = `<h2 style="margin:24px 0 10px;color:#0b2d53;font-size:21px">${escapeHtml(section.heading)}</h2>`;
+      const content = `<p style="margin:0 0 16px;line-height:1.6">${escapeHtml(section.body).replace(/\n/g, "<br>")}</p>`;
+      return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin:28px 0"><tr><td>${image}${heading}${content}</td></tr></table>`;
+    })
+    .join("");
+  const callToAction = campaign.ctaUrl
+    ? `<p style="margin:28px 0"><a href="${escapeHtml(campaign.ctaUrl)}" style="display:inline-block;padding:12px 20px;background:#f26522;color:#0b2d53;text-decoration:none;border-radius:24px;font-weight:bold">${escapeHtml(campaign.ctaLabel)}</a></p>`
+    : "";
+  return `<!doctype html><html lang="en"><body style="margin:0;padding:0;background:#f7f6f2;color:#25364a;font-family:Arial,sans-serif"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f7f6f2"><tr><td align="center" style="padding:24px 12px"><table role="presentation" width="640" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:640px;background:#fff;border:1px solid #e2ddd3;border-radius:12px"><tr><td style="padding:32px"><p style="margin:0 0 12px;color:#f26522;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase">Konsalta Insights</p><h1 style="margin:0 0 24px;color:#0b2d53;font-size:28px;line-height:1.25">${escapeHtml(campaign.title)}</h1>${paragraphs}${sections}${callToAction}<hr style="border:0;border-top:1px solid #e2ddd3;margin:32px 0 16px"><p style="margin:0;font-size:12px;line-height:1.5;color:#667085">You received this because you subscribed to Konsalta Insights. <a href="${escapeHtml(unsubscribeUrl)}" style="color:#0b2d53">Unsubscribe</a>.</p></td></tr></table></td></tr></table></body></html>`;
+}
+
+function newsletterText(campaign, unsubscribeUrl) {
+  const callToAction = campaign.ctaUrl
+    ? `\n\n${campaign.ctaLabel}: ${campaign.ctaUrl}`
+    : "";
+  const sections = (campaign.sections || [])
+    .map(
+      (section) =>
+        `\n\n${section.heading}\n${section.body}${section.imageUrl ? `\nImage: ${section.imageUrl} (alt text: ${section.imageAlt})` : ""}`,
+    )
+    .join("");
+  return `${campaign.title}\n\n${campaign.body}${sections}${callToAction}\n\nYou received this because you subscribed to Konsalta Insights. Unsubscribe: ${unsubscribeUrl}`;
+}
+
+function newsletterFeedbackPage(title, message, success = false) {
+  const accent = success ? "#237a52" : "#f26522";
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHtml(title)} | Konsalta Insights</title><style>body{margin:0;padding:24px;background:#f7f6f2;color:#25364a;font:16px/1.6 Arial,sans-serif}.card{max-width:560px;margin:10vh auto;padding:36px;background:#fff;border:1px solid #e2ddd3;border-radius:16px;box-shadow:0 12px 36px #0b2d5314}.brand{color:#f26522;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase}h1{color:#0b2d53;line-height:1.2}.mark{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:${accent};color:#fff;font-size:24px;font-weight:bold}</style></head><body><main class="card"><p class="brand">Konsalta Insights</p><div class="mark" aria-hidden="true">${success ? "✓" : "!"}</div><h1>${escapeHtml(title)}</h1><p>${escapeHtml(message)}</p></main></body></html>`;
+}
+
+function safeEqual(left, right) {
+  const leftHash = crypto.createHash("sha256").update(left).digest();
+  const rightHash = crypto.createHash("sha256").update(right).digest();
+  return crypto.timingSafeEqual(leftHash, rightHash);
+}
+
+function requireNewsletterAdmin(environment) {
+  return (request, response, next) => {
+    const configuredPassword = environment.NEWSLETTER_ADMIN_PASSWORD;
+    const expectedUsername = environment.NEWSLETTER_ADMIN_USER;
+    if (
+      !configuredPassword ||
+      configuredPassword.length < 16 ||
+      configuredPassword.startsWith("replace-") ||
+      !expectedUsername ||
+      expectedUsername === "admin"
+    ) {
+      response.status(503).send("Newsletter administration is not configured.");
+      return;
+    }
+    if (environment.NODE_ENV === "production" && !request.secure) {
+      response.status(400).send("Use HTTPS to access newsletter administration.");
+      return;
+    }
+
+    const authorization = request.get("authorization") || "";
+    const match = authorization.match(/^Basic\s+([A-Za-z0-9+/]+=*)$/i);
+    if (!match) {
+      response.set("WWW-Authenticate", 'Basic realm="Konsalta newsletter"');
+      response.status(401).send("Authentication required.");
+      return;
+    }
+
+    const credentials = Buffer.from(match[1], "base64").toString("utf8");
+    const separator = credentials.indexOf(":");
+    const username = separator < 0 ? "" : credentials.slice(0, separator);
+    const password = separator < 0 ? "" : credentials.slice(separator + 1);
+    if (
+      !safeEqual(username, expectedUsername) ||
+      !safeEqual(password, configuredPassword)
+    ) {
+      response.set("WWW-Authenticate", 'Basic realm="Konsalta newsletter"');
+      response.status(401).send("Authentication required.");
+      return;
+    }
+    if (request.method !== "GET" && request.method !== "HEAD") {
+      let siteOrigin;
+      try {
+        siteOrigin = getPublicSiteUrl(environment);
+      } catch {
+        response.status(503).send("Newsletter administration is not configured.");
+        return;
+      }
+      if (request.get("origin") !== siteOrigin) {
+        response.status(403).send("This request is not allowed.");
+        return;
+      }
+    }
+    next();
+  };
+}
+
 function createApp(options = {}) {
   const environment = options.environment || process.env;
   const deliverEmail = options.sendEmail;
+  const database =
+    options.newsletterDatabase ||
+    new NewsletterStore(
+      environment.NEWSLETTER_DB_PATH ||
+        path.join(__dirname, "data", "newsletter.json"),
+    );
+  const insightsContent =
+    options.insightsContentStore ||
+    new InsightsContentStore(
+      environment.INSIGHTS_CONTENT_PATH ||
+        path.join(__dirname, "data", "insights-content.json"),
+    );
+  const requireAdmin = requireNewsletterAdmin(environment);
   let transporter;
   const app = express();
 
@@ -368,12 +910,37 @@ function createApp(options = {}) {
     rateLimit({
       windowMs: 15 * 60 * 1000,
       limit: 8,
+      skip: (request) =>
+        request.path.startsWith("/newsletter/admin") ||
+        request.path === "/insights/content",
       standardHeaders: "draft-8",
       legacyHeaders: false,
       message: {
         success: false,
         error: "Too many submissions. Please try again later.",
       },
+    }),
+  );
+  app.use(
+    "/api/newsletter/admin",
+    rateLimit({
+      windowMs: 15 * 60 * 1000,
+      limit: 60,
+      standardHeaders: "draft-8",
+      legacyHeaders: false,
+      message: {
+        success: false,
+        error: "Too many admin requests. Please try again later.",
+      },
+    }),
+  );
+  app.use(
+    "/api/insights/content",
+    rateLimit({
+      windowMs: 15 * 60 * 1000,
+      limit: 120,
+      standardHeaders: "draft-8",
+      legacyHeaders: false,
     }),
   );
 
@@ -403,6 +970,367 @@ function createApp(options = {}) {
       ...message,
     });
   }
+
+  app.post(
+    "/api/newsletter/subscribe",
+    express.json({ limit: "4kb" }),
+    async (request, response) => {
+      try {
+        const email = getString(request.body || {}, "email", {
+          maxLength: MAX_EMAIL_LENGTH,
+          required: true,
+        }).toLowerCase();
+        if (!isEmail(email)) {
+          throw new HttpError(400, "Enter a valid email address.");
+        }
+        if (request.body?.consent !== true) {
+          throw new HttpError(400, "Please consent to receive newsletter emails.");
+        }
+
+        const existing = database.findSubscriberByEmail(email);
+        if (existing?.status === "subscribed") {
+          response.json({
+            success: true,
+            message:
+              "Thanks for your interest! If a confirmation is needed, check your inbox; an active subscription is already all set.",
+          });
+          return;
+        }
+
+        const siteUrl = getPublicSiteUrl(environment);
+        const token = createNewsletterToken();
+        const confirmationUrl = createNewsletterUrl(
+          siteUrl,
+          "/api/newsletter/confirm",
+          token,
+        );
+        const now = new Date();
+        const expiresAt = new Date(now.getTime() + 48 * 60 * 60 * 1000);
+        database.addPendingSubscriber(
+          email,
+          hashNewsletterToken(token),
+          expiresAt.toISOString(),
+          now.toISOString(),
+        );
+        await sendEmail({
+          to: email,
+          subject: "Confirm your Konsalta Insights subscription",
+          text: `Please confirm your subscription to Konsalta Insights using this link: ${confirmationUrl}\n\nThis link expires in 48 hours. If you did not request this, you can ignore this email.`,
+          html: `<p>Please confirm your subscription to Konsalta Insights:</p><p><a href="${escapeHtml(confirmationUrl)}">Confirm subscription</a></p><p>This link expires in 48 hours. If you did not request this, you can ignore this email.</p>`,
+        });
+        response.json({
+          success: true,
+          message:
+            "Thanks for your interest! If a confirmation is needed, check your inbox; an active subscription is already all set.",
+        });
+      } catch (error) {
+        if (error instanceof HttpError) {
+          response.status(error.status).json({ success: false, error: error.message });
+          return;
+        }
+        if (error instanceof SmtpConfigurationError) {
+          response.status(503).json({
+            success: false,
+            error: "Newsletter email is not configured. Please try again later.",
+          });
+          return;
+        }
+        console.error("Newsletter confirmation email delivery failed.");
+        response.status(502).json({
+          success: false,
+          error: "We could not send a confirmation email. Please try again later.",
+        });
+      }
+    },
+  );
+
+  app.get("/api/newsletter/confirm", (request, response) => {
+    const token = request.query.token;
+    if (typeof token !== "string" || !/^[A-Za-z0-9_-]{40,50}$/.test(token)) {
+      response.status(400).send("This confirmation link is invalid.");
+      return;
+    }
+
+    const subscriber = database.findSubscriberByConfirmationHash(
+      hashNewsletterToken(token),
+    );
+    if (!subscriber || subscriber.status !== "pending") {
+      response.status(400).send("This confirmation link is invalid or has already been used.");
+      return;
+    }
+    if (Date.parse(subscriber.confirmationExpiresAt) < Date.now()) {
+      response.status(410).send("This confirmation link has expired. Please sign up again.");
+      return;
+    }
+    response.type("html").send(
+      `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Confirm subscription | Konsalta Insights</title><style>body{margin:0;padding:24px;background:#f7f6f2;color:#25364a;font:16px/1.6 Arial,sans-serif}.card{max-width:560px;margin:10vh auto;padding:36px;background:#fff;border:1px solid #e2ddd3;border-radius:16px}.brand{color:#f26522;font-size:12px;font-weight:bold;letter-spacing:2px;text-transform:uppercase}h1{color:#0b2d53}button{padding:12px 20px;border:0;border-radius:24px;background:#f26522;color:#0b2d53;font-weight:bold;font-size:16px;cursor:pointer}</style></head><body><main class="card"><p class="brand">Konsalta Insights</p><h1>Confirm your subscription</h1><p>Confirm that you want to receive Konsalta Insights by email.</p><form method="post" action="/api/newsletter/confirm"><input type="hidden" name="token" value="${token}"><button type="submit">Confirm subscription</button></form></main></body></html>`,
+    );
+  });
+
+  app.post(
+    "/api/newsletter/confirm",
+    express.urlencoded({ extended: false, limit: "2kb" }),
+    (request, response) => {
+      const token = request.body?.token;
+      if (typeof token !== "string" || !/^[A-Za-z0-9_-]{40,50}$/.test(token)) {
+        response.status(400).send("This confirmation link is invalid.");
+        return;
+      }
+      const confirmed = database.confirmSubscriber(
+        hashNewsletterToken(token),
+        new Date().toISOString(),
+      );
+      if (!confirmed) {
+        response.status(400).send("This confirmation link is invalid or has already been used.");
+        return;
+      }
+      if (confirmed === "expired") {
+        response.status(410).send("This confirmation link has expired. Please sign up again.");
+        return;
+      }
+      response.type("html").send(
+        newsletterFeedbackPage(
+          "Subscription confirmed",
+          "You are now subscribed to Konsalta Insights. Thank you for joining us.",
+          true,
+        ),
+      );
+    },
+  );
+
+  app.get("/api/newsletter/unsubscribe/:token", (request, response) => {
+    const token = request.params.token;
+    if (!/^[A-Za-z0-9_-]{40,50}$/.test(token)) {
+      response.status(400).send("This unsubscribe link is invalid.");
+      return;
+    }
+    if (!database.findSubscribedByUnsubscribeHash(hashNewsletterToken(token))) {
+      response.status(404).send("This unsubscribe link is invalid or has expired.");
+      return;
+    }
+    response.type("html").send(
+      `<!doctype html><html lang="en"><meta charset="utf-8"><title>Unsubscribe</title><body><main><h1>Unsubscribe from Konsalta Insights</h1><p>Confirm that you no longer want to receive newsletter emails.</p><form method="post" action="/api/newsletter/unsubscribe/${token}"><button type="submit">Unsubscribe</button></form></main></body></html>`,
+    );
+  });
+
+  app.post(
+    "/api/newsletter/unsubscribe/:token",
+    express.urlencoded({ extended: false, limit: "2kb" }),
+    (request, response) => {
+      const token = request.params.token;
+      if (!/^[A-Za-z0-9_-]{40,50}$/.test(token)) {
+        response.status(400).send("This unsubscribe link is invalid.");
+        return;
+      }
+      if (!database.unsubscribe(hashNewsletterToken(token), new Date().toISOString())) {
+        response.status(404).send("This unsubscribe link is invalid or has expired.");
+        return;
+      }
+      response.type("html").send(
+        "<!doctype html><html lang=\"en\"><meta charset=\"utf-8\"><title>Unsubscribed</title><body><main><h1>You are unsubscribed</h1><p>You will no longer receive Konsalta Insights emails.</p></main></body></html>",
+      );
+    },
+  );
+
+  app.get("/admin", requireAdmin, (request, response) => {
+    response.sendFile(path.join(__dirname, "admin.html"));
+  });
+
+  app.get("/api/insights/content", (request, response) => {
+    response.json(insightsContent.get());
+  });
+
+  app.put(
+    "/api/newsletter/admin/insights",
+    requireAdmin,
+    express.json({ limit: "48kb" }),
+    (request, response) => {
+      try {
+        const content = validateInsightsContent(request.body);
+        insightsContent.update(content);
+        response.json({ success: true, content: insightsContent.get() });
+      } catch (error) {
+        if (error instanceof HttpError) {
+          response.status(error.status).json({ success: false, error: error.message });
+          return;
+        }
+        throw error;
+      }
+    },
+  );
+
+  app.get(
+    "/api/newsletter/admin/campaigns",
+    requireAdmin,
+    (request, response) => {
+      const campaigns = database.listCampaigns();
+      const subscriberCount = database.countSubscribers();
+      response.json({ success: true, campaigns, subscriberCount });
+    },
+  );
+
+  app.post(
+    "/api/newsletter/admin/preview",
+    requireAdmin,
+    express.json({ limit: "96kb" }),
+    (request, response) => {
+      try {
+        const campaign = validateNewsletterCampaign(request.body);
+        response.json({
+          success: true,
+          html: newsletterHtml(campaign, "#unsubscribe-preview"),
+        });
+      } catch (error) {
+        if (error instanceof HttpError) {
+          response.status(error.status).json({ success: false, error: error.message });
+          return;
+        }
+        throw error;
+      }
+    },
+  );
+
+  app.post(
+    "/api/newsletter/admin/campaigns",
+    requireAdmin,
+    express.json({ limit: "96kb" }),
+    (request, response) => {
+      try {
+        const campaign = validateNewsletterCampaign(request.body);
+        const saved = database.createCampaign(campaign, new Date().toISOString());
+        response.status(201).json({
+          success: true,
+          campaign: saved,
+        });
+      } catch (error) {
+        if (error instanceof HttpError) {
+          response.status(error.status).json({ success: false, error: error.message });
+          return;
+        }
+        throw error;
+      }
+    },
+  );
+
+  app.put(
+    "/api/newsletter/admin/campaigns/:id",
+    requireAdmin,
+    express.json({ limit: "96kb" }),
+    (request, response) => {
+      const id = Number(request.params.id);
+      if (!Number.isSafeInteger(id) || id < 1) {
+        response.status(400).json({ success: false, error: "Invalid campaign ID." });
+        return;
+      }
+      try {
+        const campaign = validateNewsletterCampaign(request.body);
+        if (!database.updateDraft(id, campaign)) {
+          response.status(404).json({
+            success: false,
+            error: "Draft not found or it can no longer be edited.",
+          });
+          return;
+        }
+        response.json({ success: true, campaign: { id, ...campaign, status: "draft" } });
+      } catch (error) {
+        if (error instanceof HttpError) {
+          response.status(error.status).json({ success: false, error: error.message });
+          return;
+        }
+        throw error;
+      }
+    },
+  );
+
+  app.post(
+    "/api/newsletter/admin/campaigns/:id/send",
+    requireAdmin,
+    async (request, response) => {
+      const id = Number(request.params.id);
+      if (!Number.isSafeInteger(id) || id < 1) {
+        response.status(400).json({ success: false, error: "Invalid campaign ID." });
+        return;
+      }
+      let siteUrl;
+      try {
+        siteUrl = getPublicSiteUrl(environment);
+      } catch {
+        response.status(503).json({
+          success: false,
+          error: "Newsletter links are not configured. Please try again later.",
+        });
+        return;
+      }
+      const campaign = database.getCampaign(id);
+      if (!campaign || campaign.status === "sent") {
+        response.status(404).json({ success: false, error: "Sendable campaign not found." });
+        return;
+      }
+      if (campaign.status === "sending") {
+        response.status(409).json({
+          success: false,
+          error: "This campaign is already being sent.",
+        });
+        return;
+      }
+      const subscribers = database.activeSubscribers();
+      if (subscribers.length === 0) {
+        response.status(409).json({
+          success: false,
+          error: "There are no confirmed subscribers yet.",
+        });
+        return;
+      }
+
+      database.setCampaignStatus(id, "sending");
+      let sent = 0;
+      let failed = 0;
+      for (const subscriber of subscribers) {
+        if (!database.isSubscribed(subscriber.id)) continue;
+        if (database.getDelivery(id, subscriber.email)?.status === "sent") {
+          sent += 1;
+          continue;
+        }
+        const unsubscribeToken = createNewsletterToken();
+        const unsubscribeUrl = new URL(
+          `/api/newsletter/unsubscribe/${unsubscribeToken}`,
+          siteUrl,
+        ).toString();
+        database.addUnsubscribeToken(
+            subscriber.id,
+            hashNewsletterToken(unsubscribeToken),
+            new Date().toISOString(),
+          );
+        database.saveDelivery(id, subscriber.email, "sending");
+        try {
+          await sendEmail({
+            to: subscriber.email,
+            subject: campaign.subject,
+            html: newsletterHtml(campaign, unsubscribeUrl),
+            text: newsletterText(campaign, unsubscribeUrl),
+            headers: {
+              "List-Unsubscribe": `<${unsubscribeUrl}>`,
+              "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+            },
+          });
+          database.saveDelivery(id, subscriber.email, "sent", new Date().toISOString());
+          sent += 1;
+        } catch {
+          database.saveDelivery(id, subscriber.email, "failed");
+          failed += 1;
+          console.error("Newsletter email delivery failed.");
+        }
+      }
+
+      const status = failed > 0 ? "partial" : "sent";
+      database.setCampaignStatus(
+        id,
+        status,
+        status === "sent" ? new Date().toISOString() : null,
+      );
+      response.json({ success: failed === 0, status, sent, failed });
+    },
+  );
 
   app.post("/api/contact", express.json({ limit: "16kb" }), async (request, response) => {
     try {
