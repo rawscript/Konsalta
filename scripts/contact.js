@@ -14,11 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
   ) {
     window.gsap
       .timeline({ defaults: { ease: "power3.out" } })
-      .from(".back-link", { opacity: 0, x: -12, duration: 0.45 })
       .from(
-        ".intro .eyebrow, .intro h1, .intro > p:last-child",
+        ".intro .badge, .intro h1, .intro > p:last-child",
         { opacity: 0, y: 18, duration: 0.6, stagger: 0.1 },
-        "-=0.25",
       )
       .fromTo(
         ".contact-card",

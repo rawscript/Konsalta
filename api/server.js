@@ -3,6 +3,7 @@
 const crypto = require("node:crypto");
 const fs = require("node:fs");
 const path = require("node:path");
+const { DatabaseSync } = require("node:sqlite");
 const express = require("express");
 const cors = require("cors");
 const multer = require("multer");
@@ -18,18 +19,24 @@ const DEFAULT_INSIGHTS_CONTENT = {
   followUrl: "https://www.linkedin.com/company/konsalta-hub-africa/",
   posts: [
     {
+      id: "our-network-model",
       title: "Our network model.",
       body: "Consulting does not have to mean a fixed bench of generalists parachuted into every project. For every engagement, we assemble the right mix of senior expertise, local context and specialist insight.",
       imageUrl: "public/linkedin/post-1.jpeg",
       imageAlt: "Konsalta network model article",
       linkUrl: "https://www.linkedin.com/company/konsalta-hub-africa/",
+      category: "Operating Model",
+      publishedAt: "2026-04-01",
     },
     {
+      id: "evidence-to-impact-cycle",
       title: "The evidence-to-impact cycle.",
       body: "Most organisations do not have an evidence problem — they have an application problem. Evidence creates value when it is translated into decisions, programmes and practical action.",
       imageUrl: "public/linkedin/post-2.jpeg",
       imageAlt: "Konsalta evidence-to-impact article",
       linkUrl: "https://www.linkedin.com/company/konsalta-hub-africa/",
+      category: "Methodology",
+      publishedAt: "2026-04-15",
     },
   ],
 };
@@ -355,244 +362,515 @@ function createSmtpConfig(environment) {
   };
 }
 
+function resolveSqlitePath(filename) {
+  const resolved = path.resolve(filename);
+  const sqlitePath = resolved.endsWith(".json")
+    ? resolved.replace(/\.json$/i, ".sqlite")
+    : resolved;
+  fs.mkdirSync(path.dirname(sqlitePath), { recursive: true, mode: 0o700 });
+  return { legacyJsonPath: resolved, sqlitePath };
+}
+
 class NewsletterStore {
   constructor(filename) {
-    this.filename = path.resolve(filename);
-    fs.mkdirSync(path.dirname(this.filename), { recursive: true, mode: 0o700 });
-    this.data = fs.existsSync(this.filename)
-      ? JSON.parse(fs.readFileSync(this.filename, "utf8"))
-      : {
-          subscribers: [],
-          campaigns: [],
-          deliveries: [],
-          unsubscribeTokens: [],
-        };
+    const { legacyJsonPath, sqlitePath } = resolveSqlitePath(filename);
+    this.filename = sqlitePath;
+    const isNewDb = !fs.existsSync(sqlitePath);
+    this.db = new DatabaseSync(sqlitePath);
+    this.db.exec(`
+      PRAGMA journal_mode = WAL;
+      PRAGMA foreign_keys = ON;
+      CREATE TABLE IF NOT EXISTS subscribers (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        email TEXT NOT NULL UNIQUE,
+        status TEXT NOT NULL,
+        consent_at TEXT,
+        confirmation_token_hash TEXT,
+        confirmation_expires_at TEXT,
+        created_at TEXT NOT NULL,
+        confirmed_at TEXT,
+        unsubscribed_at TEXT
+      );
+      CREATE TABLE IF NOT EXISTS campaigns (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        subject TEXT NOT NULL,
+        title TEXT NOT NULL,
+        body TEXT NOT NULL,
+        sections_json TEXT NOT NULL,
+        cta_label TEXT NOT NULL,
+        cta_url TEXT NOT NULL,
+        status TEXT NOT NULL,
+        created_at TEXT NOT NULL,
+        sent_at TEXT
+      );
+      CREATE TABLE IF NOT EXISTS deliveries (
+        campaign_id INTEGER NOT NULL,
+        email TEXT NOT NULL,
+        status TEXT NOT NULL,
+        sent_at TEXT,
+        PRIMARY KEY (campaign_id, email)
+      );
+      CREATE TABLE IF NOT EXISTS unsubscribe_tokens (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        subscriber_id INTEGER NOT NULL,
+        token_hash TEXT NOT NULL UNIQUE,
+        created_at TEXT NOT NULL,
+        revoked_at TEXT
+      );
+    `);
+    try {
+      fs.chmodSync(sqlitePath, 0o600);
+    } catch {}
+
+    if (isNewDb && legacyJsonPath !== sqlitePath && fs.existsSync(legacyJsonPath)) {
+      this.migrateLegacyJson(legacyJsonPath);
+    }
+
+    this.db.exec(`
+      UPDATE campaigns SET status = 'partial' WHERE status = 'sending';
+      UPDATE deliveries SET status = 'failed' WHERE status = 'sending';
+    `);
+  }
+
+  migrateLegacyJson(legacyJsonPath) {
+    const data = JSON.parse(fs.readFileSync(legacyJsonPath, "utf8"));
     for (const key of ["subscribers", "campaigns", "deliveries", "unsubscribeTokens"]) {
-      if (!Array.isArray(this.data[key])) {
+      if (!Array.isArray(data[key])) {
         throw new Error(`Newsletter storage is invalid: ${key} must be an array.`);
       }
     }
-    for (const campaign of this.data.campaigns) {
-      if (campaign.status === "sending") campaign.status = "partial";
+    this.db.exec("BEGIN");
+    try {
+      const insertSub = this.db.prepare(
+        `INSERT OR IGNORE INTO subscribers
+         (id, email, status, consent_at, confirmation_token_hash, confirmation_expires_at, created_at, confirmed_at, unsubscribed_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      );
+      for (const s of data.subscribers) {
+        insertSub.run(
+          s.id,
+          s.email,
+          s.status,
+          s.consentAt || null,
+          s.confirmationTokenHash || null,
+          s.confirmationExpiresAt || null,
+          s.createdAt,
+          s.confirmedAt || null,
+          s.unsubscribedAt || null,
+        );
+      }
+      const insertCamp = this.db.prepare(
+        `INSERT OR IGNORE INTO campaigns
+         (id, subject, title, body, sections_json, cta_label, cta_url, status, created_at, sent_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      );
+      for (const c of data.campaigns) {
+        insertCamp.run(
+          c.id,
+          c.subject,
+          c.title,
+          c.body,
+          JSON.stringify(c.sections || []),
+          c.ctaLabel || "",
+          c.ctaUrl || "",
+          c.status,
+          c.createdAt,
+          c.sentAt || null,
+        );
+      }
+      const insertDel = this.db.prepare(
+        `INSERT OR IGNORE INTO deliveries (campaign_id, email, status, sent_at) VALUES (?, ?, ?, ?)`,
+      );
+      for (const d of data.deliveries) {
+        insertDel.run(d.campaignId, d.email, d.status, d.sentAt || null);
+      }
+      const insertTok = this.db.prepare(
+        `INSERT OR IGNORE INTO unsubscribe_tokens (subscriber_id, token_hash, created_at, revoked_at) VALUES (?, ?, ?, ?)`,
+      );
+      for (const t of data.unsubscribeTokens) {
+        insertTok.run(t.subscriberId, t.tokenHash, t.createdAt, t.revokedAt || null);
+      }
+      this.db.exec("COMMIT");
+    } catch (error) {
+      this.db.exec("ROLLBACK");
+      throw error;
     }
-    for (const delivery of this.data.deliveries) {
-      if (delivery.status === "sending") delivery.status = "failed";
-    }
-    this.nextSubscriberId = this.data.subscribers.reduce(
-      (next, item) => Math.max(next, item.id + 1),
-      1,
-    );
-    this.nextCampaignId = this.data.campaigns.reduce(
-      (next, item) => Math.max(next, item.id + 1),
-      1,
-    );
   }
 
-  save() {
-    const temporaryFile = `${this.filename}.${process.pid}.tmp`;
-    fs.writeFileSync(temporaryFile, JSON.stringify(this.data), {
-      encoding: "utf8",
-      mode: 0o600,
-    });
-    fs.renameSync(temporaryFile, this.filename);
-    fs.chmodSync(this.filename, 0o600);
+  mapSubscriber(row) {
+    if (!row) return undefined;
+    return {
+      id: Number(row.id),
+      email: row.email,
+      status: row.status,
+      consentAt: row.consent_at,
+      confirmationTokenHash: row.confirmation_token_hash,
+      confirmationExpiresAt: row.confirmation_expires_at,
+      createdAt: row.created_at,
+      confirmedAt: row.confirmed_at,
+      unsubscribedAt: row.unsubscribed_at,
+    };
+  }
+
+  mapCampaign(row) {
+    if (!row) return undefined;
+    return {
+      id: Number(row.id),
+      subject: row.subject,
+      title: row.title,
+      body: row.body,
+      sections: JSON.parse(row.sections_json || "[]"),
+      ctaLabel: row.cta_label,
+      ctaUrl: row.cta_url,
+      status: row.status,
+      createdAt: row.created_at,
+      sentAt: row.sent_at,
+    };
   }
 
   findSubscriberByEmail(email) {
-    return this.data.subscribers.find((subscriber) => subscriber.email === email);
+    return this.mapSubscriber(
+      this.db.prepare("SELECT * FROM subscribers WHERE email = ?").get(email),
+    );
   }
 
   findSubscriberByConfirmationHash(tokenHash) {
-    return this.data.subscribers.find(
-      (subscriber) => subscriber.confirmationTokenHash === tokenHash,
+    return this.mapSubscriber(
+      this.db
+        .prepare("SELECT * FROM subscribers WHERE confirmation_token_hash = ?")
+        .get(tokenHash),
     );
   }
 
   addPendingSubscriber(email, tokenHash, expiresAt, now) {
-    let subscriber = this.findSubscriberByEmail(email);
-    if (subscriber) {
-      subscriber.status = "pending";
-      subscriber.consentAt = now;
-      subscriber.confirmationTokenHash = tokenHash;
-      subscriber.confirmationExpiresAt = expiresAt;
-      subscriber.unsubscribedAt = null;
+    const existing = this.findSubscriberByEmail(email);
+    if (existing) {
+      this.db
+        .prepare(
+          `UPDATE subscribers
+           SET status = 'pending', consent_at = ?, confirmation_token_hash = ?, confirmation_expires_at = ?, unsubscribed_at = NULL
+           WHERE id = ?`,
+        )
+        .run(now, tokenHash, expiresAt, existing.id);
     } else {
-      subscriber = {
-        id: this.nextSubscriberId++,
-        email,
-        status: "pending",
-        consentAt: now,
-        confirmationTokenHash: tokenHash,
-        confirmationExpiresAt: expiresAt,
-        createdAt: now,
-        confirmedAt: null,
-        unsubscribedAt: null,
-      };
-      this.data.subscribers.push(subscriber);
+      this.db
+        .prepare(
+          `INSERT INTO subscribers
+           (email, status, consent_at, confirmation_token_hash, confirmation_expires_at, created_at)
+           VALUES (?, 'pending', ?, ?, ?, ?)`,
+        )
+        .run(email, now, tokenHash, expiresAt, now);
     }
-    this.save();
   }
 
   confirmSubscriber(tokenHash, now) {
     const subscriber = this.findSubscriberByConfirmationHash(tokenHash);
     if (!subscriber || subscriber.status !== "pending") return null;
     if (Date.parse(subscriber.confirmationExpiresAt) < Date.now()) return "expired";
-    subscriber.status = "subscribed";
-    subscriber.confirmedAt = now;
-    subscriber.confirmationTokenHash = null;
-    subscriber.confirmationExpiresAt = null;
-    this.save();
-    return subscriber;
+    this.db
+      .prepare(
+        `UPDATE subscribers
+         SET status = 'subscribed', confirmed_at = ?, confirmation_token_hash = NULL, confirmation_expires_at = NULL
+         WHERE id = ?`,
+      )
+      .run(now, subscriber.id);
+    return this.findSubscriberByEmail(subscriber.email);
   }
 
   findSubscribedByUnsubscribeHash(tokenHash) {
-    const token = this.data.unsubscribeTokens.find(
-      (item) => item.tokenHash === tokenHash && !item.revokedAt,
-    );
-    if (!token) return null;
-    const subscriber = this.data.subscribers.find(
-      (item) => item.id === token.subscriberId && item.status === "subscribed",
-    );
-    return subscriber ? { subscriber, token } : null;
+    const row = this.db
+      .prepare(
+        `SELECT s.* FROM unsubscribe_tokens t
+         JOIN subscribers s ON s.id = t.subscriber_id
+         WHERE t.token_hash = ? AND t.revoked_at IS NULL AND s.status = 'subscribed'`,
+      )
+      .get(tokenHash);
+    const subscriber = this.mapSubscriber(row);
+    return subscriber ? { subscriber } : null;
   }
 
   unsubscribe(tokenHash, now) {
     const result = this.findSubscribedByUnsubscribeHash(tokenHash);
     if (!result) return false;
-    result.subscriber.status = "unsubscribed";
-    result.subscriber.unsubscribedAt = now;
-    for (const token of this.data.unsubscribeTokens) {
-      if (token.subscriberId === result.subscriber.id) token.revokedAt = now;
+    this.db.exec("BEGIN");
+    try {
+      this.db
+        .prepare("UPDATE subscribers SET status = 'unsubscribed', unsubscribed_at = ? WHERE id = ?")
+        .run(now, result.subscriber.id);
+      this.db
+        .prepare("UPDATE unsubscribe_tokens SET revoked_at = ? WHERE subscriber_id = ?")
+        .run(now, result.subscriber.id);
+      this.db.exec("COMMIT");
+    } catch (error) {
+      this.db.exec("ROLLBACK");
+      throw error;
     }
-    this.save();
     return true;
   }
 
   addUnsubscribeToken(subscriberId, tokenHash, now) {
-    this.data.unsubscribeTokens.push({
-      subscriberId,
-      tokenHash,
-      createdAt: now,
-      revokedAt: null,
-    });
-    this.save();
+    this.db
+      .prepare(
+        "INSERT INTO unsubscribe_tokens (subscriber_id, token_hash, created_at, revoked_at) VALUES (?, ?, ?, NULL)",
+      )
+      .run(subscriberId, tokenHash, now);
   }
 
   listCampaigns() {
-    return this.data.campaigns
-      .slice()
-      .sort((left, right) => right.id - left.id)
-      .slice(0, 50)
-      .map((campaign) => {
-        const deliveries = this.data.deliveries.filter(
-          (delivery) => delivery.campaignId === campaign.id,
-        );
-        return {
-          ...campaign,
-          sentCount: deliveries.filter((delivery) => delivery.status === "sent").length,
-          failedCount: deliveries.filter((delivery) => delivery.status === "failed").length,
-        };
-      });
+    const rows = this.db
+      .prepare(
+        `SELECT c.*,
+          (SELECT COUNT(*) FROM deliveries d WHERE d.campaign_id = c.id AND d.status = 'sent') AS sent_count,
+          (SELECT COUNT(*) FROM deliveries d WHERE d.campaign_id = c.id AND d.status = 'failed') AS failed_count
+         FROM campaigns c
+         ORDER BY c.id DESC
+         LIMIT 50`,
+      )
+      .all();
+    return rows.map((row) => ({
+      ...this.mapCampaign(row),
+      sentCount: Number(row.sent_count || 0),
+      failedCount: Number(row.failed_count || 0),
+    }));
   }
 
   countSubscribers() {
-    return this.data.subscribers.filter(
-      (subscriber) => subscriber.status === "subscribed",
-    ).length;
+    const row = this.db
+      .prepare("SELECT COUNT(*) AS count FROM subscribers WHERE status = 'subscribed'")
+      .get();
+    return Number(row?.count || 0);
   }
 
   createCampaign(campaign, now) {
-    const saved = {
-      id: this.nextCampaignId++,
-      ...campaign,
-      status: "draft",
-      createdAt: now,
-      sentAt: null,
-    };
-    this.data.campaigns.push(saved);
-    this.save();
-    return saved;
+    const result = this.db
+      .prepare(
+        `INSERT INTO campaigns
+         (subject, title, body, sections_json, cta_label, cta_url, status, created_at, sent_at)
+         VALUES (?, ?, ?, ?, ?, ?, 'draft', ?, NULL)`,
+      )
+      .run(
+        campaign.subject,
+        campaign.title,
+        campaign.body,
+        JSON.stringify(campaign.sections || []),
+        campaign.ctaLabel || "",
+        campaign.ctaUrl || "",
+        now,
+      );
+    return this.getCampaign(Number(result.lastInsertRowid));
   }
 
   getCampaign(id) {
-    return this.data.campaigns.find((campaign) => campaign.id === id);
+    return this.mapCampaign(
+      this.db.prepare("SELECT * FROM campaigns WHERE id = ?").get(id),
+    );
   }
 
   updateDraft(id, campaign) {
-    const saved = this.data.campaigns.find(
-      (item) => item.id === id && item.status === "draft",
-    );
-    if (!saved) return false;
-    Object.assign(saved, campaign);
-    this.save();
-    return true;
+    const result = this.db
+      .prepare(
+        `UPDATE campaigns
+         SET subject = ?, title = ?, body = ?, sections_json = ?, cta_label = ?, cta_url = ?
+         WHERE id = ? AND status = 'draft'`,
+      )
+      .run(
+        campaign.subject,
+        campaign.title,
+        campaign.body,
+        JSON.stringify(campaign.sections || []),
+        campaign.ctaLabel || "",
+        campaign.ctaUrl || "",
+        id,
+      );
+    return result.changes > 0;
   }
 
   activeSubscribers() {
-    return this.data.subscribers.filter(
-      (subscriber) => subscriber.status === "subscribed",
-    );
+    return this.db
+      .prepare("SELECT * FROM subscribers WHERE status = 'subscribed'")
+      .all()
+      .map((row) => this.mapSubscriber(row));
   }
 
   isSubscribed(id) {
-    return this.data.subscribers.some(
-      (subscriber) => subscriber.id === id && subscriber.status === "subscribed",
-    );
+    const row = this.db
+      .prepare("SELECT 1 FROM subscribers WHERE id = ? AND status = 'subscribed'")
+      .get(id);
+    return Boolean(row);
   }
 
   getDelivery(campaignId, email) {
-    return this.data.deliveries.find(
-      (delivery) =>
-        delivery.campaignId === campaignId && delivery.email === email,
-    );
+    const row = this.db
+      .prepare("SELECT * FROM deliveries WHERE campaign_id = ? AND email = ?")
+      .get(campaignId, email);
+    if (!row) return undefined;
+    return {
+      campaignId: Number(row.campaign_id),
+      email: row.email,
+      status: row.status,
+      sentAt: row.sent_at,
+    };
   }
 
   saveDelivery(campaignId, email, status, sentAt = null) {
-    let delivery = this.getDelivery(campaignId, email);
-    if (delivery) {
-      delivery.status = status;
-      delivery.sentAt = sentAt;
-    } else {
-      delivery = { campaignId, email, status, sentAt };
-      this.data.deliveries.push(delivery);
-    }
-    this.save();
+    this.db
+      .prepare(
+        `INSERT INTO deliveries (campaign_id, email, status, sent_at)
+         VALUES (?, ?, ?, ?)
+         ON CONFLICT(campaign_id, email) DO UPDATE SET status = excluded.status, sent_at = excluded.sent_at`,
+      )
+      .run(campaignId, email, status, sentAt);
   }
 
   setCampaignStatus(id, status, sentAt = null) {
-    const campaign = this.getCampaign(id);
-    if (!campaign) return;
-    campaign.status = status;
-    campaign.sentAt = sentAt;
-    this.save();
+    this.db
+      .prepare("UPDATE campaigns SET status = ?, sent_at = ? WHERE id = ?")
+      .run(status, sentAt, id);
+  }
+
+  close() {
+    try {
+      this.db?.close();
+    } catch {}
   }
 }
 
 class InsightsContentStore {
   constructor(filename) {
-    this.filename = path.resolve(filename);
-    this.content = fs.existsSync(this.filename)
-      ? validateInsightsContent(JSON.parse(fs.readFileSync(this.filename, "utf8")))
-      : JSON.parse(JSON.stringify(DEFAULT_INSIGHTS_CONTENT));
+    const { legacyJsonPath, sqlitePath } = resolveSqlitePath(filename);
+    this.filename = sqlitePath;
+    const isNewDb = !fs.existsSync(sqlitePath);
+    this.db = new DatabaseSync(sqlitePath);
+    this.db.exec(`
+      PRAGMA journal_mode = WAL;
+      CREATE TABLE IF NOT EXISTS insights_meta (
+        key TEXT PRIMARY KEY,
+        value TEXT NOT NULL
+      );
+      CREATE TABLE IF NOT EXISTS insights_posts (
+        position INTEGER NOT NULL,
+        id TEXT PRIMARY KEY,
+        title TEXT NOT NULL,
+        body TEXT NOT NULL,
+        image_url TEXT NOT NULL,
+        image_alt TEXT NOT NULL,
+        link_url TEXT NOT NULL,
+        category TEXT NOT NULL DEFAULT '',
+        published_at TEXT NOT NULL DEFAULT ''
+      );
+      CREATE TABLE IF NOT EXISTS insights_stats (
+        post_id TEXT PRIMARY KEY,
+        views INTEGER NOT NULL DEFAULT 0,
+        clicks INTEGER NOT NULL DEFAULT 0
+      );
+    `);
+    try {
+      fs.chmodSync(sqlitePath, 0o600);
+    } catch {}
+
+    if (isNewDb && legacyJsonPath !== sqlitePath && fs.existsSync(legacyJsonPath)) {
+      const legacy = validateInsightsContent(
+        JSON.parse(fs.readFileSync(legacyJsonPath, "utf8")),
+      );
+      this.update(legacy);
+    }
   }
 
   get() {
-    const content = this.content.posts.length
-      ? this.content
-      : DEFAULT_INSIGHTS_CONTENT;
-    return JSON.parse(JSON.stringify(content));
+    const metaRow = this.db
+      .prepare("SELECT value FROM insights_meta WHERE key = 'followUrl'")
+      .get();
+    const postRows = this.db
+      .prepare("SELECT * FROM insights_posts ORDER BY position ASC")
+      .all();
+    if (!postRows.length) {
+      return JSON.parse(JSON.stringify(DEFAULT_INSIGHTS_CONTENT));
+    }
+    return {
+      followUrl: metaRow ? metaRow.value : "",
+      posts: postRows.map((row) => ({
+        id: row.id,
+        title: row.title,
+        body: row.body,
+        imageUrl: row.image_url,
+        imageAlt: row.image_alt,
+        linkUrl: row.link_url,
+        category: row.category || "",
+        publishedAt: row.published_at || "",
+      })),
+    };
+  }
+
+  getStats() {
+    const rows = this.db.prepare("SELECT * FROM insights_stats").all();
+    const stats = {};
+    for (const row of rows) {
+      stats[row.post_id] = {
+        views: Number(row.views || 0),
+        clicks: Number(row.clicks || 0),
+      };
+    }
+    return stats;
+  }
+
+  recordEvent(postId, event) {
+    const posts = this.get().posts;
+    if (!posts.some((post) => post.id === postId)) {
+      return false;
+    }
+    const viewsInc = event === "view" ? 1 : 0;
+    const clicksInc = event === "click" ? 1 : 0;
+    this.db
+      .prepare(
+        `INSERT INTO insights_stats (post_id, views, clicks)
+         VALUES (?, ?, ?)
+         ON CONFLICT(post_id) DO UPDATE SET
+           views = views + excluded.views,
+           clicks = clicks + excluded.clicks`,
+      )
+      .run(postId, viewsInc, clicksInc);
+    return true;
   }
 
   update(content) {
-    fs.mkdirSync(path.dirname(this.filename), { recursive: true, mode: 0o700 });
-    const temporaryFile = `${this.filename}.${process.pid}.tmp`;
-    fs.writeFileSync(temporaryFile, JSON.stringify(content), {
-      encoding: "utf8",
-      mode: 0o600,
-    });
-    fs.renameSync(temporaryFile, this.filename);
-    fs.chmodSync(this.filename, 0o600);
-    this.content = content;
+    this.db.exec("BEGIN");
+    try {
+      this.db
+        .prepare(
+          `INSERT INTO insights_meta (key, value) VALUES ('followUrl', ?)
+           ON CONFLICT(key) DO UPDATE SET value = excluded.value`,
+        )
+        .run(content.followUrl || "");
+      this.db.exec("DELETE FROM insights_posts");
+      const insertPost = this.db.prepare(
+        `INSERT INTO insights_posts
+         (position, id, title, body, image_url, image_alt, link_url, category, published_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      );
+      content.posts.forEach((post, index) => {
+        insertPost.run(
+          index,
+          post.id,
+          post.title,
+          post.body,
+          post.imageUrl || "",
+          post.imageAlt || "",
+          post.linkUrl || "",
+          post.category || "",
+          post.publishedAt || "",
+        );
+      });
+      this.db.exec("COMMIT");
+    } catch (error) {
+      this.db.exec("ROLLBACK");
+      throw error;
+    }
+  }
+
+  close() {
+    try {
+      this.db?.close();
+    } catch {}
   }
 }
 
@@ -711,12 +989,24 @@ function validateInsightsContent(body) {
     if (!post || typeof post !== "object" || Array.isArray(post)) {
       throw new HttpError(400, `Post ${index + 1} is invalid.`);
     }
+    const rawId = getString(post, "id", { maxLength: 64 });
+    const safeId = /^[a-z0-9-]{1,64}$/i.test(rawId)
+      ? rawId.toLowerCase()
+      : crypto.randomUUID().slice(0, 12);
+    const category = getString(post, "category", { maxLength: 40 });
+    const publishedAt = getString(post, "publishedAt", { maxLength: 20 });
+    if (publishedAt && !/^\d{4}-\d{2}-\d{2}$/.test(publishedAt)) {
+      throw new HttpError(400, `Post ${index + 1} date must use YYYY-MM-DD format.`);
+    }
     const result = {
+      id: safeId,
       title: getString(post, "title", { maxLength: 160, required: true }),
       body: getString(post, "body", { maxLength: 3000, required: true }),
       imageUrl: getString(post, "imageUrl", { maxLength: 2048 }),
       imageAlt: getString(post, "imageAlt", { maxLength: 250 }),
       linkUrl: getString(post, "linkUrl", { maxLength: 2048 }),
+      category,
+      publishedAt,
     };
     validateInsightsUrl(result.imageUrl, `Post ${index + 1} image`, true);
     validateInsightsUrl(result.linkUrl, `Post ${index + 1} link`);
@@ -859,6 +1149,14 @@ function requireNewsletterAdmin(environment) {
         return;
       }
     }
+    response.set({
+      "Cache-Control": "no-store, no-cache, must-revalidate, private",
+      Pragma: "no-cache",
+      "X-Frame-Options": "DENY",
+      "X-Content-Type-Options": "nosniff",
+      "Referrer-Policy": "no-referrer",
+      "Content-Security-Policy": "frame-ancestors 'none'; base-uri 'self'; form-action 'self';",
+    });
     next();
   };
 }
@@ -878,9 +1176,15 @@ function createApp(options = {}) {
       environment.INSIGHTS_CONTENT_PATH ||
         path.join(__dirname, "data", "insights-content.json"),
     );
+
   const requireAdmin = requireNewsletterAdmin(environment);
   let transporter;
   const app = express();
+
+  app.locals.closeStores = () => {
+    database?.close?.();
+    insightsContent?.close?.();
+  };
 
   app.disable("x-powered-by");
   if (environment.TRUST_PROXY_HOPS) {
@@ -1138,6 +1442,32 @@ function createApp(options = {}) {
 
   app.get("/api/insights/content", (request, response) => {
     response.json(insightsContent.get());
+  });
+
+  app.post(
+    "/api/insights/posts/:id/track",
+    express.json({ limit: "2kb" }),
+    (request, response) => {
+      const postId = String(request.params.id || "").trim();
+      const event = request.body?.event;
+      if (!/^[a-z0-9-]{1,64}$/i.test(postId)) {
+        response.status(400).json({ success: false, error: "Invalid post identifier." });
+        return;
+      }
+      if (event !== "view" && event !== "click") {
+        response.status(400).json({ success: false, error: "Invalid tracking event." });
+        return;
+      }
+      if (!insightsContent.recordEvent(postId, event)) {
+        response.status(404).json({ success: false, error: "Post not found." });
+        return;
+      }
+      response.json({ success: true });
+    },
+  );
+
+  app.get("/api/newsletter/admin/insights/stats", requireAdmin, (request, response) => {
+    response.json({ success: true, stats: insightsContent.getStats() });
   });
 
   app.put(

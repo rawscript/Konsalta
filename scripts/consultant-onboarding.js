@@ -8,6 +8,21 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // Keep sticky progress bar flush beneath the site header at every viewport
+  const siteHeader = document.querySelector(".site-header");
+  if (siteHeader) {
+    const syncHeaderOffset = () => {
+      const h = Math.round(siteHeader.getBoundingClientRect().height);
+      document.documentElement.style.setProperty("--header-h", `${h}px`);
+    };
+    syncHeaderOffset();
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(syncHeaderOffset).observe(siteHeader);
+    } else {
+      window.addEventListener("resize", syncHeaderOffset, { passive: true });
+    }
+  }
+
   // Dynamic back button based on referrer
   const backLink = document.getElementById("backLink");
   const backText = document.getElementById("backText");
@@ -49,6 +64,33 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Section toggle functionality
+  const stepPills = document.querySelectorAll(".step-pill[data-step-target]");
+
+  const setActiveStepPill = (sectionName) => {
+    stepPills.forEach((pill) => {
+      pill.classList.toggle(
+        "is-active",
+        pill.getAttribute("data-step-target") === sectionName,
+      );
+    });
+  };
+
+  const openSection = (section, scrollIntoView = false) => {
+    if (!section) return;
+    const header = section.querySelector(".section-header");
+    const content = section.querySelector(".section-content");
+    if (!header || !content) return;
+
+    header.setAttribute("aria-expanded", "true");
+    content.classList.add("expanded");
+    section.classList.add("active");
+    setActiveStepPill(section.getAttribute("data-section"));
+
+    if (scrollIntoView) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   const sectionHeaders = document.querySelectorAll(".section-header");
   sectionHeaders.forEach((header) => {
     header.addEventListener("click", () => {
@@ -56,25 +98,53 @@ document.addEventListener("DOMContentLoaded", () => {
       const content = section.querySelector(".section-content");
       const isExpanded = header.getAttribute("aria-expanded") === "true";
 
-      header.setAttribute("aria-expanded", !isExpanded);
-      
+      header.setAttribute("aria-expanded", String(!isExpanded));
+
       if (!isExpanded) {
         content.classList.add("expanded");
+        section.classList.add("active");
+        setActiveStepPill(section.getAttribute("data-section"));
       } else {
         content.classList.remove("expanded");
+        section.classList.remove("active");
       }
+    });
+  });
+
+  stepPills.forEach((pill) => {
+    pill.addEventListener("click", () => {
+      const targetName = pill.getAttribute("data-step-target");
+      const targetSection = form.querySelector(
+        `.form-section[data-section="${targetName}"]`,
+      );
+      openSection(targetSection, true);
+    });
+  });
+
+  document.querySelectorAll(".section-next-btn[data-next-section]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const nextName = btn.getAttribute("data-next-section");
+      const currentSection = btn.closest(".form-section");
+      const nextSection = form.querySelector(
+        `.form-section[data-section="${nextName}"]`,
+      );
+      if (currentSection) {
+        currentSection
+          .querySelector(".section-header")
+          ?.setAttribute("aria-expanded", "false");
+        currentSection
+          .querySelector(".section-content")
+          ?.classList.remove("expanded");
+        currentSection.classList.remove("active");
+      }
+      openSection(nextSection, true);
     });
   });
 
   // Expand first section by default
   const firstSection = document.querySelector(".form-section");
   if (firstSection) {
-    const firstContent = firstSection.querySelector(".section-content");
-    const firstHeader = firstSection.querySelector(".section-header");
-    if (firstContent && firstHeader) {
-      firstContent.classList.add("expanded");
-      firstHeader.setAttribute("aria-expanded", "true");
-    }
+    openSection(firstSection, false);
   }
 
   // Character count for bio
@@ -175,6 +245,13 @@ document.addEventListener("DOMContentLoaded", () => {
         statusIndicator.classList.add("complete");
       } else if (hasAnyFilled) {
         statusIndicator.classList.add("incomplete");
+      }
+
+      const matchingPill = document.querySelector(
+        `.step-pill[data-step-target="${sectionName}"]`,
+      );
+      if (matchingPill) {
+        matchingPill.classList.toggle("is-complete", isComplete);
       }
     });
   };

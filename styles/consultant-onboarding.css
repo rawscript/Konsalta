@@ -14,7 +14,7 @@ html {
 body {
     margin: 0;
     padding: 0;
-    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: var(--font);
     background: var(--bg);
     color: var(--ink);
     line-height: 1.6;
@@ -26,20 +26,108 @@ body {
    ============================================================ */
 
 .progress-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    background: linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
-    padding: 16px 32px;
-    box-shadow: 
-        0 2px 8px rgba(11, 45, 83, 0.06),
-        0 8px 24px rgba(11, 45, 83, 0.04);
+    position: sticky;
+    top: var(--header-h, 68px);
+    z-index: 90;
+    background: var(--glass);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    padding: 10px 24px;
+    box-shadow: var(--shadow-sm);
+    border-bottom: 1px solid var(--line);
+}
+
+.progress-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.progress-track-group {
     display: flex;
     align-items: center;
-    gap: 20px;
-    border-bottom: 1px solid rgba(11, 45, 83, 0.08);
+    gap: 16px;
+}
+
+.step-pills {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+}
+
+.step-pills::-webkit-scrollbar {
+    display: none;
+}
+
+.step-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 6px 12px;
+    border-radius: var(--r-pill);
+    border: 1px solid var(--line);
+    background: var(--bg-card);
+    color: var(--ink-soft);
+    font: 700 12px var(--font);
+    white-space: nowrap;
+    cursor: pointer;
+    transition:
+        border-color var(--duration) var(--ease),
+        background var(--duration) var(--ease),
+        color var(--duration) var(--ease);
+}
+
+.step-pill:hover {
+    border-color: var(--navy-light);
+    color: var(--ink);
+}
+
+.step-pill-num {
+    display: inline-grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--bg-warm);
+    color: var(--navy);
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.step-pill.is-active {
+    border-color: var(--orange);
+    background: var(--orange-soft);
+    color: var(--orange-deep);
+}
+
+.step-pill.is-active .step-pill-num {
+    background: var(--orange);
+    color: var(--white);
+}
+
+.step-pill.is-complete:not(.is-active) {
+    border-color: rgba(16, 185, 129, 0.45);
+    color: var(--ink);
+}
+
+.step-pill.is-complete:not(.is-active) .step-pill-num {
+    background: var(--success);
+    color: var(--white);
+}
+
+[data-theme="dark"] .step-pill.is-active {
+    background: rgba(242, 101, 34, 0.2);
+    color: var(--orange-light);
+}
+
+[data-theme="dark"] .step-pill-num {
+    background: var(--bg-2);
+    color: var(--ink);
 }
 
 .progress-bar {
@@ -218,18 +306,75 @@ body {
 
 .intro h1 {
     margin: 0 0 16px;
-    font-size: clamp(32px, 5vw, 48px);
-    font-weight: 700;
+    font-family: var(--font-head, "Plus Jakarta Sans", var(--font));
+    font-size: clamp(2.5rem, 5.5vw, 4.75rem);
+    font-weight: 800;
     color: var(--navy);
-    line-height: 1.2;
+    line-height: 0.96;
+    letter-spacing: -0.045em;
 }
 
-.intro p {
-    margin: 0;
-    font-size: 16px;
+.intro h1 .t-navy {
+    color: var(--navy);
+}
+
+.intro h1 .t-orange {
+    color: var(--orange);
+}
+
+[data-theme="dark"] .intro h1 .t-navy {
+    color: var(--ink-dark);
+}
+
+.intro > p:not(.badge) {
+    margin: 0 auto;
+    font-size: 1.06rem;
     color: var(--ink-soft);
     max-width: 600px;
-    margin: 0 auto;
+}
+
+.onboarding-highlights {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    max-width: 780px;
+    margin: 28px auto 0;
+}
+
+.highlight-pill {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 14px 16px;
+    border-radius: var(--r-md);
+    border: 1px solid var(--line);
+    background: var(--glass);
+    backdrop-filter: var(--glass-blur);
+    text-align: left;
+}
+
+.highlight-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--orange-deep);
+}
+
+[data-theme="dark"] .highlight-label {
+    color: var(--orange-light);
+}
+
+.highlight-pill strong {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink-dark);
+}
+
+@media (max-width: 680px) {
+    .onboarding-highlights {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ============================================================
@@ -253,11 +398,12 @@ body {
    ============================================================ */
 
 .form-section {
-    background: var(--white);
-    border-radius: 16px;
+    background: var(--bg-card);
+    border-radius: var(--r-lg);
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(11, 45, 83, 0.06);
-    border: 1px solid transparent;
+    box-shadow: var(--shadow-xs);
+    border: 1px solid var(--line);
+    scroll-margin-top: 186px;
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
@@ -423,6 +569,46 @@ body {
     padding: 0 24px 24px;
 }
 
+.section-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 4px 24px 24px;
+}
+
+.section-next-btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-min);
+    padding: 10px 20px;
+    border-radius: var(--r-pill);
+    border: 1.5px solid var(--navy);
+    background: transparent;
+    color: var(--navy);
+    font: 700 14px var(--font);
+    cursor: pointer;
+    transition:
+        background var(--duration) var(--ease),
+        color var(--duration) var(--ease),
+        transform var(--duration) var(--ease);
+}
+
+.section-next-btn:hover {
+    background: var(--navy);
+    color: var(--white);
+    transform: translateY(-1px);
+}
+
+[data-theme="dark"] .section-next-btn {
+    border-color: var(--orange-light);
+    color: var(--orange-light);
+}
+
+[data-theme="dark"] .section-next-btn:hover {
+    background: var(--orange);
+    border-color: var(--orange);
+    color: var(--navy-deep);
+}
+
 /* ============================================================
    FORM GRID & FIELDS
    ============================================================ */
@@ -492,8 +678,8 @@ body {
 .form-field textarea:focus {
     outline: none;
     border-color: var(--orange);
-    background: var(--white);
-    box-shadow: 0 0 0 3px var(--orange-soft);
+    background: var(--bg-card);
+    box-shadow: 0 0 0 3px rgba(242, 101, 34, 0.14);
 }
 
 .form-field input:invalid:not(:placeholder-shown),

@@ -19,13 +19,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Inter:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..900;1,9..40,400..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
@@ -88,14 +82,11 @@
     </header>
 
     <section class="intro">
-      <a class="back-link" href="./index.html">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M19 12H5m0 0 7 7m-7-7 7-7" />
-        </svg>
-        <span>Back to home</span>
-      </a>
-      <p class="eyebrow">Start a conversation</p>
-      <h1>Contact Us</h1>
+      <p class="badge">Start a conversation</p>
+      <h1>
+        <span class="t-navy">Contact</span>
+        <span class="t-orange">Us.</span>
+      </h1>
       <p>
         Tell us about your needs and we’ll help you move from insight to action.
       </p>
@@ -104,20 +95,49 @@
     <section class="contact-wrap" aria-label="Contact form section">
       <div class="contact-card">
         <div class="contact-copy">
-          <p class="eyebrow accent">Let’s talk</p>
-          <h2 style="color: white">
-            Need sharper insight for your next decision?
-          </h2>
-          <p>
-            Whether you are planning a new market move, evaluating impact, or
-            seeking strategic guidance, our team can help you design a
-            fit-for-purpose approach.
-          </p>
-          <ul class="contact-points">
-            <li>Research &amp; evaluation</li>
-            <li>Strategy &amp; advisory</li>
-            <li>Market intelligence</li>
-          </ul>
+          <div class="contact-copy-top">
+            <p class="eyebrow accent">Let’s talk</p>
+            <h2>Need sharper insight for your next decision?</h2>
+            <p>
+              Whether you are planning a new market move, evaluating impact, or
+              seeking strategic guidance, our team can help you design a
+              fit-for-purpose approach.
+            </p>
+            <ul class="contact-points">
+              <li>Research &amp; evaluation</li>
+              <li>Strategy &amp; advisory</li>
+              <li>Market intelligence</li>
+            </ul>
+          </div>
+
+          <div class="contact-direct">
+            <div class="contact-direct-item">
+              <span class="contact-direct-label">Direct email</span>
+              <a href="mailto:engage@konsaltahub.org" class="contact-direct-value">
+                engage@konsaltahub.org
+              </a>
+            </div>
+            <div class="contact-direct-item">
+              <span class="contact-direct-label">Response time</span>
+              <span class="contact-direct-value">Within 2 business days</span>
+            </div>
+            <div class="contact-direct-links">
+              <a
+                href="https://www.linkedin.com/company/konsalta-hub-africa/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-pill-link"
+                >LinkedIn</a
+              >
+              <a
+                href="https://wa.me/?text=Hello%20Konsalta%2C%20I%20would%20like%20to%20start%20a%20conversation."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="contact-pill-link"
+                >WhatsApp</a
+              >
+            </div>
+          </div>
         </div>
 
         <form id="contactForm" class="contact-form" novalidate>
@@ -144,51 +164,68 @@
             </label>
           </div>
 
-          <div class="field-row">
-            <label>
-              Organisation
-              <input
-                type="text"
-                name="company"
-                id="company"
-                placeholder="Organisation name"
-              />
-            </label>
-            <label>
-              Project type
-              <select name="projectType" id="projectType" required>
-                <option value="" selected disabled>Select an option</option>
-                <option value="research">Research &amp; evaluation</option>
-                <option value="strategy">Strategy &amp; advisory</option>
-                <option value="market-intelligence">Market intelligence</option>
-                <option value="policy">Policy &amp; systems</option>
-                <option value="other">Other</option>
-              </select>
-            </label>
-          </div>
+          <label>
+            Organisation
+            <input
+              type="text"
+              name="company"
+              id="company"
+              placeholder="Organisation name (optional)"
+            />
+          </label>
+
+          <fieldset class="project-type-group">
+            <legend>Project type</legend>
+            <div class="project-chips">
+              <label class="chip-option">
+                <input type="radio" name="projectType" value="research" required />
+                <span>Research &amp; evaluation</span>
+              </label>
+              <label class="chip-option">
+                <input type="radio" name="projectType" value="strategy" />
+                <span>Strategy &amp; advisory</span>
+              </label>
+              <label class="chip-option">
+                <input type="radio" name="projectType" value="market-intelligence" />
+                <span>Market intelligence</span>
+              </label>
+              <label class="chip-option">
+                <input type="radio" name="projectType" value="policy" />
+                <span>Policy &amp; systems</span>
+              </label>
+              <label class="chip-option">
+                <input type="radio" name="projectType" value="other" />
+                <span>Other</span>
+              </label>
+            </div>
+          </fieldset>
 
           <label>
             Your message
             <textarea
               name="message"
               id="message"
-              rows="6"
+              rows="5"
               placeholder="Tell us a little about your goals, timelines, and the challenge you're trying to solve."
               required
             ></textarea>
           </label>
 
           <div class="form-footer">
-            <button type="submit">Send enquiry</button>
-            <a href="./consultant-onboarding.html" class="onboarding-link"
-              >Interested in joining as a consultant?</a
-            >
+            <button type="submit" class="btn contact-submit-btn">Send enquiry</button>
             <span class="helper-text"
               >We typically respond within 2 business days.</span
             >
           </div>
 
           <p class="form-status" role="status" aria-live="polite"></p>
+
+          <div class="consultant-callout">
+            <span>Interested in joining as a consultant?</span>
+            <a href="./consultant-onboarding.html" class="onboarding-link"
+              >Apply to our network</a
+            >
+          </div>
         </form>
       </div>
     </section>

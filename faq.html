@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles/tokens.css" />
@@ -72,101 +72,216 @@
     </header>
 
     <main class="faq-page">
-      <section class="faq-hero" aria-labelledby="faq-title">
-        <p class="faq-eyebrow">Help &amp; information</p>
-        <h1 id="faq-title">Frequently Asked Questions</h1>
-        <p>
-          Learn more about Konsalta, the work we do, and how to start a
-          conversation with our team.
-        </p>
+      <section class="faq-hero-band" aria-labelledby="faq-title">
+        <div class="faq-hero">
+          <p class="badge">Help &amp; information</p>
+          <h1 id="faq-title">
+            <span class="t-navy">Frequently Asked</span>
+            <span class="t-orange t-underline">Questions.</span>
+          </h1>
+          <p>
+            Learn more about Konsalta, our network-driven model, and how to
+            start a conversation with our team.
+          </p>
+
+          <div class="faq-controls">
+            <label class="faq-search" for="faqSearch">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m20 20-3.5-3.5" />
+              </svg>
+              <input
+                id="faqSearch"
+                type="search"
+                placeholder="Search questions (e.g. Harare, services, network)…"
+                autocomplete="off"
+              />
+            </label>
+            <div class="faq-filters" role="group" aria-label="Filter questions by topic">
+              <button type="button" class="faq-filter is-active" data-filter="all">
+                All
+              </button>
+              <button type="button" class="faq-filter" data-filter="about">
+                About Konsalta
+              </button>
+              <button type="button" class="faq-filter" data-filter="services">
+                Services &amp; Model
+              </button>
+              <button type="button" class="faq-filter" data-filter="engage">
+                Working With Us
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section class="faq-list" aria-label="Questions and answers">
-        <details class="faq-item">
-          <summary>What is Konsalta?</summary>
-          <div class="faq-answer">
+      <div class="faq-layout">
+        <aside class="faq-aside" aria-label="Direct support">
+          <div class="faq-aside-card">
+            <p class="faq-aside-eyebrow">Still have questions?</p>
+            <h2>Let’s discuss your mandate.</h2>
             <p>
-              Konsalta is a women-led, Africa-focused research, consulting, and
-              advisory firm. We work with organisations to translate evidence
-              into action, strengthen institutional capability, and support
-              lasting impact.
+              Can’t find what you need here? Reach out directly and our team
+              will respond within two business days.
             </p>
+            <div class="faq-aside-stats" aria-label="Konsalta quick facts">
+              <div>
+                <span class="stat-k">Base</span>
+                <strong class="stat-v">Harare, ZW</strong>
+              </div>
+              <div>
+                <span class="stat-k">Reach</span>
+                <strong class="stat-v">Pan-African</strong>
+              </div>
+            </div>
+            <div class="faq-aside-actions">
+              <a href="contactUs.html" class="btn">Start a Conversation</a>
+              <a href="consultant-onboarding.html" class="faq-aside-link">
+                Apply to join our consultant network →
+              </a>
+            </div>
+            <div class="faq-aside-meta">
+              <span>Direct email</span>
+              <a href="mailto:engage@konsaltahub.org">engage@konsaltahub.org</a>
+            </div>
           </div>
-        </details>
+        </aside>
 
-        <details class="faq-item">
-          <summary>Who does Konsalta work with?</summary>
-          <div class="faq-answer">
-            <p>
-              We work with governments and public institutions, development
-              partners and international organisations, private sector
-              organisations, academic and research institutions, and civil
-              society.
-            </p>
+        <section class="faq-content" aria-label="Questions and answers">
+          <div class="faq-toolbar">
+            <span class="faq-count" id="faqCount">7 questions</span>
+            <button type="button" class="faq-toggle-all" id="faqToggleAll">
+              Expand all
+            </button>
           </div>
-        </details>
 
-        <details class="faq-item">
-          <summary>What services does Konsalta provide?</summary>
-          <div class="faq-answer">
-            <p>
-              Our work spans research and evaluation, strategy and advisory,
-              market intelligence and insights, and policy and systems. Visit
-              <a href="services.html">Our Services</a> for more detail.
-            </p>
-          </div>
-        </details>
+          <div class="faq-list" id="faqList">
+            <details class="faq-item" data-category="about" open>
+              <summary>
+                <span class="faq-num">01</span>
+                <span class="faq-q">What is Konsalta?</span>
+                <span class="faq-tag">About</span>
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  Konsalta is a women-led, Africa-focused research, consulting,
+                  and advisory firm. We work with organisations to translate
+                  evidence into action, strengthen institutional capability, and
+                  support lasting impact.
+                </p>
+              </div>
+            </details>
 
-        <details class="faq-item">
-          <summary>Where is Konsalta based, and where does it work?</summary>
-          <div class="faq-answer">
-            <p>
-              Konsalta is based in Harare, Zimbabwe, and is focused on work
-              across Africa and beyond, combining local and regional insight
-              with a global perspective.
-            </p>
-          </div>
-        </details>
+            <details class="faq-item" data-category="about">
+              <summary>
+                <span class="faq-num">02</span>
+                <span class="faq-q">Who does Konsalta work with?</span>
+                <span class="faq-tag">About</span>
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  We work with governments and public institutions, development
+                  partners and international organisations, private sector
+                  organisations, academic and research institutions, and civil
+                  society.
+                </p>
+              </div>
+            </details>
 
-        <details class="faq-item">
-          <summary>
-            How does Konsalta tailor its work to each organisation?
-          </summary>
-          <div class="faq-answer">
-            <p>
-              We shape our approach around each organisation’s mandate and
-              needs. Our agile, network-driven model brings together the
-              relevant core team members and specialist expertise for the work.
-            </p>
-          </div>
-        </details>
+            <details class="faq-item" data-category="services">
+              <summary>
+                <span class="faq-num">03</span>
+                <span class="faq-q">What services does Konsalta provide?</span>
+                <span class="faq-tag">Services</span>
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  Our work spans research and evaluation, strategy and advisory,
+                  market intelligence and insights, and policy and systems.
+                  Visit <a href="services.html">Our Services</a> for more
+                  detail.
+                </p>
+              </div>
+            </details>
 
-        <details class="faq-item">
-          <summary>How can I discuss a project with Konsalta?</summary>
-          <div class="faq-answer">
-            <p>
-              Use the <a href="contactUs.html">Contact Us</a> page to share your
-              enquiry and the support you are looking for. Our team can then
-              discuss the appropriate next steps.
-            </p>
-          </div>
-        </details>
+            <details class="faq-item" data-category="about">
+              <summary>
+                <span class="faq-num">04</span>
+                <span class="faq-q">
+                  Where is Konsalta based, and where does it work?
+                </span>
+                <span class="faq-tag">About</span>
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  Konsalta is based in Harare, Zimbabwe, and is focused on work
+                  across Africa and beyond, combining local and regional insight
+                  with a global perspective.
+                </p>
+              </div>
+            </details>
 
-        <details class="faq-item">
-          <summary>
-            How can a consultant express interest in joining the network?
-          </summary>
-          <div class="faq-answer">
-            <p>
-              Visit the
-              <a href="consultant-onboarding.html">Join Our Network</a>
-              page for information about the consultant network. The page
-              currently notes that online submission is unavailable; you can
-              contact Konsalta to ask about next steps.
-            </p>
+            <details class="faq-item" data-category="services">
+              <summary>
+                <span class="faq-num">05</span>
+                <span class="faq-q">
+                  How does Konsalta tailor its work to each organisation?
+                </span>
+                <span class="faq-tag">Model</span>
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  We shape our approach around each organisation’s mandate and
+                  needs. Our agile, network-driven model brings together the
+                  relevant core team members and specialist expertise for the
+                  work.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-category="engage">
+              <summary>
+                <span class="faq-num">06</span>
+                <span class="faq-q">
+                  How can I discuss a project with Konsalta?
+                </span>
+                <span class="faq-tag">Engage</span>
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  Use the <a href="contactUs.html">Contact Us</a> page to share
+                  your enquiry and the support you are looking for. Our team
+                  typically responds within two business days to discuss
+                  appropriate next steps.
+                </p>
+              </div>
+            </details>
+
+            <details class="faq-item" data-category="engage">
+              <summary>
+                <span class="faq-num">07</span>
+                <span class="faq-q">
+                  How can a consultant express interest in joining the network?
+                </span>
+                <span class="faq-tag">Network</span>
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  Complete our online
+                  <a href="consultant-onboarding.html">Consultant Onboarding</a>
+                  application to share your background, areas of expertise,
+                  geographic experience, and CV with the Konsalta team.
+                </p>
+              </div>
+            </details>
           </div>
-        </details>
-      </section>
+
+          <p class="faq-empty" id="faqEmpty" hidden>
+            No matching questions found. Try clearing your search or
+            <a href="contactUs.html">contact us directly</a>.
+          </p>
+        </section>
+      </div>
     </main>
 
     <footer class="site-footer" id="contact">
@@ -238,5 +353,75 @@
         </button>
       </div>
     </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const searchInput = document.getElementById("faqSearch");
+        const filterButtons = document.querySelectorAll(".faq-filter");
+        const items = [...document.querySelectorAll(".faq-item")];
+        const countEl = document.getElementById("faqCount");
+        const emptyEl = document.getElementById("faqEmpty");
+        const toggleAllBtn = document.getElementById("faqToggleAll");
+
+        let activeFilter = "all";
+
+        const updateVisible = () => {
+          const query = (searchInput?.value || "").trim().toLowerCase();
+          let visibleCount = 0;
+
+          items.forEach((item) => {
+            const matchesCategory =
+              activeFilter === "all" || item.dataset.category === activeFilter;
+            const matchesQuery =
+              !query || item.textContent.toLowerCase().includes(query);
+            const show = matchesCategory && matchesQuery;
+            item.hidden = !show;
+            if (show) visibleCount += 1;
+          });
+
+          if (countEl) {
+            countEl.textContent = `${visibleCount} question${visibleCount === 1 ? "" : "s"}`;
+          }
+          if (emptyEl) {
+            emptyEl.hidden = visibleCount > 0;
+          }
+          syncToggleAllLabel();
+        };
+
+        const syncToggleAllLabel = () => {
+          if (!toggleAllBtn) return;
+          const visible = items.filter((item) => !item.hidden);
+          const allOpen = visible.length > 0 && visible.every((item) => item.open);
+          toggleAllBtn.textContent = allOpen ? "Collapse all" : "Expand all";
+        };
+
+        searchInput?.addEventListener("input", updateVisible);
+
+        filterButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            activeFilter = btn.dataset.filter || "all";
+            filterButtons.forEach((b) =>
+              b.classList.toggle("is-active", b === btn),
+            );
+            updateVisible();
+          });
+        });
+
+        toggleAllBtn?.addEventListener("click", () => {
+          const visible = items.filter((item) => !item.hidden);
+          const shouldOpen = !visible.every((item) => item.open);
+          visible.forEach((item) => {
+            item.open = shouldOpen;
+          });
+          syncToggleAllLabel();
+        });
+
+        items.forEach((item) => {
+          item.addEventListener("toggle", syncToggleAllLabel);
+        });
+
+        syncToggleAllLabel();
+      });
+    </script>
   </body>
 </html>

@@ -4,157 +4,747 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>Konsalta Admin</title>
+    <title>Konsalta Admin Studio</title>
+    <link rel="icon" href="/public/favicon.ico" type="image/x-icon" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
-        color-scheme: light;
-        font-family: Arial, sans-serif;
-        color: #19324d;
-        background: #f5f4f0;
+        --navy-deep: #061a32;
+        --navy: #0b2d53;
+        --navy-mid: #103866;
+        --navy-soft: #edf4fc;
+        --orange: #f26522;
+        --orange-deep: #d34e0d;
+        --orange-light: #ff7e42;
+        --orange-soft: #fff2eb;
+        --bg: #f8f6f0;
+        --bg-warm: #f0ece1;
+        --bg-card: #ffffff;
+        --ink: #0d0d10;
+        --ink-dark: #071526;
+        --ink-soft: #4e5e73;
+        --line: #e2ddd3;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --error: #ef4444;
+        --shadow-xs: 0 2px 8px rgba(11, 45, 83, 0.04);
+        --shadow-sm: 0 6px 20px rgba(11, 45, 83, 0.06);
+        --shadow-md: 0 16px 40px rgba(11, 45, 83, 0.1);
+        --r-sm: 10px;
+        --r-md: 14px;
+        --r-lg: 20px;
+        --r-pill: 999px;
+        --font: "Manrope", system-ui, -apple-system, sans-serif;
+        --font-head: "Plus Jakarta Sans", "Manrope", system-ui, sans-serif;
+        --font-mono: "JetBrains Mono", monospace;
       }
+
+      [data-theme="dark"] {
+        --bg: #071220;
+        --bg-warm: #0b1a2e;
+        --bg-card: #0f223b;
+        --ink: #e8eef6;
+        --ink-dark: #ffffff;
+        --ink-soft: #9bb0c9;
+        --line: rgba(255, 255, 255, 0.12);
+        --navy-soft: rgba(255, 255, 255, 0.06);
+        --orange-soft: rgba(242, 101, 34, 0.18);
+        --shadow-xs: 0 2px 10px rgba(0, 0, 0, 0.25);
+        --shadow-sm: 0 8px 24px rgba(0, 0, 0, 0.35);
+      }
+
       * {
         box-sizing: border-box;
       }
+
       body {
         margin: 0;
-        padding: 32px 16px;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--font);
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
       }
-      main {
-        max-width: 900px;
-        margin: auto;
-      }
+
       h1,
-      h2 {
-        color: #0b2d53;
+      h2,
+      h3 {
+        margin: 0;
+        font-family: var(--font-head);
+        color: var(--ink-dark);
+        letter-spacing: -0.03em;
       }
-      .panel {
-        margin: 20px 0;
-        padding: 24px;
-        border: 1px solid #e2ddd3;
-        border-radius: 14px;
-        background: #fff;
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: clamp(10px, 1.5vw, 24px);
+        width: 100%;
+        padding: 12px clamp(16px, 4vw, 56px);
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--line);
       }
-      label {
+
+      [data-theme="dark"] .topbar {
+        background: rgba(15, 34, 59, 0.88);
+      }
+
+      .logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        flex-shrink: 0;
+        text-decoration: none;
+      }
+
+      .logo picture {
         display: block;
-        margin: 16px 0 6px;
-        font-weight: 700;
+        flex-shrink: 0;
       }
+
+      .logo img {
+        display: block;
+        width: auto;
+        height: auto;
+        max-height: clamp(30px, 2.6vw, 38px);
+        max-width: clamp(128px, 13vw, 176px);
+        object-fit: contain;
+      }
+
+      .admin-badge {
+        padding: 4px 10px;
+        border-radius: var(--r-pill);
+        background: var(--orange-soft);
+        color: var(--orange-deep);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      [data-theme="dark"] .admin-badge {
+        color: var(--orange-light);
+      }
+
+      .tabs {
+        display: flex;
+        flex: 1 1 auto;
+        min-width: 0;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: clamp(10px, 1.5vw, 22px);
+      }
+
+      .tab-btn {
+        min-height: 38px;
+        padding: 7px 14px;
+        border-radius: var(--r-pill);
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--ink-soft);
+        font: 700 clamp(0.8125rem, 0.95vw, 0.875rem)/1.2 var(--font);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .tab-btn:hover {
+        color: var(--ink-dark);
+        background: var(--bg-warm);
+      }
+
+      .tab-btn.is-active {
+        background: var(--navy);
+        color: #fff;
+      }
+
+      [data-theme="dark"] .tab-btn.is-active {
+        background: var(--orange);
+        color: var(--navy-deep);
+      }
+
+      .topbar-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .ghost-link,
+      .icon-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        min-height: 38px;
+        padding: 7px 14px;
+        border-radius: var(--r-pill);
+        border: 1px solid var(--line);
+        background: var(--bg-card);
+        color: var(--ink-dark);
+        font: 700 13px var(--font);
+        text-decoration: none;
+        cursor: pointer;
+        transition: border-color 0.2s ease, background 0.2s ease;
+      }
+
+      .ghost-link:hover,
+      .icon-btn:hover {
+        border-color: var(--orange);
+        background: var(--orange-soft);
+      }
+
+      .wrap {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 28px 24px 80px;
+      }
+
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .kpi-card {
+        padding: 20px 22px;
+        border-radius: var(--r-lg);
+        border: 1px solid var(--line);
+        background: var(--bg-card);
+        box-shadow: var(--shadow-xs);
+      }
+
+      .kpi-card.is-accent {
+        background:
+          radial-gradient(circle at 100% 100%, rgba(242, 101, 34, 0.22), transparent 50%),
+          linear-gradient(155deg, var(--navy-deep), var(--navy));
+        border-color: transparent;
+        color: #fff;
+      }
+
+      .kpi-label {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+      }
+
+      .kpi-card.is-accent .kpi-label {
+        color: rgba(255, 255, 255, 0.68);
+      }
+
+      .kpi-value {
+        margin-top: 6px;
+        font-family: var(--font-head);
+        font-size: clamp(1.6rem, 2.8vw, 2.2rem);
+        font-weight: 800;
+        color: var(--ink-dark);
+      }
+
+      .kpi-card.is-accent .kpi-value {
+        color: #fff;
+      }
+
+      .kpi-sub {
+        margin-top: 4px;
+        font-size: 13px;
+        color: var(--ink-soft);
+      }
+
+      .kpi-card.is-accent .kpi-sub {
+        color: rgba(255, 255, 255, 0.78);
+      }
+
+      .tab-panel[hidden] {
+        display: none;
+      }
+
+      .panel {
+        padding: 28px;
+        border: 1px solid var(--line);
+        border-radius: var(--r-lg);
+        background: var(--bg-card);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .panel-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .panel-head h2 {
+        font-size: 1.45rem;
+      }
+
+      .muted {
+        color: var(--ink-soft);
+        font-size: 0.92rem;
+        margin: 6px 0 0;
+      }
+
+      label {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 16px 0 6px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: var(--ink-dark);
+      }
+
+      .char-hint {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--ink-soft);
+      }
+
       input,
       textarea {
         width: 100%;
-        padding: 11px 12px;
-        border: 1px solid #b8c2ce;
-        border-radius: 7px;
-        font: inherit;
+        padding: 11px 14px;
+        border: 1.5px solid var(--line);
+        border-radius: var(--r-sm);
+        background: var(--bg);
+        color: var(--ink-dark);
+        font: 500 0.94rem var(--font);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
       }
+
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--orange);
+        background: var(--bg-card);
+        box-shadow: 0 0 0 3px rgba(242, 101, 34, 0.14);
+      }
+
       textarea {
-        min-height: 150px;
+        min-height: 140px;
         resize: vertical;
       }
-      .section-editor {
-        margin: 18px 0;
-        padding: 18px;
-        border: 1px solid #d5dce3;
-        border-radius: 10px;
-        background: #fafbfd;
-      }
-      .section-editor h3 { margin: 0; color: #0b2d53; }
-      .section-editor textarea { min-height: 100px; }
-      .remove-section { background: #f5e5e0; color: #7b2c18; }
-      .admin-nav { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0; }
-      .admin-nav a {
-        padding: 9px 14px;
-        border: 1px solid #d5dce3;
-        border-radius: 20px;
-        color: #0b2d53;
-        text-decoration: none;
-        font-weight: 700;
-      }
-      .post-editor {
-        margin: 18px 0;
-        padding: 18px;
-        border: 1px solid #d5dce3;
-        border-radius: 10px;
-        background: #fafbfd;
-      }
-      .post-editor h3 { margin: 0; color: #0b2d53; }
-      .post-editor textarea { min-height: 100px; }
-      .post-actions { display: flex; flex-wrap: wrap; gap: 8px; }
-      .remove-post { background: #f5e5e0; color: #7b2c18; }
-      button {
-        margin: 12px 8px 0 0;
-        padding: 10px 16px;
+
+      .btn-primary,
+      .btn-secondary,
+      .btn-danger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-height: 42px;
+        padding: 10px 20px;
         border: 0;
-        border-radius: 24px;
-        background: #f26522;
-        color: #0b2d53;
-        font: inherit;
-        font-weight: 700;
+        border-radius: var(--r-pill);
+        font: 800 0.9rem var(--font);
         cursor: pointer;
+        transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.2s ease;
       }
+
+      .btn-primary {
+        background: var(--orange);
+        color: var(--navy-deep);
+        box-shadow: 0 3px 0 var(--orange-deep);
+      }
+
+      .btn-primary:hover:not(:disabled) {
+        background: var(--orange-light);
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        background: var(--bg-warm);
+        color: var(--ink-dark);
+        border: 1px solid var(--line);
+      }
+
+      .btn-secondary:hover:not(:disabled) {
+        border-color: var(--navy);
+      }
+
+      .btn-danger {
+        background: rgba(239, 68, 68, 0.12);
+        color: #b91c1c;
+        border: 1px solid rgba(239, 68, 68, 0.25);
+      }
+
+      [data-theme="dark"] .btn-danger {
+        color: #fca5a5;
+      }
+
       button:disabled {
         opacity: 0.55;
         cursor: wait;
       }
-      .secondary {
-        background: #e9eef4;
+
+      .action-bar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-top: 20px;
       }
-      .muted,
-      #status {
-        color: #59697a;
+
+      .section-editor,
+      .post-editor {
+        margin: 18px 0;
+        padding: 20px;
+        border: 1px solid var(--line);
+        border-radius: var(--r-md);
+        background: var(--bg);
       }
+
+      .post-editor-grid {
+        display: grid;
+        grid-template-columns: 1fr 180px;
+        gap: 18px;
+        align-items: start;
+      }
+
+      .thumb-box {
+        border: 1px dashed var(--line);
+        border-radius: var(--r-sm);
+        background: var(--bg-card);
+        aspect-ratio: 4 / 3;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        color: var(--ink-soft);
+        font-size: 12px;
+        text-align: center;
+        padding: 8px;
+      }
+
+      .thumb-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+
+      .editor-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 8px;
+      }
+
+      .editor-header h3 {
+        font-size: 1rem;
+      }
+
+      .post-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+
+      .studio-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 24px;
+        align-items: start;
+      }
+
+      .preview-pane {
+        position: sticky;
+        top: 84px;
+        border: 1px solid var(--line);
+        border-radius: var(--r-md);
+        background: var(--bg);
+        overflow: hidden;
+      }
+
+      .preview-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--line);
+        background: var(--bg-warm);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ink-soft);
+      }
+
+      #preview-frame {
+        display: block;
+        width: 100%;
+        min-height: 620px;
+        border: 0;
+        background: #fff;
+      }
+
+      .preview-empty {
+        padding: 48px 24px;
+        text-align: center;
+        color: var(--ink-soft);
+        font-size: 0.92rem;
+      }
+
       .campaign {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
-        gap: 12px;
-        padding: 16px 0;
-        border-top: 1px solid #e2ddd3;
+        gap: 14px;
+        padding: 18px 0;
+        border-top: 1px solid var(--line);
       }
-      .campaign p {
-        margin: 5px 0;
+
+      .campaign:first-child {
+        border-top: 0;
       }
-      #preview-frame {
-        display: block;
-        width: 100%;
-        min-height: 760px;
-        margin-top: 18px;
-        border: 1px solid #e2ddd3;
-        border-radius: 8px;
-        background: #f7f6f2;
+
+      .campaign-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        margin-top: 6px;
       }
-      #preview-frame[hidden] { display: none; }
-      @media (max-width: 560px) {
-        body {
-          padding: 20px 12px;
+
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        padding: 3px 10px;
+        border-radius: var(--r-pill);
+        font-size: 11px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .status-pill.draft {
+        background: var(--navy-soft);
+        color: var(--navy);
+      }
+
+      [data-theme="dark"] .status-pill.draft {
+        color: #93c5fd;
+      }
+
+      .status-pill.sent {
+        background: rgba(16, 185, 129, 0.14);
+        color: #047857;
+      }
+
+      [data-theme="dark"] .status-pill.sent {
+        color: #6ee7b7;
+      }
+
+      .status-pill.partial,
+      .status-pill.sending {
+        background: rgba(245, 158, 11, 0.16);
+        color: #b45309;
+      }
+
+      .toast {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 80;
+        max-width: 380px;
+        padding: 13px 18px;
+        border-radius: var(--r-md);
+        background: var(--navy-deep);
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 600;
+        box-shadow: var(--shadow-md);
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        opacity: 0;
+        transform: translateY(12px);
+        pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+
+      .toast.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .toast.is-error {
+        background: #7f1d1d;
+      }
+
+      .modal-backdrop,
+      .lock-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: grid;
+        place-items: center;
+        padding: 20px;
+        background: rgba(6, 26, 50, 0.72);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .modal-backdrop[hidden],
+      .lock-screen[hidden] {
+        display: none;
+      }
+
+      .modal-card {
+        width: min(100%, 460px);
+        padding: 28px;
+        border-radius: var(--r-lg);
+        background: var(--bg-card);
+        border: 1px solid var(--line);
+        box-shadow: var(--shadow-md);
+      }
+
+      .modal-card h2 {
+        font-size: 1.3rem;
+        margin-bottom: 8px;
+      }
+
+      @media (max-width: 960px) {
+        .studio-grid {
+          grid-template-columns: 1fr;
+        }
+        .preview-pane {
+          position: static;
+        }
+      }
+
+      @media (max-width: 720px) {
+        .kpi-grid {
+          grid-template-columns: 1fr;
+        }
+        .post-editor-grid {
+          grid-template-columns: 1fr;
+        }
+        .wrap {
+          padding: 20px 14px 64px;
         }
         .panel {
-          padding: 16px;
+          padding: 18px;
         }
       }
     </style>
   </head>
   <body>
-    <main>
-      <h1>Konsalta site admin</h1>
-      <p class="muted">
-        Manage the Insights page posts and create newsletters for confirmed subscribers.
-      </p>
-      <nav class="admin-nav" aria-label="Admin sections">
-        <a href="#insights-content">Insights page content</a>
-        <a href="#newsletter-tools">Newsletter</a>
-        <a href="/insights.html" target="_blank" rel="noopener noreferrer">
-          View Insights page
-        </a>
+    <header class="topbar">
+      <a
+        href="/index.html"
+        class="logo"
+        aria-label="Konsalta — Go to Home"
+        title="Go to Home"
+      >
+        <picture>
+          <source media="(max-width: 1080px)" srcset="/public/Logo-5.png" />
+          <img src="/public/Logo-3.png" alt="Konsalta Logo" />
+        </picture>
+        <span class="admin-badge">Admin</span>
+      </a>
+
+      <nav class="tabs" role="tablist" aria-label="Admin workspace">
+        <button
+          type="button"
+          class="tab-btn is-active"
+          role="tab"
+          aria-selected="true"
+          data-tab="insights"
+        >
+          Insights Posts
+        </button>
+        <button
+          type="button"
+          class="tab-btn"
+          role="tab"
+          aria-selected="false"
+          data-tab="newsletter"
+        >
+          Newsletter Studio
+        </button>
+        <button
+          type="button"
+          class="tab-btn"
+          role="tab"
+          aria-selected="false"
+          data-tab="campaigns"
+        >
+          Campaigns
+        </button>
       </nav>
-      <section class="panel" id="insights-content" aria-labelledby="insights-heading">
-        <h2 id="insights-heading">Insights page posts</h2>
-        <p class="muted">
-          Edit the cards shown on the public Insights page. Use a site image path
-          such as <code>public/linkedin/post-1.jpeg</code> or a public HTTPS image
-          URL. The post link opens in a new tab.
-        </p>
+
+      <div class="topbar-actions">
+        <a
+          href="/insights.html"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="ghost-link"
+          >Public Insights ↗</a
+        >
+        <button type="button" class="icon-btn" id="theme-toggle">Theme</button>
+        <button type="button" class="icon-btn" id="lock-button">Lock</button>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="kpi-grid" aria-label="Workspace overview">
+        <div class="kpi-card is-accent">
+          <div class="kpi-label">Confirmed Audience</div>
+          <div class="kpi-value" id="kpi-subscribers">—</div>
+          <div class="kpi-sub" id="audience">Loading subscriber count…</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Public Insights</div>
+          <div class="kpi-value" id="kpi-posts">—</div>
+          <div class="kpi-sub">Cards published on Insights page</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Campaigns</div>
+          <div class="kpi-value" id="kpi-campaigns">—</div>
+          <div class="kpi-sub">Drafts &amp; sent newsletters</div>
+        </div>
+      </section>
+
+      <!-- TAB 1: INSIGHTS -->
+      <section
+        class="panel tab-panel"
+        id="tab-insights"
+        role="tabpanel"
+        aria-labelledby="insights-heading"
+      >
+        <div class="panel-head">
+          <div>
+            <h2 id="insights-heading">Insights page posts</h2>
+            <p class="muted">
+              Edit the cards shown on the public Insights page. Use a site path
+              such as <code>public/linkedin/post-1.jpeg</code> or a public HTTPS
+              image URL.
+            </p>
+          </div>
+          <div class="action-bar" style="margin-top: 0">
+            <button type="button" class="btn-secondary" id="add-post-button">
+              + Add post
+            </button>
+            <button type="button" class="btn-primary" id="save-insights-button">
+              Save Insights changes
+            </button>
+          </div>
+        </div>
+
         <label for="follow-url">“Follow on LinkedIn” link</label>
         <input
           id="follow-url"
@@ -162,76 +752,304 @@
           maxlength="2048"
           placeholder="https://www.linkedin.com/company/..."
         />
+
         <div id="insights-posts"></div>
-        <button type="button" class="secondary" id="add-post-button">
-          Add post
-        </button>
-        <button type="button" id="save-insights-button">Save Insights changes</button>
         <p id="insights-status" class="muted" role="status" aria-live="polite">
           Loading Insights content…
         </p>
       </section>
-      <section class="panel" id="newsletter-tools" aria-labelledby="audience-heading">
-        <h2 id="audience-heading">Audience</h2>
-        <p id="audience">Loading subscriber count…</p>
-        <p id="status" role="status" aria-live="polite"></p>
+
+      <!-- TAB 2: NEWSLETTER STUDIO -->
+      <section
+        class="panel tab-panel"
+        id="tab-newsletter"
+        role="tabpanel"
+        aria-labelledby="editor-heading"
+        hidden
+      >
+        <div class="panel-head">
+          <div>
+            <h2 id="editor-heading">Newsletter studio</h2>
+            <p class="muted" id="status" role="status" aria-live="polite">
+              Compose a draft and preview the exact email layout before sending.
+            </p>
+          </div>
+          <div class="action-bar" style="margin-top: 0">
+            <button type="button" class="btn-secondary" id="new-button">
+              New draft
+            </button>
+            <button type="button" class="btn-secondary" id="preview-button">
+              Refresh preview
+            </button>
+            <button type="submit" form="campaign-form" class="btn-primary" id="save-button">
+              Save draft
+            </button>
+          </div>
+        </div>
+
+        <div class="studio-grid">
+          <form id="campaign-form">
+            <label for="subject">
+              <span>Email subject</span>
+              <span class="char-hint" id="subject-count">0 / 180</span>
+            </label>
+            <input id="subject" name="subject" maxlength="180" required />
+
+            <label for="title">
+              <span>Headline</span>
+              <span class="char-hint" id="title-count">0 / 160</span>
+            </label>
+            <input id="title" name="title" maxlength="160" required />
+
+            <label for="body">
+              <span>Newsletter text</span>
+              <span class="char-hint" id="body-count">0 / 20000</span>
+            </label>
+            <textarea id="body" name="body" maxlength="20000" required></textarea>
+
+            <div class="panel-head" style="margin: 22px 0 6px">
+              <div>
+                <h3>Image &amp; content sections</h3>
+                <p class="muted">Up to 8 sections using public HTTPS images.</p>
+              </div>
+              <button type="button" class="btn-secondary" id="add-section-button">
+                + Add section
+              </button>
+            </div>
+            <div id="sections"></div>
+
+            <label for="cta-label">Optional button label</label>
+            <input id="cta-label" name="ctaLabel" maxlength="80" />
+
+            <label for="cta-url">Optional button URL (https://)</label>
+            <input id="cta-url" name="ctaUrl" type="url" maxlength="2048" />
+          </form>
+
+          <div class="preview-pane">
+            <div class="preview-bar">
+              <span>Email Preview</span>
+              <span>Sandboxed</span>
+            </div>
+            <div class="preview-empty" id="preview-empty">
+              Click <strong>Refresh preview</strong> to render the exact email
+              HTML.
+            </div>
+            <iframe
+              id="preview-frame"
+              title="Newsletter email preview"
+              sandbox
+              hidden
+            ></iframe>
+          </div>
+        </div>
       </section>
-      <section class="panel" aria-labelledby="editor-heading">
-        <h2 id="editor-heading">Newsletter draft</h2>
-        <form id="campaign-form">
-          <label for="subject">Email subject</label>
-          <input id="subject" name="subject" maxlength="180" required />
-          <label for="title">Headline</label>
-          <input id="title" name="title" maxlength="160" required />
-          <label for="body">Newsletter text</label>
-          <textarea id="body" name="body" maxlength="20000" required></textarea>
-          <h3>Image and content sections</h3>
-          <p class="muted">
-            Add up to 8 sections. Use public HTTPS image URLs and descriptive
-            alternative text. Some email apps hide remote images by default.
-          </p>
-          <div id="sections"></div>
-          <button type="button" class="secondary" id="add-section-button">
-            Add image section
-          </button>
-          <label for="cta-label">Optional button label</label>
-          <input id="cta-label" name="ctaLabel" maxlength="80" />
-          <label for="cta-url">Optional button URL (https://)</label>
-          <input id="cta-url" name="ctaUrl" type="url" maxlength="2048" />
-          <button type="submit" id="save-button">Save draft</button>
-          <button type="button" class="secondary" id="preview-button">
-            Preview
-          </button>
-          <button type="button" class="secondary" id="new-button">
-            New draft
-          </button>
-        </form>
-        <iframe
-          id="preview-frame"
-          title="Newsletter email preview"
-          sandbox
-          hidden
-        ></iframe>
-      </section>
-      <section class="panel" aria-labelledby="drafts-heading">
-        <h2 id="drafts-heading">Drafts and previous sends</h2>
+
+      <!-- TAB 3: CAMPAIGNS -->
+      <section
+        class="panel tab-panel"
+        id="tab-campaigns"
+        role="tabpanel"
+        aria-labelledby="drafts-heading"
+        hidden
+      >
+        <div class="panel-head">
+          <div>
+            <h2 id="drafts-heading">Drafts &amp; previous sends</h2>
+            <p class="muted">
+              Edit saved drafts or dispatch to confirmed subscribers.
+            </p>
+          </div>
+        </div>
         <div id="campaigns">Loading campaigns…</div>
       </section>
     </main>
+
+    <!-- TWO-STEP SEND CONFIRMATION MODAL -->
+    <div
+      class="modal-backdrop"
+      id="send-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="send-modal-title"
+      hidden
+    >
+      <div class="modal-card">
+        <h2 id="send-modal-title">Confirm live newsletter send</h2>
+        <p class="muted" id="send-modal-desc"></p>
+        <label for="send-confirm-input">Type <code>SEND</code> to confirm</label>
+        <input
+          id="send-confirm-input"
+          type="text"
+          autocomplete="off"
+          placeholder="SEND"
+        />
+        <div class="action-bar">
+          <button type="button" class="btn-secondary" id="send-cancel-btn">
+            Cancel
+          </button>
+          <button type="button" class="btn-primary" id="send-confirm-btn" disabled>
+            Send newsletter
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SESSION LOCK OVERLAY -->
+    <div
+      class="lock-screen"
+      id="lock-screen"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="lock-title"
+      hidden
+    >
+      <div class="modal-card">
+        <h2 id="lock-title">Session locked</h2>
+        <p class="muted" id="lock-reason">
+          Workspace locked for security. Unlock to re-verify your admin session.
+        </p>
+        <div class="action-bar">
+          <button type="button" class="btn-primary" id="unlock-button">
+            Unlock session
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
     <script>
       const form = document.querySelector("#campaign-form");
       const status = document.querySelector("#status");
-      const campaigns = document.querySelector("#campaigns");
+      const campaignsEl = document.querySelector("#campaigns");
       const preview = document.querySelector("#preview-frame");
+      const previewEmpty = document.querySelector("#preview-empty");
       const sectionsContainer = document.querySelector("#sections");
       const insightsPosts = document.querySelector("#insights-posts");
       const insightsStatus = document.querySelector("#insights-status");
+      const toastEl = document.querySelector("#toast");
+      const sendModal = document.querySelector("#send-modal");
+      const sendModalDesc = document.querySelector("#send-modal-desc");
+      const sendConfirmInput = document.querySelector("#send-confirm-input");
+      const sendConfirmBtn = document.querySelector("#send-confirm-btn");
+      const lockScreen = document.querySelector("#lock-screen");
+      const lockReason = document.querySelector("#lock-reason");
+
       let sectionCount = 0;
       let postCount = 0;
       let editingId = null;
+      let pendingCampaign = null;
+      let lastSubscriberCount = 0;
+      let toastTimer = null;
+      let idleTimer = null;
+      const IDLE_LOCK_MS = 15 * 60 * 1000;
 
-      function say(message) {
+      // Theme persistence
+      const savedTheme = localStorage.getItem("konsalta-admin-theme") || "light";
+      document.documentElement.setAttribute("data-theme", savedTheme);
+      document.querySelector("#theme-toggle").addEventListener("click", () => {
+        const next =
+          document.documentElement.getAttribute("data-theme") === "dark"
+            ? "light"
+            : "dark";
+        document.documentElement.setAttribute("data-theme", next);
+        localStorage.setItem("konsalta-admin-theme", next);
+      });
+
+      // Tab switching
+      const tabButtons = document.querySelectorAll(".tab-btn[data-tab]");
+      const tabPanels = document.querySelectorAll(".tab-panel");
+      function switchTab(tabName) {
+        tabButtons.forEach((btn) => {
+          const active = btn.dataset.tab === tabName;
+          btn.classList.toggle("is-active", active);
+          btn.setAttribute("aria-selected", String(active));
+        });
+        tabPanels.forEach((panel) => {
+          panel.hidden = panel.id !== `tab-${tabName}`;
+        });
+      }
+      tabButtons.forEach((btn) =>
+        btn.addEventListener("click", () => switchTab(btn.dataset.tab)),
+      );
+
+      function showToast(message, isError = false) {
+        toastEl.textContent = message;
+        toastEl.classList.toggle("is-error", isError);
+        toastEl.classList.add("is-visible");
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toastEl.classList.remove("is-visible"), 3600);
+      }
+
+      function say(message, isError = false) {
         status.textContent = message;
+        showToast(message, isError);
+      }
+
+      // Inactivity auto-lock
+      function lockSession(reasonText) {
+        preview.srcdoc = "";
+        preview.hidden = true;
+        previewEmpty.hidden = false;
+        lockReason.textContent = reasonText;
+        lockScreen.hidden = false;
+      }
+
+      function resetIdleTimer() {
+        clearTimeout(idleTimer);
+        if (lockScreen.hidden) {
+          idleTimer = setTimeout(
+            () => lockSession("Locked after 15 minutes of inactivity."),
+            IDLE_LOCK_MS,
+          );
+        }
+      }
+      ["click", "keydown", "mousemove", "scroll"].forEach((evt) =>
+        document.addEventListener(evt, resetIdleTimer, { passive: true }),
+      );
+      resetIdleTimer();
+
+      document
+        .querySelector("#lock-button")
+        .addEventListener("click", () =>
+          lockSession("Workspace locked manually. Unlock to resume."),
+        );
+
+      document.querySelector("#unlock-button").addEventListener("click", async () => {
+        try {
+          await refresh();
+          lockScreen.hidden = true;
+          resetIdleTimer();
+          showToast("Session verified.");
+        } catch (error) {
+          showToast(error.message || "Authentication failed.", true);
+        }
+      });
+
+      // Live character counters
+      for (const [id, max] of [
+        ["subject", 180],
+        ["title", 160],
+        ["body", 20000],
+      ]) {
+        const el = document.getElementById(id);
+        const counter = document.getElementById(`${id}-count`);
+        const update = () => {
+          counter.textContent = `${el.value.length} / ${max}`;
+        };
+        el.addEventListener("input", update);
+        update();
+      }
+
+      function safePreviewSrc(raw) {
+        const val = (raw || "").trim();
+        if (!val) return "";
+        if (val.startsWith("public/")) return `/${val}`;
+        try {
+          const url = new URL(val);
+          if (url.protocol === "https:") return url.href;
+        } catch {}
+        return "";
       }
 
       function payload() {
@@ -260,15 +1078,23 @@
 
       function addSection(values = {}) {
         if (sectionsContainer.children.length >= 8) {
-          say("A newsletter can contain up to 8 image sections.");
+          say("A newsletter can contain up to 8 image sections.", true);
           return;
         }
         sectionCount += 1;
         const section = document.createElement("fieldset");
         section.className = "section-editor";
+        const header = document.createElement("div");
+        header.className = "editor-header";
         const heading = document.createElement("h3");
         heading.textContent = `Section ${sectionCount}`;
-        section.append(heading);
+        const remove = document.createElement("button");
+        remove.type = "button";
+        remove.className = "btn-danger";
+        remove.textContent = "Remove";
+        remove.addEventListener("click", () => section.remove());
+        header.append(heading, remove);
+        section.append(header);
 
         const fields = [
           ["heading", "Section heading", "text", values.heading || ""],
@@ -294,35 +1120,62 @@
           field.required = name === "heading" || name === "body";
           section.append(label, field);
         }
-
-        const remove = document.createElement("button");
-        remove.type = "button";
-        remove.className = "remove-section";
-        remove.textContent = "Remove section";
-        remove.addEventListener("click", () => section.remove());
-        section.append(remove);
         sectionsContainer.append(section);
       }
 
-      function addPost(values = {}) {
+      function addPost(values = {}, postStats = null) {
         if (insightsPosts.children.length >= 8) {
           insightsStatus.textContent = "The Insights page can show up to 8 posts.";
+          showToast(insightsStatus.textContent, true);
           return;
         }
         postCount += 1;
         const post = document.createElement("fieldset");
         post.className = "post-editor";
+        if (values.id) post.dataset.postId = values.id;
+
+        const header = document.createElement("div");
+        header.className = "editor-header";
         const heading = document.createElement("h3");
         heading.textContent = `Post ${postCount}`;
-        post.append(heading);
+        header.append(heading);
+        if (postStats) {
+          const metrics = document.createElement("span");
+          metrics.className = "char-hint";
+          metrics.textContent = `${postStats.views || 0} views · ${postStats.clicks || 0} clicks`;
+          header.append(metrics);
+        }
+        post.append(header);
+
+        const grid = document.createElement("div");
+        grid.className = "post-editor-grid";
+        const fieldsCol = document.createElement("div");
+        const thumbBox = document.createElement("div");
+        thumbBox.className = "thumb-box";
+
+        const renderThumb = (urlVal) => {
+          const src = safePreviewSrc(urlVal);
+          thumbBox.replaceChildren();
+          if (src) {
+            const img = document.createElement("img");
+            img.src = src;
+            img.alt = "Post thumbnail preview";
+            thumbBox.append(img);
+          } else {
+            thumbBox.textContent = "Image preview (HTTPS or public/...)";
+          }
+        };
 
         const fields = [
           ["title", "Post heading", "text", values.title || "", 160],
+          ["category", "Category (e.g. Research, Strategy)", "text", values.category || "", 40],
+          ["publishedAt", "Published date", "date", values.publishedAt || new Date().toISOString().slice(0, 10), 20],
           ["body", "Post text", "textarea", values.body || "", 3000],
           ["imageUrl", "Image path or public HTTPS URL", "text", values.imageUrl || "", 2048],
           ["imageAlt", "Image description (alt text)", "text", values.imageAlt || "", 250],
           ["linkUrl", "Post link (HTTPS)", "url", values.linkUrl || "", 2048],
         ];
+
         for (const [name, labelText, type, value, maxLength] of fields) {
           const id = `insight-post-${postCount}-${name}`;
           const label = document.createElement("label");
@@ -338,15 +1191,22 @@
           field.maxLength = maxLength;
           field.value = value;
           field.required = name === "title" || name === "body";
-          post.append(label, field);
+          if (name === "imageUrl") {
+            field.addEventListener("input", () => renderThumb(field.value));
+          }
+          fieldsCol.append(label, field);
         }
+
+        renderThumb(values.imageUrl || "");
+        grid.append(fieldsCol, thumbBox);
+        post.append(grid);
 
         const actions = document.createElement("div");
         actions.className = "post-actions";
         for (const [label, offset] of [["Move up", -1], ["Move down", 1]]) {
           const move = document.createElement("button");
           move.type = "button";
-          move.className = "secondary";
+          move.className = "btn-secondary";
           move.textContent = label;
           move.addEventListener("click", () => {
             const sibling =
@@ -360,21 +1220,34 @@
         }
         const remove = document.createElement("button");
         remove.type = "button";
-        remove.className = "remove-post";
+        remove.className = "btn-danger";
         remove.textContent = "Remove post";
-        remove.addEventListener("click", () => post.remove());
+        remove.addEventListener("click", () => {
+          post.remove();
+          document.querySelector("#kpi-posts").textContent = String(
+            insightsPosts.children.length,
+          );
+        });
         actions.append(remove);
         post.append(actions);
         insightsPosts.append(post);
       }
 
       async function loadInsightsContent() {
-        const result = await request("/api/insights/content");
+        const [result, statsResult] = await Promise.all([
+          request("/api/insights/content"),
+          request("/api/newsletter/admin/insights/stats").catch(() => ({ stats: {} })),
+        ]);
+        const statsMap = statsResult.stats || {};
         document.querySelector("#follow-url").value = result.followUrl || "";
         insightsPosts.replaceChildren();
         postCount = 0;
-        for (const post of result.posts) addPost(post);
-        insightsStatus.textContent = "Changes are saved to the server and appear on the public page.";
+        for (const post of result.posts) {
+          addPost(post, post.id ? statsMap[post.id] || { views: 0, clicks: 0 } : null);
+        }
+        document.querySelector("#kpi-posts").textContent = String(result.posts.length);
+        insightsStatus.textContent =
+          "Changes are saved to the server and appear on the public page.";
       }
 
       async function saveInsightsContent() {
@@ -383,23 +1256,30 @@
         insightsStatus.textContent = "Saving Insights content…";
         const content = {
           followUrl: document.querySelector("#follow-url").value.trim(),
-          posts: [...insightsPosts.querySelectorAll(".post-editor")].map((post) =>
-            Object.fromEntries(
-              ["title", "body", "imageUrl", "imageAlt", "linkUrl"].map((name) => [
+          posts: [...insightsPosts.querySelectorAll(".post-editor")].map((post) => ({
+            id: post.dataset.postId || "",
+            ...Object.fromEntries(
+              ["title", "category", "publishedAt", "body", "imageUrl", "imageAlt", "linkUrl"].map((name) => [
                 name,
                 post.querySelector(`[data-field="${name}"]`).value.trim(),
               ]),
             ),
-          ),
+          })),
         };
         try {
-          await request("/api/newsletter/admin/insights", {
+          const saved = await request("/api/newsletter/admin/insights", {
             method: "PUT",
             body: JSON.stringify(content),
           });
+          await loadInsightsContent();
+          document.querySelector("#kpi-posts").textContent = String(
+            (saved.content?.posts || content.posts).length,
+          );
           insightsStatus.textContent = "Insights page updated successfully.";
+          showToast("Insights page updated.");
         } catch (error) {
           insightsStatus.textContent = error.message;
+          showToast(error.message, true);
         } finally {
           button.disabled = false;
         }
@@ -408,7 +1288,7 @@
       async function updatePreview() {
         const button = document.querySelector("#preview-button");
         button.disabled = true;
-        say("Rendering email preview…");
+        status.textContent = "Rendering email preview…";
         try {
           const result = await request("/api/newsletter/admin/preview", {
             method: "POST",
@@ -416,9 +1296,10 @@
           });
           preview.srcdoc = result.html;
           preview.hidden = false;
-          say("Preview matches the email layout that will be sent.");
+          previewEmpty.hidden = true;
+          say("Preview updated.");
         } catch (error) {
-          say(error.message);
+          say(error.message, true);
         } finally {
           button.disabled = false;
         }
@@ -426,78 +1307,129 @@
 
       async function refresh() {
         const result = await request("/api/newsletter/admin/campaigns");
+        lastSubscriberCount = result.subscriberCount;
+        document.querySelector("#kpi-subscribers").textContent = String(
+          result.subscriberCount,
+        );
         document.querySelector("#audience").textContent =
           `${result.subscriberCount} confirmed subscriber${result.subscriberCount === 1 ? "" : "s"}`;
-        campaigns.replaceChildren();
+        document.querySelector("#kpi-campaigns").textContent = String(
+          result.campaigns.length,
+        );
+
+        campaignsEl.replaceChildren();
         if (result.campaigns.length === 0) {
-          campaigns.textContent = "No drafts yet.";
+          const empty = document.createElement("p");
+          empty.className = "muted";
+          empty.textContent = "No drafts yet. Create one in Newsletter Studio.";
+          campaignsEl.append(empty);
           return;
         }
+
         for (const campaign of result.campaigns) {
           const item = document.createElement("article");
           item.className = "campaign";
           const summary = document.createElement("div");
           const title = document.createElement("strong");
           title.textContent = campaign.subject;
-          const details = document.createElement("p");
-          details.className = "muted";
-          details.textContent = `${campaign.status} · ${campaign.sentCount || 0} sent · ${campaign.failedCount || 0} failed`;
-          summary.append(title, details);
+          const meta = document.createElement("div");
+          meta.className = "campaign-meta";
+          const badge = document.createElement("span");
+          badge.className = `status-pill ${campaign.status}`;
+          badge.textContent = campaign.status;
+          const counts = document.createElement("span");
+          counts.className = "muted";
+          counts.style.margin = "0";
+          counts.textContent = `${campaign.sentCount || 0} sent · ${campaign.failedCount || 0} failed`;
+          meta.append(badge, counts);
+          summary.append(title, meta);
           item.append(summary);
+
+          const btns = document.createElement("div");
+          btns.style.display = "flex";
+          btns.style.gap = "8px";
 
           if (campaign.status === "draft") {
             const edit = document.createElement("button");
-            edit.className = "secondary";
+            edit.className = "btn-secondary";
             edit.textContent = "Edit";
             edit.addEventListener("click", () => loadDraft(campaign));
-            item.append(edit);
+            btns.append(edit);
           }
           if (campaign.status !== "sent" && campaign.status !== "sending") {
             const send = document.createElement("button");
+            send.className = "btn-primary";
             send.textContent =
               campaign.status === "partial" ? "Retry failed" : "Send";
-            send.addEventListener("click", () => sendCampaign(campaign));
-            item.append(send);
+            send.addEventListener("click", () => openSendModal(campaign));
+            btns.append(send);
           }
-          campaigns.append(item);
+          item.append(btns);
+          campaignsEl.append(item);
         }
       }
 
       function loadDraft(campaign) {
         editingId = campaign.id;
         for (const key of ["subject", "title", "body", "ctaLabel", "ctaUrl"]) {
-          form.elements[key].value = campaign[key] || "";
+          const el = form.elements[key];
+          el.value = campaign[key] || "";
+          el.dispatchEvent(new Event("input"));
         }
         sectionsContainer.replaceChildren();
         sectionCount = 0;
         for (const section of campaign.sections || []) addSection(section);
         document.querySelector("#save-button").textContent = "Update draft";
         preview.hidden = true;
+        previewEmpty.hidden = false;
+        switchTab("newsletter");
         say(`Editing draft: ${campaign.subject}`);
-        form.scrollIntoView({ behavior: "smooth", block: "start" });
       }
 
-      async function sendCampaign(campaign) {
-        const warning = `Send “${campaign.subject}” to the confirmed subscriber list? This sends individual emails and cannot be undone.`;
-        if (!window.confirm(warning)) return;
+      function openSendModal(campaign) {
+        pendingCampaign = campaign;
+        sendModalDesc.textContent = `Send “${campaign.subject}” to ${lastSubscriberCount} confirmed subscriber${lastSubscriberCount === 1 ? "" : "s"}? This sends individual emails and cannot be undone.`;
+        sendConfirmInput.value = "";
+        sendConfirmBtn.disabled = true;
+        sendModal.hidden = false;
+        sendConfirmInput.focus();
+      }
+
+      sendConfirmInput.addEventListener("input", () => {
+        sendConfirmBtn.disabled = sendConfirmInput.value.trim() !== "SEND";
+      });
+
+      document.querySelector("#send-cancel-btn").addEventListener("click", () => {
+        pendingCampaign = null;
+        sendModal.hidden = true;
+      });
+
+      sendConfirmBtn.addEventListener("click", async () => {
+        if (!pendingCampaign) return;
+        const campaign = pendingCampaign;
+        sendConfirmBtn.disabled = true;
         say("Sending newsletter emails…");
         try {
           const result = await request(
             `/api/newsletter/admin/campaigns/${campaign.id}/send`,
             { method: "POST" },
           );
+          sendModal.hidden = true;
+          pendingCampaign = null;
           say(`Send complete: ${result.sent} sent, ${result.failed} failed.`);
           await refresh();
         } catch (error) {
-          say(error.message);
+          say(error.message, true);
+        } finally {
+          sendConfirmBtn.disabled = false;
         }
-      }
+      });
 
       form.addEventListener("submit", async (event) => {
         event.preventDefault();
         const button = document.querySelector("#save-button");
         button.disabled = true;
-        say("Saving draft…");
+        status.textContent = "Saving draft…";
         try {
           const result = await request(
             editingId
@@ -513,7 +1445,7 @@
           say("Draft saved.");
           await refresh();
         } catch (error) {
-          say(error.message);
+          say(error.message, true);
         } finally {
           button.disabled = false;
         }
@@ -522,25 +1454,37 @@
       document
         .querySelector("#preview-button")
         .addEventListener("click", updatePreview);
-      document.querySelector("#add-section-button").addEventListener("click", () => addSection());
-      document.querySelector("#add-post-button").addEventListener("click", () => addPost());
+      document
+        .querySelector("#add-section-button")
+        .addEventListener("click", () => addSection());
+      document.querySelector("#add-post-button").addEventListener("click", () => {
+        addPost();
+        document.querySelector("#kpi-posts").textContent = String(
+          insightsPosts.children.length,
+        );
+      });
       document
         .querySelector("#save-insights-button")
         .addEventListener("click", saveInsightsContent);
       document.querySelector("#new-button").addEventListener("click", () => {
         form.reset();
+        for (const id of ["subject", "title", "body"]) {
+          document.getElementById(id).dispatchEvent(new Event("input"));
+        }
         sectionsContainer.replaceChildren();
         sectionCount = 0;
         editingId = null;
         document.querySelector("#save-button").textContent = "Save draft";
         preview.hidden = true;
+        previewEmpty.hidden = false;
         preview.srcdoc = "";
-        say("New draft.");
+        say("Started new draft.");
       });
 
-      refresh().catch((error) => say(error.message));
+      refresh().catch((error) => say(error.message, true));
       loadInsightsContent().catch((error) => {
         insightsStatus.textContent = error.message;
+        showToast(error.message, true);
       });
     </script>
   </body>

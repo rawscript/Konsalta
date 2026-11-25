@@ -16,6 +16,7 @@ async function startServer(app) {
     server.once("listening", resolve);
     server.once("error", reject);
   });
+  server.once("close", () => app.locals?.closeStores?.());
   servers.push(server);
   return `http://127.0.0.1:${server.address().port}`;
 }

@@ -1,36 +1,59 @@
-/* Newsletter signup for the Our Insights page. */
+/* Insights feed + newsletter signup for the Our Insights page. */
 (() => {
-  const form = document.querySelector(".signup");
-  if (!form) return;
-  const input = form.querySelector("input");
-  const consent = form.querySelector('input[name="consent"]');
-  const button = form.querySelector("button");
-  const note = form.querySelector(".signup-note");
-  const say = (msg, cls) => {
-    note.textContent = msg;
-    note.className = "signup-note " + (cls || "");
+  const safeExternalUrl = (raw) => {
+    const val = (raw || "").trim();
+    if (!val) return "";
+    try {
+      const url = new URL(val);
+      return url.protocol === "https:" && !url.username && !url.password
+        ? url.href
+        : "";
+    } catch {
+      return "";
+    }
   };
 
-  function createPostAction(label, path, href) {
-    const link = document.createElement("a");
-    link.href = href;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    icon.setAttribute("viewBox", "0 0 24 24");
-    icon.setAttribute("aria-hidden", "true");
-    const shape = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    shape.setAttribute("d", path);
-    icon.append(shape);
-    const text = document.createElement("span");
-    text.textContent = label;
-    link.append(icon, text);
-    return link;
-  }
+  const safeImageSrc = (raw) => {
+    const val = (raw || "").trim();
+    if (!val) return "";
+    if (!/^[a-z][a-z\d+.-]*:/i.test(val)) {
+      if (
+        val.startsWith("//") ||
+        val.includes("\\") ||
+        val.split("/").includes("..")
+      ) {
+        return "";
+      }
+      return val;
+    }
+    return safeExternalUrl(val);
+  };
 
-  function createLinkedInPost(post, index, followUrl) {
+  const formatDate = (isoDate) => {
+    if (!isoDate || !/^\d{4}-\d{2}-\d{2}$/.test(isoDate)) return "";
+    const parsed = new Date(`${isoDate}T00:00:00Z`);
+    if (Number.isNaN(parsed.getTime())) return "";
+    return parsed.toLocaleDateString("en-GB", {
+      month: "short",
+      year: "numeric",
+      timeZone: "UTC",
+    });
+  };
+
+  const trackPostEvent = (postId, event) => {
+    if (!postId || !/^[a-z0-9-]{1,64}$/i.test(postId)) return;
+    fetch(`/api/insights/posts/${encodeURIComponent(postId)}/track`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event }),
+      keepalive: true,
+    }).catch(() => {});
+  };
+
+  function createInsightCard(post, index, followUrl) {
     const article = document.createElement("article");
     article.className = `linkedin-post${index === 0 ? " linkedin-post--featured" : ""}`;
+    if (post.id) article.dataset.postId = post.id;
 
     const header = document.createElement("header");
     header.className = "linkedin-post-head";
@@ -43,45 +66,36 @@
     author.className = "linkedin-author-meta";
     const brand = document.createElement("strong");
     brand.textContent = "Konsalta";
-    const publicLabel = document.createElement("span");
-    const publicMark = document.createElement("span");
-    publicMark.className = "linkedin-public";
-    publicMark.setAttribute("aria-hidden", "true");
-    const publicIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    publicIcon.setAttribute("viewBox", "0 0 24 24");
-    publicIcon.setAttribute("aria-hidden", "true");
-    const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    circle.setAttribute("cx", "12");
-    circle.setAttribute("cy", "12");
-    circle.setAttribute("r", "9");
-    const meridians = document.createElementNS("http://www.w3.org/2000/svg", "path");
-    meridians.setAttribute(
-      "d",
-      "M3.6 9h16.8M3.6 15h16.8M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18",
-    );
-    publicIcon.append(circle, meridians);
-    publicMark.append(publicIcon);
-    publicLabel.append(publicMark, document.createTextNode(" Public"));
-    author.append(brand, publicLabel);
 
-    const postLink = post.linkUrl || followUrl;
-    const more = document.createElement("a");
-    more.className = "linkedin-more";
-    more.href = postLink;
-    more.target = "_blank";
-    more.rel = "noopener noreferrer";
-    more.setAttribute("aria-label", "Open Konsalta on LinkedIn");
-    more.textContent = "···";
-    header.append(avatar, author, more);
+    const metaParts = [post.category, formatDate(post.publishedAt)].filter(Boolean);
+    const metaLine = document.createElement("span");
+    metaLine.textContent = metaParts.length ? metaParts.join(" · ") : "Konsalta Insights";
+    author.append(brand, metaLine);
+
+    const postLink = safeExternalUrl(post.linkUrl) || safeExternalUrl(followUrl);
+    header.append(avatar, author);
+
+    if (postLink) {
+      const more = document.createElement("a");
+      more.className = "linkedin-more";
+      more.href = postLink;
+      more.target = "_blank";
+      more.rel = "noopener noreferrer";
+      more.setAttribute("aria-label", `Open ${post.title || "post"}`);
+      more.textContent = "↗";
+      more.addEventListener("click", () => trackPostEvent(post.id, "click"));
+      header.append(more);
+    }
 
     const copy = document.createElement("p");
     copy.className = "linkedin-post-copy";
     const title = document.createElement("strong");
     title.textContent = post.title;
-    copy.append(title, document.createTextNode(post.body));
+    copy.append(title, document.createTextNode(" "), document.createTextNode(post.body));
     article.append(header, copy);
 
-    if (post.imageUrl) {
+    const imgSrc = safeImageSrc(post.imageUrl);
+    if (imgSrc) {
       const media = postLink ? document.createElement("a") : document.createElement("div");
       media.className = "linkedin-post-media";
       if (postLink) {
@@ -89,10 +103,11 @@
         media.target = "_blank";
         media.rel = "noopener noreferrer";
         media.setAttribute("aria-label", `Open ${post.title}`);
+        media.addEventListener("click", () => trackPostEvent(post.id, "click"));
       }
       const image = document.createElement("img");
-      image.src = post.imageUrl;
-      image.alt = post.imageAlt;
+      image.src = imgSrc;
+      image.alt = post.imageAlt || post.title || "";
       image.loading = "lazy";
       image.addEventListener("error", () => media.remove(), { once: true });
       media.append(image);
@@ -102,25 +117,16 @@
     if (postLink) {
       const footer = document.createElement("footer");
       footer.className = "linkedin-post-actions";
-      footer.append(
-        createPostAction(
-          "Like",
-          "M7 10v11M7 10l4-6a2 2 0 0 1 3 1.7V9h5.2a2 2 0 0 1 2 2.3l-1.1 7.2a2 2 0 0 1-2 1.7H7M7 10H4a1 1 0 0 0-1 1v9a1 1 0 0 0 1 1h3",
-          postLink,
-        ),
-        createPostAction(
-          "Comment",
-          "M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5Z",
-          postLink,
-        ),
-        createPostAction(
-          "Repost",
-          "m17 2 4 4-4 4M3 11v-1a4 4 0 0 1 4-4h14M7 22l-4-4 4-4M21 13v1a4 4 0 0 1-4 4H3",
-          postLink,
-        ),
-      );
+      const readLink = document.createElement("a");
+      readLink.href = postLink;
+      readLink.target = "_blank";
+      readLink.rel = "noopener noreferrer";
+      readLink.textContent = "Read full insight →";
+      readLink.addEventListener("click", () => trackPostEvent(post.id, "click"));
+      footer.append(readLink);
       article.append(footer);
     }
+
     return article;
   }
 
@@ -132,19 +138,52 @@
       if (!response.ok) throw new Error("Unable to load Insights posts.");
       const content = await response.json();
       const followLink = document.querySelector("#linkedin-follow");
-      if (followLink && content.followUrl) followLink.href = content.followUrl;
+      const safeFollow = safeExternalUrl(content.followUrl);
+      if (followLink && safeFollow) followLink.href = safeFollow;
       if (!Array.isArray(content.posts) || !content.posts.length) return;
-      feed.replaceChildren(
-        ...content.posts.map((post, index) =>
-          createLinkedInPost(post, index, content.followUrl),
-        ),
+
+      const cards = content.posts.map((post, index) =>
+        createInsightCard(post, index, safeFollow),
       );
+      feed.replaceChildren(...cards);
+
+      if ("IntersectionObserver" in window) {
+        const seen = new Set();
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              const postId = entry.target.dataset.postId;
+              if (postId && !seen.has(postId)) {
+                seen.add(postId);
+                trackPostEvent(postId, "view");
+              }
+              observer.unobserve(entry.target);
+            });
+          },
+          { threshold: 0.4 },
+        );
+        cards.forEach((card) => {
+          if (card.dataset.postId) observer.observe(card);
+        });
+      }
     } catch (error) {
       console.warn("Could not load edited Insights posts; showing defaults.", error);
     }
   }
 
   loadInsightsPosts();
+
+  const form = document.querySelector(".signup");
+  if (!form) return;
+  const input = form.querySelector("input");
+  const consent = form.querySelector('input[name="consent"]');
+  const button = form.querySelector("button");
+  const note = form.querySelector(".signup-note");
+  const say = (msg, cls) => {
+    note.textContent = msg;
+    note.className = "signup-note " + (cls || "");
+  };
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -171,7 +210,10 @@
       form.reset();
       say(result.message, "is-ok");
     } catch (error) {
-      say(error.message || "Something went wrong. Please try again in a moment.", "is-err");
+      say(
+        error.message || "Something went wrong. Please try again in a moment.",
+        "is-err",
+      );
     } finally {
       button.disabled = false;
     }

@@ -17,19 +17,21 @@ h3,
 
 /* Contact */
 .intro {
-  min-height: 420px;
+  min-height: 360px;
   display: grid;
   place-content: center;
+  justify-items: center;
   background:
+    radial-gradient(ellipse at 50% -15%, rgba(242, 101, 34, 0.14), transparent 58%),
     linear-gradient(rgba(11, 45, 83, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(11, 45, 83, 0.025) 1px, transparent 1px),
     var(--bg);
-  background-size: 48px 48px;
+  background-size: auto, 48px 48px, 48px 48px, auto;
 }
 
 .intro .eyebrow {
   color: var(--orange-deep);
-  font-family: "Manrope", sans-serif;
+  font-family: var(--font);
   font-weight: 800;
   letter-spacing: 0.16em;
 }
@@ -38,16 +40,17 @@ h3,
 .faq-hero h1,
 .governance-hero h1 {
   color: var(--navy);
-  font-family: "Plus Jakarta Sans", sans-serif;
+  font-family: "Plus Jakarta Sans", var(--font);
   font-weight: 800;
-  letter-spacing: -0.055em;
+  letter-spacing: -0.045em;
 }
 
 .contact-card {
-  border-radius: 24px;
-  box-shadow: 0 24px 70px rgba(11, 45, 83, 0.10);
+  border-radius: var(--r-xl);
+  box-shadow: var(--shadow-lg);
 }
 
+.intro .badge,
 .intro .eyebrow,
 .intro h1,
 .intro > p:last-child,
@@ -58,82 +61,23 @@ h3,
   transform: none !important;
 }
 
-.contact-copy {
-  background:
-    radial-gradient(circle at 100% 100%, rgba(242, 101, 34, 0.22), transparent 32%),
-    var(--navy-deep);
-}
-
-.contact-form input,
+.contact-form input:not([type="radio"]),
 .contact-form select,
 .contact-form textarea {
-  border-radius: 12px;
+  border-radius: var(--r-sm);
 }
 
 .form-footer button,
 .submit-btn {
   border: 0;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   background: var(--orange);
   color: var(--navy-deep);
   box-shadow: 0 4px 0 var(--orange-deep);
   font-weight: 800;
 }
 
-/* FAQ */
-.faq-page {
-  width: min(100% - 40px, 1120px);
-  padding-top: 72px;
-  background: transparent;
-}
-
-.faq-hero {
-  position: relative;
-  max-width: 980px;
-  margin-bottom: 48px;
-  text-align: center;
-}
-
-.faq-hero::before {
-  content: "";
-  display: block;
-  width: 90px;
-  height: 2px;
-  margin: 0 auto 22px;
-  background: var(--orange);
-  box-shadow: 114px 0 0 var(--orange), -114px 0 0 var(--orange);
-}
-
-.faq-eyebrow {
-  color: var(--orange-deep);
-  font-family: "Manrope", sans-serif;
-  font-size: 13px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.faq-hero h1 {
-  font-size: clamp(44px, 7vw, 76px);
-  line-height: 1;
-}
-
-.faq-list {
-  max-width: 920px;
-  margin-inline: auto;
-}
-
-.faq-item {
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.86);
-  box-shadow: 0 8px 24px rgba(11, 45, 83, 0.05);
-}
-
-.faq-item[open] {
-  border-color: rgba(242, 101, 34, 0.38);
-  box-shadow: 0 14px 34px rgba(11, 45, 83, 0.08);
-}
+/* FAQ (styles live in faq.css) */
 
 /* Consultant onboarding */
 .consultant-onboarding-page body,
@@ -143,12 +87,12 @@ body:has(.consultant-form) {
 
 .progress-container {
   position: sticky;
-  top: 72px;
+  top: var(--header-h, 68px);
   z-index: 90;
-  background: rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 8px 24px rgba(11, 45, 83, 0.05);
+  background: var(--glass);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  box-shadow: var(--shadow-sm);
 }
 
 .consultant-onboarding .intro,
@@ -157,10 +101,11 @@ body:has(.consultant-form) {
   width: 100%;
   min-height: 390px;
   background:
+    radial-gradient(ellipse at 50% -15%, rgba(242, 101, 34, 0.14), transparent 58%),
     linear-gradient(rgba(11, 45, 83, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(11, 45, 83, 0.025) 1px, transparent 1px),
     var(--bg);
-  background-size: 48px 48px;
+  background-size: auto, 48px 48px, 48px 48px, auto;
 }
 
 .intro:has(+ .form-container) h1 {
@@ -295,7 +240,7 @@ body:has(.consultant-form) {
   }
 
   .progress-container {
-    top: 68px;
+    top: var(--header-h, 60px);
   }
 }
 
