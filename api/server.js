@@ -1757,6 +1757,13 @@ function createApp(options = {}) {
   );
 
   app.use("/api", (request, response) => {
+    if (request.path === "/admin.html") {
+      response
+        .status(404)
+        .set("X-Robots-Tag", "noindex, nofollow")
+        .sendFile(path.join(SITE_ROOT, "404.html"));
+      return;
+    }
     response.status(404).json({ success: false, error: "API endpoint not found." });
   });
 
@@ -1765,13 +1772,25 @@ function createApp(options = {}) {
   });
   app.use(express.static(SITE_ROOT, { dotfiles: "ignore", index: false }));
 
+  app.use((request, response) => {
+    response
+      .status(404)
+      .set("X-Robots-Tag", "noindex, nofollow")
+      .sendFile(path.join(SITE_ROOT, "404.html"));
+  });
+
   app.use((error, request, response, next) => {
-    if (!request.path.startsWith("/api/")) {
+    if (response.headersSent) {
       next(error);
       return;
     }
-    if (response.headersSent) {
-      next(error);
+
+    if (!request.path.startsWith("/api/")) {
+      console.error("Website request failed:", error.message);
+      response
+        .status(500)
+        .set("X-Robots-Tag", "noindex, nofollow")
+        .sendFile(path.join(SITE_ROOT, "500.html"));
       return;
     }
 

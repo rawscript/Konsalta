@@ -1,1 +1,5 @@
-{}
+{
+  "liveServer.settings.ignoreFiles": [
+    "**/api/**"
+  ]
+}

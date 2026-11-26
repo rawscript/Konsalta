@@ -11,6 +11,15 @@ npm start
 
 Open `http://localhost:3000/`. Do not open the HTML files directly with `file://`
 or use a separate static server; the forms submit to this same origin.
+Unknown website URLs show a branded 404 page, and unexpected website-server
+errors show a friendly 500 page. API requests continue to receive JSON errors.
+
+For a local, static-only preview, run `python dev_preview.py` from the repository
+root. This guarded preview server returns the branded 404 page for `/admin` and
+all `/api/` URLs. The workspace's VS Code Live Server setting also ignores
+`api/`. Avoid unrestricted static servers such as `python -m http.server` on
+the repository root; they bypass application authentication and may expose
+server files. Use `npm start` to test the admin page and API.
 
 ## Configuration
 
@@ -273,6 +282,32 @@ sudo ufw status
 
 Do not open port 3000 to the public internet. Nginx and the Node app should be
 kept updated, and TLS renewal should be checked with `sudo certbot renew --dry-run`.
+The documented VPS configuration proxies requests through the Node application:
+`/admin` is authenticated there, and direct `/api/admin.html` requests receive
+the branded 404 page. Do not configure Nginx or another static web server to
+serve the repository root directly; that bypasses the application's route
+protections.
+
+#### Production operator checklist for admin access
+
+- Put `NEWSLETTER_ADMIN_USER` and `NEWSLETTER_ADMIN_PASSWORD` only in
+  `/etc/konsalta/konsalta.env`. Use a private username and a unique password of
+  at least 16 characters; the example values are placeholders. Restart the
+  service after changing either value.
+- Nginx must proxy the whole site to `http://127.0.0.1:3000`, as in the
+  configuration above. Do not add a `root`/`alias` rule or separate static
+  host that publishes `/opt/konsalta` or the repository's `api/` directory.
+- Keep port 3000 private; expose only SSH and Nginx HTTPS through the firewall.
+- Verify after deployment: opening `https://YOUR_DOMAIN/admin` in a browser
+  prompts for credentials. A request without credentials returns `401` and a
+  `WWW-Authenticate` header. A request to
+  `https://YOUR_DOMAIN/api/admin.html` returns the branded 404, not admin HTML.
+
+This gate is enforced by Express; it does not follow the admin file if another
+server publishes that file directly. The local `dev_preview.py` and VS Code
+Live Server workspace setting hide `/admin` and `/api/` for previews, but
+generic static servers do not enforce authentication. `robots.txt` and
+`noindex` are crawler hints only, never security controls.
 
 ### 7. Test subscription and SMTP delivery
 

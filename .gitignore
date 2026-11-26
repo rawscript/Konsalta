@@ -2,4 +2,7 @@ api/.env
 api/node_modules/
 api/data/
 npm-debug.log*
-.vscode
+.vscode/*
+!.vscode/settings.json
+.env
+__pycache__/

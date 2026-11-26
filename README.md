@@ -17,6 +17,15 @@ npm start
 
 Open `http://localhost:3000/`. The API serves the website from the repository
 root. Do not open pages with `file://`; forms need the same-origin API.
+Unknown page URLs and unexpected website errors use Konsalta-styled error pages.
+
+For a static preview without the API, use `python dev_preview.py` and open
+`http://127.0.0.1:5500/`. It serves public website files and returns the branded
+404 page for `/admin` and `/api/` paths. The VS Code Live Server workspace
+setting also excludes the entire `api/` directory. Do not use
+`python -m http.server` or another unrestricted static server on the repository
+root: generic static servers do not enforce the application's admin
+authentication and may expose application files.
 
 Run the automated checks with `cd api && npm test`. Tests use a fake email
 sender and temporary newsletter storage, so no SMTP credentials or `.env` file
@@ -28,15 +37,36 @@ For the complete Ubuntu VPS guide—including DNS, Node.js, private environment
 configuration, systemd, Nginx, HTTPS, SMTP verification, backups, and updates—
 see [api/README.md](api/README.md).
 
-After deployment, the site admin page is at
-`https://YOUR_DOMAIN/admin`. It uses the `NEWSLETTER_ADMIN_USER`
-and `NEWSLETTER_ADMIN_PASSWORD` values in the private server environment. The
-admin page requires those credentials to access either the Insights content
-editor or newsletter tools. The newsletter editor supports drafts with optional
-image sections and a rendered email preview before sending.
-The server challenges unauthenticated requests and requires HTTPS in production.
-`robots.txt` asks crawlers not to index the admin URL, but it is not an
-authentication mechanism.
+### Deployment handoff: keep the admin behind the application
+
+The admin page is served by the Express app at `https://YOUR_DOMAIN/admin`.
+Its HTTP Basic Authentication gate protects both the page and its editing and
+newsletter APIs. The VPS operator must:
+
+1. Set a private `NEWSLETTER_ADMIN_USER` and a unique
+   `NEWSLETTER_ADMIN_PASSWORD` (at least 16 characters) in the server-only
+   environment file. Do not copy real credentials into this repository.
+2. Keep the Node app bound to localhost, put Nginx in front with HTTPS, and
+   proxy **all website paths** to Node. Do not configure Nginx or another web
+   server to publish the repository directory as static files.
+3. Keep port 3000 closed to public traffic. After deployment, check that a
+   browser visit to `/admin` prompts for credentials; unauthenticated HTTP
+   requests should return `401` with a `WWW-Authenticate` header. A direct
+   request to `/api/admin.html` should return the branded 404, never the admin
+   HTML.
+
+The browser prompt appears only after valid credentials are configured. The
+repository's `.env.example` contains placeholders, not working credentials.
+`robots.txt` and `noindex` only discourage indexing; they do not protect access.
+
+For local static preview, `python dev_preview.py` and VS Code Live Server are
+configured to hide the admin and API paths. Generic static servers such as
+`python -m http.server` do not enforce the application's access gate. Do not
+use them to serve this repository, and do not copy `api/admin.html` into a
+public static hosting directory.
+
+The admin page supports Insights content and newsletter management. Newsletter
+sending additionally needs the mail provider's SMTP settings.
 
 The newsletter requires a configured SMTP account, public HTTPS site URL, and
 persistent data path. SMTP secrets and subscriber data must never be committed

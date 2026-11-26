@@ -78,12 +78,22 @@ test("serves the website root and does not expose API source files", async () =>
   assert.match(insightsHtml, /Our network model\./);
   assert.match(insightsHtml, /The evidence-to-impact cycle\./);
 
+  const missingPage = await fetch(`${baseUrl}/this-page-does-not-exist`);
+  assert.equal(missingPage.status, 404);
+  assert.equal(missingPage.headers.get("x-robots-tag"), "noindex, nofollow");
+  assert.match(await missingPage.text(), /We can’t find that page/);
+
   const source = await fetch(`${baseUrl}/api/server.js`);
   assert.equal(source.status, 404);
   assert.deepEqual(await source.json(), {
     success: false,
     error: "API endpoint not found.",
   });
+
+  const adminFile = await fetch(`${baseUrl}/api/admin.html`);
+  assert.equal(adminFile.status, 404);
+  assert.equal(adminFile.headers.get("x-robots-tag"), "noindex, nofollow");
+  assert.match(await adminFile.text(), /We can’t find that page/);
 });
 
 test("protects Insights editing and persists validated public content", async () => {
