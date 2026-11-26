@@ -34,6 +34,9 @@ and `NEWSLETTER_ADMIN_PASSWORD` values in the private server environment. The
 admin page requires those credentials to access either the Insights content
 editor or newsletter tools. The newsletter editor supports drafts with optional
 image sections and a rendered email preview before sending.
+The server challenges unauthenticated requests and requires HTTPS in production.
+`robots.txt` asks crawlers not to index the admin URL, but it is not an
+authentication mechanism.
 
 The newsletter requires a configured SMTP account, public HTTPS site URL, and
 persistent data path. SMTP secrets and subscriber data must never be committed

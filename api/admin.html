@@ -947,6 +947,17 @@
       // Theme persistence
       const savedTheme = localStorage.getItem("konsalta-admin-theme") || "light";
       document.documentElement.setAttribute("data-theme", savedTheme);
+      const updateAdminLogo = () => {
+        const picture = document.querySelector(".topbar .logo picture");
+        const image = picture?.querySelector("img");
+        const mobileSource = picture?.querySelector("source");
+        const isDark = document.documentElement.dataset.theme === "dark";
+        if (image) image.src = `/public/Logo-${isDark ? "4" : "3"}.png`;
+        if (mobileSource) {
+          mobileSource.srcset = `/public/Logo-${isDark ? "6" : "5"}.png`;
+        }
+      };
+      updateAdminLogo();
       document.querySelector("#theme-toggle").addEventListener("click", () => {
         const next =
           document.documentElement.getAttribute("data-theme") === "dark"
@@ -954,6 +965,7 @@
             : "dark";
         document.documentElement.setAttribute("data-theme", next);
         localStorage.setItem("konsalta-admin-theme", next);
+        updateAdminLogo();
       });
 
       // Tab switching

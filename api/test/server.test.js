@@ -55,7 +55,22 @@ test("serves the website root and does not expose API source files", async () =>
   const baseUrl = await startServer(createTestApp({ environment: {} }));
   const home = await fetch(`${baseUrl}/`);
   assert.equal(home.status, 200);
-  assert.match(await home.text(), /Konsalta/);
+  const homeHtml = await home.text();
+  assert.match(homeHtml, /Konsalta/);
+  assert.match(homeHtml, /public\/site\.webmanifest/);
+
+  const manifestResponse = await fetch(`${baseUrl}/public/site.webmanifest`);
+  assert.equal(manifestResponse.status, 200);
+  const manifest = await manifestResponse.json();
+  assert.equal(manifest.start_url, "../index.html");
+  assert.equal(manifest.scope, "../");
+  assert.equal(manifest.icons.length, 2);
+
+  const robotsResponse = await fetch(`${baseUrl}/robots.txt`);
+  assert.equal(robotsResponse.status, 200);
+  const robots = await robotsResponse.text();
+  assert.match(robots, /Disallow: \/admin/);
+  assert.match(robots, /Disallow: \/api\/newsletter\/admin/);
 
   const insights = await fetch(`${baseUrl}/insights.html`);
   assert.equal(insights.status, 200);
@@ -170,6 +185,14 @@ test("protects Insights editing and persists validated public content", async ()
   const restoredDefaults = await defaultContent.json();
   assert.equal(restoredDefaults.posts.length, 2);
   assert.equal(restoredDefaults.posts[0].title, "Our network model.");
+});
+
+test("explains that admin credentials must be configured before login is prompted", async () => {
+  const baseUrl = await startServer(createTestApp({ environment: {} }));
+  const response = await fetch(`${baseUrl}/admin`);
+  assert.equal(response.status, 503);
+  assert.equal(response.headers.has("www-authenticate"), false);
+  assert.match(await response.text(), /Site administration is not configured/);
 });
 
 test("validates contact submissions and sends them as plain text", async () => {
@@ -353,10 +376,15 @@ test("protects campaign tools, sends individual emails, and honors unsubscribe l
   assert.equal(unauthorized.status, 401);
   const protectedPage = await fetch(`${baseUrl}/admin`);
   assert.equal(protectedPage.status, 401);
+  assert.equal(
+    protectedPage.headers.get("www-authenticate"),
+    'Basic realm="Konsalta site admin"',
+  );
   const adminPage = await fetch(`${baseUrl}/admin`, {
     headers: { Authorization: authorization },
   });
   assert.equal(adminPage.status, 200);
+  assert.equal(adminPage.headers.get("x-robots-tag"), "noindex, nofollow");
   const adminHtml = await adminPage.text();
   assert.match(adminHtml, /Konsalta Admin/);
   assert.match(adminHtml, /Newsletter email preview/);

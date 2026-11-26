@@ -1,6 +1,11 @@
 {
-  "name": "Konsalta",
+  "id": "../",
+  "name": "Konsalta — Better Decisions. Greater Impact",
   "short_name": "Konsalta",
+  "description": "Research, consulting and advisory for better decisions and greater impact.",
+  "lang": "en",
+  "start_url": "../index.html",
+  "scope": "../",
   "icons": [
     {
       "src": "android-chrome-192x192.png",
@@ -13,7 +18,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#061a32",
+  "background_color": "#f7f6f2",
   "display": "standalone"
 }

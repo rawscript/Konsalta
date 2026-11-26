@@ -32,8 +32,10 @@ const FOOTER_CONFIG = {
     {
       heading: "Company",
       links: [
+        { label: "Home", href: "index.html" },
         { label: "About Konsalta", href: "aboutUs.html" },
         { label: "Why Choose us", href: "whyUs.html" },
+        { label: "Our Insights", href: "insights.html" },
         { label: "Contact Us", href: "contactUs.html" },
         { label: "FAQs", href: "faq.html" },
       ],
@@ -141,4 +143,3 @@ document.addEventListener("DOMContentLoaded", () => {
   bottomWrap.append(copyrightSpan, creditSpan, toTopBtn);
   footer.replaceChildren(topWrap, wordmark, bottomWrap);
 });
-

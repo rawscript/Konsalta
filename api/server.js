@@ -1097,7 +1097,7 @@ function safeEqual(left, right) {
   return crypto.timingSafeEqual(leftHash, rightHash);
 }
 
-function requireNewsletterAdmin(environment) {
+function requireSiteAdmin(environment) {
   return (request, response, next) => {
     const configuredPassword = environment.NEWSLETTER_ADMIN_PASSWORD;
     const expectedUsername = environment.NEWSLETTER_ADMIN_USER;
@@ -1108,18 +1108,18 @@ function requireNewsletterAdmin(environment) {
       !expectedUsername ||
       expectedUsername === "admin"
     ) {
-      response.status(503).send("Newsletter administration is not configured.");
+      response.status(503).send("Site administration is not configured.");
       return;
     }
     if (environment.NODE_ENV === "production" && !request.secure) {
-      response.status(400).send("Use HTTPS to access newsletter administration.");
+      response.status(400).send("Use HTTPS to access site administration.");
       return;
     }
 
     const authorization = request.get("authorization") || "";
     const match = authorization.match(/^Basic\s+([A-Za-z0-9+/]+=*)$/i);
     if (!match) {
-      response.set("WWW-Authenticate", 'Basic realm="Konsalta newsletter"');
+      response.set("WWW-Authenticate", 'Basic realm="Konsalta site admin"');
       response.status(401).send("Authentication required.");
       return;
     }
@@ -1132,7 +1132,7 @@ function requireNewsletterAdmin(environment) {
       !safeEqual(username, expectedUsername) ||
       !safeEqual(password, configuredPassword)
     ) {
-      response.set("WWW-Authenticate", 'Basic realm="Konsalta newsletter"');
+      response.set("WWW-Authenticate", 'Basic realm="Konsalta site admin"');
       response.status(401).send("Authentication required.");
       return;
     }
@@ -1141,7 +1141,7 @@ function requireNewsletterAdmin(environment) {
       try {
         siteOrigin = getPublicSiteUrl(environment);
       } catch {
-        response.status(503).send("Newsletter administration is not configured.");
+        response.status(503).send("Site administration is not configured.");
         return;
       }
       if (request.get("origin") !== siteOrigin) {
@@ -1152,6 +1152,7 @@ function requireNewsletterAdmin(environment) {
     response.set({
       "Cache-Control": "no-store, no-cache, must-revalidate, private",
       Pragma: "no-cache",
+      "X-Robots-Tag": "noindex, nofollow",
       "X-Frame-Options": "DENY",
       "X-Content-Type-Options": "nosniff",
       "Referrer-Policy": "no-referrer",
@@ -1177,7 +1178,7 @@ function createApp(options = {}) {
         path.join(__dirname, "data", "insights-content.json"),
     );
 
-  const requireAdmin = requireNewsletterAdmin(environment);
+  const requireAdmin = requireSiteAdmin(environment);
   let transporter;
   const app = express();
 

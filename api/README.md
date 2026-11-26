@@ -14,10 +14,19 @@ or use a separate static server; the forms submit to this same origin.
 
 ## Configuration
 
-Copy `.env.example` to `.env` and set `SMTP_PASSWORD` to the current mailbox
-password. Keep `.env` private and never commit it. The server defaults to
+Copy `.env.example` to `.env`, set `NEWSLETTER_ADMIN_USER` to a private
+username, and set `NEWSLETTER_ADMIN_PASSWORD` to a unique password of at least
+16 characters that does not start with `replace-`. Set `SMTP_PASSWORD` to the
+current mailbox password if you need to test email features. Keep `.env`
+private and never commit it. The server defaults to
 `mail.konsaltahub.org` on port `465` with TLS, sends from
 `no-reply@konsaltahub.org`, and delivers to `engage@konsaltahub.org`.
+
+The browser's built-in login prompt appears only after valid admin credentials
+have been configured and you open `/admin`. If credentials are missing or still
+placeholders, the server returns `503 Site administration is not configured`
+instead of prompting. The committed `.env.example` is only a template; it does
+not configure a login by itself. After changing `.env`, restart `npm start`.
 
 | Variable | Purpose |
 | --- | --- |
@@ -295,6 +304,9 @@ The browser will prompt for HTTP Basic Authentication. Use
 environment file. This built-in authentication needs no Supabase, hosted
 identity service, or additional dependency. The credentials are required to
 open the admin page and to call every admin editing, preview, and send endpoint.
+The server returns an authentication challenge to unauthenticated requests and
+requires HTTPS in production. `robots.txt` excludes `/admin` and the admin API
+from crawler indexing, but crawler directives do not provide access control.
 Keep the page behind HTTPS;
 consider additionally restricting the admin URL by VPN or trusted office IP at
 Nginx. Change the private credentials by updating the environment file and
